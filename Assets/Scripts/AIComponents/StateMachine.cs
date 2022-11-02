@@ -1,12 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class StateMachine : MonoBehaviour
 {
-    public Animator animator;
     protected State currentState;
-    public Shooting shooting;
+    public Animator animator;
     public Combat combat;
     public Health health;
 
@@ -20,9 +17,9 @@ public abstract class StateMachine : MonoBehaviour
     }
 
     private void Start() => ChooseState();
-    private void Update() 
+    private void Update()
     {
-        if(currentState != null)    
+        if (currentState != null)
             currentState.UpdateState(this);
-    } 
+    }
 }

@@ -19,10 +19,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
 
     //methods
-    public void SetStop(bool active)
-    {
-        isStopped = active;
-    }
+    public void SetStop(bool active) => isStopped = active;
     private IEnumerator AttackCulldown()
     {
         canAttack = false;

@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using UnityEngine;
 
 public abstract class StateMachine : MonoBehaviour
@@ -6,6 +7,7 @@ public abstract class StateMachine : MonoBehaviour
     public Animator animator;
     public Combat combat;
     public Health health;
+    [SerializeField] private bool chooseStateOnAwake = true;
 
     abstract public void ChooseState();
     public void ChangeState(State newState)
@@ -16,7 +18,11 @@ public abstract class StateMachine : MonoBehaviour
         currentState.EnterState(this);
     }
 
-    private void Start() => ChooseState();
+    private void Start() 
+    {
+        if (chooseStateOnAwake)
+            ChooseState();
+    }
     private void Update()
     {
         if (currentState != null)

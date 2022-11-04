@@ -1,19 +1,30 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Dialoge : MonoBehaviour
 {
     [TextArea(2,10)]
-    [SerializeField] private List<string> dialoges = new List<string>();
+    [SerializeField] private List<string> phrases = new List<string>();
     [SerializeField] private Text UIText;
-    private int currentDialogue = 0;
+    private int currentPhrase = 0;
+    public UnityEvent onConversationStarts = new UnityEvent();
+    public UnityEvent onConversationEnds = new UnityEvent();
 
-    public void NextConversation()
+    public void RepeatConversationAgain() => currentPhrase = 0;
+    public void NextPhrase()
     {
-        currentDialogue++;
-        if (currentDialogue >= dialoges.Count) currentDialogue = 0;
+        if (currentPhrase == 0)
+            onConversationStarts.Invoke();
 
-        UIText.text = dialoges[currentDialogue];
+        if (currentPhrase > phrases.Count)
+            onConversationEnds.Invoke();
+        else
+        {
+            if(currentPhrase < phrases.Count) UIText.text = phrases[currentPhrase];
+            currentPhrase++;
+        }   
+                
     }
 }

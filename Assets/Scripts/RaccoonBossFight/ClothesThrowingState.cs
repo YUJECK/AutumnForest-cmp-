@@ -22,6 +22,7 @@ public class ClothesThrowingState : State
     }
     protected IEnumerator StateExitDelay(float delay, StateMachine stateMachine)
     {
+        stateMachine.animator.Play("RaccoonIdle");
         yield return new WaitForSeconds(delay);
         stateMachine.ChooseState();
     }

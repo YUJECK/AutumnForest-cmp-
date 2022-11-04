@@ -1,11 +1,19 @@
 using UnityEngine;
+using System.Collections;
 
 public class Following : MonoBehaviour
 {
-    [SerializeField] private Transform targetTransform;
-    void FixedUpdate()
+    public GameObject followTarget;
+    private Vector3 targetPos;
+
+    public void SetTarget(GameObject newTarget) => followTarget = newTarget;
+
+    void Update()
     {
-        if (targetTransform != null && transform.position != targetTransform.position)
-            transform.position = new Vector3 (targetTransform.position.x, targetTransform.position.y, -100f);
+        if(followTarget != null && followTarget.transform.position != targetPos)
+        {
+            targetPos = new Vector3(followTarget.transform.position.x, followTarget.transform.position.y, -10f);
+            transform.position = targetPos;
+        }
     }
 }

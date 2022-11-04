@@ -13,13 +13,17 @@ public class Combat : MonoBehaviour
     //methods
     public void Hit()
     {
-        RaycastHit2D[] hittedObjects = Physics2D.RaycastAll(attackPoint.position, Vector2.zero, attackRange);
-
-        foreach (RaycastHit2D item in hittedObjects)
+        Collider2D[] hittedObjects = Physics2D.OverlapCircleAll(attackPoint.position, attackRange);
+        
+        foreach (Collider2D item in hittedObjects)
         {
             if (item.transform.gameObject.TryGetComponent(out Health health))
                 health.TakeHit(damage);
         }
     }
-
+    private void OnDrawGizmos()
+    {
+        if(attackPoint!=null)
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    }
 }

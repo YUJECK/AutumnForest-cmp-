@@ -12,7 +12,7 @@ public class Health : MonoBehaviour
     public UnityEvent onDie = new UnityEvent();
     public UnityEvent<int, int> onHealthChange = new UnityEvent<int, int>();
 
-    private void Start() { spriteRenderer = GetComponent<SpriteRenderer>(); }
+    private void Start() { if(spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>(); }
 
     public void Destroy() => Destroy(gameObject);
     public void Instiate(GameObject obj) => Instantiate(obj, transform.position, Quaternion.identity);

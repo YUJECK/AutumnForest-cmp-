@@ -5,6 +5,7 @@ public class RaccoonStateMachine : StateMachine
     [SerializeField] private Transform player;
     [SerializeField] private State idleState;
     [SerializeField] private State spawnQuirrelState;
+    [SerializeField] private State shirtThrowingState;
     [SerializeField] private State roundState;
 
     public override void ChooseState()
@@ -18,6 +19,9 @@ public class RaccoonStateMachine : StateMachine
                 break;
             case 1:
                 newState = spawnQuirrelState;
+                break;
+            case 2:
+                newState = shirtThrowingState;
                 break;
         }
 

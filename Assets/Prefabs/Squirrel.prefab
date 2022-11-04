@@ -194,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33da092926b1ab148abd74ca5be38fcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 5767805362926127979, guid: 594db085ab8f7c647982cc2a5d904787, type: 3}
+  projectile: {fileID: 5767805362926127979, guid: b83cea696371311499604f502cc5603e, type: 3}
   firePoint: {fileID: 8611510710469207697}
 --- !u!114 &521130304501401816
 MonoBehaviour:

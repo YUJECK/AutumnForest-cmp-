@@ -36,34 +36,31 @@ public class PlayerController : MonoBehaviour
     //inputs
     private void Update()
     {
-        if (!isStopped)
-        {
-            movement.x = Input.GetAxis("Horizontal");
-            movement.y = Input.GetAxis("Vertical");
+        movement.x = Input.GetAxis("Horizontal");
+        movement.y = Input.GetAxis("Vertical");
 
-            if (Input.GetMouseButtonDown(0) && canAttack)
-            {
-                combat.Hit();
-                Instantiate(attackAnimation, combat.AttackPoint.position, combat.AttackPoint.rotation);
-                StartCoroutine(AttackCulldown());
-            }
+        if (Input.GetMouseButtonDown(0) && canAttack && !isStopped)
+        {
+            combat.Hit();
+            Instantiate(attackAnimation, combat.AttackPoint.position, combat.AttackPoint.rotation);
+            StartCoroutine(AttackCulldown());
         }
     }
 
     //movement
     private void FixedUpdate()
     {
-        if (!isStopped)
+        rigidbody.velocity = movement * moveSpeed;
+        
+        if (!isStopped && movement != Vector2.zero)
         {
             if (movement.x < 0 && transform.localScale.x == -1)
                 transform.localScale = new Vector3(1, 1, 1);
             if (movement.x > 0 && transform.localScale.x == 1)
                 transform.localScale = new Vector3(-1, 1, 1);
 
-            rigidbody.velocity = movement * moveSpeed;
             animator.SetBool("Run", true);
         }
-        if (movement == Vector2.zero)
-            animator.SetBool("Run", false);
+        else animator.SetBool("Run", false);
     }
 }

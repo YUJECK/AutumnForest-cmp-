@@ -15,6 +15,7 @@ public class Health : MonoBehaviour
     private void Start() { if(spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>(); }
 
     public void Destroy() => Destroy(gameObject);
+    public void DestroyOther(GameObject obj) => DestroyOther(obj);
     public void Instiate(GameObject obj) => Instantiate(obj, transform.position, Quaternion.identity);
     public void TakeHit(int hit)
     {

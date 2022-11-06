@@ -17,14 +17,12 @@ public class Dialoge : MonoBehaviour
     {
         if (currentPhrase == 0)
             onConversationStarts.Invoke();
-
-        if (currentPhrase > phrases.Count)
+        if (currentPhrase >= phrases.Count)
             onConversationEnds.Invoke();
         else
         {
-            if(currentPhrase < phrases.Count) UIText.text = phrases[currentPhrase];
+            UIText.text = phrases[currentPhrase];
             currentPhrase++;
-        }   
-                
+        }
     }
 }

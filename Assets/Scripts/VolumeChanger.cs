@@ -1,12 +1,9 @@
-using JetBrains.Annotations;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class VolumeChanger : MonoBehaviour
 {
-    public void ChangeVolume(int volume)
-    {
+    [SerializeField] private AudioMixer mixer;
 
-    }
+    public void ChangeVolume(float volume) => mixer.SetFloat("Volume", volume);
 }

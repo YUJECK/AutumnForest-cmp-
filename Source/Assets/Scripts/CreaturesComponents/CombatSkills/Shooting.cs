@@ -6,6 +6,7 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Transform firePoint;
     private PointRotation pointRotation;
 
+    public void StopPointRotation(bool active) => pointRotation.StopRotating(active);
     public void Shoot(GameObject projectile, float speed, float shootOffset, float spawnOffset, ForceMode2D forceMode2D)
     {
         if (firePoint != null)
@@ -18,8 +19,5 @@ public class Shooting : MonoBehaviour
         }
         else Debug.LogWarning("Fire point is null");
     }
-    private void Start()
-    {   
-        pointRotation = GetComponent<PointRotation>();
-    }
+    private void Start() => pointRotation = GetComponent<PointRotation>();
 }

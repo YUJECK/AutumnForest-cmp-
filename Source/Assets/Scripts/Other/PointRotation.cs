@@ -35,7 +35,8 @@ public class PointRotation : MonoBehaviour
         if (targetType == PointRotationTargetType.Other) target = newTarget;
         else Debug.LogWarning("Rotation type is - " + targetType);
     }
-    public void StopRotating(bool active, float time) { StartCoroutine(StopRotatingCoroutine(active, time)); }
+    public void StopRotating(bool active, float time) => StartCoroutine(StopRotatingCoroutine(active, time)); 
+    public void StopRotating(bool active) => stopRotating = active; 
 
     private IEnumerator StopRotatingCoroutine(bool active, float time)
     {

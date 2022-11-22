@@ -14,13 +14,18 @@ namespace AutumnForest
         {
             State nextState = idleState;
 
+            if (Vector3.Distance(GameManager.Player.transform.position, transform.position) > 5)
+                nextState = clothesThrowingState;
+            else nextState = coneThrowingState[Random.Range(0, coneThrowingState.Length)];
+
             if(nextState != CurrentState)
                 ChangeState(nextState);
         }
 
         protected override void UpdateStates()
         {
-            CurrentState.UpdateState(this);
+            if(CurrentState != null)
+                CurrentState.UpdateState(this);
         }
     }
 }

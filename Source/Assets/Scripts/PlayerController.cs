@@ -1,3 +1,4 @@
+using AutumnForest;
 using System.Collections;
 using UnityEngine;
 
@@ -31,6 +32,8 @@ public class PlayerController : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        GameManager.SetPlayer(this);
     }
 
     //inputs

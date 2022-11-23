@@ -44,6 +44,7 @@ namespace CreaturesAI
                     StartCoroutine(EnterNewState(newState, currentState.StateTransitionDelay));
                 else EnterNewState(newState);
             }
+            else Debug.Log(newState.name);
         }
         private void EnterNewState(State newState)
         {

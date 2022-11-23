@@ -11,8 +11,8 @@ namespace AutumnForest
         public override void StartBossFight()
         {
             onBossFightBegins.Invoke();
-            GameManager.MainCamera.orthographicSize = 6f;
-            Following cameraFollowing = GameManager.MainCamera?.GetComponent<Following>();
+            ObjectList.MainCamera.orthographicSize = 6f;
+            Following cameraFollowing = ObjectList.MainCamera.GetComponent<Following>();
 
             if (cameraFollowing != null && raccoon != null)
                 cameraFollowing.followTarget = raccoon; 
@@ -22,11 +22,11 @@ namespace AutumnForest
         public override void EndBossFight()
         {
             onBossFightEnds.Invoke();
-            GameManager.MainCamera.orthographicSize = 3f;
-            Following cameraFollowing = GameManager.MainCamera?.GetComponent<Following>();
+            ObjectList.MainCamera.orthographicSize = 3f;
+            Following cameraFollowing = ObjectList.MainCamera.GetComponent<Following>();
 
             if (cameraFollowing != null && raccoon != null)
-                cameraFollowing.followTarget = GameManager.Player.gameObject;
+                cameraFollowing.followTarget = ObjectList.Player.gameObject;
             else Debug.LogError("Following script doesnt set to camera");
             if (log != null) log.SetActive(false);
         }

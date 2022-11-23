@@ -70,7 +70,7 @@ namespace CreaturesAI.Pathfinding
         private int Heuristic(Point first, Point second) => Mathf.Abs(first.X - second.X) + Mathf.Abs(first.Y - second.Y);
         private bool CheckPointCollider(Point point)
         {
-            if (Managers.Grid.GetPoint(new Vector2Int(point.X, point.Y)) == 0) return true;
+            if (ObjectList.Grid.GetPoint(new Vector2Int(point.X, point.Y)) == 0) return true;
             else return false;
         }
         
@@ -78,14 +78,14 @@ namespace CreaturesAI.Pathfinding
         public List<Vector2> FindPath(Vector2 start, Vector2 end)
         {
             //simple check endpoint for obstacle
-            if (Managers.Grid.GetPoint(end) == 1)
+            if (ObjectList.Grid.GetPoint(end) == 1)
             {
                 Debug.LogWarning("End point is obstacle");
                 return new List<Vector2>();
             }
 
             List<Point> nextPoints = new List<Point>();
-            bool[,] visitedPoints = new bool[Managers.Grid.GridWidth, Managers.Grid.GridHeight];
+            bool[,] visitedPoints = new bool[ObjectList.Grid.GridWidth, ObjectList.Grid.GridHeight];
             Point startPoint = new Point((int)start.x, (int)start.y);
             Point endPoint = new Point((int)end.x, (int)end.y);
 

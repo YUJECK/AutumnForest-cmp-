@@ -22,6 +22,7 @@ namespace CreaturesAI
         [SerializeField] private DynamicPathfinding dymamicPathfinding;
         [SerializeField] private Health health;
         [SerializeField] private Combat combat;
+        [SerializeField] private Dialogue dialogue;
 
         //getters
         protected State CurrentState => currentState;
@@ -31,6 +32,7 @@ namespace CreaturesAI
         public DynamicPathfinding DynamicPathfinding => dymamicPathfinding;
         public Health Health => health;
         public Combat Combat => combat;
+        public Dialogue Dialogue => dialogue;
         public Animator Animator => animator;
 
         //constant methods
@@ -48,7 +50,7 @@ namespace CreaturesAI
             if (newState != currentState && newState != null)
             {
                 if (currentState != null) currentState.ExitState(this);
-                currentState = Instantiate(newState);   
+                currentState = newState;   
                 currentStateName = currentState.StateName;
                 currentState.EnterState(this);
             }

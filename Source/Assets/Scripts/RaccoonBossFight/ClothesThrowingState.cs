@@ -19,15 +19,15 @@ namespace AutumnForest
                 yield return new WaitForSeconds(2f);
             }
 
-            ExitState(stateMachine);
+            stateMachine.StateChoosing();
         }
 
         public override void EnterState(StateMachine stateMachine)
         {
             stateMachine.Animator.Play(throwingAnimationName);
-            stateMachine.StartCoroutine(Throwing(stateMachine));
+            StartCoroutine(Throwing(stateMachine));
         }
-        public override void ExitState(StateMachine stateMachine) => stateMachine.StateChoosing();
+        public override void ExitState(StateMachine stateMachine) => StopAllCoroutines();
         public override void UpdateState(StateMachine stateMachine) { }
     }
 }

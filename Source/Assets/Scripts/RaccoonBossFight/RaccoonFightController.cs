@@ -18,8 +18,6 @@ namespace AutumnForest
                 cameraFollowing.followTarget = raccoon; 
             else Debug.LogError("Following script doesnt set to camera");
             if (log != null) log.SetActive(true);
-
-            raccoon?.GetComponent<StateMachine>().StateChoosing();
         }
         public override void EndBossFight()
         {

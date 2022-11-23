@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace AutumnForest
 {
-    [CreateAssetMenu()]
     public class ConeRoundShootingRaccoonState : State
     {
         [SerializeField] private GameObject cone;
@@ -16,20 +15,20 @@ namespace AutumnForest
 
             for (int i = 0; i < 10; i++)
             {
-                stateMachine.Shooting.Shoot(cone, 10, 0, i*45, ForceMode2D.Impulse);
-                yield return new WaitForSeconds(0.2f);
+                stateMachine.Shooting.Shoot(cone, 15, 0, i*30, ForceMode2D.Impulse);
+                yield return new WaitForSeconds(0.1f);
             }
 
             stateMachine.Shooting.StopPointRotation(false);
-            ExitState(stateMachine);
+            stateMachine.StateChoosing();
         }
 
         public override void EnterState(StateMachine stateMachine)
         {
             stateMachine.Animator.Play(coneThrowingAnimationName);
-            stateMachine.StartCoroutine(Shooting(stateMachine));
+            StartCoroutine(Shooting(stateMachine));
         }
-        public override void ExitState(StateMachine stateMachine) => stateMachine.StateChoosing(); 
+        public override void ExitState(StateMachine stateMachine) => StopAllCoroutines(); 
         public override void UpdateState(StateMachine stateMachine) { }
     }
 }

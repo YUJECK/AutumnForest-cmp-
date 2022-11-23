@@ -12,13 +12,19 @@ public class Dialogue : MonoBehaviour
     public UnityEvent onConversationStarts = new UnityEvent();
     public UnityEvent onConversationEnds = new UnityEvent();
 
-    public void RepeatConversationAgain() => currentPhrase = 0;
+    public void StartConversation()
+    {
+        currentPhrase = 0;
+        NextPhrase();
+        onConversationStarts.Invoke();
+    }
     public void NextPhrase()
     {
-        if (currentPhrase == 0)
-            onConversationStarts.Invoke();
         if (currentPhrase >= phrases.Count)
+        { 
             onConversationEnds.Invoke();
+            Debug.Log("Conversation ends");
+        }
         else
         {
             UIText.text = phrases[currentPhrase];

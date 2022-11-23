@@ -2,19 +2,19 @@ using UnityEngine;
 
 namespace AutumnForest
 {
-    static public class GameManager 
+    public class GameManager : MonoBehaviour
     {
+        //variables
         static private PlayerController player;
+        static private Camera mainCamera;
+        //getters
         static public PlayerController Player => player;
-
-        static public void SetPlayer(PlayerController newPlayer)
+        static public Camera MainCamera => mainCamera;
+        
+        private void Awake()
         {
-            if(player != null)
-            {
-                GameObject.Destroy(player.gameObject);
-                return;
-            }
-            player = newPlayer;
+            player = FindObjectOfType<PlayerController>();    
+            mainCamera = Camera.main;    
         }
     }
 }

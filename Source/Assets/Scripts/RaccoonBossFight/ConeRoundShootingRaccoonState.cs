@@ -16,8 +16,8 @@ namespace AutumnForest
 
             for (int i = 0; i < 10; i++)
             {
-                stateMachine.Shooting.Shoot(cone, 10, 0, i*20, ForceMode2D.Impulse);
-                yield return new WaitForSeconds(0.5f);
+                stateMachine.Shooting.Shoot(cone, 10, 0, i*45, ForceMode2D.Impulse);
+                yield return new WaitForSeconds(0.2f);
             }
 
             stateMachine.Shooting.StopPointRotation(false);

@@ -1,11 +1,16 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BossFightController : MonoBehaviour
+namespace AutumnForest
 {
-    public void StartBossFight() => onBossFightBegins.Invoke();
-    public void EndBossFight() => onBossFightEnds.Invoke();
-
-    public UnityEvent onBossFightBegins = new UnityEvent();
-    public UnityEvent onBossFightEnds = new UnityEvent();
+    abstract public class BossFightController : MonoBehaviour
+    {
+        //events
+        public UnityEvent onBossFightBegins = new UnityEvent();
+        public UnityEvent onBossFightEnds = new UnityEvent();
+    
+        //abstract methods
+        abstract public void StartBossFight();
+        abstract public void EndBossFight();
+    }
 }

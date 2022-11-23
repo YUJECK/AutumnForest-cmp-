@@ -57,7 +57,7 @@ public class PointRotation : MonoBehaviour
             angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + 90f;
             return coefficient * angle + offset;
         }
-        return angle;
+        return coefficient * angle + offset;
     }
     private Vector3 DefineTargetPosition()
     {
@@ -68,10 +68,5 @@ public class PointRotation : MonoBehaviour
 
     //unity methods
     private void Awake() => mainCamera = Camera.main;
-    private void FixedUpdate()
-    {
-        //�������� 
-        if (DefineTargetPosition() != lastTargetPosition)
-            transform.rotation = Quaternion.Euler(0f, 0f, CalculateAngle());
-    }
+    private void FixedUpdate() => transform.rotation = Quaternion.Euler(0f, 0f, CalculateAngle());
 }

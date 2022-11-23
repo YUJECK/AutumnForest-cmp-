@@ -73,7 +73,6 @@ namespace CreaturesAI
         abstract protected void UpdateStates();
 
         //unity methods
-        private void Start() => StateChoosing();
         private void Update() => UpdateStates();
     }
 }

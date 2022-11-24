@@ -38,13 +38,9 @@ namespace CreaturesAI
         //constant methods
         protected void ChangeState(State newState)
         {
-            if (newState != currentState)
-            {
-                if (currentState != null && currentState.StateTransitionDelay != 0f)
-                    StartCoroutine(EnterNewState(newState, currentState.StateTransitionDelay));
-                else EnterNewState(newState);
-            }
-            else Debug.Log(newState.name);
+            if (currentState != null && currentState.StateTransitionDelay != 0f)
+                StartCoroutine(EnterNewState(newState, currentState.StateTransitionDelay));
+            else EnterNewState(newState);
         }
         private void EnterNewState(State newState)
         {
@@ -62,10 +58,9 @@ namespace CreaturesAI
 
             yield return new WaitForSeconds(delay);
 
-            if (newState != currentState & newState != null)
+            if (newState != null)
             {
-                if (currentState != null) currentState.ExitState(this);
-                currentState = Instantiate(newState);
+                currentState = newState;
                 currentStateName = currentState.StateName;
                 currentState.EnterState(this);
             }

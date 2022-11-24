@@ -17,7 +17,7 @@ namespace AutumnForest
         {
             State nextState = idleState;
 
-            if (Vector3.Distance(ObjectList.Player.transform.position, transform.position) > 5)
+            if (Vector3.Distance(ObjectList.Player.transform.position, transform.position) > 2.5)
                 nextState = clothesThrowingState;
             else nextState = coneThrowingState[Random.Range(0, coneThrowingState.Length)];
 
@@ -27,10 +27,7 @@ namespace AutumnForest
                 isStart = false;
             }
 
-            if(nextState != CurrentState)
-                ChangeState(nextState);
-
-            Debug.Log("LKSDL:KLDK:J");
+            ChangeState(nextState);
         }
 
         protected override void UpdateStates()

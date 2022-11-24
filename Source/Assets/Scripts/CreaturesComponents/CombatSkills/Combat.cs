@@ -65,6 +65,7 @@ public class Combat : MonoBehaviour
     }
 
     //unity methods
+    private void OnDrawGizmos() => Gizmos.DrawWireSphere(attackPoint.position, attackRange);
 
     //temp
     private void Awake() => triggerChecker = GetComponent<TriggerChecker>();

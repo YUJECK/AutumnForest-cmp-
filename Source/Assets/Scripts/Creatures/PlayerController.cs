@@ -1,4 +1,3 @@
-using AutumnForest;
 using System.Collections;
 using UnityEngine;
 
@@ -52,7 +51,7 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         rigidbody.velocity = movement * moveSpeed;
-        
+
         if (!isStopped && movement != Vector2.zero)
         {
             if (movement.x < 0 && transform.localScale.x == -1)

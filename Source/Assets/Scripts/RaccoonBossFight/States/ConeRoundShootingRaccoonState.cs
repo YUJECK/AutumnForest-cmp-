@@ -11,18 +11,17 @@ namespace AutumnForest
 
         private IEnumerator Shooting(StateMachine stateMachine)
         {
+            //Time.timeScale = 0.1f;
             stateMachine.Shooting.StopPointRotation(true);
 
-            for (int i = 0; i < 24; i++)
+            for (int i = 0; i < 36; i++)
             {
-                stateMachine.Shooting.Shoot(cone, 15, 0, i*30, ForceMode2D.Impulse);
-                yield return new WaitForSeconds(0.1f);
+                stateMachine.Shooting.Shoot(cone, 7, 0, i*30, ForceMode2D.Impulse);
+                yield return new WaitForSeconds(0.05f);
             }
 
             stateMachine.Shooting.StopPointRotation(false);
             stateMachine.StateChoosing();
-
-            Debug.Log("exit");
         }
 
         public override void EnterState(StateMachine stateMachine)

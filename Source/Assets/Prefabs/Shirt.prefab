@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8680921058980622148}
   - component: {fileID: 3221090224230522510}
   - component: {fileID: 4865484186909741059}
+  - component: {fileID: 5235366391092543952}
   m_Layer: 0
   m_Name: Shirt
   m_TagString: Untagged
@@ -45,7 +46,7 @@ Animator:
   m_GameObject: {fileID: 8680921058980622144}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 26031159bb7b6d9408389c3bc328b869, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0b9044f86628da444821134b00af2428, type: 2}
   m_CullingMode: 2
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -63,12 +64,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 8680921058980622144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c20b071c01920748990e5f9e3135991, type: 3}
+  m_Script: {fileID: 11500000, guid: 0008d5b6b188f8046b56a319b2bf3cc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
-  attackRange: 1
+  minimumDamage: 10
+  maximumDamage: 15
+  attackDelay: 0.5
+  attackRate: 1
+  attackRange: 0.5
   attackPoint: {fileID: 8680921058980622150}
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  beforeHitting:
+    m_PersistentCalls:
+      m_Calls: []
+  onHitting:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3221090224230522510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,18 +91,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8680921058980622144}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5862ac7a653939458958ea8a45b4fe4, type: 3}
+  m_Script: {fileID: 11500000, guid: 72f324168f9356c49bdab40a4a83722c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 30
-  maxHealth: 30
-  spriteRenderer: {fileID: 0}
-  onDie:
-    m_PersistentCalls:
-      m_Calls: []
-  onHealthChange:
-    m_PersistentCalls:
-      m_Calls: []
+  lifeTime: 0.8
 --- !u!212 &4865484186909741059
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -141,6 +146,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5235366391092543952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8680921058980622144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8282806e2355ee14d8c8f5b66c8ab0b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enterTags: []
 --- !u!1 &8680921060144729249
 GameObject:
   m_ObjectHideFlags: 0

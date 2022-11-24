@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour
 {
-    [TextArea(2,10)]
+    [TextArea(2, 10)]
     [SerializeField] private List<string> phrases = new List<string>();
     [SerializeField] private Text UIText;
     private int currentPhrase = 0;
@@ -21,7 +21,7 @@ public class Dialogue : MonoBehaviour
     public void NextPhrase()
     {
         if (currentPhrase >= phrases.Count)
-        { 
+        {
             onConversationEnds.Invoke();
             Debug.Log("Conversation ends");
         }

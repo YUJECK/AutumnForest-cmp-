@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace AutumnForest
 {
-    [CreateAssetMenu()]
     public class ClothesThrowingState : State
     {
         [SerializeField] private string throwingAnimationName = "RaccoonThrowing";

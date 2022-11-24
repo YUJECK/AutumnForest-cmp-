@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class Following : MonoBehaviour
 {
@@ -10,7 +9,7 @@ public class Following : MonoBehaviour
 
     void LateUpdate()
     {
-        if(followTarget != null && followTarget.transform.position != targetPos)
+        if (followTarget != null && followTarget.transform.position != targetPos)
         {
             targetPos = new Vector3(followTarget.transform.position.x, followTarget.transform.position.y, -10f);
             transform.position = targetPos;

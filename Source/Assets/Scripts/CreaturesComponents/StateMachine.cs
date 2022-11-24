@@ -1,6 +1,5 @@
 using CreaturesAI.Pathfinding;
 using System.Collections;
-using TMPro;
 using UnityEngine;
 
 namespace CreaturesAI
@@ -47,7 +46,7 @@ namespace CreaturesAI
             if (newState != currentState && newState != null)
             {
                 if (currentState != null) currentState.ExitState(this);
-                currentState = newState;   
+                currentState = newState;
                 currentStateName = currentState.StateName;
                 currentState.EnterState(this);
             }

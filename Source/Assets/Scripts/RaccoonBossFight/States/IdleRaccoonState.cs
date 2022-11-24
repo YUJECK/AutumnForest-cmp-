@@ -3,7 +3,6 @@ using UnityEngine;
 
 namespace AutumnForest
 {
-    [CreateAssetMenu()]
     public class IdleRaccoonState : State
     {
         [SerializeField] private string idleAnimationName = "RaccoonIdle";

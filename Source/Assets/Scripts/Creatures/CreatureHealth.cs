@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace AutumnForest
 {
     public class CreatureHealth : Health
@@ -13,6 +15,9 @@ namespace AutumnForest
             currentHealth += healPoints;
             onHeal.Invoke(currentHealth, maximumHealth);
             onHealthChange.Invoke(currentHealth, maximumHealth);
+
+            if (currentHealth > maximumHealth)
+                currentHealth = maximumHealth;
         }
 
         public override void IncreaseMaximumHealth(int healPoints)
@@ -26,6 +31,9 @@ namespace AutumnForest
             currentHealth -= damagePoints;
             onTakeHit.Invoke(currentHealth, maximumHealth);
             onHealthChange.Invoke(currentHealth, maximumHealth);
+
+            if (currentHealth <= 0)
+                onDie.Invoke();
         }
     }
 }

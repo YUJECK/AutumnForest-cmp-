@@ -1,4 +1,4 @@
-using UnityEditor.Events;
+using UnityEngine.Events;
 using UnityEngine;
 
 namespace AutumnForest
@@ -29,8 +29,8 @@ namespace AutumnForest
         private void Start()
         {
             //adding persistent listeners
-            UnityEventTools.AddBoolPersistentListener(onTriggerEnter.onEnter, onKeyDown.SetActive, true);
-            UnityEventTools.AddBoolPersistentListener(onTriggerExit.onExit, onKeyDown.SetActive, false);
+            onTriggerEnter.onEnter.AddListener(delegate { onKeyDown.SetActive(true); });
+            onTriggerExit.onExit.AddListener(delegate { onKeyDown.SetActive(false); });
         }
     }
 }

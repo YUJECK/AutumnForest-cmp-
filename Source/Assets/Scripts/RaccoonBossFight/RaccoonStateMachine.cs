@@ -15,6 +15,8 @@ namespace AutumnForest
 
         private bool isStart = true;
 
+        private void Start() => FindObjectOfType<MafiaFightController>().onBossFightBegins.AddListener(StateChoosing);
+
         public override void StateChoosing()
         {
             State nextState = idleState;
@@ -36,7 +38,6 @@ namespace AutumnForest
 
             ChangeState(nextState);
         }
-
         protected override void UpdateStates()
         {
             if(CurrentState != null)

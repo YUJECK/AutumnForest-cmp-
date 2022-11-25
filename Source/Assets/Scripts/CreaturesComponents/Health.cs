@@ -11,6 +11,7 @@ public abstract class Health : MonoBehaviour
     public UnityEvent<int, int> onHealthChange = new UnityEvent<int, int>();
     public UnityEvent<int, int> onHeal = new UnityEvent<int, int>();
     public UnityEvent<int, int> onTakeHit = new UnityEvent<int, int>();
+    public UnityEvent onDie = new UnityEvent();
     //getters
     public int CurrentHealth => currentHealth;
     public int MaximumHealth => maximumHealth;

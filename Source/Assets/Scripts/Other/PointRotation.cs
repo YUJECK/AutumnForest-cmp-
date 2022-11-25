@@ -30,14 +30,15 @@ public class PointRotation : MonoBehaviour
     public PointRotationTargetType TargetType => targetType;
 
     //setters
-    public void SetTarget(Transform newTarget)
+    public void SetTarget(GameObject newTarget)
     {
-        if (targetType == PointRotationTargetType.Other) target = newTarget;
+        if (targetType == PointRotationTargetType.Other) target = newTarget.transform;
         else Debug.LogWarning("Rotation type is - " + targetType);
     }
     public void StopRotating(bool active, float time) => StartCoroutine(StopRotatingCoroutine(active, time)); 
     public void StopRotating(bool active) => stopRotating = active; 
 
+    //methods
     private IEnumerator StopRotatingCoroutine(bool active, float time)
     {
         stopRotating = active;

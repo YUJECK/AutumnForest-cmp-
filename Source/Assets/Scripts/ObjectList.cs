@@ -7,6 +7,8 @@ public sealed class ObjectList : MonoBehaviour
     static private GridManager grid;
     static private PlayerController player;
     static private Camera mainCamera;
+    static private GameObject mainTheme; //–имуру, не бей. я знаю что это кривое решение
+    static private GameObject bossfightTheme;
     
     //getters
     static public GridManager Grid => grid;        
@@ -18,5 +20,7 @@ public sealed class ObjectList : MonoBehaviour
         player = FindObjectOfType<PlayerController>();
         mainCamera = Camera.main;
         grid = FindObjectOfType<GridManager>();
+        mainTheme = GameObject.Find("MainTheme");
+        bossfightTheme = GameObject.Find("BossfightTheme");
     }
 }

@@ -5,6 +5,8 @@ namespace AutumnForest
 {
     public class RaccoonStateMachine : StateMachine
     {
+        [SerializeField] MafiaFightController fightController;
+
         [SerializeField] private State idleState;
         [SerializeField] private State[] coneThrowingState;
         [SerializeField] private State clothesThrowingState;
@@ -20,6 +22,11 @@ namespace AutumnForest
             if (Vector3.Distance(ObjectList.Player.transform.position, transform.position) > 2.5)
                 nextState = clothesThrowingState;
             else nextState = coneThrowingState[Random.Range(0, coneThrowingState.Length)];
+            if(Health.CurrentHealth <= 100)
+            {
+                nextState = healingState;
+                fightController.BossChangeToFox();
+            }
 
             if(isStart)
             {

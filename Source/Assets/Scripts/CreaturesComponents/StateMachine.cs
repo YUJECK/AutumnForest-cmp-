@@ -53,7 +53,8 @@ namespace CreaturesAI
         }
         private IEnumerator EnterNewState(State newState, float delay)
         {
-            currentState = null;
+            if (currentState != null) currentState.ExitState(this);
+            else currentState = null;
 
             yield return new WaitForSeconds(delay);
 

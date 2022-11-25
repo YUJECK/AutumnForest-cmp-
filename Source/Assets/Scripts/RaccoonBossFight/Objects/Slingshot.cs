@@ -1,15 +1,20 @@
+using AutumnForest;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(InteractionField))]
 public class Slingshot : MonoBehaviour
 {
+    //variables
     [SerializeField] private Transform target;
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform firePoint;
     [SerializeField] private Text culldownText;
     private bool canShoot = true;
 
+    //methods
+    public void ChangeTarget(GameObject newTarget) => target = newTarget.transform;
     public void Shoot()
     {
         if(canShoot)
@@ -30,5 +35,12 @@ public class Slingshot : MonoBehaviour
 
         culldownText.text = "";
         canShoot = true;
+    }
+
+    //unity methods
+    private void Start()
+    {
+        FindObjectOfType<MafiaFightController>().OnBossChange.AddListener(ChangeTarget);
+        GetComponent<InteractionField>().OnKeyDown.onKeyDown.AddListener(Shoot);
     }
 }

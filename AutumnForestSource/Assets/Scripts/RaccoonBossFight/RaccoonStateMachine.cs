@@ -8,7 +8,7 @@ namespace AutumnForest
         [SerializeField] MafiaFightController fightController;
 
         [SerializeField] private State idleState;
-        [SerializeField] private State[] coneThrowingState;
+        [SerializeField] private State shootingState;
         [SerializeField] private State clothesThrowingState;
         [SerializeField] private State healingState;
         [SerializeField] private State dialogueState;
@@ -23,7 +23,7 @@ namespace AutumnForest
 
             if (Vector3.Distance(ObjectList.Player.transform.position, transform.position) > 3.5)
                 nextState = clothesThrowingState;
-            else nextState = coneThrowingState[Random.Range(0, coneThrowingState.Length)];
+            else nextState = shootingState;
             if(Health.CurrentHealth <= 100)
             {
                 nextState = healingState;

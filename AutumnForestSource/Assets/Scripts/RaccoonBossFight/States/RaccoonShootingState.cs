@@ -16,18 +16,21 @@ namespace AutumnForest
 
         public override void EnterState(StateMachine stateMachine)
         {
-            int random = Random.Range(0, 2);
+            Debug.Log("Enter shooting state");
+         
+            int random = Random.Range(0, 1);
             currentPattern = null;
 
             switch (random)
             {
                 case 0:
-                    currentPattern = roundShootingFirstStage;
+                    currentPattern = Instantiate(roundShootingFirstStage);
                     break;
                 case 1:
-                    currentPattern = tripleShotFirstStage[Random.Range(0, tripleShotFirstStage.Length)];
+                    currentPattern = Instantiate(tripleShotFirstStage[0]);
                     break;
             }
+
 
             currentPattern.OnPatternEnd.AddListener(stateMachine.StateChoosing);
             currentPattern.UsePattern(stateMachine.Shooting);
@@ -35,8 +38,8 @@ namespace AutumnForest
 
         public override void ExitState(StateMachine stateMachine) 
         {
-            currentPattern.OnPatternEnd.RemoveListener(stateMachine.StateChoosing);
             currentPattern.CompletePattern(stateMachine.Shooting); 
+            currentPattern.OnPatternEnd.RemoveListener(stateMachine.StateChoosing);
         }
 
         public override void UpdateState(StateMachine stateMachine) { }

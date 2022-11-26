@@ -37,6 +37,8 @@ namespace CreaturesAI
         //constant methods
         protected void ChangeState(State newState)
         {
+            Debug.Log(newState.StateName);
+
             if (currentState != null && currentState.StateTransitionDelay != 0f)
                 StartCoroutine(EnterNewState(newState, currentState.StateTransitionDelay));
             else EnterNewState(newState);
@@ -45,7 +47,7 @@ namespace CreaturesAI
         {
             if (newState != currentState && newState != null)
             {
-                if (currentState != null) currentState.ExitState(this);
+                if (currentState != null) currentState.ExitState(this); 
                 currentState = newState;
                 currentStateName = currentState.StateName;
                 currentState.EnterState(this);

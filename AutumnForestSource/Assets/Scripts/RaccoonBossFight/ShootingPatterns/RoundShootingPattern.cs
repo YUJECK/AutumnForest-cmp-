@@ -4,7 +4,7 @@ using UnityEngine;
 namespace AutumnForest
 {
     [CreateAssetMenu]
-    public class ConeRoundShootingRaccoonState : ShootingPattern
+    public class RoundShootingPattern : ShootingPattern
     {
         [SerializeField] private GameObject cone;
 
@@ -19,6 +19,7 @@ namespace AutumnForest
             }
 
             shooting.StopPointRotation(false);
+
             OnPatternEnd.Invoke();
         }
     }

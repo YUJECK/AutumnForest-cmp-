@@ -11,6 +11,10 @@ public abstract class ShootingPattern : ScriptableObject
     public bool IsFinished => isFinished;
 
     public void UsePattern(Shooting shooting) => patternCoroutine = shooting.StartCoroutine(Pattern(shooting));
-    public void CompletePattern(Shooting shooting) => shooting.StopCoroutine(patternCoroutine);
+    public void CompletePattern(Shooting shooting)
+    {
+        if(patternCoroutine != null) 
+            shooting.StopCoroutine(patternCoroutine);
+    }
     public abstract IEnumerator Pattern(Shooting shooting);
 }

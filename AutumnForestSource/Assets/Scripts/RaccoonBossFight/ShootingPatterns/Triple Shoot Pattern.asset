@@ -16,5 +16,5 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   chestnut: {fileID: 5767805362926127979, guid: e8c0b2bb56593f3429477322396d7488, type: 3}
-  shootingRate: 0.5
+  shootingRate: 0.1
   shootingSpread: 25

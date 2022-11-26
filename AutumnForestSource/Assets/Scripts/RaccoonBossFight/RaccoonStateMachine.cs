@@ -5,8 +5,8 @@ namespace AutumnForest
 {
     public class RaccoonStateMachine : StateMachine
     {
-        [SerializeField] MafiaFightController fightController;
-
+        //variables
+        [Header("States")]
         [SerializeField] private State idleState;
         [SerializeField] private State shootingState;
         [SerializeField] private State clothesThrowingState;
@@ -15,20 +15,21 @@ namespace AutumnForest
 
         private bool isStart = true;
 
-        private void Start() => FindObjectOfType<MafiaFightController>().onBossFightBegins.AddListener(StateChoosing);
-
+        //override methods
         public override void StateChoosing()
         {
+            Debug.Log("State Choosing");
+
             State nextState = idleState;
 
-            if (Vector3.Distance(ObjectList.Player.transform.position, transform.position) > 3.5)
+            if (Vector3.Distance(ObjectList.Player.transform.position, transform.position) > 5.5)
                 nextState = clothesThrowingState;
             else nextState = shootingState;
-            if(Health.CurrentHealth <= 100)
-            {
-                nextState = healingState;
-                fightController.BossChangeToFox();
-            }
+            //if(Health.CurrentHealth <= 100)
+            //{
+            //    nextState = healingState;
+            //    fightController.BossChangeToFox();
+            //}
 
             if(isStart)
             {
@@ -43,5 +44,8 @@ namespace AutumnForest
             if(CurrentState != null)
                 CurrentState.UpdateState(this);
         }
+        
+        //unity methods
+        private void Start() => FindObjectOfType<MafiaFightController>().onBossFightBegins.AddListener(StateChoosing);
     }
 }

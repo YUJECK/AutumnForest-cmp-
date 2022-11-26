@@ -17,7 +17,7 @@ namespace AutumnForest
 
             for (int i = 0; i < 3; i++)
             {
-                shooting.Shoot(chestnut, 10, 0f, shootingSpread, ForceMode2D.Impulse);
+                shooting.Shoot(chestnut, 10, Random.Range(0, shootingSpread), 0f, ForceMode2D.Impulse);
                 yield return new WaitForSeconds(shootingRate);
             }
 

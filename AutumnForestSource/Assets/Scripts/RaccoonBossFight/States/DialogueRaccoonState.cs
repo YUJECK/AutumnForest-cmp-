@@ -1,4 +1,5 @@
 using CreaturesAI;
+using UnityEngine;
 
 namespace AutumnForest
 {
@@ -11,6 +12,10 @@ namespace AutumnForest
         }
 
         public override void ExitState(StateMachine stateMachine) { }
-        public override void UpdateState(StateMachine stateMachine) { }
+        public override void UpdateState(StateMachine stateMachine)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+                stateMachine.Dialogue.NextPhrase();
+        }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AutumnForest
 {
-    public class TripleShootRaccoonState : ShootingPattern
+    public class TripleShootPattern : ShootingPattern
     {
         [SerializeField] private GameObject chestnut;
         [SerializeField] private float shootingRate = 0.5f;

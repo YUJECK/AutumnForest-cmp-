@@ -7,7 +7,7 @@ namespace AutumnForest
         public override void EnterState(StateMachine stateMachine)
         {
             stateMachine.Dialogue.StartConversation();
-            stateMachine.Dialogue.onConversationEnds.AddListener(stateMachine.StateChoosing);
+            stateMachine.Dialogue.OnConversationEnds.AddListener(stateMachine.StateChoosing);
         }
 
         public override void ExitState(StateMachine stateMachine) { }

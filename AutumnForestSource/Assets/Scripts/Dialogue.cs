@@ -1,33 +1,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.UI;
 
 public class Dialogue : MonoBehaviour
 {
+    //variables
     [TextArea(2, 10)]
+    [SerializeField] private string name = "Somebody";
     [SerializeField] private List<string> phrases = new List<string>();
-    [SerializeField] private Text UIText;
     private int currentPhrase = 0;
-    public UnityEvent onConversationStarts = new UnityEvent();
-    public UnityEvent onConversationEnds = new UnityEvent();
+    //events
+    public UnityEvent<Dialogue> OnConversationStarts = new UnityEvent<Dialogue>();
+    public UnityEvent<string, string> OnNextPhrase = new UnityEvent<string, string>();
+    public UnityEvent OnConversationEnds = new UnityEvent();
 
     public void StartConversation()
     {
         currentPhrase = 0;
+        OnConversationStarts.Invoke(this);
         NextPhrase();
-        onConversationStarts.Invoke();
     }
+    public void EndConversation() => OnConversationEnds.Invoke();
     public void NextPhrase()
     {
         if (currentPhrase >= phrases.Count)
-        {
-            onConversationEnds.Invoke();
-            Debug.Log("Conversation ends");
-        }
+            OnConversationEnds.Invoke();
         else
         {
-            UIText.text = phrases[currentPhrase];
+            OnNextPhrase.Invoke(phrases[currentPhrase], name);
             currentPhrase++;
         }
     }

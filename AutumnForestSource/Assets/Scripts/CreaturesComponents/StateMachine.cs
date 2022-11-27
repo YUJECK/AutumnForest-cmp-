@@ -45,7 +45,7 @@ namespace CreaturesAI
         }
         private void EnterNewState(State newState)
         {
-            if (newState != currentState && newState != null)
+            if (newState != null)
             {
                 if (currentState != null) currentState.ExitState(this); 
                 currentState = newState;

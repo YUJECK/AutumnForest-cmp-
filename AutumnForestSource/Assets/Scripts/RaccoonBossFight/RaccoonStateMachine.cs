@@ -25,11 +25,6 @@ namespace AutumnForest
             if (Vector3.Distance(ObjectList.Player.transform.position, transform.position) > 5.5)
                 nextState = clothesThrowingState;
             else nextState = shootingState;
-            //if(Health.CurrentHealth <= 100)
-            //{
-            //    nextState = healingState;
-            //    fightController.BossChangeToFox();
-            //}
 
             if(isStart)
             {

@@ -1,4 +1,5 @@
 using CreaturesAI;
+using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,46 +14,52 @@ namespace AutumnForest
 
     public class MafiaFightController : BossFightController
     {
+        //variables
         private Stages currentStage = Stages.FirstStage;
-        [SerializeField] private GameObject raccoon;
-        [SerializeField] private GameObject fox;
+        [SerializeField] private StateMachine raccoon;
+        [SerializeField] private StateMachine fox;
         [SerializeField] private GameObject log;
         public UnityEvent<GameObject> OnBossChange = new UnityEvent<GameObject>();
 
+        //getters
         public Stages CurrentStage => currentStage;
 
         //methods
         private void CheckHealth(int currentHealth, int maximumHealth)
         {
             if (currentHealth < 0.6 * maximumHealth && currentStage != Stages.SecondStage)
-                EnterSecondState();
+                EnterSecondStage();
             else if (currentHealth <= 0)
-                EnterThirdState();        
+                EnterThirdStage();        
         }
         public override void StartBossFight()
         {
             onBossFightBegins.Invoke();
+
             ObjectList.MainCamera.orthographicSize = 6f;
             Following cameraFollowing = ObjectList.MainCamera.GetComponent<Following>();
-
-            if (cameraFollowing != null && raccoon != null)
-                cameraFollowing.followTarget = raccoon;
-            else Debug.LogError("Following script doesnt set to camera");
-            if (log != null) log.SetActive(true);
+            cameraFollowing.followTarget = raccoon.gameObject;
+            log?.SetActive(true);
         }
-        private void EnterSecondState()
+        
+        private void EnterFirstStage()
         {
-            OnBossChange.Invoke(fox);
+            OnBossChange.Invoke(raccoon.gameObject);
+            raccoon.StateChoosing();
+        }
+        private void EnterSecondStage()
+        {
+            OnBossChange.Invoke(fox.gameObject);
             currentStage = Stages.SecondStage;
-            raccoon.GetComponent<Health>().onHealthChange.RemoveListener(CheckHealth);
-            fox.GetComponent<Health>().onHealthChange.AddListener(CheckHealth);
+            raccoon.Health.onHealthChange.RemoveListener(CheckHealth);
+            fox.Health.onHealthChange.AddListener(CheckHealth);
         }
-        private void EnterThirdState()
+        private void EnterThirdStage()
         {
-            OnBossChange.Invoke(raccoon);
+            OnBossChange.Invoke(raccoon.gameObject);
             currentStage = Stages.ThirdStage;
-            fox.GetComponent<Health>().onHealthChange.RemoveListener(CheckHealth);
-            raccoon.GetComponent<Health>().onHealthChange.AddListener(CheckHealth);
+            fox.Health.onHealthChange.RemoveListener(CheckHealth);
+            raccoon.Health.onHealthChange.AddListener(CheckHealth);
         }
         public override void EndBossFight()
         {
@@ -67,10 +74,6 @@ namespace AutumnForest
         }
 
         //unity methods
-        private void Start() 
-        {
-            raccoon.GetComponent<StateMachine>().Health.onHealthChange.AddListener(CheckHealth);
-            OnBossChange.Invoke(raccoon); 
-        }
+        private void Start()  => raccoon.Health.onHealthChange.AddListener(CheckHealth);
     }
 }

@@ -4,27 +4,27 @@ using UnityEngine;
 namespace AutumnForest
 {
     //contracts
-    [RequireComponent(typeof(OnTriggerEnter))]
-    [RequireComponent(typeof(OnTriggerExit))]
-    [RequireComponent(typeof(OnKeyDown))]
+    [RequireComponent(typeof(OnTriggerEnterEvent))]
+    [RequireComponent(typeof(OnTriggerExitEvent))]
+    [RequireComponent(typeof(OnKeyDownEvent))]
     public class InteractionField : MonoBehaviour
     {
         //variables
-        private OnTriggerEnter onTriggerEnter;
-        private OnTriggerExit onTriggerExit;
-        private OnKeyDown onKeyDown;
+        private OnTriggerEnterEvent onTriggerEnter;
+        private OnTriggerExitEvent onTriggerExit;
+        private OnKeyDownEvent onKeyDown;
         //getters
-        public OnTriggerEnter OnTriggerEnter => onTriggerEnter;
-        public OnTriggerExit OnTriggerExit => onTriggerExit;
-        public OnKeyDown OnKeyDown => onKeyDown;
+        public OnTriggerEnterEvent OnTriggerEnter => onTriggerEnter;
+        public OnTriggerExitEvent OnTriggerExit => onTriggerExit;
+        public OnKeyDownEvent OnKeyDown => onKeyDown;
 
         //unity methods
         private void Awake()
         {
             //getting components
-            onTriggerEnter = GetComponent<OnTriggerEnter>();
-            onTriggerExit = GetComponent<OnTriggerExit>();
-            onKeyDown = GetComponent<OnKeyDown>();
+            onTriggerEnter = GetComponent<OnTriggerEnterEvent>();
+            onTriggerExit = GetComponent<OnTriggerExitEvent>();
+            onKeyDown = GetComponent<OnKeyDownEvent>();
         }
         private void Start()
         {

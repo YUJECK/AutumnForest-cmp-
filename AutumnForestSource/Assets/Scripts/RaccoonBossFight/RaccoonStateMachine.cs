@@ -15,6 +15,8 @@ namespace AutumnForest
 
         private bool isStart = true;
 
+        private MafiaFightController fightController;
+
         //override methods
         public override void StateChoosing()
         {
@@ -22,14 +24,23 @@ namespace AutumnForest
 
             State nextState = idleState;
 
-            if (Vector3.Distance(ObjectList.Player.transform.position, transform.position) > 5.5)
-                nextState = clothesThrowingState;
-            else nextState = shootingState;
-
-            if(isStart)
+            switch (fightController.CurrentStage)
             {
-                nextState = dialogueState;
-                isStart = false;
+                case Stages.FirstStage:
+                    if (Vector3.Distance(ObjectList.Player.transform.position, transform.position) > 5.5)
+                        nextState = clothesThrowingState;
+                    else nextState = shootingState;
+
+                    if(isStart)
+                    {
+                        nextState = dialogueState;
+                        isStart = false;
+                    }
+                    break;
+                case Stages.SecondStage:
+                    break;
+                case Stages.ThirdStage:
+                    break;
             }
 
             ChangeState(nextState);
@@ -39,8 +50,12 @@ namespace AutumnForest
             if(CurrentState != null)
                 CurrentState.UpdateState(this);
         }
-        
+
         //unity methods
-        private void Start() => FindObjectOfType<MafiaFightController>().onBossFightBegins.AddListener(StateChoosing);
+        private void Start()
+        {
+            fightController = FindObjectOfType<MafiaFightController>();
+            fightController.onBossFightBegins.AddListener(StateChoosing);
+        }
     }
 }

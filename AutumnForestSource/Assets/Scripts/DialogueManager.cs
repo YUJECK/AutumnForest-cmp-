@@ -53,7 +53,7 @@ namespace AutumnForest
         }
 
         //unity methods
-        private void Awake()
+        private void Awake ()
         {
             Dialogue[] allDialogues = FindObjectsOfType<Dialogue>();
             

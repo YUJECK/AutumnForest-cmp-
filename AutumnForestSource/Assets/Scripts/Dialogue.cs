@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(OnKeyDownEvent))]
 public class Dialogue : MonoBehaviour
 {
     //variables
@@ -14,6 +15,7 @@ public class Dialogue : MonoBehaviour
     public UnityEvent<string, string> OnNextPhrase = new UnityEvent<string, string>();
     public UnityEvent OnConversationEnds = new UnityEvent();
 
+    //methods
     public void StartConversation()
     {
         currentPhrase = 0;
@@ -31,4 +33,7 @@ public class Dialogue : MonoBehaviour
             currentPhrase++;
         }
     }
+
+    //unity methods
+    private void Start() => GetComponent<OnKeyDownEvent>().onKeyDown.AddListener(NextPhrase);
 }

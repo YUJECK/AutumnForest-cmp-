@@ -1,16 +1,34 @@
+using CreaturesAI;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace AutumnForest
 {
+    public enum Stages
+    {
+        FirstStage,
+        SecondStage,
+        ThirdStage,
+    }
+
     public class MafiaFightController : BossFightController
     {
+        private Stages currentStage = Stages.FirstStage;
         [SerializeField] private GameObject raccoon;
         [SerializeField] private GameObject fox;
         [SerializeField] private GameObject log;
         public UnityEvent<GameObject> OnBossChange = new UnityEvent<GameObject>();
 
+        public Stages CurrentStage => currentStage;
+
         //methods
+        private void CheckHealth(int currentHealth, int maximumHealth)
+        {
+            if (currentHealth < 0.6 * maximumHealth && currentStage != Stages.SecondStage)
+                EnterSecondState();
+            else if (currentHealth <= 0)
+                EnterThirdState();        
+        }
         public override void StartBossFight()
         {
             onBossFightBegins.Invoke();
@@ -21,6 +39,20 @@ namespace AutumnForest
                 cameraFollowing.followTarget = raccoon;
             else Debug.LogError("Following script doesnt set to camera");
             if (log != null) log.SetActive(true);
+        }
+        private void EnterSecondState()
+        {
+            OnBossChange.Invoke(fox);
+            currentStage = Stages.SecondStage;
+            raccoon.GetComponent<Health>().onHealthChange.RemoveListener(CheckHealth);
+            fox.GetComponent<Health>().onHealthChange.AddListener(CheckHealth);
+        }
+        private void EnterThirdState()
+        {
+            OnBossChange.Invoke(raccoon);
+            currentStage = Stages.ThirdStage;
+            fox.GetComponent<Health>().onHealthChange.RemoveListener(CheckHealth);
+            raccoon.GetComponent<Health>().onHealthChange.AddListener(CheckHealth);
         }
         public override void EndBossFight()
         {
@@ -33,14 +65,12 @@ namespace AutumnForest
             else Debug.LogError("Following script doesnt set to camera");
             if (log != null) log.SetActive(false);
         }
-        public void BossChangeToFox()
-        {
-            OnBossChange.Invoke(fox);
-
-            //maybe something else
-        }
 
         //unity methods
-        private void Start() => OnBossChange.Invoke(raccoon);
+        private void Start() 
+        {
+            raccoon.GetComponent<StateMachine>().Health.onHealthChange.AddListener(CheckHealth);
+            OnBossChange.Invoke(raccoon); 
+        }
     }
 }

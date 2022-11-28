@@ -62,7 +62,7 @@ public class PointRotation : MonoBehaviour
     }
     private Vector3 DefineTargetPosition()
     {
-        if (targetType == PointRotationTargetType.Other) return target.position;
+        if (targetType == PointRotationTargetType.Other && target != null) return target.position;
         else return new Vector3(mainCamera.ScreenToWorldPoint(Input.mousePosition).x, mainCamera.ScreenToWorldPoint(Input.mousePosition).y, 0f);
     }
     private Vector2 CalculateDirection(Vector3 targetPosition) => transform.position - targetPosition;

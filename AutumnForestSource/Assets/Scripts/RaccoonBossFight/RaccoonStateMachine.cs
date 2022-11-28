@@ -9,6 +9,8 @@ namespace AutumnForest
         [Header("States")]
         [SerializeField] private State idleState;
         [SerializeField] private State shootingState;
+        [SerializeField] private State waterJetState;
+        [SerializeField] private State squirrelSpawnState;
         [SerializeField] private State clothesThrowingState;
         [SerializeField] private State healingState;
         [SerializeField] private State dialogueState;
@@ -29,13 +31,15 @@ namespace AutumnForest
                 case Stages.FirstStage:
                     if (Vector3.Distance(ObjectList.Player.transform.position, transform.position) > 5.5)
                         nextState = clothesThrowingState;
-                    else nextState = shootingState;
+                    else nextState = squirrelSpawnState;
+
 
                     if(isStart)
                     {
                         nextState = dialogueState;
                         isStart = false;
                     }
+
                     break;
                 case Stages.SecondStage:
                     break;
@@ -55,7 +59,6 @@ namespace AutumnForest
         private void Start()
         {
             fightController = FindObjectOfType<MafiaFightController>();
-            fightController.onBossFightBegins.AddListener(StateChoosing);
         }
     }
 }

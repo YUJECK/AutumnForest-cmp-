@@ -12,9 +12,14 @@ public class Slingshot : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [SerializeField] private Text culldownText;
     private bool canShoot = true;
+    [SerializeField] private PointRotation pointRotation;
 
     //methods
-    public void ChangeTarget(GameObject newTarget) => target = newTarget.transform;
+    public void ChangeTarget(GameObject newTarget) 
+    {
+        target = newTarget.transform;
+        pointRotation.SetTarget(newTarget);
+    }
     public void Shoot()
     {
         if(canShoot)

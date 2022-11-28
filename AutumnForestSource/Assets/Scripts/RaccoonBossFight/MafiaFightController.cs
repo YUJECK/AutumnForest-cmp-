@@ -40,6 +40,8 @@ namespace AutumnForest
             Following cameraFollowing = ObjectList.MainCamera.GetComponent<Following>();
             cameraFollowing.followTarget = raccoon.gameObject;
             log?.SetActive(true);
+
+            EnterFirstStage();
         }
         
         private void EnterFirstStage()
@@ -74,6 +76,6 @@ namespace AutumnForest
         }
 
         //unity methods
-        private void Start()  => raccoon.Health.onHealthChange.AddListener(CheckHealth);
+        private void Start() => raccoon.Health.onHealthChange.AddListener(CheckHealth);
     }
 }

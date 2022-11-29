@@ -31,7 +31,7 @@ namespace AutumnForest
                 case Stages.FirstStage:
                     if (Vector3.Distance(ObjectList.Player.transform.position, transform.position) > 5.5)
                         nextState = clothesThrowingState;
-                    else nextState = squirrelSpawnState;
+                    else nextState = waterJetState;
 
 
                     if(isStart)

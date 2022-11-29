@@ -7,7 +7,7 @@ public class Shooting : MonoBehaviour
     private PointRotation pointRotation;
 
     public void StopPointRotation(bool active) => pointRotation.StopRotating(active);
-    public void Shoot(GameObject projectile, float speed, float shootOffset, float spawnOffset, ForceMode2D forceMode2D)
+    public void ShootWithInstantiate(GameObject projectile, float speed, float shootOffset, float spawnOffset, ForceMode2D forceMode2D)
     {
         if (firePoint != null)
         {
@@ -16,6 +16,16 @@ public class Shooting : MonoBehaviour
             newProjectile.transform.Rotate(new Vector3(0, 0, shootOffset));
             Rigidbody2D projectileRigidbody = newProjectile.GetComponent<Rigidbody2D>();
             projectileRigidbody.AddForce(newProjectile.transform.up * speed, forceMode2D);
+        }
+        else Debug.LogWarning("Fire point is null");
+    }
+    public void ShootWithoutInstantiate(GameObject projectile, float speed, float shootOffset, float spawnOffset, ForceMode2D forceMode2D)
+    {
+        if (firePoint != null)
+        {
+            pointRotation.offset = spawnOffset;
+            projectile.transform.rotation = firePoint.rotation;
+            projectile.GetComponent<Rigidbody2D>().AddForce(projectile.transform.up * speed, forceMode2D);
         }
         else Debug.LogWarning("Fire point is null");
     }

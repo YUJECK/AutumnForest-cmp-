@@ -26,6 +26,8 @@ namespace AutumnForest
                 }
                 else i--;
             }
+
+            stateMachine.StateChoosing();
         }
 
         public override void EnterState(StateMachine stateMachine) => StartCoroutine(SquirellSpawn(stateMachine)); 

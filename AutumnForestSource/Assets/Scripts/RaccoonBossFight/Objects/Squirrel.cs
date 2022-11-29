@@ -16,7 +16,7 @@ public class Squirrel : MonoBehaviour
     {
         while(true)
         {
-            shooting.Shoot(acornProjectile, 10, 0, 0, ForceMode2D.Impulse);
+            shooting.ShootWithInstantiate(acornProjectile, 10, 0, 0, ForceMode2D.Impulse);
             yield return new WaitForSeconds(2f);
         }
     }

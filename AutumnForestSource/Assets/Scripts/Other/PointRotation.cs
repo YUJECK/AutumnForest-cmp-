@@ -68,6 +68,10 @@ public class PointRotation : MonoBehaviour
     private Vector2 CalculateDirection(Vector3 targetPosition) => transform.position - targetPosition;
 
     //unity methods
-    private void Awake() => mainCamera = Camera.main;
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+        if (usePlayerAsTarget) target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
     private void FixedUpdate() => transform.rotation = Quaternion.Euler(0f, 0f, CalculateAngle());
 }

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5767805362926127976}
   - component: {fileID: 5767805362926127977}
   - component: {fileID: 105440391055869312}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AcornProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4782536523648044059}
   - component: {fileID: 6951769176606020117}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

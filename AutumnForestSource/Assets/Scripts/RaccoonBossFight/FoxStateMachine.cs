@@ -1,21 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
+using CreaturesAI;
 using UnityEngine;
 
 namespace AutumnForest
 {
-    public class FoxStateMachine : MonoBehaviour
+    public class FoxStateMachine : StateMachine
     {
-        // Start is called before the first frame update
-        void Start()
+        [Header("States")]
+        [SerializeField] private State swordThrowingState;
+
+        public override void StateChoosing()
         {
-        
+            State nextState = swordThrowingState;
+
+            ChangeState(nextState);
         }
 
-        // Update is called once per frame
-        void Update()
+        protected override void UpdateStates()
         {
-        
+            if (CurrentState != null)
+                CurrentState.UpdateState(this);
+        }
+
+        private void Start()
+        {
+            StateChoosing();
         }
     }
 }

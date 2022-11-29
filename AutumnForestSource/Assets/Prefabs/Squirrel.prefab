@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8611510710469207697}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 8611510710614999688}
   - component: {fileID: 8611510710614999671}
   - component: {fileID: 7872283651497904194}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PointRotation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 3032720394781062066}
   - component: {fileID: 2573717397716356673}
   - component: {fileID: 7020556687911912326}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Squirrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}

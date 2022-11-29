@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 181172915614402284}
   - component: {fileID: 2821420859594835611}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 3221090224230522510}
   - component: {fileID: 4865484186909741059}
   - component: {fileID: 5235366391092543952}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Shirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8680921060144729248}
   - component: {fileID: 8680921060144729254}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}

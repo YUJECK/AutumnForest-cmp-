@@ -15,7 +15,7 @@ namespace AutumnForest
             for (int i = 0; i < 36; i++)
             {
                 Debug.Log("dsfds");
-                shooting.Shoot(cone, 7, 0, i * 30, ForceMode2D.Impulse);
+                shooting.ShootWithInstantiate(cone, 7, 0, i * 30, ForceMode2D.Impulse);
                 yield return new WaitForSeconds(0.05f);
             }
 

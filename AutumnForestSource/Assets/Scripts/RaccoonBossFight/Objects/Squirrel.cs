@@ -1,25 +1,31 @@
+using AutumnForest;
 using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(CreatureHealth))]
 public class Squirrel : MonoBehaviour
 {
-    [SerializeField] private GameObject projectile;
-    [SerializeField] private Transform firePoint;
-    private Animator animator;
+    //fields
+    [SerializeField] private GameObject acornProjectile;
+    [SerializeField] private GameObject acornHeal;
+    [SerializeField] private Shooting shooting;
 
+    //shooting coroutine
     private IEnumerator Shooting()
     {
         while(true)
         {
-            Instantiate(projectile, firePoint.position, firePoint.rotation);
+            shooting.Shoot(acornProjectile, 10, 0, 0, ForceMode2D.Impulse);
             yield return new WaitForSeconds(2f);
         }
     }
 
-    void Start()
+    //unity methods
+    private void Awake()
     {
-        animator = GetComponent<Animator>();
-        StartCoroutine(Shooting());
+        GetComponent<Health>().onDie.AddListener(delegate { Instantiate(acornHeal, transform.position, transform.rotation); });
+        GetComponent<Health>().onDie.AddListener(delegate { Destroy(gameObject); });
     }
+    private void Start() => StartCoroutine(Shooting());
 }

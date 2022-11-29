@@ -40,6 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8611510710614999688}
   - component: {fileID: 8611510710614999671}
+  - component: {fileID: 7872283651497904194}
   m_Layer: 0
   m_Name: PointRotation
   m_TagString: Untagged
@@ -71,11 +72,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 8611510710614999689}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d13af218864dc944f86c1e5f1b905c19, type: 3}
+  m_Script: {fileID: 11500000, guid: 80433a10ef25dd24697b243beb570018, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: {fileID: 0}
-  useAsPlayer: 1
+  targetType: 1
+  usePlayerAsTarget: 1
+  target: {fileID: 0}
+  offset: 0
+  coefficient: 1
+  angle: 0
+--- !u!114 &7872283651497904194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611510710614999689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb21741dd506464382c1d49639b2502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 8611510710469207697}
 --- !u!1 &8611510710650669708
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,6 +106,8 @@ GameObject:
   - component: {fileID: 8611510710650669707}
   - component: {fileID: 8611510710650669704}
   - component: {fileID: 3032720394781062066}
+  - component: {fileID: 2573717397716356673}
+  - component: {fileID: 7020556687911912326}
   m_Layer: 0
   m_Name: Squirrel
   m_TagString: Untagged
@@ -206,3 +226,44 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.75979424, y: 0.5737939}
   m_EdgeRadius: 0
+--- !u!114 &2573717397716356673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611510710650669708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1383fc2ea2ebe3c4ca07883841b6c034, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acornProjectile: {fileID: 5767805362926127979, guid: 7cf482e6256aee948b492812460e089e, type: 3}
+  acornHeal: {fileID: 5767805362926127979, guid: 780c9b573169bad45a66ee76974e3210, type: 3}
+  shooting: {fileID: 7872283651497904194}
+--- !u!114 &7020556687911912326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611510710650669708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce26d5c78b628b8468827465b4ac22d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 1
+  maximumHealth: 1
+  onHealthChange:
+    m_PersistentCalls:
+      m_Calls: []
+  onHeal:
+    m_PersistentCalls:
+      m_Calls: []
+  onTakeHit:
+    m_PersistentCalls:
+      m_Calls: []
+  onDie:
+    m_PersistentCalls:
+      m_Calls: []

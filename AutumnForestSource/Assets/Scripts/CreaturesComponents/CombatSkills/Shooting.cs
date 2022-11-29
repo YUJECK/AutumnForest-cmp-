@@ -19,5 +19,5 @@ public class Shooting : MonoBehaviour
         }
         else Debug.LogWarning("Fire point is null");
     }
-    private void Start() => pointRotation = GetComponent<PointRotation>();
+    private void Awake() => pointRotation = GetComponent<PointRotation>();
 }

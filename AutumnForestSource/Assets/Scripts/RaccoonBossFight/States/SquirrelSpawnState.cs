@@ -9,27 +9,27 @@ namespace AutumnForest
         [SerializeField] private GameObject squirrel;
         [SerializeField] private Transform[] spawnPoints;
 
-        private IEnumerator SquirellSpawn()
+        private IEnumerator SquirellSpawn(StateMachine stateMachine)
         {
-            for (int i = 0; i < 4; i++)
+            stateMachine.Animator.Play("Idle");
+
+            int squirrelsCount = Random.Range(2, 3);
+
+            for (int i = 0; i < squirrelsCount; i++)
             {
-                Instantiate(squirrel, spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity);
-                yield return new WaitForSeconds(1.5f);
+                int spawnPointIndex = Random.Range(0, spawnPoints.Length);
+
+                if (Physics2D.Raycast(spawnPoints[spawnPointIndex].position, Vector2.zero).transform == null)
+                {
+                    Instantiate(squirrel, spawnPoints[spawnPointIndex].position, Quaternion.identity);
+                    yield return new WaitForSeconds(2f);
+                }
+                else i--;
             }
         }
 
-        public override void EnterState(StateMachine stateMachine)
-        {
-            StartCoroutine(SquirellSpawn());
-        }
-
-        public override void ExitState(StateMachine stateMachine)
-        {
-            StopAllCoroutines();
-        }
-
-        public override void UpdateState(StateMachine stateMachine)
-        {
-        }
+        public override void EnterState(StateMachine stateMachine) => StartCoroutine(SquirellSpawn(stateMachine)); 
+        public override void ExitState(StateMachine stateMachine) => StopAllCoroutines();
+        public override void UpdateState(StateMachine stateMachine) { }
     }
 }

@@ -1,66 +1,73 @@
+using AutumnForest;
 using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(PlayerInput))]
+[RequireComponent(typeof(PlayerDash))]
 public class PlayerController : MonoBehaviour
 {
     //variables
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float attackRate = 1f;
     public bool isStopped = false;
-    private Vector2 movement;
     private bool canAttack = true;
 
     //components
     [SerializeField] GameObject attackAnimation;
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D playerRigidbody;
     [SerializeField] private Combat combat;
     private Animator animator;
-
-    //methods
-    public void SetStop(bool active) => isStopped = active;
-    private IEnumerator AttackCulldown()
-    {
-        canAttack = false;
-        yield return new WaitForSeconds(attackRate);
-        canAttack = true;
-    }
+    private PlayerInput playerInput;
+    private PlayerDash playerDash;
 
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        playerRigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-    }
+        playerInput = GetComponent<PlayerInput>();
+        playerDash = GetComponent<PlayerDash>();
 
-    //inputs
-    private void Update()
-    {
-        movement.x = Input.GetAxis("Horizontal");
-        movement.y = Input.GetAxis("Vertical");
-
-        if (Input.GetMouseButtonDown(0) && canAttack && !isStopped)
-        {
-            combat.Hit();
-            Instantiate(attackAnimation, combat.AttackPoint.position, combat.AttackPoint.rotation);
-            StartCoroutine(AttackCulldown());
-        }
+        playerInput.OnAttackInput.AddListener(Attack);
+        playerInput.OnDashInput.AddListener(playerDash.Dash);
     }
 
     //movement
     private void FixedUpdate()
     {
-        rigidbody.velocity = movement * moveSpeed;
-
-        if (!isStopped && movement != Vector2.zero)
+        if(!playerDash.NowDashing)
         {
-            if (movement.x < 0 && transform.localScale.x == -1)
-                transform.localScale = new Vector3(1, 1, 1);
-            if (movement.x > 0 && transform.localScale.x == 1)
-                transform.localScale = new Vector3(-1, 1, 1);
+            playerRigidbody.velocity = playerInput.Movement * moveSpeed;
 
-            animator.SetBool("IsRunning", true);
+            if (!isStopped && playerInput.Movement != Vector2.zero)
+            {
+                if (playerInput.Movement.x < 0 && transform.localScale.x == -1)
+                    transform.localScale = new Vector3(1, 1, 1);
+                if (playerInput.Movement.x > 0 && transform.localScale.x == 1)
+                    transform.localScale = new Vector3(-1, 1, 1);
+
+                animator.SetBool("IsRunning", true);
+            }
+            else animator.SetBool("IsRunning", false);
         }
-        else animator.SetBool("IsRunning", false);
+    }
+    //methods
+    public void SetStop(bool active) => isStopped = active;
+    private void Attack()
+    {
+        if (canAttack && !isStopped)
+        {
+            combat.Hit();
+            Instantiate(attackAnimation, combat.AttackPoint.position, combat.AttackPoint.rotation);
+            StartCoroutine(AttackCulldown());
+        }
+        //local method
+        IEnumerator AttackCulldown()
+        {
+            canAttack = false;
+            yield return new WaitForSeconds(attackRate);
+            canAttack = true;
+        }
     }
 }

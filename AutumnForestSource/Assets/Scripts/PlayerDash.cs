@@ -8,41 +8,40 @@ namespace AutumnForest
         [Header("Propertys")]
         [SerializeField] private float dashSpeed = 5f;
         [SerializeField] private float dashDuration = 1f;
-        [SerializeField] private LayerMask dashLayer;
+        [SerializeField] private int layerIndex;
         private bool nowDashing = false;
         //some components
         private PlayerInput playerInput;
-        private Rigidbody2D rigidbody;
+        private Rigidbody2D playerRigidbody;
 
         public bool NowDashing => nowDashing;
 
         //unity methods
         private void Awake()
         {
-            rigidbody = GetComponent<Rigidbody2D>();
+            playerRigidbody = GetComponent<Rigidbody2D>();
             playerInput = FindObjectOfType<PlayerInput>();
         }
 
         //methods
-        public void Dash()
-        {
-            gameObject.layer = dashLayer;
-            StartCoroutine(DashingCoroutine());
-        }
+        public void Dash() => StartCoroutine(DashingCoroutine());
         private IEnumerator DashingCoroutine()
         {
             nowDashing = true;
+            int defaultLayer = gameObject.layer;
+            gameObject.layer = layerIndex;
 
             float startTime = Time.time;
             Vector2 movement = playerInput.Movement*10;
 
             while (Time.time <= startTime + dashDuration)
             {
-                rigidbody.velocity = movement * dashSpeed;
+                playerRigidbody.velocity = movement * dashSpeed;
                 yield return new WaitForFixedUpdate();
             }
 
             nowDashing = false;
+            gameObject.layer = defaultLayer;
         }
     }
 }

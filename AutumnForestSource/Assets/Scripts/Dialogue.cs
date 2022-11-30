@@ -31,6 +31,7 @@ public class Dialogue : MonoBehaviour
         {
             OnNextPhrase.Invoke(phrases[currentPhrase], name);
             currentPhrase++;
+            Debug.Log(currentPhrase);
         }
     }
 

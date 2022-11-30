@@ -15,9 +15,19 @@ namespace AutumnForest
 
         private IEnumerator SwordThrowing(StateMachine stateMachine)
         {
-            foreach (GameObject sword in spawnedSwords)
+            //instantiate swords
+            for (int i = 0; i < swordPoints.Length; i++)
             {
-                stateMachine.Shooting.ShootWithInstantiate(sword, 15, 0, 0, ForceMode2D.Impulse);
+                spawnedSwords.Push(Instantiate(swordPrefab, swordPoints[i].position, Quaternion.identity));
+                yield return new WaitForSeconds(0.1f);
+            }
+
+            //shooting
+            while(spawnedSwords.Count != 0)
+            {
+                if(spawnedSwords.Peek() != null)
+                    stateMachine.Shooting.ShootWithoutInstantiate(spawnedSwords.Peek(), 10, 0, 0, ForceMode2D.Impulse);
+                spawnedSwords.Pop();
                 yield return new WaitForSeconds(1.5f);
             }
 
@@ -25,9 +35,7 @@ namespace AutumnForest
         }
         public override void EnterState(StateMachine stateMachine)
         {
-            for (int i = 0; i < swordPoints.Length; i++)
-                spawnedSwords.Push(Instantiate(swordPrefab, swordPoints[i].position, Quaternion.identity));
-
+            stateMachine.Animator.Play("FoxMagicBookOpen");
             StartCoroutine(SwordThrowing(stateMachine));
         }
 

@@ -38,7 +38,8 @@ namespace AutumnForest
 
             ObjectList.MainCamera.orthographicSize = 6f;
             Following cameraFollowing = ObjectList.MainCamera.GetComponent<Following>();
-            cameraFollowing.followTarget = raccoon.gameObject;
+
+            cameraFollowing.SetTarget(raccoon.gameObject);
             log?.SetActive(true);
 
             EnterFirstStage();
@@ -70,7 +71,7 @@ namespace AutumnForest
             Following cameraFollowing = ObjectList.MainCamera.GetComponent<Following>();
 
             if (cameraFollowing != null && raccoon != null)
-                cameraFollowing.followTarget = ObjectList.Player.gameObject;
+                cameraFollowing.SetTarget(ObjectList.Player.gameObject);
             else Debug.LogError("Following script doesnt set to camera");
             if (log != null) log.SetActive(false);
         }

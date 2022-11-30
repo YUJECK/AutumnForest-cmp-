@@ -56,6 +56,7 @@ namespace AutumnForest
             currentStage = Stages.SecondStage;
             raccoon.Health.onHealthChange.RemoveListener(CheckHealth);
             fox.Health.onHealthChange.AddListener(CheckHealth);
+            fox.StateChoosing();
         }
         private void EnterThirdStage()
         {

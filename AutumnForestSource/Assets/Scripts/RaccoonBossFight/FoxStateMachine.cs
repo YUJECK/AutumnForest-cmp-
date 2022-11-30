@@ -20,10 +20,5 @@ namespace AutumnForest
             if (CurrentState != null)
                 CurrentState.UpdateState(this);
         }
-
-        private void Start()
-        {
-            StateChoosing();
-        }
     }
 }

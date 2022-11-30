@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace AutumnForest
 {
@@ -13,6 +14,7 @@ namespace AutumnForest
         //some components
         private PlayerInput playerInput;
         private Rigidbody2D playerRigidbody;
+        private Coroutine dashCoroutine;
 
         public bool NowDashing => nowDashing;
 
@@ -24,7 +26,11 @@ namespace AutumnForest
         }
 
         //methods
-        public void Dash() => StartCoroutine(DashingCoroutine());
+        public void Dash()
+        {
+            if (dashCoroutine != null) StopCoroutine(dashCoroutine);
+            dashCoroutine = StartCoroutine(DashingCoroutine());
+        }
         private IEnumerator DashingCoroutine()
         {
             nowDashing = true;
@@ -41,6 +47,7 @@ namespace AutumnForest
             }
 
             nowDashing = false;
+            yield return new WaitForSeconds(0.7f);
             gameObject.layer = defaultLayer;
         }
     }

@@ -55,6 +55,7 @@ namespace AutumnForest
             OnBossChange.Invoke(fox.gameObject);
             currentStage = Stages.SecondStage;
             raccoon.Health.onHealthChange.RemoveListener(CheckHealth);
+            fox.gameObject.SetActive(true);
             fox.Health.onHealthChange.AddListener(CheckHealth);
             fox.StateChoosing();
         }

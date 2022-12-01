@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 {
     //variables
     [SerializeField] private float moveSpeed = 3f;
+    [SerializeField] private int damage;
     [SerializeField] private float attackRate = 1f;
     public bool isStopped = false;
     private bool canAttack = true;
@@ -17,7 +18,7 @@ public class PlayerController : MonoBehaviour
     //components
     [SerializeField] GameObject attackAnimation;
     private Rigidbody2D playerRigidbody;
-    [SerializeField] private Combat combat;
+    [SerializeField] private AreaHit areaHit;
     private Animator animator;
     private PlayerInput playerInput;
     private PlayerDash playerDash;
@@ -58,8 +59,8 @@ public class PlayerController : MonoBehaviour
     {
         if (canAttack && !isStopped)
         {
-            combat.Hit();
-            Instantiate(attackAnimation, combat.AttackPoint.position, combat.AttackPoint.rotation);
+            areaHit.Hit(damage);
+            Instantiate(attackAnimation, areaHit.transform.position, areaHit.transform.rotation);
             StartCoroutine(AttackCulldown());
         }
         //local method

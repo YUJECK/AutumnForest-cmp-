@@ -51,7 +51,7 @@ namespace AutumnForest
                 nextState = healingState;
             else if(fightController.CurrentStage == Stages.ThirdStage)
             {
-                int randomState = Random.Range(0, 3);
+                int randomState = Random.Range(0, 2);
 
                 switch (randomState)
                 {

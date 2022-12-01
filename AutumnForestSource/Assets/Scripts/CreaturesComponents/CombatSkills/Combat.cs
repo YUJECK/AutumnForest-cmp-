@@ -1,8 +1,10 @@
+using AutumnForest;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(TriggerChecker))]
+[RequireComponent(typeof(AreaHit))]
 public class Combat : MonoBehaviour
 {
     //serialized variables
@@ -12,13 +14,10 @@ public class Combat : MonoBehaviour
     [Header("Timing settings")]
     [SerializeField] private float attackDelay = 0.5f;
     [SerializeField] private float attackRate = 1f;
-    [Header("Attack area settings")]
-    [SerializeField] private float attackRange = 0.3f;
-    [SerializeField] private Transform attackPoint;
-    [SerializeField] private LayerMask damageLayer;
 
     //only private variables
     private TriggerChecker triggerChecker;
+    private AreaHit areaHit;
 
     //events
     [Header("Events")]
@@ -27,7 +26,6 @@ public class Combat : MonoBehaviour
 
     //getters
     public int Damage => Random.Range(minimumDamage, maximumDamage);
-    public Transform AttackPoint => attackPoint;
     public TriggerChecker TriggerChecker => triggerChecker;
 
     //public methods
@@ -41,32 +39,18 @@ public class Combat : MonoBehaviour
         {
             beforeHitting.Invoke();
             yield return new WaitForSeconds(attackDelay);
-            Hit();
+            areaHit.Hit(Random.Range(minimumDamage, maximumDamage));
             yield return new WaitForSeconds(attackRate);
         }
     }
-    public bool Hit()
+    
+    private void Awake()
     {
-        //define hitted objects
-        bool isHitSomeone = false;
-        Collider2D[] hitObj = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, damageLayer);
-        onHitting.Invoke();
-
-        //checking every hit objects for the presence of a Health component
-        foreach (Collider2D obj in hitObj)
-        {
-            if (obj.TryGetComponent(out Health health))
-            {
-                health.TakeHit(Damage);
-                isHitSomeone = true;
-            }
-        }
-        return isHitSomeone;
+        triggerChecker = GetComponent<TriggerChecker>();
+        areaHit = GetComponent<AreaHit>();
     }
 
     //unity methods
-    private void OnDrawGizmos() => Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    private void OnDrawGizmos() => Gizmos.DrawWireSphere(areaHit.transform.position, 1);
 
-    //temp
-    private void Awake() => triggerChecker = GetComponent<TriggerChecker>();
 }

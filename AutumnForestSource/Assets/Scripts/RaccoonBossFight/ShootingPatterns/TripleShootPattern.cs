@@ -7,21 +7,18 @@ namespace AutumnForest
     public class TripleShootPattern : ShootingPattern
     {
         //variables 
-        [SerializeField] private GameObject chestnut;
+        [SerializeField] private GameObject projectile;
+        [SerializeField] private int projectilesCount = 3;
         [SerializeField] private float shootingRate = 0.5f;
-        [SerializeField] private float shootingSpread = 25f;
+        [SerializeField] private float shootingSpread = 15f;
 
         public override IEnumerator Pattern(Shooting shooting)
         {
-            shooting.StopPointRotation(true);
-
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < projectilesCount; i++)
             {
-                shooting.ShootWithInstantiate(chestnut, 10, Random.Range(0, shootingSpread), 0f, ForceMode2D.Impulse);
+                shooting.ShootWithInstantiate(projectile, 10, Random.Range(0, shootingSpread), 0f, ForceMode2D.Impulse);
                 yield return new WaitForSeconds(shootingRate);
             }
-
-            shooting.StopPointRotation(false);
             
             OnPatternEnd.Invoke();
         }

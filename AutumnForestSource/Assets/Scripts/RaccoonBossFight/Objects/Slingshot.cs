@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(InteractionField))]
 public class Slingshot : MonoBehaviour
 {
-    //variables
+    //fields
     [SerializeField] private Transform target;
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform firePoint;

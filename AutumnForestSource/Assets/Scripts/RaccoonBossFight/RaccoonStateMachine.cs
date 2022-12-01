@@ -29,7 +29,7 @@ namespace AutumnForest
 
             if (fightController.CurrentStage == Stages.FirstStage)
             {
-                int randomState = Random.Range(0, 3);
+                int randomState = Random.Range(0, 2);
 
                 switch (randomState)
                 {

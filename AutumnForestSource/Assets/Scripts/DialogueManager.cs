@@ -6,6 +6,7 @@ namespace AutumnForest
 {
     public class DialogueManager : MonoBehaviour
     {
+        //fields
         [SerializeField] private GameObject cloud;
         [SerializeField] private Text dialogueText;
         [SerializeField] private Text dialogueName;
@@ -13,16 +14,16 @@ namespace AutumnForest
         private Dialogue currentDialogue;
         private Coroutine showText;
 
+        //methods
         private void StartDialogue(Dialogue dialogue)
         {
-            if (currentDialogue == null)
-            {
-                currentDialogue = dialogue;
-                cloud.SetActive(true);
-                currentDialogue.OnNextPhrase.AddListener(ShowPhrase);
-                currentDialogue.OnConversationEnds.AddListener(EndDialogue);
-            }
-            else { /*Some logic*/ } 
+            if (currentDialogue != null)
+                EndDialogue(); 
+            
+            currentDialogue = dialogue;
+            cloud.SetActive(true);
+            currentDialogue.OnNextPhrase.AddListener(ShowPhrase);
+            currentDialogue.OnConversationEnds.AddListener(EndDialogue);
         }
         private void EndDialogue()
         {

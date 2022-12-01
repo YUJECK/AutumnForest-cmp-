@@ -2,20 +2,31 @@ using UnityEngine;
 
 public class Following : MonoBehaviour
 {
-    [SerializeField] private Transform followTarget;
-    [SerializeField] private Transform secondTarget;
+    [SerializeField] private Transform firstFollowTarget;
+    [SerializeField] private bool lerping = false;
+    [SerializeField] private Transform secondFollowTarget; //i need to code editor script for disabling/enabaling this fields
     [SerializeField] private float lerp;
     private Vector3 targetPos;
-
-    public void SetTarget(GameObject newTarget) => followTarget = newTarget.transform;
-
-    void LateUpdate()
+    
+    //some methods
+    public void SetTarget(GameObject newTarget) => firstFollowTarget = newTarget.transform;
+    private Vector3 GetPosition(Transform target1, Transform target2)
     {
-        if (followTarget != null && followTarget.transform.position != targetPos)
+        return new Vector3(Mathf.Lerp(firstFollowTarget.transform.position.x, secondFollowTarget.position.x, lerp),
+            Mathf.Lerp(firstFollowTarget.transform.position.y, secondFollowTarget.position.y, lerp), -10f);
+    }
+    private Vector3 GetPosition(Transform target) => new Vector3(target.position.x, target.position.y, -10f);
+    
+    //unity methods
+    private void LateUpdate()
+    {
+        if (lerping)
         {
-            targetPos = new Vector3(Mathf.Lerp(followTarget.transform.position.x, secondTarget.position.x, lerp), 
-                Mathf.Lerp(followTarget.transform.position.y, secondTarget.position.y, lerp), -10f);
-            transform.position = targetPos;
+            if (firstFollowTarget != null && secondFollowTarget != null)
+                targetPos = GetPosition(firstFollowTarget, secondFollowTarget);
         }
+        else if (firstFollowTarget != null) targetPos = GetPosition(firstFollowTarget);
+
+        transform.position = targetPos;
     }
 }

@@ -6,8 +6,8 @@ using UnityEngine.Events;
 public class Dialogue : MonoBehaviour
 {
     //variables
-    [TextArea(2, 10)]
     [SerializeField] private string name = "Somebody";
+    [TextArea(2, 20)]
     [SerializeField] private List<string> phrases = new List<string>();
     private int currentPhrase = 0;
     //events

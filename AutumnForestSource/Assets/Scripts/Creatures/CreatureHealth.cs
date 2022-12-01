@@ -4,6 +4,8 @@ namespace AutumnForest
 {
     public class CreatureHealth : Health
     {
+        [SerializeField] private bool destroyOnDie = true; 
+
         public override void DecreaseMaximumHealth(int damagePoints)
         {
             maximumHealth -= damagePoints;
@@ -33,7 +35,10 @@ namespace AutumnForest
             onHealthChange.Invoke(currentHealth, maximumHealth);
 
             if (currentHealth <= 0)
+            {
                 onDie.Invoke();
+                if (destroyOnDie) Destroy(gameObject);
+            }
         }
     }
 }

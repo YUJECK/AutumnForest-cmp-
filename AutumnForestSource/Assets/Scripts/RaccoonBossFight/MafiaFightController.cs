@@ -40,7 +40,6 @@ namespace AutumnForest
 
             EnterFirstStage();
         }
-
         private void EnterFirstStage()
         {
             OnBossChange.Invoke(raccoon.gameObject);
@@ -62,11 +61,13 @@ namespace AutumnForest
             currentStage = Stages.ThirdStage;
             fox.Health.onHealthChange.RemoveListener(CheckHealth);
             raccoon.Health.onHealthChange.AddListener(CheckHealth);
+            raccoon.StateChoosing();
         }
         public override void EndBossFight()
         {
             onBossFightEnds.Invoke();
             ObjectList.MainCamera.orthographicSize = 3f;
+            ObjectList.MainCamera.GetComponent<MainCameraBrain>().SetTarget(ObjectList.Player.gameObject);
             if (log != null) log.SetActive(false);
         }
 

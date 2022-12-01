@@ -146,7 +146,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 8
+        width: 12
         height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -165,9 +165,9 @@ TextureImporter:
       name: WaterJet-Sheet_1
       rect:
         serializedVersion: 2
-        x: 8
+        x: 12
         y: 0
-        width: 8
+        width: 12
         height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -186,9 +186,9 @@ TextureImporter:
       name: WaterJet-Sheet_2
       rect:
         serializedVersion: 2
-        x: 16
+        x: 24
         y: 0
-        width: 8
+        width: 12
         height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -207,9 +207,9 @@ TextureImporter:
       name: WaterJet-Sheet_3
       rect:
         serializedVersion: 2
-        x: 24
+        x: 36
         y: 0
-        width: 8
+        width: 12
         height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -228,9 +228,9 @@ TextureImporter:
       name: WaterJet-Sheet_4
       rect:
         serializedVersion: 2
-        x: 32
+        x: 48
         y: 0
-        width: 8
+        width: 12
         height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -249,9 +249,9 @@ TextureImporter:
       name: WaterJet-Sheet_5
       rect:
         serializedVersion: 2
-        x: 40
+        x: 60
         y: 0
-        width: 8
+        width: 12
         height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -270,9 +270,9 @@ TextureImporter:
       name: WaterJet-Sheet_6
       rect:
         serializedVersion: 2
-        x: 48
+        x: 72
         y: 0
-        width: 8
+        width: 12
         height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -291,9 +291,9 @@ TextureImporter:
       name: WaterJet-Sheet_7
       rect:
         serializedVersion: 2
-        x: 56
+        x: 84
         y: 0
-        width: 8
+        width: 12
         height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -304,90 +304,6 @@ TextureImporter:
       bones: []
       spriteID: d06f100a13a891c60800000000000000
       internalID: 7789408976256497165
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WaterJet-Sheet_8
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c8df7c09c017def90800000000000000
-      internalID: -6922752753416012404
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WaterJet-Sheet_9
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 0
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ee76dab2d7b78ef10800000000000000
-      internalID: 2299223387306551278
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WaterJet-Sheet_10
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8c6edf05c18abc7a0800000000000000
-      internalID: -6355801609531955512
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: WaterJet-Sheet_11
-      rect:
-        serializedVersion: 2
-        x: 88
-        y: 0
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: adb968fb7527412c0800000000000000
-      internalID: -4461815609616327718
       vertices: []
       indices: 
       edges: []
@@ -403,12 +319,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      WaterJet-Sheet_9: 2299223387306551278
       WaterJet-Sheet_3: 1994771864035497838
       WaterJet-Sheet_7: 7789408976256497165
-      WaterJet-Sheet_8: -6922752753416012404
-      WaterJet-Sheet_11: -4461815609616327718
-      WaterJet-Sheet_10: -6355801609531955512
       WaterJet-Sheet_0: 4528238369691275056
       WaterJet-Sheet_5: 3569537479629187037
       WaterJet-Sheet_2: 2104961262958950723

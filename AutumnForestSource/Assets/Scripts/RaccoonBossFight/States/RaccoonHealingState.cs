@@ -1,6 +1,4 @@
 using CreaturesAI;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AutumnForest
@@ -9,18 +7,8 @@ namespace AutumnForest
     {
         [SerializeField] private Transform healingPoint;
 
-        public override void EnterState(StateMachine stateMachine)
-        {
-            stateMachine.transform.position = healingPoint.position;
-        }
-
-        public override void ExitState(StateMachine stateMachine)
-        {
-        }
-
-        public override void UpdateState(StateMachine stateMachine)
-        {
-            stateMachine.Health.Heal(1);
-        }
+        public override void EnterState(StateMachine stateMachine) => stateMachine.transform.position = healingPoint.position;
+        public override void ExitState(StateMachine stateMachine) { }
+        public override void UpdateState(StateMachine stateMachine) => stateMachine.Health.Heal(1); 
     }
 }

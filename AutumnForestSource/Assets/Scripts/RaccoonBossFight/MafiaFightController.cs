@@ -1,5 +1,4 @@
 using CreaturesAI;
-using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -30,21 +29,18 @@ namespace AutumnForest
             if (currentHealth < 0.6 * maximumHealth && currentStage != Stages.SecondStage)
                 EnterSecondStage();
             else if (currentHealth <= 0)
-                EnterThirdStage();        
+                EnterThirdStage();
         }
         public override void StartBossFight()
         {
             onBossFightBegins.Invoke();
 
             ObjectList.MainCamera.orthographicSize = 6f;
-            Following cameraFollowing = ObjectList.MainCamera.GetComponent<Following>();
-
-            cameraFollowing.SetTarget(raccoon.gameObject);
             log?.SetActive(true);
 
             EnterFirstStage();
         }
-        
+
         private void EnterFirstStage()
         {
             OnBossChange.Invoke(raccoon.gameObject);
@@ -55,6 +51,7 @@ namespace AutumnForest
             OnBossChange.Invoke(fox.gameObject);
             currentStage = Stages.SecondStage;
             raccoon.Health.onHealthChange.RemoveListener(CheckHealth);
+            raccoon.StateChoosing();
             fox.gameObject.SetActive(true);
             fox.Health.onHealthChange.AddListener(CheckHealth);
             fox.StateChoosing();
@@ -70,15 +67,14 @@ namespace AutumnForest
         {
             onBossFightEnds.Invoke();
             ObjectList.MainCamera.orthographicSize = 3f;
-            Following cameraFollowing = ObjectList.MainCamera.GetComponent<Following>();
-
-            if (cameraFollowing != null && raccoon != null)
-                cameraFollowing.SetTarget(ObjectList.Player.gameObject);
-            else Debug.LogError("Following script doesnt set to camera");
             if (log != null) log.SetActive(false);
         }
 
         //unity methods
-        private void Start() => raccoon.Health.onHealthChange.AddListener(CheckHealth);
+        private void Start()
+        {
+            raccoon.Health.onHealthChange.AddListener(CheckHealth);
+            OnBossChange.AddListener(GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MainCameraBrain>().SetTarget);
+        }
     }
 }

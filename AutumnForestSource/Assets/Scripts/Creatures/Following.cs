@@ -1,6 +1,7 @@
+using AutumnForest;
 using UnityEngine;
 
-public class Following : MonoBehaviour
+public class MainCameraBrain : MonoBehaviour
 {
     [SerializeField] private Transform firstFollowTarget;
     [SerializeField] private bool lerping = false;
@@ -16,8 +17,12 @@ public class Following : MonoBehaviour
             Mathf.Lerp(firstFollowTarget.transform.position.y, secondFollowTarget.position.y, lerp), -10f);
     }
     private Vector3 GetPosition(Transform target) => new Vector3(target.position.x, target.position.y, -10f);
-    
+
     //unity methods
+    private void Start()
+    {
+        FindObjectOfType<MafiaFightController>().OnBossChange.AddListener(SetTarget);
+    }
     private void LateUpdate()
     {
         if (lerping)

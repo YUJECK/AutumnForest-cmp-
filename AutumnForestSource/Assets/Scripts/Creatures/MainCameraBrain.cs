@@ -17,7 +17,7 @@ public class MainCameraBrain : MonoBehaviour
     }
 
     //unity methods
-    private void Start() => FindObjectOfType<MafiaFightController>().OnBossChange.AddListener(SetTarget);
+    private void Start() => FindObjectOfType<BossFightController>().OnBossChange.AddListener(SetTarget);
     private void LateUpdate()
     {   
         if (firstFollowTarget != null && secondFollowTarget != null)

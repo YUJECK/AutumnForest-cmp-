@@ -20,51 +20,56 @@ namespace AutumnForest
 
         private bool isStart = true;
 
-        private MafiaFightController fightController;
+        private BossFightController fightController;
 
         //override methods
         public override void StateChoosing()
         {
             State nextState = idleState;
 
-            if (fightController.CurrentStage == Stages.FirstStage)
+            if (Health.CurrentHealth > 0)
             {
-                int randomState = Random.Range(0, 2);
-
-                switch (randomState)
+                if (fightController.CurrentStage == Stages.FirstStage)
                 {
-                    case 0:
-                        nextState = clothesThrowingState;
-                        break;
-                    case 1:
-                        nextState = shootingState;
-                        break;
-                }
+                    int randomState = Random.Range(0, 2);
 
-                if (isStart)
-                {
-                    nextState = dialogueState;
-                    isStart = false;
+                    switch (randomState)
+                    {
+                        case 0:
+                            nextState = clothesThrowingState;
+                            break;
+                        case 1:
+                            nextState = shootingState;
+                            break;
+                    }
+
+                    if (isStart)
+                    {
+                        nextState = dialogueState;
+                        isStart = false;
+                    }
                 }
+                else if (fightController.CurrentStage == Stages.SecondStage)
+                    nextState = healingState;
+                else if (fightController.CurrentStage == Stages.ThirdStage)
+                {
+                    int randomState = Random.Range(0, 2);
+
+                    switch (randomState)
+                    {
+                        case 0:
+                            nextState = squirrelSpawnState;
+                            break;
+                        case 1:
+                            nextState = waterJetState;
+                            break;
+                    }
+                }
+                
+                ChangeState(nextState);
             }
-            else if (fightController.CurrentStage == Stages.SecondStage)
-                nextState = healingState;
-            else if(fightController.CurrentStage == Stages.ThirdStage)
-            {
-                int randomState = Random.Range(0, 2);
+            else CurrentState.ExitState(this);
 
-                switch (randomState)
-                {
-                    case 0:
-                        nextState = squirrelSpawnState;
-                        break;
-                    case 1:
-                        nextState = waterJetState;
-                        break;
-                }
-            }
-
-            ChangeState(nextState);
         }
         protected override void UpdateStates()
         {
@@ -73,6 +78,6 @@ namespace AutumnForest
         }
 
         //unity methods
-        private void Start() => fightController = FindObjectOfType<MafiaFightController>();
+        private void Start() => fightController = FindObjectOfType<BossFightController>();
     }
 }

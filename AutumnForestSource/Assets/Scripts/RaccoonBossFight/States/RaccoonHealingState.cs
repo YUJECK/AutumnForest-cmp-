@@ -1,7 +1,6 @@
 using CreaturesAI;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace AutumnForest
 {
@@ -27,7 +26,7 @@ namespace AutumnForest
         public override void ExitState(StateMachine stateMachine)
         {
             stateMachine.transform.position = defaultPoint.position;
-            StopCoroutine(Healing(stateMachine));
+            StopAllCoroutines();
         }
         public override void UpdateState(StateMachine stateMachine) { }
     }

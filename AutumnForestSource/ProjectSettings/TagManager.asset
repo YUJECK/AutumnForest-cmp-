@@ -6,6 +6,10 @@ TagManager:
   tags:
   - MainTheme
   - BossfightTheme
+  - FamilyInteractiveField
+  - Raccoon
+  - Fox
+  - Log
   layers:
   - Default
   - TransparentFX

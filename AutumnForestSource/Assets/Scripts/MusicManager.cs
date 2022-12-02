@@ -8,15 +8,15 @@ namespace AutumnForest
         [SerializeField] private GameObject mainTheme;
         [SerializeField] private GameObject bossTheme;
 
-        private MafiaFightController fightController;
-
+        private BossFightController fightController;
+            
         //unity methods
-        private void Awake() => fightController = FindObjectOfType<MafiaFightController>();
+        private void Awake() => fightController = FindObjectOfType<BossFightController>();
         private void Start()
         {
-            fightController.onBossFightBegins.AddListener(
+            fightController.OnBossFightBegins.AddListener(
                 delegate { mainTheme.SetActive(false); bossTheme.SetActive(true); });
-            fightController.onBossFightEnds.AddListener(
+            fightController.OnBossFightEnds.AddListener(
                 delegate { mainTheme.SetActive(true); bossTheme.SetActive(false); });
         }
     }

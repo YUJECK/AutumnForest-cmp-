@@ -11,6 +11,10 @@ namespace AutumnForest
 
         private IEnumerator Healing(StateMachine stateMachine)
         {
+            stateMachine.Animator.Play("RaccoonJumpAway");
+            yield return new WaitForSeconds(0.21f);
+            stateMachine.transform.position = healingPoint.position;
+
             while (true)
             {
                 stateMachine.Health.Heal(2);
@@ -18,11 +22,7 @@ namespace AutumnForest
             }
         }
 
-        public override void EnterState(StateMachine stateMachine)
-        {
-            stateMachine.transform.position = healingPoint.position;
-            StartCoroutine(Healing(stateMachine));
-        }
+        public override void EnterState(StateMachine stateMachine) => StartCoroutine(Healing(stateMachine));
         public override void ExitState(StateMachine stateMachine)
         {
             stateMachine.transform.position = defaultPoint.position;

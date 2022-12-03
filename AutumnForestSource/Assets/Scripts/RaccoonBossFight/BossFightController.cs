@@ -1,6 +1,7 @@
 using CreaturesAI;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace AutumnForest
 {
@@ -18,15 +19,31 @@ namespace AutumnForest
         public UnityEvent OnBossFightEnds = new UnityEvent();
         //variables
         private Stages currentStage = Stages.FirstStage;
+        private StateMachine currentBoss;
+        private GameObject currentHealthBar;
         private StateMachine raccoon;
         private StateMachine fox;
-        private GameObject log;
+        [SerializeField] private GameObject raccoonHealthBar;
+        [SerializeField] private GameObject foxHealthBar;
         private GameObject familyInteractiveField;
+        private GameObject log;
         public UnityEvent<GameObject> OnBossChange = new UnityEvent<GameObject>();
         //getters
         public Stages CurrentStage => currentStage;
 
         //methods
+        private void ChangeBoss(StateMachine newBoss, GameObject newHealthBar)
+        {
+            if(currentBoss != null) currentBoss.Health.onHealthChange.RemoveListener(CheckHealth);
+            if (!newBoss.gameObject.active) newBoss.gameObject.SetActive(true);
+            newBoss.Health.onHealthChange.AddListener(CheckHealth);
+            currentBoss = newBoss;
+            if (currentHealthBar != null) currentHealthBar.SetActive(false);
+            newHealthBar.SetActive(true);
+            currentHealthBar = newHealthBar;
+           
+            OnBossChange.Invoke(currentBoss.gameObject);
+        }
         private void CheckHealth(int currentHealth, int maximumHealth)
         {
             if (currentHealth < 0.6 * maximumHealth && currentStage != Stages.SecondStage)
@@ -37,35 +54,28 @@ namespace AutumnForest
         public void StartBossFight()
         {
             OnBossFightBegins.Invoke();
-
             ObjectList.MainCamera.orthographicSize = 6f;
             log?.SetActive(true);
-            raccoon.Health.onHealthChange.AddListener(CheckHealth);
 
             EnterFirstStage();
         }
         private void EnterFirstStage()
         {
-            OnBossChange.Invoke(raccoon.gameObject);
-            raccoon.StateChoosing();
+            currentStage = Stages.FirstStage;
+            ChangeBoss(raccoon, raccoonHealthBar);
+            currentBoss.StateChoosing();
         }
         private void EnterSecondStage()
         {
-            OnBossChange.Invoke(fox.gameObject);
             currentStage = Stages.SecondStage;
-            raccoon.Health.onHealthChange.RemoveListener(CheckHealth);
-            raccoon.StateChoosing();
-            fox.gameObject.SetActive(true);
-            fox.Health.onHealthChange.AddListener(CheckHealth);
-            fox.StateChoosing();
+            ChangeBoss(fox, foxHealthBar);
+            currentBoss.StateChoosing();
         }
         private void EnterThirdStage()
         {
-            OnBossChange.Invoke(raccoon.gameObject);
             currentStage = Stages.ThirdStage;
-            fox.Health.onHealthChange.RemoveListener(CheckHealth);
-            raccoon.Health.onHealthChange.AddListener(CheckHealth);
-            raccoon.StateChoosing();
+            ChangeBoss(raccoon, raccoonHealthBar);
+            currentBoss.StateChoosing();
         }
         public void EndBossFight()
         {

@@ -12,27 +12,8 @@ namespace CreaturesAI
         private State currentState;
         [SerializeField] private string currentStateName;
 
-        //some components
-        [Header("Components")]
-        [SerializeField] private Animator animator;
-        [SerializeField] private Shooting shooting;
-        [SerializeField] private Moving moving;
-        [SerializeField] private TargetSelection targetSelection;
-        [SerializeField] private DynamicPathfinding dymamicPathfinding;
-        [SerializeField] private Health health;
-        [SerializeField] private Combat combat;
-        [SerializeField] private Dialogue dialogue;
-
         //getters
-        protected State CurrentState => currentState;
-        public Moving Moving => moving;
-        public Shooting Shooting => shooting;
-        public TargetSelection TargetSelection => targetSelection;
-        public DynamicPathfinding DynamicPathfinding => dymamicPathfinding;
-        public Health Health => health;
-        public Combat Combat => combat;
-        public Dialogue Dialogue => dialogue;
-        public Animator Animator => animator;
+        public State CurrentState => currentState;
 
         //constant methods
         protected void ChangeState(State newState)

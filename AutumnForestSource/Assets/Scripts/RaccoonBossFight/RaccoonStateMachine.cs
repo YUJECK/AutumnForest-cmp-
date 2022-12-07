@@ -6,6 +6,7 @@ namespace AutumnForest
     public class RaccoonStateMachine : StateMachine
     {
         //variables
+        [SerializeField] private Health health;
         [Header("States")]
         [SerializeField] private State idleState;
         [Header("First Stage States")]
@@ -27,7 +28,7 @@ namespace AutumnForest
         {
             State nextState = idleState;
 
-            if (Health.CurrentHealth > 0)
+            if (health.CurrentHealth > 0)
             {
                 if (fightController.CurrentStage == Stages.FirstStage)
                 {

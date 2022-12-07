@@ -6,12 +6,13 @@ namespace AutumnForest
 {
     public class SquirrelSpawnState : State
     {
+        [SerializeField] private Animator animator;
         [SerializeField] private GameObject squirrel;
         [SerializeField] private Transform[] spawnPoints;
 
         private IEnumerator SquirellSpawn(StateMachine stateMachine)
         {
-            stateMachine.Animator.Play("Idle");
+            animator.Play("Idle");
 
             int squirrelsCount = Random.Range(2, 3);
 

@@ -6,18 +6,20 @@ namespace AutumnForest
 {
     public class RaccoonHealingState : State
     {
+        [SerializeField] private Health health;
+        [SerializeField] private Animator animator;
         [SerializeField] private Transform healingPoint;
         [SerializeField] private Transform defaultPoint;
 
         private IEnumerator Healing(StateMachine stateMachine)
         {
-            stateMachine.Animator.Play("RaccoonJumpAway");
+            animator.Play("RaccoonJumpAway");
             yield return new WaitForSeconds(0.21f);
             stateMachine.transform.position = healingPoint.position;
 
             while (true)
             {
-                stateMachine.Health.Heal(2);
+                health.Heal(2);
                 yield return new WaitForSeconds(3);
             }
         }

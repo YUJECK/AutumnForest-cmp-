@@ -5,6 +5,8 @@ namespace AutumnForest
 {
     public class RaccoonShootingState : State
     {
+        [Header("Components")]
+        [SerializeField] private Shooting shooting;
         [Header("First Raccoon Stage")]
         [SerializeField] private ShootingPattern[] tripleShotFirstStage;
         [SerializeField] private ShootingPattern roundShootingFirstStage;
@@ -30,12 +32,12 @@ namespace AutumnForest
             }
 
             currentPattern.OnPatternEnd.AddListener(stateMachine.StateChoosing);
-            currentPattern.UsePattern(stateMachine.Shooting);
+            currentPattern.UsePattern(shooting);
         }
 
         public override void ExitState(StateMachine stateMachine) 
         {
-            currentPattern.CompletePattern(stateMachine.Shooting);
+            currentPattern.CompletePattern(shooting);
             currentPattern.OnPatternEnd.RemoveListener(stateMachine.StateChoosing);
         }
 

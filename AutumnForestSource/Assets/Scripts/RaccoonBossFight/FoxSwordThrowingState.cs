@@ -7,8 +7,10 @@ namespace AutumnForest
 {
     public class FoxSwordThrowingState : State
     {
+        [SerializeField] private Animator animator;
         [SerializeField] private GameObject swordPrefab;
         [SerializeField] private Transform[] swordPoints;
+        [SerializeField] private Shooting shooting;
 
         private Stack<GameObject> spawnedSwords = new Stack<GameObject>();
 
@@ -26,7 +28,7 @@ namespace AutumnForest
             while(spawnedSwords.Count != 0)
             {
                 if(spawnedSwords.Peek() != null)
-                    stateMachine.Shooting.ShootWithoutInstantiate(spawnedSwords.Peek(), 10, 0, 0, ForceMode2D.Impulse);
+                    shooting.ShootWithoutInstantiate(spawnedSwords.Peek(), 10, 0, 0, ForceMode2D.Impulse);
                 spawnedSwords.Pop();
                 yield return new WaitForSeconds(1.5f);
             }
@@ -35,7 +37,7 @@ namespace AutumnForest
         }
         public override void EnterState(StateMachine stateMachine)
         {
-            stateMachine.Animator.Play("FoxMagicBookOpen");
+            animator.Play("FoxMagicBookOpen");
             StartCoroutine(SwordThrowing(stateMachine));
         }
 

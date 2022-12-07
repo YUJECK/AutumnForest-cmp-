@@ -46,9 +46,9 @@ namespace AutumnForest
         }
         private void CheckHealth(int currentHealth, int maximumHealth)
         {
-            if (currentHealth < 0.6 * maximumHealth && currentStage != Stages.SecondStage)
+            if (currentHealth < 0.6 * maximumHealth && currentStage == Stages.FirstStage)
                 EnterSecondStage();
-            else if (currentHealth <= 0)
+            else if (currentHealth <= 0 && currentStage == Stages.SecondStage)
                 EnterThirdStage();
         }
         public void StartBossFight()
@@ -99,6 +99,7 @@ namespace AutumnForest
             familyInteractiveField.SetActive(false);
             //adding events
             OnBossFightEnds.AddListener(delegate { familyInteractiveField.SetActive(true); });
+            raccoon.Health.onDie.AddListener(EndBossFight);
         }
     }
 }

@@ -45,7 +45,7 @@ public class Slingshot : MonoBehaviour
     //unity methods
     private void Start()
     {
-        FindObjectOfType<BossFightController>().OnBossChange.AddListener(ChangeTarget);
+        //FindObjectOfType<BossFightController>().OnBossChange.AddListener(ChangeTarget);
         GetComponent<InteractionField>().OnKeyDown.onKeyDown.AddListener(Shoot);
     }
 }

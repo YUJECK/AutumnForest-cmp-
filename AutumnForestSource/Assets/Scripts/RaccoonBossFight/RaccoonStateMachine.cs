@@ -20,9 +20,10 @@ namespace AutumnForest
         [SerializeField] private State squirrelSpawnState;
 
         private bool isStart = true;
+        private BossFightStages currentStage;
 
-        private BossFightController fightController;
-
+        private void SetCurrentStage(BossFightStages newStage) => currentStage = newStage;
+        
         //override methods
         public override void StateChoosing()
         {
@@ -30,43 +31,10 @@ namespace AutumnForest
 
             if (health.CurrentHealth > 0)
             {
-                if (fightController.CurrentStage == Stages.FirstStage)
-                {
-                    int randomState = Random.Range(0, 2);
+                if (currentStage == BossFightStages.FirstStage) nextState = FirstStageStateChoosing();
+                else if (currentStage == BossFightStages.FirstStage) nextState = healingState;
+                else if (currentStage == BossFightStages.ThirdStage) nextState = ThirdStageStateChoosing();
 
-                    switch (randomState)
-                    {
-                        case 0:
-                            nextState = clothesThrowingState;
-                            break;
-                        case 1:
-                            nextState = shootingState;
-                            break;
-                    }
-
-                    if (isStart)
-                    {
-                        nextState = dialogueState;
-                        isStart = false;
-                    }
-                }
-                else if (fightController.CurrentStage == Stages.SecondStage)
-                    nextState = healingState;
-                else if (fightController.CurrentStage == Stages.ThirdStage)
-                {
-                    int randomState = Random.Range(0, 2);
-
-                    switch (randomState)
-                    {
-                        case 0:
-                            nextState = squirrelSpawnState;
-                            break;
-                        case 1:
-                            nextState = waterJetState;
-                            break;
-                    }
-                }
-                
                 ChangeState(nextState);
             }
             else CurrentState.ExitState(this);
@@ -77,8 +45,49 @@ namespace AutumnForest
             if(CurrentState != null)
                 CurrentState.UpdateState(this);
         }
+        //stages
+        private State FirstStageStateChoosing()
+        {
+            int randomState = Random.Range(0, 2);
+            State nextState = idleState;
+
+            switch (randomState)
+            {
+                case 0:
+                    nextState = clothesThrowingState;
+                    break;
+                case 1:
+                    nextState = shootingState;
+                    break;
+            }
+
+            if (isStart)
+            {
+                nextState = dialogueState;
+                isStart = false;
+            }
+
+            return nextState;
+        }
+        private State ThirdStageStateChoosing()
+        {
+            int randomState = Random.Range(0, 2);
+            State nextState = idleState;
+
+            switch (randomState)
+            {
+                case 0:
+                    nextState = squirrelSpawnState;
+                    break;
+                case 1:
+                    nextState = waterJetState;
+                    break;
+            }
+
+            return nextState;
+        }
 
         //unity methods
-        private void Start() => fightController = FindObjectOfType<BossFightController>();
+        private void Awake() => FindObjectOfType<BossFightController>().OnStageChanges.AddListener(SetCurrentStage);
     }
 }

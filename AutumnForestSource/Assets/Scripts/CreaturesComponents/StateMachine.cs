@@ -1,4 +1,5 @@
 using CreaturesAI.Pathfinding;
+using NaughtyAttributes;
 using System.Collections;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace CreaturesAI
         //state info
         [Header("Some info")]
         private State currentState;
-        [SerializeField] private string currentStateName;
+        [ReadOnly, SerializeField] private string currentStateName = "None";
 
         //getters
         public State CurrentState => currentState;

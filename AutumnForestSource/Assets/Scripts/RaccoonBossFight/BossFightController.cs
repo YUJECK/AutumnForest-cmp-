@@ -1,4 +1,5 @@
 using CreaturesAI;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,11 +14,11 @@ namespace AutumnForest
 
     public class BossFightController : StateMachine
     {
-        private BossFightStages currentStage;
+        [ReadOnly] private BossFightStages currentStage;
         //bossfight stages
-        private State firstStage;
-        private State secondStage;
-        private State thirdStage;
+        [SerializeField] private State firstStage;
+        [SerializeField] private State secondStage;
+        [SerializeField] private State thirdStage;
         //some objects
         private Health raccoonHealth;
         private Health foxHealth;

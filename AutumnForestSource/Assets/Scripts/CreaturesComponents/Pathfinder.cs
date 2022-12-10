@@ -1,3 +1,4 @@
+using AutumnForest;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -70,7 +71,7 @@ namespace CreaturesAI.Pathfinding
         private int Heuristic(Point first, Point second) => Mathf.Abs(first.X - second.X) + Mathf.Abs(first.Y - second.Y);
         private bool CheckPointCollider(Point point)
         {
-            if (ObjectList.Grid.GetPoint(new Vector2Int(point.X, point.Y)) == 0) return true;
+            if (ServiceLocator.GetService<GridManager>().GetPoint(new Vector2Int(point.X, point.Y)) == 0) return true;
             else return false;
         }
         
@@ -78,14 +79,14 @@ namespace CreaturesAI.Pathfinding
         public List<Vector2> FindPath(Vector2 start, Vector2 end)
         {
             //simple check endpoint for obstacle
-            if (ObjectList.Grid.GetPoint(end) == 1)
+            if (ServiceLocator.GetService<GridManager>().GetPoint(end) == 1)
             {
                 Debug.LogWarning("End point is obstacle");
                 return new List<Vector2>();
             }
 
             List<Point> nextPoints = new List<Point>();
-            bool[,] visitedPoints = new bool[ObjectList.Grid.GridWidth, ObjectList.Grid.GridHeight];
+            bool[,] visitedPoints = new bool[ServiceLocator.GetService<GridManager>().GridWidth, ServiceLocator.GetService<GridManager>().GridHeight];
             Point startPoint = new Point((int)start.x, (int)start.y);
             Point endPoint = new Point((int)end.x, (int)end.y);
 

@@ -10,5 +10,6 @@ namespace AutumnForest
         public const string RaccoonTag = "Raccoon";
         public const string FoxTag = "Fox";
         public const string Log = "Log";
+        public const string BossHealthBar = "BossHealthBar";
     }
 }

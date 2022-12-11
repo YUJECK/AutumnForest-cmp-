@@ -1,40 +1,34 @@
-using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace AutumnForest
 {
-    [RequireComponent(typeof(CreatureHealth))]
-    public class HealthVizualization : MonoBehaviour
+    public abstract class HealthBar : MonoBehaviour
     {
-        private enum VizualizationType
-        {
-            HealthBar,
-            Counter
-        }
-
-        [SerializeField] private VizualizationType type = VizualizationType.Counter;
+        //health bar components
         [SerializeField] private Slider healthBar;
-        [SerializeField] private Text healthCounter;
+        [SerializeField] private SpriteRenderer healthBarIcon;
+        [SerializeField] private Text healthBarText;
+        //health target
+        private Health healthTarget;
 
-        private CreatureHealth health;
 
-        //untiy methods
-        private void Awake() => health = GetComponent<CreatureHealth>();
-        private void Start()
+        //methods
+        public virtual void SetPreset(HealthBarPreset healthBarPreset)
         {
-            switch (type)
+            if (healthBarPreset != null)
             {
-                case VizualizationType.HealthBar:
-                    health.onHealthChange.AddListener(UpdateHealthBar);
-                    break;
-                case VizualizationType.Counter:
-                    health.onHealthChange.AddListener(UpdateHealthCounter);
-                    break;
-            }
-        }
+                //fill all fields
+                healthTarget = healthBarPreset.HealthTarget;
+                healthBarIcon.sprite = healthBarPreset.HealthBarIcon;
+                healthBarText.text = healthBarPreset.HealthBarName;
 
-        //vizualization methods
+                healthTarget.onHealthChange.AddListener(UpdateHealthBar);
+                //update health bar to new health params
+                UpdateHealthBar(healthTarget.CurrentHealth, healthTarget.MaximumHealth);
+            }
+            else Debug.LogError($"Null reference. {healthBarPreset.name} is null");
+        }
         private void UpdateHealthBar(int currentHealth, int maximumHealth)
         {
             if (healthBar != null)
@@ -42,13 +36,7 @@ namespace AutumnForest
                 healthBar.value = currentHealth;
                 healthBar.maxValue = maximumHealth;
             }
-            else Debug.LogError("Null reference. healthBar is null");
-        }
-        private void UpdateHealthCounter(int currentHealth, int maximumHealth)
-        {
-            if (healthCounter != null)
-                healthCounter.text = $"{currentHealth}/{maximumHealth}";
-            else Debug.LogError("Null reference. healthCounter is null");
+            else Debug.LogError($"Null reference. {healthBar.name} is null");
         }
     }
 }

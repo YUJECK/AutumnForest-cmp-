@@ -5,11 +5,15 @@ using UnityEngine.Events;
 public class OnTriggerEnterEvent : MonoBehaviour
 {
     public List<string> enterTags = new List<string>();
-    public UnityEvent<GameObject> onEnter = new UnityEvent<GameObject>();
+    public UnityEvent<GameObject> OnEnter = new UnityEvent<GameObject>();
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (enterTags.Contains(collision.tag))
-            onEnter.Invoke(collision.gameObject);
+        {
+            OnEnter.Invoke(collision.gameObject);
+            OnEnterTrigger();
+        }
     }
+    protected virtual void OnEnterTrigger() { }
 }

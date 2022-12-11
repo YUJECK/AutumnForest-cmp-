@@ -8,6 +8,7 @@ namespace AutumnForest
         {
             ServiceLocator.RegisterService(FindObjectOfType<RaccoonStateMachine>());
             ServiceLocator.RegisterService(FindObjectOfType<FoxStateMachine>());
+            ServiceLocator.GetService<FoxStateMachine>().gameObject.SetActive(false);
             ServiceLocator.RegisterService(FindObjectOfType<PlayerController>());
             ServiceLocator.RegisterService(FindObjectOfType<DialogueManager>());
             ServiceLocator.RegisterService(Camera.main);

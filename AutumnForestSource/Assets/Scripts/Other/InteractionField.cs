@@ -29,7 +29,7 @@ namespace AutumnForest
         private void Start()
         {
             //adding persistent listeners
-            onTriggerEnter.onEnter.AddListener(delegate { onKeyDown.SetActive(true); });
+            onTriggerEnter.OnEnter.AddListener(delegate { onKeyDown.SetActive(true); });
             onTriggerExit.onExit.AddListener(delegate { onKeyDown.SetActive(false); });
         }
     }

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0ad4add6f09c4d4a93e90499a1f04d3, type: 3}
+  m_Name: RaccoonHealthBar
+  m_EditorClassIdentifier: 
+  healthBarName: "\u041C\u0430\u0444\u0438\u043D\u043E\u0442"
+  healthBarIcon: {fileID: 358522314, guid: 8c8ffc1b7f9db6c46898cbe7865cf271, type: 3}
+  healthTarget: {fileID: 0}

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AutumnForest
@@ -12,6 +10,7 @@ namespace AutumnForest
             ServiceLocator.RegisterService(FindObjectOfType<FoxStateMachine>());
             ServiceLocator.RegisterService(FindObjectOfType<PlayerController>());
             ServiceLocator.RegisterService(FindObjectOfType<DialogueManager>());
+            ServiceLocator.RegisterService(Camera.main);
         }
     }
 }

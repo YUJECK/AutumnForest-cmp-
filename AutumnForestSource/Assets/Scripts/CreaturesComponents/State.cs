@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace CreaturesAI
@@ -6,7 +7,7 @@ namespace CreaturesAI
     {
         #region variables
         [Header("State settings")]
-        [SerializeField] private string stateName = "Some state";
+        [SerializeField] protected string stateName = "Some state";
         [SerializeField] private float stateTransitionDelay = 0f;
         #endregion
         #region getters

@@ -9,8 +9,7 @@ namespace AutumnForest
 
         public override void EnterState(StateMachine stateMachine)
         {
-            GameObject.FindGameObjectWithTag(TagHelper.Log).SetActive(true);
-
+            ServiceLocator.GetService<RaccoonStateMachine>().StateChoosing();
         }
 
         public override void ExitState(StateMachine stateMachine)

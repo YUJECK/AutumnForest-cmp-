@@ -16,12 +16,14 @@ namespace AutumnForest
     {
         [ReadOnly] private BossFightStages currentStage;
         //bossfight stages
+        [SerializeField] private State startStage;
         [SerializeField] private State firstStage;
         [SerializeField] private State secondStage;
         [SerializeField] private State thirdStage;
         //some objects
         private Health raccoonHealth;
         private Health foxHealth;
+        private bool isStart = true;
         //events
         public UnityEvent<BossFightStages> OnStageChanges = new UnityEvent<BossFightStages>();
 
@@ -49,6 +51,11 @@ namespace AutumnForest
                 currentStage = BossFightStages.ThirdStage;
             }
 
+            if (isStart)
+            {
+                nextStage = startStage;
+                isStart = false;
+            }
             if (CurrentState != nextStage)
             {
                 ChangeState(nextStage);

@@ -3,18 +3,17 @@ using UnityEngine.UI;
 
 namespace AutumnForest
 {
-    public abstract class HealthBar : MonoBehaviour
+    public class HealthBar : MonoBehaviour
     {
         //health bar components
         [SerializeField] private Slider healthBar;
-        [SerializeField] private SpriteRenderer healthBarIcon;
+        [SerializeField] private Image healthBarIcon;
         [SerializeField] private Text healthBarText;
         //health target
         private Health healthTarget;
 
-
         //methods
-        public virtual void SetPreset(HealthBarPreset healthBarPreset)
+        public void SetPreset(HealthBarPreset healthBarPreset)
         {
             if (healthBarPreset != null)
             {
@@ -23,7 +22,7 @@ namespace AutumnForest
                 healthBarIcon.sprite = healthBarPreset.HealthBarIcon;
                 healthBarText.text = healthBarPreset.HealthBarName;
 
-                healthTarget.onHealthChange.AddListener(UpdateHealthBar);
+                healthTarget.OnHealthChange.AddListener(UpdateHealthBar);
                 //update health bar to new health params
                 UpdateHealthBar(healthTarget.CurrentHealth, healthTarget.MaximumHealth);
             }

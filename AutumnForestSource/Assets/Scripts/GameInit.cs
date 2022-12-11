@@ -7,6 +7,7 @@ namespace AutumnForest
         private void Awake()
         {
             ServiceLocator.RegisterService(FindObjectOfType<RaccoonStateMachine>());
+            ServiceLocator.RegisterService(FindObjectOfType<BossFightController>());
             ServiceLocator.RegisterService(FindObjectOfType<FoxStateMachine>());
             ServiceLocator.GetService<FoxStateMachine>().gameObject.SetActive(false);
             ServiceLocator.RegisterService(FindObjectOfType<PlayerController>());

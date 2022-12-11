@@ -8,10 +8,10 @@ public abstract class Health : MonoBehaviour
     [SerializeField] protected int maximumHealth = 60;
     [Space]
     //events
-    public UnityEvent<int, int> onHealthChange = new UnityEvent<int, int>();
-    public UnityEvent<int, int> onHeal = new UnityEvent<int, int>();
-    public UnityEvent<int, int> onTakeHit = new UnityEvent<int, int>();
-    public UnityEvent onDie = new UnityEvent();
+    public UnityEvent<int, int> OnHealthChange = new UnityEvent<int, int>();
+    public UnityEvent<int, int> OnHeal = new UnityEvent<int, int>();
+    public UnityEvent<int, int> OnTakeHit = new UnityEvent<int, int>();
+    public UnityEvent OnDie = new UnityEvent();
     //getters
     public int CurrentHealth => currentHealth;
     public int MaximumHealth => maximumHealth;

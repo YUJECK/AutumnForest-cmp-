@@ -11,6 +11,10 @@ namespace AutumnForest
         {
             log.SetActive(true);
             healthBar.SetActive(true);
+            ServiceLocator.GetService<Camera>().orthographicSize = 7;
+            ServiceLocator.GetService<Camera>().GetComponent<MainCameraBrain>().SetTarget(ServiceLocator.GetService<RaccoonStateMachine>().gameObject);
+
+            ServiceLocator.GetService<BossFightController>().StateChoosing();
         }
         private void Start()
         {

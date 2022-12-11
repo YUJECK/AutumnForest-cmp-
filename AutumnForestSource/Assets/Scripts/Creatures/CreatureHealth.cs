@@ -9,14 +9,14 @@ namespace AutumnForest
         public override void DecreaseMaximumHealth(int damagePoints)
         {
             maximumHealth -= damagePoints;
-            onHealthChange.Invoke(currentHealth, maximumHealth);
+            OnHealthChange.Invoke(currentHealth, maximumHealth);
         }
 
         public override void Heal(int healPoints)
         {
             currentHealth += healPoints;
-            onHeal.Invoke(currentHealth, maximumHealth);
-            onHealthChange.Invoke(currentHealth, maximumHealth);
+            OnHeal.Invoke(currentHealth, maximumHealth);
+            OnHealthChange.Invoke(currentHealth, maximumHealth);
 
             if (currentHealth > maximumHealth)
                 currentHealth = maximumHealth;
@@ -25,18 +25,18 @@ namespace AutumnForest
         public override void IncreaseMaximumHealth(int healPoints)
         {
             maximumHealth += healPoints;
-            onHealthChange.Invoke(currentHealth, maximumHealth);
+            OnHealthChange.Invoke(currentHealth, maximumHealth);
         }
 
         public override void TakeHit(int damagePoints)
         {
             currentHealth -= damagePoints;
-            onTakeHit.Invoke(currentHealth, maximumHealth);
-            onHealthChange.Invoke(currentHealth, maximumHealth);
+            OnTakeHit.Invoke(currentHealth, maximumHealth);
+            OnHealthChange.Invoke(currentHealth, maximumHealth);
 
             if (currentHealth <= 0)
             {
-                onDie.Invoke();
+                OnDie.Invoke();
                 if (destroyOnDie) Destroy(gameObject);
             }
         }

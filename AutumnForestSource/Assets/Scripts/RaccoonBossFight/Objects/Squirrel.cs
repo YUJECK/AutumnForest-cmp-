@@ -24,8 +24,8 @@ public class Squirrel : MonoBehaviour
     //unity methods
     private void Awake()
     {
-        GetComponent<Health>().onDie.AddListener(delegate { Instantiate(acornHeal, transform.position, transform.rotation); });
-        GetComponent<Health>().onDie.AddListener(delegate { Destroy(gameObject); });
+        GetComponent<Health>().OnDie.AddListener(delegate { Instantiate(acornHeal, transform.position, transform.rotation); });
+        GetComponent<Health>().OnDie.AddListener(delegate { Destroy(gameObject); });
     }
     private void Start() => StartCoroutine(Shooting());
 }

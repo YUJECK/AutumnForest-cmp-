@@ -8,6 +8,7 @@ namespace AutumnForest
     {
         [SerializeField] private Animator animator;
         [SerializeField] private string throwingAnimationName = "RaccoonThrowing";
+        [SerializeField] private float throwingDelay = 1f;
         [SerializeField] private GameObject shirt;
         [SerializeField] private int shirtsCount;
 
@@ -16,7 +17,7 @@ namespace AutumnForest
             for (int i = 0; i < shirtsCount; i++)
             {
                 Instantiate(shirt, ServiceLocator.GetService<PlayerController>().transform.position, Quaternion.identity);
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(throwingDelay);
             }
 
             stateMachine.StateChoosing();

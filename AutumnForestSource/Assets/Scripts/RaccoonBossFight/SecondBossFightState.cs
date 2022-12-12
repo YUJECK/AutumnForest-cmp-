@@ -1,6 +1,4 @@
 using CreaturesAI;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AutumnForest
@@ -17,7 +15,7 @@ namespace AutumnForest
             foxPreset.HealthTarget = foxStateMachine.GetComponent<Health>();
             bossHealthBar.SetPreset(foxPreset);
             foxStateMachine.gameObject.SetActive(true);
-            foxStateMachine.StateChoosing();
+            foxStateMachine.StartStateMachine();
         }
 
         public override void ExitState(StateMachine stateMachine)
@@ -25,8 +23,6 @@ namespace AutumnForest
             ServiceLocator.GetService<FoxStateMachine>().gameObject.SetActive(false);
         }
 
-        public override void UpdateState(StateMachine stateMachine)
-        {
-        }
+        public override void UpdateState(StateMachine stateMachine) => stateMachine.StateChoosing();
     }
 }

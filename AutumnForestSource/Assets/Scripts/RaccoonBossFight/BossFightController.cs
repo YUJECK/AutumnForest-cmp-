@@ -43,7 +43,7 @@ namespace AutumnForest
                 nextStage = secondStage;
                 currentStage = BossFightStages.SecondStage;
             }
-            else if (foxHealth.CurrentHealth <= 0)
+            if (foxHealth.CurrentHealth <= 0)
             {
                 nextStage = thirdStage;
                 currentStage = BossFightStages.ThirdStage;

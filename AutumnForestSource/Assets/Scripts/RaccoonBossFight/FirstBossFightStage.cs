@@ -13,7 +13,7 @@ namespace AutumnForest
         {
             raccoonPreset.HealthTarget = ServiceLocator.GetService<RaccoonStateMachine>().GetComponent<Health>();
             bossHealthBar.SetPreset(raccoonPreset);
-            ServiceLocator.GetService<RaccoonStateMachine>().StateChoosing();
+            ServiceLocator.GetService<RaccoonStateMachine>().StartStateMachine();
         }
 
         public override void ExitState(StateMachine stateMachine)

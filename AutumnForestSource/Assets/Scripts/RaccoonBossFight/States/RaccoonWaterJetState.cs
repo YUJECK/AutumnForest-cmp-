@@ -23,6 +23,7 @@ namespace AutumnForest
         public override void ExitState(StateMachine stateMachine)
         {
             waterJet.gameObject.SetActive(false);
+            StopAllCoroutines();
         }
 
         public override void UpdateState(StateMachine stateMachine)

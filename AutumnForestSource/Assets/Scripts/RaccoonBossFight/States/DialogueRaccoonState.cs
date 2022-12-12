@@ -13,7 +13,7 @@ namespace AutumnForest
             dialogue.OnConversationEnds.AddListener(stateMachine.StateChoosing);
         }
 
-        public override void ExitState(StateMachine stateMachine) { }
+        public override void ExitState(StateMachine stateMachine) { dialogue.OnConversationEnds.RemoveListener(stateMachine.StateChoosing); }
         public override void UpdateState(StateMachine stateMachine)
         {
             if (Input.GetKeyDown(KeyCode.E))

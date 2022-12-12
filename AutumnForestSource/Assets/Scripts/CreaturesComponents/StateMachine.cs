@@ -12,7 +12,7 @@ namespace CreaturesAI
         [Header("Some info")]
         private State currentState;
         [ReadOnly, SerializeField] private string currentStateName = "None";
-
+        private bool isStart = true;
         //getters
         public State CurrentState => currentState;
 
@@ -51,6 +51,7 @@ namespace CreaturesAI
         }
 
         //abstract methods
+        virtual public void StartStateMachine() { if (isStart) { StateChoosing(); isStart = false; } }
         abstract public void StateChoosing();
         abstract protected void UpdateStates();
 

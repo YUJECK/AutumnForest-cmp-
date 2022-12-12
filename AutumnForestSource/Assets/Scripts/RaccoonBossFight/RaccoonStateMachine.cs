@@ -35,10 +35,11 @@ namespace AutumnForest
                 else if (currentStage == BossFightStages.FirstStage) nextState = healingState;
                 else if (currentStage == BossFightStages.ThirdStage) nextState = ThirdStageStateChoosing();
 
-                ChangeState(nextState);
+                if(nextState != null) ChangeState(nextState);
             }
             else CurrentState.ExitState(this);
 
+            Debug.Log("StateChoosing");
         }
         protected override void UpdateStates()
         {
@@ -84,6 +85,8 @@ namespace AutumnForest
                     break;
             }
 
+            Debug.Log(nextState.StateName);
+            gameObject.SetActive(false);
             return nextState;
         }
 

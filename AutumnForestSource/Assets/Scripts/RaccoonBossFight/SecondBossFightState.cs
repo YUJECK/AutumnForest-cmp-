@@ -14,6 +14,7 @@ namespace AutumnForest
             FoxStateMachine foxStateMachine = ServiceLocator.GetService<FoxStateMachine>();
             foxPreset.HealthTarget = foxStateMachine.GetComponent<Health>();
             bossHealthBar.SetPreset(foxPreset);
+            ServiceLocator.GetService<Camera>().GetComponent<MainCameraBrain>().SetTarget(foxStateMachine.gameObject);
             foxStateMachine.gameObject.SetActive(true);
             foxStateMachine.StartStateMachine();
         }

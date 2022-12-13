@@ -51,7 +51,7 @@ namespace CreaturesAI
         }
 
         //abstract methods
-        virtual public void StartStateMachine() { if (isStart) { StateChoosing(); isStart = false; } }
+        virtual public void StartStateMachine() { if (isStart) { StateChoosing(); isStart = false; Debug.Log("sdf"); } }
         abstract public void StateChoosing();
         abstract protected void UpdateStates();
 

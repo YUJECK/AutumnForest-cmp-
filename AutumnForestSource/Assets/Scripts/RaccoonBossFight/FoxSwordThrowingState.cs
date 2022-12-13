@@ -14,6 +14,11 @@ namespace AutumnForest
 
         private Stack<GameObject> spawnedSwords = new Stack<GameObject>();
 
+        private void OnDestroy()
+        {
+            foreach (GameObject sword in spawnedSwords)
+                Destroy(sword);
+        }
 
         private IEnumerator SwordThrowing(StateMachine stateMachine)
         {
@@ -40,7 +45,6 @@ namespace AutumnForest
             animator.Play("FoxMagicBookOpen");
             StartCoroutine(SwordThrowing(stateMachine));
         }
-
         public override void ExitState(StateMachine stateMachine) { }
         public override void UpdateState(StateMachine stateMachine) { }
     }

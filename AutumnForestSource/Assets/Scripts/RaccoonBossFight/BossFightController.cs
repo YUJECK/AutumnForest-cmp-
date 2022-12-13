@@ -51,8 +51,8 @@ namespace AutumnForest
             
             if (CurrentState != nextStage)
             {
-                ChangeState(nextStage);
                 OnStageChanges.Invoke(currentStage);
+                ChangeState(nextStage);
             }
         }
         protected override void UpdateStates()

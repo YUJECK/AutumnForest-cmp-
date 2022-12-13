@@ -28,8 +28,11 @@ namespace AutumnForest
         //methods
         public void Dash()
         {
-            if (dashCoroutine != null) StopCoroutine(dashCoroutine);
-            dashCoroutine = StartCoroutine(DashingCoroutine());
+            if(playerInput.Movement != Vector2.zero)
+            {
+                if (dashCoroutine != null) StopCoroutine(dashCoroutine);
+                dashCoroutine = StartCoroutine(DashingCoroutine());
+            }
         }
         private IEnumerator DashingCoroutine()
         {

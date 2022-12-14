@@ -7,13 +7,9 @@ namespace AutumnForest
     {
         [Header("Components")]
         [SerializeField] private Shooting shooting;
-        [Header("First Raccoon Stage")]
+        [Header("Shooting patterns")]
         [SerializeField] private ShootingPattern[] tripleShotFirstStage;
         [SerializeField] private ShootingPattern roundShootingFirstStage;
-        [Header("Second Raccoon Stage")]
-        [SerializeField] private ShootingPattern[] tripleShotSecondStage;
-        [SerializeField] private ShootingPattern roundShootingSecondStage;
-
         private ShootingPattern currentPattern;
 
         public override void EnterState(StateMachine stateMachine)

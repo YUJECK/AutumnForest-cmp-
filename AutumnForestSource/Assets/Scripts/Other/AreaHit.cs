@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,13 +9,15 @@ namespace AutumnForest
         //feilds
         public UnityEvent OnHitting = new UnityEvent();
         [SerializeField] private float attackRange = 0.3f;
-        [SerializeField] private int damageLayer = 0;
+        [SerializeField, Layer] private int damageLayer = 0;
+
+        //unity methods
+        private void OnDrawGizmos() => Gizmos.DrawWireSphere(transform.position, attackRange);
 
         //methods
-        public bool Hit(int damage)
+        public void Hit(int damage = 10)
         {
-            //define hitted objects
-            bool isHitSomeone = false;
+            //define hitted 
             Collider2D[] hitObj = Physics2D.OverlapCircleAll(transform.position, attackRange);
             OnHitting.Invoke();
 
@@ -22,12 +25,8 @@ namespace AutumnForest
             foreach (Collider2D obj in hitObj)
             {
                 if (obj.TryGetComponent(out Health health))
-                {
                     health.TakeHit(damage);
-                    isHitSomeone = true;
-                }
             }
-            return isHitSomeone;
         }
     }
 }

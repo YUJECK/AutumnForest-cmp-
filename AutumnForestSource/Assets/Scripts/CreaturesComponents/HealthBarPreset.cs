@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AutumnForest
+namespace CreaturesAI.Health
 {
     [CreateAssetMenu]
     public class HealthBarPreset : ScriptableObject

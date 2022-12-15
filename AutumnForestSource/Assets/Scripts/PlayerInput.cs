@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace AutumnForest
+namespace AutumnForest.Player
 {
     public class PlayerInput : MonoBehaviour
     {

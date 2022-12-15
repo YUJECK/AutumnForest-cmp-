@@ -2,7 +2,7 @@ using CreaturesAI;
 using System.Collections;
 using UnityEngine;
 
-namespace AutumnForest
+namespace AutumnForest.BossFight.Raccoon
 {
     public class RaccoonWaterJetState : State
     {

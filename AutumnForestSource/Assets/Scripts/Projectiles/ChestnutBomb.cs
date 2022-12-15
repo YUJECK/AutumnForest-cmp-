@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Drawing;
 using UnityEngine;
 
-namespace AutumnForest
+namespace AutumnForest.Projectiles
 {
     [RequireComponent(typeof(AreaHit))]
     public class ChestnutBomb : MonoBehaviour
@@ -17,12 +16,17 @@ namespace AutumnForest
 
         //unity methods
         private void Awake() => areaHit = GetComponent<AreaHit>();
-        private void Start() => StartCoroutine(Exploit());
+        private void Start() => StartCoroutine(StartExploit());
+        private void OnCollisionEnter2D(Collision2D collision) => Exploit();
 
         //methods
-        private IEnumerator Exploit()
+        private IEnumerator StartExploit()
         {
             yield return new WaitForSeconds(timeToExpoit);
+            Exploit();
+        }
+        private void Exploit()
+        {
             areaHit.Hit(damage);
 
             Instantiate(exploitPrefab, transform.position, transform.rotation);

@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CreaturesAI;
+using CreaturesAI.CombatSkills;
 
-namespace AutumnForest
+namespace AutumnForest.BossFight.Fox
 {
     public class FoxSwordThrowingState : State
     {

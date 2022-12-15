@@ -30,7 +30,7 @@ namespace AutumnForest
         {
             //adding persistent listeners
             onTriggerEnter.OnEnter.AddListener(delegate { onKeyDown.SetActive(true); });
-            onTriggerExit.onExit.AddListener(delegate { onKeyDown.SetActive(false); });
+            onTriggerExit.OnExit.AddListener(delegate { onKeyDown.SetActive(false); });
         }
     }
 }

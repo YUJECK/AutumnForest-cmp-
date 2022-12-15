@@ -1,6 +1,7 @@
+using AutumnForest.BossFight;
 using UnityEngine;
 
-namespace AutumnForest
+namespace AutumnForest.Other
 {
     public class MusicManager : MonoBehaviour
     {
@@ -9,14 +10,14 @@ namespace AutumnForest
         [SerializeField] private GameObject bossTheme;
 
         private BossFightController fightController;
-            
+
         //unity methods
         private void Awake() => fightController = FindObjectOfType<BossFightController>();
         private void Start()
         {
-            fightController.OnBossFightBegins.AddListener(
+            fightController.OnMachineStarts.AddListener(
                 delegate { mainTheme.SetActive(false); bossTheme.SetActive(true); });
-            fightController.OnBossFightEnds.AddListener(
+            fightController.OnMachineStops.AddListener(
                 delegate { mainTheme.SetActive(true); bossTheme.SetActive(false); });
         }
     }

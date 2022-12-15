@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace AutumnForest
+namespace CreaturesAI.Health
 {
     public class CreatureHealth : Health
     {
-        [SerializeField] private bool destroyOnDie = true; 
+        [SerializeField] private bool destroyOnDie = true;
 
         public override void DecreaseMaximumHealth(int damagePoints)
         {

@@ -1,7 +1,8 @@
+using CreaturesAI.CombatSkills;
 using System.Collections;
 using UnityEngine;
 
-namespace AutumnForest
+namespace AutumnForest.BossFight.Raccoon
 {
     [CreateAssetMenu]
     public class RoundShootingPattern : ShootingPattern

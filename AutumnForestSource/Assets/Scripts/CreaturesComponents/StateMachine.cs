@@ -19,10 +19,10 @@ namespace CreaturesAI
         [Header("Some info")]
         private State currentState;
         [ReadOnly, SerializeField] private string currentStateName = "None";
-        private StateMachineState stateMachineState;
+        private StateMachineState stateMachineState = StateMachineState.Stopped;
         //events
-        public UnityEvent onMachineStarts = new();
-        public UnityEvent onMachineStops = new();
+        public UnityEvent OnMachineStarts = new();
+        public UnityEvent OnMachineStops = new();
 
         //getters
         public State CurrentState => currentState;
@@ -69,6 +69,7 @@ namespace CreaturesAI
             {
                 StateChoosing();
                 stateMachineState = StateMachineState.Working;
+                OnMachineStarts.Invoke();
             }
         } 
         
@@ -76,6 +77,7 @@ namespace CreaturesAI
         {
             currentState.ExitState(this);
             stateMachineState = StateMachineState.Stopped;
+            OnMachineStops.Invoke();
         }
         abstract public void StateChoosing();
         abstract protected void UpdateStates();

@@ -1,7 +1,8 @@
 using CreaturesAI;
+using CreaturesAI.Health;
 using UnityEngine;
 
-namespace AutumnForest
+namespace AutumnForest.BossFight.Raccoon
 {
     public class RaccoonStateMachine : StateMachine
     {

@@ -1,3 +1,4 @@
+using CreaturesAI.Health;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;

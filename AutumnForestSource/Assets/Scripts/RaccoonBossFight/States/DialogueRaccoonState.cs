@@ -1,7 +1,8 @@
 using CreaturesAI;
 using UnityEngine;
+using AutumnForest.DialogueSystem;
 
-namespace AutumnForest
+namespace AutumnForest.BossFight.Raccoon
 {
     public class DialogueRaccoonState : State
     {

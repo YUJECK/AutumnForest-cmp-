@@ -1,24 +1,27 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public abstract class Health : MonoBehaviour
+namespace CreaturesAI.Health
 {
-    //health indicators
-    [SerializeField] protected int currentHealth = 60;
-    [SerializeField] protected int maximumHealth = 60;
-    [Space]
-    //events
-    public UnityEvent<int, int> OnHealthChange = new UnityEvent<int, int>();
-    public UnityEvent<int, int> OnHeal = new UnityEvent<int, int>();
-    public UnityEvent<int, int> OnTakeHit = new UnityEvent<int, int>();
-    public UnityEvent OnDie = new UnityEvent();
-    //getters
-    public int CurrentHealth => currentHealth;
-    public int MaximumHealth => maximumHealth;
+    public abstract class Health : MonoBehaviour
+    {
+        //health indicators
+        [SerializeField] protected int currentHealth = 60;
+        [SerializeField] protected int maximumHealth = 60;
+        [Space]
+        //events
+        public UnityEvent<int, int> OnHealthChange = new UnityEvent<int, int>();
+        public UnityEvent<int, int> OnHeal = new UnityEvent<int, int>();
+        public UnityEvent<int, int> OnTakeHit = new UnityEvent<int, int>();
+        public UnityEvent OnDie = new UnityEvent();
+        //getters
+        public int CurrentHealth => currentHealth;
+        public int MaximumHealth => maximumHealth;
 
-    //abstract methods
-    public abstract void TakeHit(int damagePoints);
-    public abstract void Heal(int healPoints);
-    public abstract void DecreaseMaximumHealth(int damagePoints);
-    public abstract void IncreaseMaximumHealth(int healPoints);
+        //abstract methods
+        public abstract void TakeHit(int damagePoints);
+        public abstract void Heal(int healPoints);
+        public abstract void DecreaseMaximumHealth(int damagePoints);
+        public abstract void IncreaseMaximumHealth(int healPoints);
+    }
 }

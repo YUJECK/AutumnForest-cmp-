@@ -1,8 +1,7 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-namespace AutumnForest
+namespace AutumnForest.Player
 {
     public class PlayerDash : MonoBehaviour
     {
@@ -28,7 +27,7 @@ namespace AutumnForest
         //methods
         public void Dash()
         {
-            if(playerInput.Movement != Vector2.zero)
+            if (playerInput.Movement != Vector2.zero)
             {
                 if (dashCoroutine != null) StopCoroutine(dashCoroutine);
                 dashCoroutine = StartCoroutine(DashingCoroutine());
@@ -41,7 +40,7 @@ namespace AutumnForest
             gameObject.layer = layerIndex;
 
             float startTime = Time.time;
-            Vector2 movement = playerInput.Movement*10;
+            Vector2 movement = playerInput.Movement * 10;
 
             while (Time.time <= startTime + dashDuration)
             {

@@ -1,7 +1,8 @@
+using CreaturesAI.Health;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace AutumnForest
+namespace CreaturesAI.Health
 {
     public class HealthBar : MonoBehaviour
     {

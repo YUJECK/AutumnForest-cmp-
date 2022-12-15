@@ -1,7 +1,7 @@
 using CreaturesAI;
 using UnityEngine;
 
-namespace AutumnForest
+namespace AutumnForest.BossFight.Fox
 {
     public class FoxStateMachine : StateMachine
     {

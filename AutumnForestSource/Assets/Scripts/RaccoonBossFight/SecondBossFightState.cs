@@ -1,7 +1,9 @@
+using AutumnForest.BossFight.Fox;
 using CreaturesAI;
+using CreaturesAI.Health;
 using UnityEngine;
 
-namespace AutumnForest
+namespace AutumnForest.BossFight
 {
     public class SecondBossFightState : State
     {

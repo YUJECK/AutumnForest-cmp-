@@ -1,9 +1,10 @@
 using CreaturesAI;
+using CreaturesAI.Health;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace AutumnForest
+namespace AutumnForest.BossFight
 {
     public enum BossFightStages
     {
@@ -32,7 +33,8 @@ namespace AutumnForest
         private void Awake()
         {
             raccoonHealth = GameObject.FindGameObjectWithTag(TagHelper.RaccoonTag).GetComponent<Health>();    
-            foxHealth = GameObject.FindGameObjectWithTag(TagHelper.FoxTag).GetComponent<Health>();    
+            foxHealth = GameObject.FindGameObjectWithTag(TagHelper.FoxTag).GetComponent<Health>();
+            FindObjectOfType<EnteringToBossFight>().OnEnter.AddListener(delegate { StartStateMachine(); });
         }
         public override void StateChoosing()
         {

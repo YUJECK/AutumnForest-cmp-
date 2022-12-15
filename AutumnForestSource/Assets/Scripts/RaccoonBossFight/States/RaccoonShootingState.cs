@@ -1,7 +1,8 @@
 using CreaturesAI;
+using CreaturesAI.CombatSkills;
 using UnityEngine;
 
-namespace AutumnForest
+namespace AutumnForest.BossFight.Raccoon
 {
     public class RaccoonShootingState : State
     {

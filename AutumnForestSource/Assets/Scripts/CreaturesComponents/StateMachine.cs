@@ -2,9 +2,16 @@ using CreaturesAI.Pathfinding;
 using NaughtyAttributes;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CreaturesAI
 {
+    public enum StateMachineState
+    {
+        Working,
+        Stopped
+    }
+
     abstract public class StateMachine : MonoBehaviour
     {
         //variables
@@ -12,9 +19,14 @@ namespace CreaturesAI
         [Header("Some info")]
         private State currentState;
         [ReadOnly, SerializeField] private string currentStateName = "None";
-        private bool isStart = true;
+        private StateMachineState stateMachineState;
+        //events
+        public UnityEvent onMachineStarts = new();
+        public UnityEvent onMachineStops = new();
+
         //getters
         public State CurrentState => currentState;
+        public StateMachineState StateMachineState => stateMachineState;
 
         //constant methods
         protected void ChangeState(State newState)
@@ -51,7 +63,20 @@ namespace CreaturesAI
         }
 
         //abstract methods
-        virtual public void StartStateMachine() { if (isStart) { StateChoosing(); isStart = false; Debug.Log("sdf"); } }
+        virtual public void StartStateMachine() 
+        {
+            if (stateMachineState != StateMachineState.Working)
+            {
+                StateChoosing();
+                stateMachineState = StateMachineState.Working;
+            }
+        } 
+        
+        virtual public void StopStateMachine() 
+        {
+            currentState.ExitState(this);
+            stateMachineState = StateMachineState.Stopped;
+        }
         abstract public void StateChoosing();
         abstract protected void UpdateStates();
 

@@ -14,10 +14,10 @@ namespace AutumnForest
         private void Awake() => fightController = FindObjectOfType<BossFightController>();
         private void Start()
         {
-            //fightController.OnBossFightBegins.AddListener(
-            //    delegate { mainTheme.SetActive(false); bossTheme.SetActive(true); });
-            //fightController.OnBossFightEnds.AddListener(
-            //    delegate { mainTheme.SetActive(true); bossTheme.SetActive(false); });
+            fightController.OnBossFightBegins.AddListener(
+                delegate { mainTheme.SetActive(false); bossTheme.SetActive(true); });
+            fightController.OnBossFightEnds.AddListener(
+                delegate { mainTheme.SetActive(true); bossTheme.SetActive(false); });
         }
     }
 }

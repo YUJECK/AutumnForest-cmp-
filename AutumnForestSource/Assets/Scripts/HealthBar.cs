@@ -1,4 +1,3 @@
-using CreaturesAI.Health;
 using UnityEngine;
 using UnityEngine.UI;
 

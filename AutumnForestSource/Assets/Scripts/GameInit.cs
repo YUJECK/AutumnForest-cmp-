@@ -2,6 +2,7 @@ using AutumnForest.BossFight;
 using AutumnForest.BossFight.Fox;
 using AutumnForest.BossFight.Raccoon;
 using AutumnForest.DialogueSystem;
+using AutumnForest.Other;
 using AutumnForest.Player;
 using UnityEngine;
 
@@ -17,7 +18,7 @@ namespace AutumnForest
             ServiceLocator.GetService<FoxStateMachine>().gameObject.SetActive(false);
             ServiceLocator.RegisterService(FindObjectOfType<PlayerController>());
             ServiceLocator.RegisterService(FindObjectOfType<DialogueManager>());
-            ServiceLocator.RegisterService(Camera.main);
+            ServiceLocator.RegisterService(FindObjectOfType<MainCameraBrain>());
         }
     }
 }

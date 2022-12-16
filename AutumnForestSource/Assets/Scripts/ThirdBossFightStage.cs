@@ -1,4 +1,5 @@
 using AutumnForest.BossFight.Raccoon;
+using AutumnForest.Other;
 using CreaturesAI;
 using CreaturesAI.Health;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace AutumnForest.BossFight
             RaccoonStateMachine raccoonStateMachine = ServiceLocator.GetService<RaccoonStateMachine>();
 
             raccoonPreset.HealthTarget = raccoonStateMachine.GetComponent<Health>();
-            ServiceLocator.GetService<Camera>().GetComponent<MainCameraBrain>().SetTarget(raccoonStateMachine.gameObject);
+            ServiceLocator.GetService<Camera>().GetComponent<MainCameraBrain>().SetTargets(raccoonStateMachine.gameObject);
             bossHealthBar.SetPreset(raccoonPreset);
             raccoonStateMachine.StateChoosing();
         }

@@ -1,5 +1,6 @@
 using AutumnForest.BossFight;
 using AutumnForest.BossFight.Raccoon;
+using AutumnForest.Other;
 using UnityEngine;
 
 namespace AutumnForest
@@ -13,8 +14,10 @@ namespace AutumnForest
         {
             log.SetActive(true);
             healthBar.SetActive(true);
-            ServiceLocator.GetService<Camera>().orthographicSize = 7;
-            ServiceLocator.GetService<Camera>().GetComponent<MainCameraBrain>().SetTarget(ServiceLocator.GetService<RaccoonStateMachine>().gameObject);
+
+            MainCameraBrain camera = ServiceLocator.GetService<MainCameraBrain>();
+            camera.SetTargets(ServiceLocator.GetService<RaccoonStateMachine>().gameObject);
+            camera.ChangeOrthographicSize(7, 0.01f);
 
             ServiceLocator.GetService<BossFightController>().StateChoosing();
         }

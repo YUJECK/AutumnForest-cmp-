@@ -1,4 +1,5 @@
 using AutumnForest.BossFight.Fox;
+using AutumnForest.Other;
 using CreaturesAI;
 using CreaturesAI.Health;
 using UnityEngine;
@@ -16,7 +17,7 @@ namespace AutumnForest.BossFight
             FoxStateMachine foxStateMachine = ServiceLocator.GetService<FoxStateMachine>();
             foxPreset.HealthTarget = foxStateMachine.GetComponent<Health>();
             bossHealthBar.SetPreset(foxPreset);
-            ServiceLocator.GetService<Camera>().GetComponent<MainCameraBrain>().SetTarget(foxStateMachine.gameObject);
+            ServiceLocator.GetService<MainCameraBrain>().SetTargets(foxStateMachine.gameObject);
             foxStateMachine.gameObject.SetActive(true);
             foxStateMachine.StartStateMachine();
         }

@@ -6,11 +6,17 @@ namespace AutumnForest.DialogueSystem
     [RequireComponent(typeof(Dialogue))]
     public class DialogueTriggerArea : MonoBehaviour
     {
-        void Awake()
+        private InteractionField interactionField;
+        private Dialogue dialogue;
+
+        private void Awake()
         {
             //get components
-            InteractionField interactionField = GetComponent<InteractionField>();
-            Dialogue dialogue = GetComponent<Dialogue>();
+            interactionField = GetComponent<InteractionField>();
+            dialogue = GetComponent<Dialogue>();
+        }
+        private void Start()
+        {
             //adding listeners to events
             interactionField.OnTriggerEnter.OnEnter.AddListener(delegate { dialogue.StartConversation(); });
             interactionField.OnTriggerExit.OnExit.AddListener(delegate { dialogue.EndConversation(); });

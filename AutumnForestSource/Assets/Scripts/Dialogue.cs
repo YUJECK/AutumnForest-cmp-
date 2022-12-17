@@ -35,8 +35,5 @@ namespace AutumnForest.DialogueSystem
                 currentPhrase++;
             }
         }
-
-        //unity methods
-        private void Start() => GetComponent<OnKeyDownEvent>().OnKeyDown.AddListener(NextPhrase);
     }
 }

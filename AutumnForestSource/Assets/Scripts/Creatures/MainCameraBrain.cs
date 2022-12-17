@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace AutumnForest.Other
 {
@@ -11,6 +12,7 @@ namespace AutumnForest.Other
         [SerializeField] private Transform secondFollowTarget;
         [SerializeField] private float positionLerp = 0.15f;
         private new Camera camera;
+        private PostProcessVolume postProcessVolume;
 
         //unity methods
         private void Awake() => camera = GetComponent<Camera>();
@@ -26,6 +28,7 @@ namespace AutumnForest.Other
             if(newFirstTarget != null) firstFollowTarget = newFirstTarget.transform;
             if(newSecondTarget != null) secondFollowTarget = newSecondTarget.transform;
         }
+        public PostProcessProfile GetPostProcessProfile() => postProcessVolume.profile;
         public void SetLerp(float newLerp) => positionLerp = newLerp;
         public void ChangeOrthographicSize(float toSize, float speed = 0.01f)
         {

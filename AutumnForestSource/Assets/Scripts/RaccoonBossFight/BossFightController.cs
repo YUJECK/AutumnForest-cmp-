@@ -52,7 +52,6 @@ namespace AutumnForest.BossFight
                 nextStage = thirdStage;
                 currentStage = BossFightStages.ThirdStage;
             }
-            
             if (CurrentState != nextStage)
             {
                 OnStageChanges.Invoke(currentStage);

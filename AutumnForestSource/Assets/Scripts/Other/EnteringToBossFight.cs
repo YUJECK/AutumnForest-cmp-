@@ -17,7 +17,7 @@ namespace AutumnForest
 
             MainCameraBrain camera = ServiceLocator.GetService<MainCameraBrain>();
             camera.SetTargets(ServiceLocator.GetService<RaccoonStateMachine>().gameObject);
-            camera.ChangeOrthographicSize(7, 0.01f);
+            camera.ChangeOrthographicSize(7);
 
             ServiceLocator.GetService<BossFightController>().StateChoosing();
         }

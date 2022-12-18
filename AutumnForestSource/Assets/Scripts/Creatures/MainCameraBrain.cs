@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 
@@ -11,8 +12,8 @@ namespace AutumnForest.Other
         [SerializeField] private Transform firstFollowTarget;
         [SerializeField] private Transform secondFollowTarget;
         [SerializeField] private float positionLerp = 0.15f;
+        [SerializeField] private PostProcessVolume postProcessVolume;
         private new Camera camera;
-        private PostProcessVolume postProcessVolume;
 
         //unity methods
         private void Awake() => camera = GetComponent<Camera>();
@@ -30,20 +31,17 @@ namespace AutumnForest.Other
         }
         public PostProcessProfile GetPostProcessProfile() => postProcessVolume.profile;
         public void SetLerp(float newLerp) => positionLerp = newLerp;
-        public void ChangeOrthographicSize(float toSize, float speed = 0.01f)
+        public async void ChangeOrthographicSize(float toSize, int speed = 1)
         {
-            StartCoroutine(Change());
+            float differenceInSize = toSize - camera.orthographicSize;
+            float sizeIncreasing = differenceInSize / 100;
+            int cycles = (int)(differenceInSize / sizeIncreasing);
 
-            IEnumerator Change()
+            for(int i = 0; i < cycles; i++)
             {
-                float sizeIncreasing = 0.1f;
-                int cycles = (int)((toSize - camera.orthographicSize) / sizeIncreasing);
 
-                for(int i = 0; i < cycles; i++)
-                {
-                    yield return new WaitForSeconds(speed);
-                    camera.orthographicSize += sizeIncreasing; 
-                }
+                await Task.Delay(1);
+                camera.orthographicSize += sizeIncreasing; 
             }
         }
         

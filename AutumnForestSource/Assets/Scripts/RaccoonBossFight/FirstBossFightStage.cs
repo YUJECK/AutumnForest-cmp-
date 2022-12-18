@@ -13,7 +13,9 @@ namespace AutumnForest.BossFight
 
         public override void EnterState(StateMachine stateMachine)
         {
-            raccoonPreset.HealthTarget = ServiceLocator.GetService<RaccoonStateMachine>().GetComponent<Health>();
+            ServiceLocator.GetService<RaccoonStateMachine>().TryGetComponent(out Health health);
+            if (health != null) raccoonPreset.HealthTarget = health;
+            else Debug.LogError("Health component doesnt set to Raccoon");
             bossHealthBar.SetPreset(raccoonPreset);
             ServiceLocator.GetService<RaccoonStateMachine>().StartStateMachine();
         }

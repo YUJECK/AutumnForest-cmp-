@@ -1,3 +1,5 @@
+using AutumnForest.BossFight.Fox;
+using AutumnForest.BossFight.Raccoon;
 using CreaturesAI;
 using CreaturesAI.Health;
 using NaughtyAttributes;
@@ -32,8 +34,8 @@ namespace AutumnForest.BossFight
         //methods
         private void Awake()
         {
-            raccoonHealth = GameObject.FindGameObjectWithTag(TagHelper.RaccoonTag).GetComponent<Health>();    
-            foxHealth = GameObject.FindGameObjectWithTag(TagHelper.FoxTag).GetComponent<Health>();
+            raccoonHealth = ServiceLocator.GetService<RaccoonStateMachine>().GetComponent<Health>();    
+            foxHealth = ServiceLocator.GetService<FoxStateMachine>().GetComponent<Health>();
             FindObjectOfType<EnteringToBossFight>().OnEnter.AddListener(delegate { StartStateMachine(); });
         }
         public override void StateChoosing()

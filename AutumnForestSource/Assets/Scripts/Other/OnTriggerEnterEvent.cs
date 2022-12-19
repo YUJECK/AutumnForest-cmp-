@@ -10,7 +10,7 @@ public class OnTriggerEnterEvent : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (enterTags.Contains(collision.tag))
-        {
+        {   
             OnEnter.Invoke(collision.gameObject);
             OnEnterTrigger();
         }

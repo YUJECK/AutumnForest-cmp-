@@ -24,27 +24,31 @@ namespace AutumnForest.Other
                 transform.position = GetPosition();
         }
         //setters like
-        public void SetTargets(GameObject newFirstTarget = null, GameObject newSecondTarget = null) 
+        public void SetTargets(GameObject newFirstTarget = null, GameObject newSecondTarget = null)
         {
-            if(newFirstTarget != null) firstFollowTarget = newFirstTarget.transform;
-            if(newSecondTarget != null) secondFollowTarget = newSecondTarget.transform;
+            if (newFirstTarget != null) firstFollowTarget = newFirstTarget.transform;
+            if (newSecondTarget != null) secondFollowTarget = newSecondTarget.transform;
         }
         public PostProcessProfile GetPostProcessProfile() => postProcessVolume.profile;
         public void SetLerp(float newLerp) => positionLerp = newLerp;
-        public async void ChangeOrthographicSize(float toSize, int speed = 1)
+        public void ChangeOrthographicSize(float toSize, float speed = 0.0005f)
         {
             float differenceInSize = toSize - camera.orthographicSize;
             float sizeIncreasing = differenceInSize / 100;
             int cycles = (int)(differenceInSize / sizeIncreasing);
 
-            for(int i = 0; i < cycles; i++)
-            {
+            StartCoroutine(Change());
 
-                await Task.Delay(1);
-                camera.orthographicSize += sizeIncreasing; 
+            IEnumerator Change()
+            {
+                for (int i = 0; i < cycles; i++)
+                {
+                    camera.orthographicSize += sizeIncreasing;
+                    yield return new WaitForFixedUpdate();
+                }
             }
         }
-        
+
         //other methods
         private Vector3 GetPosition()
         {

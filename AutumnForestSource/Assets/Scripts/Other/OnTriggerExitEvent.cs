@@ -10,6 +10,10 @@ public class OnTriggerExitEvent : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (exitTags.Contains(collision.tag))
+        {
             OnExit.Invoke(collision.gameObject);
+            OnExitTrigger();
+        }
     }
+    protected virtual void OnExitTrigger() { }
 }

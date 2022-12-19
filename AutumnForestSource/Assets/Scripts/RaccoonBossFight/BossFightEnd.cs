@@ -19,9 +19,11 @@ namespace AutumnForest.BossFight
             ServiceLocator.GetService<MainCameraBrain>().SetTargets(ServiceLocator.GetService<PlayerController>().gameObject);
             Vignette vignette = ServiceLocator.GetService<MainCameraBrain>().GetPostProcessProfile().GetSetting<Vignette>();
 
+            Color startColor = vignette.color.value;
+
             for (float i = 0.05f; vignette.color != newVignetteColor; i += 0.001f)
             {
-                vignette.color.value = Color.Lerp(vignette.color, newVignetteColor, i);
+                vignette.color.value = Color.Lerp(startColor, newVignetteColor, i);
                 await Task.Delay(10);
             }
         }

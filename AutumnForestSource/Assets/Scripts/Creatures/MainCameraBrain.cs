@@ -31,21 +31,14 @@ namespace AutumnForest.Other
         }
         public PostProcessProfile GetPostProcessProfile() => postProcessVolume.profile;
         public void SetLerp(float newLerp) => positionLerp = newLerp;
-        public void ChangeOrthographicSize(float toSize, float speed = 0.0005f)
+        public async void ChangeOrthographicSize(float toSize)
         {
-            float differenceInSize = toSize - camera.orthographicSize;
-            float sizeIncreasing = differenceInSize / 100;
-            int cycles = (int)(differenceInSize / sizeIncreasing);
+            float startSize = camera.orthographicSize;
 
-            StartCoroutine(Change());
-
-            IEnumerator Change()
+            for (float i = 0f; camera.orthographicSize != toSize; i += 0.02f)
             {
-                for (int i = 0; i < cycles; i++)
-                {
-                    camera.orthographicSize += sizeIncreasing;
-                    yield return new WaitForFixedUpdate();
-                }
+                camera.orthographicSize = Mathf.Lerp(startSize, toSize, i);
+                await Task.Delay(1);
             }
         }
 

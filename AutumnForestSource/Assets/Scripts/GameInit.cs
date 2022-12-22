@@ -12,13 +12,20 @@ namespace AutumnForest
     {
         private void Awake()
         {
-            ServiceLocator.RegisterService(FindObjectOfType<MainCameraBrain>());
+            //registering
+            //boss fight services
             ServiceLocator.RegisterService(FindObjectOfType<RaccoonStateMachine>());
             ServiceLocator.RegisterService(FindObjectOfType<BossFightController>());
             ServiceLocator.RegisterService(FindObjectOfType<FoxStateMachine>());
-            ServiceLocator.GetService<FoxStateMachine>().gameObject.SetActive(false);
+            //player like components
+            ServiceLocator.RegisterService(FindObjectOfType<MainCameraBrain>());
             ServiceLocator.RegisterService(FindObjectOfType<PlayerController>());
+            ServiceLocator.RegisterService(FindObjectOfType<PlayerInput>());
+            //other managers
             ServiceLocator.RegisterService(FindObjectOfType<DialogueManager>());
+            
+            //doing something
+            ServiceLocator.GetService<FoxStateMachine>().gameObject.SetActive(false);
         }
     }
 }

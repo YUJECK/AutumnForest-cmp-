@@ -1,5 +1,7 @@
-using System.Collections;
+using AutumnForest.Player;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace AutumnForest.BossFight
@@ -8,46 +10,43 @@ namespace AutumnForest.BossFight
     public class SlingshotShoot : MonoBehaviour
     {
         //fields
-        [SerializeField] private Transform target;
         [SerializeField] private GameObject projectile;
         [SerializeField] private Transform firePoint;
         [SerializeField] private Text culldownText;
         private bool canShoot = true;
         [SerializeField] private PointRotation pointRotation;
+        public UnityEvent OnShoot = new();
 
         //unity methods
         private void Start()
         {
-            //FindObjectOfType<BossFightController>().OnBossChange.AddListener(ChangeTarget);
-            GetComponent<InteractionField>().OnKeyDown.OnKeyDown.AddListener(Shoot);
+            OnShoot.AddListener(Culldown);
+            OnShoot.AddListener(delegate { ServiceLocator.GetService<PlayerInput>().OnAttackInput.RemoveListener(Shoot); });
         }
 
-        //methods
-        public void ChangeTarget(GameObject newTarget)
-        {
-            target = newTarget.transform;
-            pointRotation.SetTarget(newTarget);
-        }
-        public void Shoot()
+        //shooting controll methods
+        private void Shoot()
         {
             if (canShoot)
             {
                 Instantiate(projectile, firePoint.position, firePoint.rotation);
-                StartCoroutine(Culldown());
+                OnShoot.Invoke();
             }
         }
-        private IEnumerator Culldown()
+        private async void Culldown()
         {
             canShoot = false;
 
             for (int i = 0; i < 5; i++)
             {
                 culldownText.text = (5 - i).ToString();
-                yield return new WaitForSeconds(1f);
+                await Task.Delay(1000);
             }
 
             culldownText.text = "";
             canShoot = true;
         }
+        //other methods
+        public void Active() => ServiceLocator.GetService<PlayerInput>().OnAttackInput.AddListener(Shoot);
     }
 }

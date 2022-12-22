@@ -10,6 +10,8 @@ namespace AutumnForest
         [SerializeField] private GameObject log;
         [SerializeField] private GameObject healthBar;
 
+        private bool hasEntered = false;
+
         protected override void OnEnterTrigger()
         {
             log.SetActive(true);
@@ -20,6 +22,8 @@ namespace AutumnForest
             camera.ChangeOrthographicSize(7);
 
             ServiceLocator.GetService<BossFightController>().StateChoosing();
+
+            Destroy(this);            
         }
         private void Start()
         {

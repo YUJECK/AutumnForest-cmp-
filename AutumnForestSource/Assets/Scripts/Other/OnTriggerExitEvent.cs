@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnTriggerExitEvent : IInteractive
+public class OnTriggerExitEvent : MonoBehaviour, IInteractive
 {
     public List<string> exitTags = new List<string>();
     public UnityEvent OnExit = new UnityEvent();
@@ -15,6 +15,7 @@ public class OnTriggerExitEvent : IInteractive
         if (exitTags.Contains(collision.tag))
         {
             OnExit.Invoke();
+            Interact();
         }
     }
 

@@ -9,13 +9,13 @@ namespace AutumnForest.Other
         [SerializeField] private float timeScale;
         [SerializeField] private Sprite cursor;
 
-        protected override void OnExitTrigger()
+        protected void OnTriggerExit()
         {
             ServiceLocator.GetService<MainCameraBrain>().SetLerp(lerp);
             ServiceLocator.GetService<MainCameraBrain>().ChangeOrthographicSize(cameraSize);
 
             Time.timeScale = timeScale;
-            FindObjectOfType<Cursor>().SetCursorIcon(cursor);
+            //FindObjectOfType<Cursor>().SetCursorIcon(cursor);
         }
     }
 }

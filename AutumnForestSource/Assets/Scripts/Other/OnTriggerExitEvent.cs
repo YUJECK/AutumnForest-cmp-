@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnTriggerExitEvent : MonoBehaviour, IInteractive
+public class OnTriggerExitEvent : MonoBehaviour
 {
     public List<string> exitTags = new List<string>();
     public UnityEvent OnExit = new UnityEvent();
 
-    public UnityEvent onInteract { get => OnExit; set => OnExit = value; }
+    public UnityEvent<GameObject> onInteract { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
     private void OnTriggerExit2D(Collider2D collision)
     {

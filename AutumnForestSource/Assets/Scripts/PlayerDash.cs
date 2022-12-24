@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace AutumnForest.Player
@@ -6,51 +7,66 @@ namespace AutumnForest.Player
     public class PlayerDash : MonoBehaviour
     {
         [Header("Propertys")]
+        //dash params
         [SerializeField] private float dashSpeed = 5f;
         [SerializeField] private float dashDuration = 1f;
+        [SerializeField] private int dashCulldown = 1000;
         [SerializeField] private int layerIndex;
+        //some bollean fields
         private bool nowDashing = false;
+        private bool isCulldown = false;
         //some components
         private PlayerInput playerInput;
         private Rigidbody2D playerRigidbody;
-        private Coroutine dashCoroutine;
-
+        
+        //getters
         public bool NowDashing => nowDashing;
 
         //unity methods
         private void Awake()
         {
             playerRigidbody = GetComponent<Rigidbody2D>();
-            playerInput = FindObjectOfType<PlayerInput>();
+            playerInput = ServiceLocator.GetService<PlayerInput>();
+            playerInput.OnRightMouseButtonPressed.AddListener(Dash);
         }
 
         //methods
         public void Dash()
         {
-            if (playerInput.Movement != Vector2.zero)
+            //some params
+            int layerMaskTransitionDelay = 700;
+            int dashDelay = 10;
+
+            if (playerInput.Movement != Vector2.zero && !isCulldown)
+                Dashing();
+
+            async void Dashing()
             {
-                if (dashCoroutine != null) StopCoroutine(dashCoroutine);
-                dashCoroutine = StartCoroutine(DashingCoroutine());
+                nowDashing = true;
+                int defaultLayer = gameObject.layer;
+                gameObject.layer = layerIndex;
+
+                float startTime = Time.time;
+                Vector2 movement = playerInput.Movement * 10;
+
+                while (Time.time <= startTime + dashDuration)
+                {
+                    playerRigidbody.velocity = movement * dashSpeed;
+                    await Task.Delay(dashDelay);
+                }
+
+                nowDashing = false;
+                await Task.Delay(layerMaskTransitionDelay);
+                gameObject.layer = defaultLayer;
+
+                DashCulldown();
             }
-        }
-        private IEnumerator DashingCoroutine()
-        {
-            nowDashing = true;
-            int defaultLayer = gameObject.layer;
-            gameObject.layer = layerIndex;
-
-            float startTime = Time.time;
-            Vector2 movement = playerInput.Movement * 10;
-
-            while (Time.time <= startTime + dashDuration)
+            async void DashCulldown()
             {
-                playerRigidbody.velocity = movement * dashSpeed;
-                yield return new WaitForFixedUpdate();
+                isCulldown = true;
+                await Task.Delay(dashCulldown);
+                isCulldown = false;
             }
-
-            nowDashing = false;
-            yield return new WaitForSeconds(0.7f);
-            gameObject.layer = defaultLayer;
         }
     }
 }

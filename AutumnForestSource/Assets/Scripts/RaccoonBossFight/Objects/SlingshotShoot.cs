@@ -21,7 +21,7 @@ namespace AutumnForest.BossFight
         private void Start()
         {
             OnShoot.AddListener(Culldown);
-            OnShoot.AddListener(delegate { ServiceLocator.GetService<PlayerInput>().OnAttackInput.RemoveListener(Shoot); });
+            OnShoot.AddListener(delegate { ServiceLocator.GetService<PlayerInput>().OnLeftMouseButtonPressed.RemoveListener(Shoot); });
         }
 
         //shooting controll methods
@@ -47,6 +47,6 @@ namespace AutumnForest.BossFight
             canShoot = true;
         }
         //other methods
-        public void Active() => ServiceLocator.GetService<PlayerInput>().OnAttackInput.AddListener(Shoot);
+        public void Active() => ServiceLocator.GetService<PlayerInput>().OnLeftMouseButtonPressed.AddListener(Shoot);
     }
 }

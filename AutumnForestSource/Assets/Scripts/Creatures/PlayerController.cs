@@ -32,8 +32,8 @@ namespace AutumnForest.Player
             playerInput = GetComponent<PlayerInput>();
             playerDash = GetComponent<PlayerDash>();
 
-            playerInput.OnAttackInput.AddListener(Attack);
-            playerInput.OnDashInput.AddListener(playerDash.Dash);
+            playerInput.OnLeftMouseButtonPressed.AddListener(Attack);
+            playerInput.OnRightMouseButtonPressed.AddListener(playerDash.Dash);
         }
 
         //movement

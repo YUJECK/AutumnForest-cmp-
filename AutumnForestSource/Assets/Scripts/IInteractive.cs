@@ -2,9 +2,11 @@
 
 namespace AutumnForest.Other
 {
-    internal interface IInteractive
+    public interface IInteractive
     {
-        public UnityEvent onInteract { get; set; }
+        public UnityEvent OnInteract { get; set; }
+
+        public virtual void Init() { }
         public void Interact();
     }
 }

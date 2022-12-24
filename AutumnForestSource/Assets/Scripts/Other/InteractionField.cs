@@ -1,36 +1,34 @@
-using UnityEngine.Events;
+using AutumnForest.Player;
 using UnityEngine;
 
-namespace AutumnForest
+namespace AutumnForest.Other
 {
-    //contracts
-    [RequireComponent(typeof(OnTriggerEnterEvent))]
     [RequireComponent(typeof(OnTriggerExitEvent))]
-    [RequireComponent(typeof(OnKeyDownEvent))]
+    [RequireComponent(typeof(OnTriggerEnterEvent))]
     public class InteractionField : MonoBehaviour
     {
-        //variables
+        [SerializeField] private IInteractive interactive;
+
         private OnTriggerEnterEvent onTriggerEnter;
         private OnTriggerExitEvent onTriggerExit;
-        private OnKeyDownEvent onKeyDown;
-        //getters
+
         public OnTriggerEnterEvent OnTriggerEnter => onTriggerEnter;
         public OnTriggerExitEvent OnTriggerExit => onTriggerExit;
-        public OnKeyDownEvent OnKeyDown => onKeyDown;
 
-        //unity methods
         private void Awake()
         {
-            //getting components
             onTriggerEnter = GetComponent<OnTriggerEnterEvent>();
             onTriggerExit = GetComponent<OnTriggerExitEvent>();
-            onKeyDown = GetComponent<OnKeyDownEvent>();
         }
         private void Start()
         {
-            //adding persistent listeners
-            onTriggerEnter.OnEnter.AddListener(delegate { onKeyDown.SetActive(true); });
-            onTriggerExit.OnExit.AddListener(delegate { onKeyDown.SetActive(false); });
+            if(interactive != null)
+            {
+                onTriggerEnter.OnEnter.AddListener(
+                    delegate { ServiceLocator.GetService<PlayerInput>().AddInput(KeyCode.E, interactive.Interact, false); });
+                onTriggerEnter.OnEnter.AddListener(
+                    delegate { ServiceLocator.GetService<PlayerInput>().RemoveInput(KeyCode.E); });
+            }
         }
     }
 }

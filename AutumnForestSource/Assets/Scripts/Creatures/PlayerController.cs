@@ -1,4 +1,3 @@
-using AutumnForest;
 using System.Collections;
 using UnityEngine;
 
@@ -39,7 +38,7 @@ namespace AutumnForest.Player
         //movement
         private void FixedUpdate()
         {
-            if(!playerDash.NowDashing)
+            if (!playerDash.NowDashing)
             {
                 playerRigidbody.velocity = playerInput.Movement * moveSpeed;
 

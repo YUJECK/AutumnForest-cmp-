@@ -2,18 +2,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnTriggerEnterEvent : MonoBehaviour
+namespace AutumnForest.Other
 {
-    public List<string> enterTags = new List<string>();
-    public UnityEvent<GameObject> OnEnter = new UnityEvent<GameObject>();
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class OnTriggerEnterEvent : MonoBehaviour
     {
-        if (enterTags.Contains(collision.tag))
-        {   
-            OnEnter.Invoke(collision.gameObject);
-            OnEnterTrigger();
+        //fields
+        public List<string> enterTags = new();
+        public UnityEvent<GameObject> OnEnter = new();
+        private IInteractive interactive;
+
+        //getters
+        public IInteractive Interactive { get => interactive; set => interactive = value; }
+        
+        //unity methods
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (enterTags.Contains(collision.tag))
+            {
+                OnEnter.Invoke(collision.gameObject);
+                if (interactive != null) interactive.Interact();
+            }
         }
     }
-    protected virtual void OnEnterTrigger() { }
 }

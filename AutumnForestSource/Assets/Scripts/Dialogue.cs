@@ -4,7 +4,6 @@ using UnityEngine.Events;
 
 namespace AutumnForest.DialogueSystem
 {
-    [RequireComponent(typeof(OnKeyDownEvent))]
     public class Dialogue : MonoBehaviour
     {
         //variables

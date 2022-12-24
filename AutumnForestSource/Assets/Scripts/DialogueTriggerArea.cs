@@ -1,3 +1,4 @@
+using AutumnForest.Other;
 using UnityEngine;
 
 namespace AutumnForest.DialogueSystem
@@ -20,7 +21,7 @@ namespace AutumnForest.DialogueSystem
             //adding listeners to events
             interactionField.OnTriggerEnter.OnEnter.AddListener(delegate { dialogue.StartConversation(); });
             interactionField.OnTriggerExit.OnExit.AddListener(delegate { dialogue.EndConversation(); });
-            interactionField.OnKeyDown.OnKeyDown.AddListener(delegate { dialogue.NextPhrase(); });
+            //interactionField.OnKeyDown.OnKeyDown.AddListener(delegate { dialogue.NextPhrase(); });
         }
     }
 }

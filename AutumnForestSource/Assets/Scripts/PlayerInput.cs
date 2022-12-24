@@ -44,5 +44,10 @@ namespace AutumnForest.Player
             if (!playerInputs.ContainsKey(key) || !replace) playerInputs.Add(key, action);
             else playerInputs[key] = action;
         }
+        public void RemoveInput(KeyCode key)
+        {
+            if (playerInputs.ContainsKey(key))  playerInputs.Remove(key);
+            else Debug.LogError($"PlayerInputs doesnt contain {key}");
+        }
     }
 }

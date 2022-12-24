@@ -36,7 +36,7 @@ namespace AutumnForest.BossFight
         {
             raccoonHealth = ServiceLocator.GetService<RaccoonStateMachine>().GetComponent<Health>();    
             foxHealth = ServiceLocator.GetService<FoxStateMachine>().GetComponent<Health>();
-            FindObjectOfType<EnteringToBossFight>().OnEnter.AddListener(delegate { StartStateMachine(); });
+            FindObjectOfType<EnteringToBossFight>().OnInteract.AddListener(delegate { StartStateMachine(); });
         }
         public override void StateChoosing()
         {

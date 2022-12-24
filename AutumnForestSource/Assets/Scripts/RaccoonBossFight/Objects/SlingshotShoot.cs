@@ -1,3 +1,4 @@
+using AutumnForest.Other;
 using AutumnForest.Player;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -17,13 +18,6 @@ namespace AutumnForest.BossFight
         [SerializeField] private PointRotation pointRotation;
         public UnityEvent OnShoot = new();
 
-        //unity methods
-        private void Start()
-        {
-            OnShoot.AddListener(Culldown);
-            OnShoot.AddListener(delegate { ServiceLocator.GetService<PlayerInput>().OnLeftMouseButtonPressed.RemoveListener(Shoot); });
-        }
-
         //shooting controll methods
         private void Shoot()
         {
@@ -31,6 +25,8 @@ namespace AutumnForest.BossFight
             {
                 Instantiate(projectile, firePoint.position, firePoint.rotation);
                 OnShoot.Invoke();
+                ServiceLocator.GetService<PlayerInput>().OnLeftMouseButtonPressed.RemoveListener(Shoot);
+                Culldown();
             }
         }
         private async void Culldown()
@@ -47,6 +43,6 @@ namespace AutumnForest.BossFight
             canShoot = true;
         }
         //other methods
-        public void Active() => ServiceLocator.GetService<PlayerInput>().OnLeftMouseButtonPressed.AddListener(Shoot);
+        public void ActivateSlingshot() => ServiceLocator.GetService<PlayerInput>().OnLeftMouseButtonPressed.AddListener(Shoot);
     }
 }

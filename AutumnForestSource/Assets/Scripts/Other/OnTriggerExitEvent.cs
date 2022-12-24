@@ -5,22 +5,18 @@ using UnityEngine.Events;
 
 public class OnTriggerExitEvent : MonoBehaviour
 {
-    public List<string> exitTags = new List<string>();
-    public UnityEvent OnExit = new UnityEvent();
+    public List<string> exitTags = new();
+    public UnityEvent OnExit = new();
+    [SerializeField] private IInteractive interactive;
 
-    public UnityEvent<GameObject> onInteract { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+    public IInteractive Interactive { get => interactive; set => interactive = value; }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (exitTags.Contains(collision.tag))
         {
             OnExit.Invoke();
-            Interact();
+            interactive?.Interact();
         }
-    }
-
-    public void Interact()
-    {
-
     }
 }

@@ -2,15 +2,12 @@
 
 namespace AutumnForest.Other
 {
+    [RequireComponent(typeof(InteractionField))]
     public class SlingshotCameraZoom : MonoBehaviour
     {
         //on zoom
         [Header("Params on zoom")]
-        [SerializeField] private IInteractive zoomInteractive;
-        [SerializeField] private float lerpOnZoom = 0.6f;
-        [SerializeField] private float cameraSizeOnZoom = 4;
-        [SerializeField] private float timeScaleOnZoom = 0.7f;
-        [SerializeField] private Sprite cursorOnZoom;
+
         [Header("Params on distance")]
         //on distance
         [SerializeField] private IInteractive distanceInteractive;
@@ -22,11 +19,7 @@ namespace AutumnForest.Other
         //camera controll methods
         private void Zoom()
         {
-            ServiceLocator.GetService<MainCameraBrain>().SetLerp(lerpOnZoom);
-            ServiceLocator.GetService<MainCameraBrain>().ChangeOrthographicSize(cameraSizeOnZoom);
 
-            Time.timeScale = timeScaleOnZoom;
-            FindObjectOfType<Cursor>().SetCursorIcon(cursorOnZoom);
         }
         private void Distance()
         {

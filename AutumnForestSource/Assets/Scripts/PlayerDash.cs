@@ -27,20 +27,22 @@ namespace AutumnForest.Player
         {
             playerRigidbody = GetComponent<Rigidbody2D>();
             playerInput = ServiceLocator.GetService<PlayerInput>();
-            playerInput.OnRightMouseButtonPressed.AddListener(Dash);
+            playerInput.OnRightMouseButtonPressed.AddListener(StartDash);
         }
 
         //methods
-        public void Dash()
+        private void StartDash()
         {
             //some params
-            int layerMaskTransitionDelay = 700;
-            int dashDelay = 10;
+            float layerMaskTransitionDelay = 0.7f;
 
             if (playerInput.Movement != Vector2.zero && !isCulldown)
-                Dashing();
+            {
+                StartCoroutine(Dashing());
+                DashCulldown();
+            }
 
-            async void Dashing()
+            IEnumerator Dashing()
             {
                 nowDashing = true;
                 int defaultLayer = gameObject.layer;
@@ -52,14 +54,12 @@ namespace AutumnForest.Player
                 while (Time.time <= startTime + dashDuration)
                 {
                     playerRigidbody.velocity = movement * dashSpeed;
-                    await Task.Delay(dashDelay);
+                    yield return new WaitForFixedUpdate();
                 }
 
                 nowDashing = false;
-                await Task.Delay(layerMaskTransitionDelay);
+                yield return new WaitForSeconds(layerMaskTransitionDelay);
                 gameObject.layer = defaultLayer;
-
-                DashCulldown();
             }
             async void DashCulldown()
             {

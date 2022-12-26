@@ -1,22 +1,21 @@
-using AutumnForest.Other;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnTriggerExitEvent : MonoBehaviour
+namespace AutumnForest.Other
 {
-    public List<string> exitTags = new();
-    public UnityEvent OnExit = new();
-    [SerializeField] private IInteractive interactive;
-
-    public IInteractive Interactive { get => interactive; set => interactive = value; }
-
-    private void OnTriggerExit2D(Collider2D collision)
+    public class OnTriggerExitEvent : InteractiveHandler
     {
-        if (exitTags.Contains(collision.tag))
+        public List<string> exitTags = new();
+        public UnityEvent OnExit = new();
+
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            OnExit.Invoke();
-            interactive?.Interact();
+            if (exitTags.Contains(collision.tag))
+            {
+                OnExit.Invoke();
+                Interactive?.Interact();
+            }
         }
     }
 }

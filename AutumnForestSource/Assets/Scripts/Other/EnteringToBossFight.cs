@@ -12,8 +12,7 @@ namespace AutumnForest
         [SerializeField] private GameObject healthBar;
         [SerializeField] private float cameraSizeOnBossFight = 7f;
 
-        private UnityEvent onInteract = new();
-        public UnityEvent OnInteract { get => onInteract; set => onInteract = value; }
+        public UnityEvent OnInteract { get; set; } = new();
 
         private void Start()
         {
@@ -35,6 +34,5 @@ namespace AutumnForest
 
             Destroy(this);
         }
-
     }
 }

@@ -6,54 +6,58 @@ using UnityEngine.InputSystem;
 
 namespace AutumnForest.Player
 {
-    [RequireComponent(typeof(PlayerMove))]
+    [RequireComponent(typeof(PlayerMovable))]
+    
     public sealed class PlayerDash : MonoBehaviour
     {
-        [Header("Propertys")]
+        private enum DashState
+        {
+            None,
+            NowDashing,
+            Culldown
+        }
+
         //dash params
         [SerializeField] private float dashSpeed = 5f;
         [SerializeField] private float dashDuration = 1f;
         [SerializeField] private int dashCulldown = 1000;
         [SerializeField] private int layerIndex = 10;
-        //some bollean fields
-        private bool nowDashing = false;
-        private bool isCulldown = false;
+
+        [NaughtyAttributes.ReadOnly] private DashState dashState;    
         //events
         private UnityEvent OnDash = new();
         private UnityEvent AfterDash = new();
         //some components
         private Rigidbody2D playerRigidbody;
         private Vector2 movement;
-        //getters
-        public bool NowDashing => nowDashing;
 
-        //unity methods
-        private void Awake()
+        private void OnEnable()
         {
             playerRigidbody = GetComponent<Rigidbody2D>();
-            GetComponent<PlayerMove>().OnMove.AddListener(SetMovement);
-            OnDash.AddListener(delegate { GetComponent<PlayerMove>().IsStopped = true; });
-            AfterDash.AddListener(delegate { GetComponent<PlayerMove>().IsStopped = false; });
+
+            GetComponent<PlayerMovable>().OnMove.AddListener(SetMovement);
+            OnDash.AddListener(delegate { GetComponent<PlayerMovable>().IsStopped = true; });
+            AfterDash.AddListener(delegate { GetComponent<PlayerMovable>().IsStopped = false; });
+
             ServiceLocator.GetService<PlayerInput>().Player.Dash.performed += StartDash;
         }
+        private void OnDisable() => ServiceLocator.GetService<PlayerInput>().Player.Dash.performed -= StartDash;
 
-        //methods
         private void SetMovement(Vector2 newMovement) => movement = newMovement;
         private void StartDash(InputAction.CallbackContext context)
         {
             //some params
             float layerMaskTransitionDelay = 0.7f;
 
-            if (movement != Vector2.zero && !isCulldown)
+            if (movement != Vector2.zero && dashState == DashState.None)
             {
                 OnDash.Invoke();
                 StartCoroutine(Dashing());
-                DashCulldown();
             }
 
             IEnumerator Dashing()
             {
-                nowDashing = true;
+                dashState = DashState.NowDashing;
                 int defaultLayer = gameObject.layer;
                 gameObject.layer = layerIndex;
 
@@ -67,16 +71,16 @@ namespace AutumnForest.Player
                 }
 
                 AfterDash.Invoke();
-                
-                nowDashing = false;
+
+                DashCulldown();
                 yield return new WaitForSeconds(layerMaskTransitionDelay);
                 gameObject.layer = defaultLayer;
             }
             async void DashCulldown()
             {
-                isCulldown = true;
+                dashState = DashState.Culldown;
                 await Task.Delay(dashCulldown);
-                isCulldown = false;
+                dashState = DashState.None;
             }
         }
     }

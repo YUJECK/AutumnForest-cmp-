@@ -16,7 +16,7 @@ namespace AutumnForest.BossFight
         private async void EndBossFight()
         {
             ServiceLocator.GetService<MainCameraBrain>().ChangeOrthographicSize(3f);
-            ServiceLocator.GetService<MainCameraBrain>().SetTargets(ServiceLocator.GetService<PlayerController>().gameObject);
+            ServiceLocator.GetService<MainCameraBrain>().SetTargets(ServiceLocator.GetService<PlayerMovable>().gameObject);
             Vignette vignette = ServiceLocator.GetService<MainCameraBrain>().GetPostProcessProfile().GetSetting<Vignette>();
 
             Color startColor = vignette.color.value;

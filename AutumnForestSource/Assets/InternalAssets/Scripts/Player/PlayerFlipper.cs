@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 
-namespace AutumnForest.Assets.InternalAssets.Scripts.Player
+namespace AutumnForest.Player
 {
-    [RequireComponent(typeof(PlayerMove))]
+    [RequireComponent(typeof(PlayerMovable))]
     public sealed class PlayerFlipper : MonoBehaviour
     {
-        private PlayerMove playerMove;
+        private PlayerMovable playerMove;
 
         private void Awake()
         {
-            playerMove = GetComponent<PlayerMove>();
+            playerMove = GetComponent<PlayerMovable>();
             playerMove.OnMove.AddListener(Flip);
         }
         private void Flip(Vector2 movement)

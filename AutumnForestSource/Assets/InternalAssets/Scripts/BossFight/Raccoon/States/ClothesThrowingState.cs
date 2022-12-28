@@ -17,7 +17,7 @@ namespace AutumnForest
         {
             for (int i = 0; i < shirtsCount; i++)
             {
-                Instantiate(shirt, ServiceLocator.GetService<PlayerController>().transform.position, Quaternion.identity);
+                Instantiate(shirt, ServiceLocator.GetService<PlayerMovable>().transform.position, Quaternion.identity);
                 yield return new WaitForSeconds(throwingDelay);
             }
 

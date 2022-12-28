@@ -15,22 +15,33 @@ namespace AutumnForest
 
         private void OnEnable()
         {
-            //registering
-            //boss fight services
-            ServiceLocator.RegisterService(FindObjectOfType<RaccoonStateMachine>());
-            ServiceLocator.RegisterService(FindObjectOfType<BossFightController>());
-            ServiceLocator.RegisterService(FindObjectOfType<FoxStateMachine>());
-            //player like components
-            ServiceLocator.RegisterService(FindObjectOfType<MainCameraBrain>());
-            ServiceLocator.RegisterService(FindObjectOfType<PlayerController>());
-            ServiceLocator.RegisterService(new PlayerInput());
-            //other managers
-            ServiceLocator.RegisterService(FindObjectOfType<DialogueManager>());
+            RegisterPlayerServices();
+            RegisterBossFightServices();
+            RegisterDialogueServices();
 
-            //doing something
             ServiceLocator.GetService<PlayerInput>().Enable();
 
             OnInit.Invoke();
+        }
+
+        private void RegisterPlayerServices()
+        {
+            ServiceLocator.RegisterService(FindObjectOfType<PlayerMovable>());
+            ServiceLocator.RegisterService(FindObjectOfType<PlayerAttack>());
+            ServiceLocator.RegisterService(FindObjectOfType<PlayerDash>());
+            ServiceLocator.RegisterService(FindObjectOfType<PlayerFlipper>());
+            ServiceLocator.RegisterService(FindObjectOfType<MainCameraBrain>());
+            ServiceLocator.RegisterService(new PlayerInput());
+        }
+        private void RegisterDialogueServices()
+        {
+            ServiceLocator.RegisterService(FindObjectOfType<DialogueManager>());
+        }
+        private void RegisterBossFightServices()
+        {
+            ServiceLocator.RegisterService(FindObjectOfType<RaccoonStateMachine>());
+            ServiceLocator.RegisterService(FindObjectOfType<BossFightController>());
+            ServiceLocator.RegisterService(FindObjectOfType<FoxStateMachine>());
         }
     }
 }

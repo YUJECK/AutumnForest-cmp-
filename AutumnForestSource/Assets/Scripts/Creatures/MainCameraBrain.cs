@@ -35,7 +35,7 @@ namespace AutumnForest.Other
         {
             float startSize = camera.orthographicSize;
 
-            for (float i = 0f; camera.orthographicSize != toSize; i += 0.02f)
+            for (float i = 0f; camera.orthographicSize != toSize; i += 0.03f)
             {
                 camera.orthographicSize = Mathf.Lerp(startSize, toSize, i);
                 await Task.Delay(1);

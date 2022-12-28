@@ -1,3 +1,4 @@
+using AutumnForest.Helpers;
 using AutumnForest.Other;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,7 +8,6 @@ namespace AutumnForest.BossFight
     public class SlingshotActivateInteraction : MonoBehaviour, IInteractive
     {
         [SerializeField] private float lerp = 0.6f;
-        [SerializeField] private float cameraSize = 4;
         [SerializeField] private float timeScale = 0.7f;
         [SerializeField] private Sprite cursor;
 
@@ -16,7 +16,7 @@ namespace AutumnForest.BossFight
         public void Interact()
         {
             ServiceLocator.GetService<MainCameraBrain>().SetLerp(lerp);
-            ServiceLocator.GetService<MainCameraBrain>().ChangeOrthographicSize(cameraSize);
+            ServiceLocator.GetService<MainCameraBrain>().ChangeOrthographicSize(CameraSizeHelper.Slingshot);
 
             Time.timeScale = timeScale;
             FindObjectOfType<Cursor>().SetCursorIcon(cursor);

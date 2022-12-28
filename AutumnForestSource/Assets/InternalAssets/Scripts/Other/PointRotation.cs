@@ -6,7 +6,7 @@ public enum PointRotationTargetType
     Mouse,
     Other
 }
-public class PointRotation : MonoBehaviour
+public sealed class PointRotation : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private PointRotationTargetType targetType;

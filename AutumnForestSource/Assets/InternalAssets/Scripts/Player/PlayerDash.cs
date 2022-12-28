@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace AutumnForest.Player
 {
-    public class PlayerDash : MonoBehaviour
+    [RequireComponent(typeof(PlayerMove))]
+    public sealed class PlayerDash : MonoBehaviour
     {
         [Header("Propertys")]
         //dash params
@@ -16,9 +18,8 @@ namespace AutumnForest.Player
         private bool nowDashing = false;
         private bool isCulldown = false;
         //some components
-        private PlayerInput playerInput;
         private Rigidbody2D playerRigidbody;
-        
+        private Vector2 movement;
         //getters
         public bool NowDashing => nowDashing;
 
@@ -26,17 +27,17 @@ namespace AutumnForest.Player
         private void Awake()
         {
             playerRigidbody = GetComponent<Rigidbody2D>();
-            playerInput = ServiceLocator.GetService<PlayerInput>();
-            playerInput.OnRightMouseButtonPressed.AddListener(StartDash);
+            GetComponent<PlayerMove>().OnMove.AddListener(SetMovement);
         }
 
         //methods
-        private void StartDash()
+        private void SetMovement(Vector2 newMovement) => movement = newMovement;
+        private void StartDash(InputAction.CallbackContext context)
         {
             //some params
             float layerMaskTransitionDelay = 0.7f;
 
-            if (playerInput.Movement != Vector2.zero && !isCulldown)
+            if (!isCulldown)
             {
                 StartCoroutine(Dashing());
                 DashCulldown();
@@ -49,7 +50,7 @@ namespace AutumnForest.Player
                 gameObject.layer = layerIndex;
 
                 float startTime = Time.time;
-                Vector2 movement = playerInput.Movement * 10;
+                Vector2 movement = context.ReadValue<Vector2>() * 10;
 
                 while (Time.time <= startTime + dashDuration)
                 {

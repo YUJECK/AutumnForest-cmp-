@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace AutumnForest.Player
 {
@@ -28,31 +29,31 @@ namespace AutumnForest.Player
         {
             playerRigidbody = GetComponent<Rigidbody2D>();
             animator = GetComponent<Animator>();
-            playerInput = GetComponent<PlayerInput>();
+            //playerInput = GetComponent<PlayerInput>();
             playerDash = GetComponent<PlayerDash>();
 
+
             //нужно полностью перенести атаку в отдельный скрипт
-            playerInput.OnLeftMouseButtonPressed.AddListener(Attack);
         }
 
         //movement
         private void FixedUpdate()
         {
-            if (!playerDash.NowDashing)
-            {
-                playerRigidbody.velocity = playerInput.Movement * moveSpeed;
+            //if (!playerDash.NowDashing)
+            //{
+            //    playerRigidbody.velocity = playerInput.Movement * moveSpeed;
 
-                if (!isStopped && playerInput.Movement != Vector2.zero)
-                {
-                    if (playerInput.Movement.x < 0 && transform.localScale.x == -1)
-                        transform.localScale = new Vector3(1, 1, 1);
-                    if (playerInput.Movement.x > 0 && transform.localScale.x == 1)
-                        transform.localScale = new Vector3(-1, 1, 1);
+            //    if (!isStopped && playerInput.Movement != Vector2.zero)
+            //    {
+            //        if (playerInput.Movement.x < 0 && transform.localScale.x == -1)
+            //            transform.localScale = new Vector3(1, 1, 1);
+            //        if (playerInput.Movement.x > 0 && transform.localScale.x == 1)
+            //            transform.localScale = new Vector3(-1, 1, 1);
 
-                    animator.SetBool("IsRunning", true);
-                }
-                else animator.SetBool("IsRunning", false);
-            }
+            //        animator.SetBool("IsRunning", true);
+            //    }
+            //    else animator.SetBool("IsRunning", false);
+            //}
         }
         //methods
         public void SetStop(bool active) => isStopped = active;

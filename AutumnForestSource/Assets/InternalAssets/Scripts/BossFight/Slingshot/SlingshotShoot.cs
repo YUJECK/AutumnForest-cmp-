@@ -1,14 +1,14 @@
 using AutumnForest.Other;
-using AutumnForest.Player;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace AutumnForest.BossFight
 {
     [RequireComponent(typeof(InteractionField))]
-    public class SlingshotShoot : MonoBehaviour
+    public sealed class SlingshotShoot : MonoBehaviour
     {
         [SerializeField] private GameObject projectile;
         [SerializeField] private Transform firePoint;
@@ -16,27 +16,27 @@ namespace AutumnForest.BossFight
         [SerializeField] private PointRotation pointRotation;
         private bool canShoot = true;
         private bool isActivated = false;
-        
+
         public UnityEvent OnShoot = new();
         public bool IsActivated => isActivated;
 
         public void ActivateSlingshot()
         {
-            ServiceLocator.GetService<PlayerInput>().OnLeftMouseButtonPressed.AddListener(Shoot);
+            ServiceLocator.GetService<PlayerInput>().Player.Attack.performed += Shoot;
             isActivated = true;
         }
         public void DisableSlingshot()
         {
-            ServiceLocator.GetService<PlayerInput>().OnLeftMouseButtonPressed.RemoveListener(Shoot);
+            ServiceLocator.GetService<PlayerInput>().Player.Attack.performed -= Shoot;
             isActivated = false;
         }
-        private void Shoot()
+        private void Shoot(InputAction.CallbackContext context)
         {
             if (canShoot)
             {
                 Instantiate(projectile, firePoint.position, firePoint.rotation);
                 OnShoot.Invoke();
-                ServiceLocator.GetService<PlayerInput>().OnLeftMouseButtonPressed.RemoveListener(Shoot);
+                DisableSlingshot();
                 Culldown();
             }
         }

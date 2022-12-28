@@ -5,12 +5,15 @@ using AutumnForest.DialogueSystem;
 using AutumnForest.Other;
 using AutumnForest.Player;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace AutumnForest
 {
-    public class GameInit : MonoBehaviour
+    public sealed class GameInit : MonoBehaviour
     {
-        private void Awake()
+        public UnityEvent OnInit = new();
+
+        private void OnEnable()
         {
             //registering
             //boss fight services
@@ -20,12 +23,14 @@ namespace AutumnForest
             //player like components
             ServiceLocator.RegisterService(FindObjectOfType<MainCameraBrain>());
             ServiceLocator.RegisterService(FindObjectOfType<PlayerController>());
-            ServiceLocator.RegisterService(FindObjectOfType<PlayerInput>());
+            ServiceLocator.RegisterService(new PlayerInput());
             //other managers
             ServiceLocator.RegisterService(FindObjectOfType<DialogueManager>());
-            
+
             //doing something
-            ServiceLocator.GetService<FoxStateMachine>().gameObject.SetActive(false);
+            ServiceLocator.GetService<PlayerInput>().Enable();
+
+            OnInit.Invoke();
         }
     }
 }

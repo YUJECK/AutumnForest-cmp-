@@ -5,7 +5,7 @@ namespace AutumnForest.Other
 {
     [RequireComponent(typeof(OnTriggerExitEvent))]
     [RequireComponent(typeof(OnTriggerEnterEvent))]
-    public class InteractionField : InteractiveHandler
+    public sealed class InteractionField : InteractiveHandler
     {
         private OnTriggerEnterEvent onTriggerEnter;
         private OnTriggerExitEvent onTriggerExit;
@@ -22,12 +22,11 @@ namespace AutumnForest.Other
         {
             if (Interactive != null)
             {
-                onTriggerEnter.OnEnter.AddListener(
-                    delegate { ServiceLocator.GetService<PlayerInput>().AddInput(KeyCode.E, Interactive.Interact, false); });
-                onTriggerExit.OnExit.AddListener(
-                    delegate { ServiceLocator.GetService<PlayerInput>().RemoveInput(KeyCode.E); });
+                //onTriggerEnter.OnEnter.AddListener(
+                //    delegate { ServiceLocator.GetService<PlayerInput>().AddInput(KeyCode.E, Interactive.Interact, false); });
+                //onTriggerExit.OnExit.AddListener(
+                //    delegate { ServiceLocator.GetService<PlayerInput>().RemoveInput(KeyCode.E); });
             }
-            else Debug.Log(name);
         }
     }
 }

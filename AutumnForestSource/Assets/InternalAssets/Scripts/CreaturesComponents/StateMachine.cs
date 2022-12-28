@@ -1,5 +1,5 @@
 using NaughtyAttributes;
-using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,55 +13,34 @@ namespace CreaturesAI
 
     abstract public class StateMachine : MonoBehaviour
     {
-        //variables
-        //state info
         [Header("Some info")]
         private State currentState;
         [ReadOnly, SerializeField] private string currentStateName = "None";
         private StateMachineState stateMachineState = StateMachineState.Stopped;
-        //events
+
         public UnityEvent OnMachineStarts = new();
         public UnityEvent OnMachineStops = new();
 
-        //getters
         public State CurrentState => currentState;
         public StateMachineState StateMachineState => stateMachineState;
 
-        //constant methods
-        protected void ChangeState(State newState)
-        {
-            Debug.Log(newState.StateName);
-
-            if (currentState != null && currentState.StateTransitionDelay != 0f)
-                StartCoroutine(EnterNewState(newState, currentState.StateTransitionDelay));
-            else EnterNewState(newState);
-        }
-        private void EnterNewState(State newState)
+        protected async void ChangeState(State newState)
         {
             if (newState != null)
             {
                 if (currentState != null) currentState.ExitState(this);
+                int waitTime = (int)(currentState.StateTransitionDelay * 1000);
+                currentState = null;
+
+                await Task.Delay(waitTime);
+
                 currentState = newState;
                 currentStateName = currentState.StateName;
                 currentState.EnterState(this);
             }
-        }
-        private IEnumerator EnterNewState(State newState, float delay)
-        {
-            if (currentState != null) currentState.ExitState(this);
-            else currentState = null;
-
-            yield return new WaitForSeconds(delay);
-
-            if (newState != null)
-            {
-                currentState = newState;
-                currentStateName = currentState.StateName;
-                currentState.EnterState(this);
-            }
+            else Debug.LogError("New State is null");
         }
 
-        //abstract methods
         virtual public void StartStateMachine()
         {
             if (stateMachineState != StateMachineState.Working)
@@ -71,17 +50,16 @@ namespace CreaturesAI
                 OnMachineStarts.Invoke();
             }
         }
-
         virtual public void StopStateMachine()
         {
             currentState.ExitState(this);
             stateMachineState = StateMachineState.Stopped;
             OnMachineStops.Invoke();
         }
+
         abstract public void StateChoosing();
         abstract protected void UpdateStates();
 
-        //unity methods
         private void Update() => UpdateStates();
     }
 }

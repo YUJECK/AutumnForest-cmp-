@@ -1,20 +1,13 @@
-﻿using UnityEngine;
+﻿using AutumnForest.Editor;
+using UnityEngine;
 
 namespace AutumnForest.Other
 {
     public abstract class InteractiveHandler : MonoBehaviour
     {
-        [SerializeField] private GameObject interactive;
-        public IInteractive Interactive { get; set; }
+        [Interface(typeof(IInteractive)), SerializeField] private Object interactive;
+        public IInteractive Interactive { get; private set; }
 
-        private void OnValidate()
-        {
-            if (interactive != null)
-            {
-                if (interactive.TryGetComponent(out IInteractive _interactive))
-                    Interactive = _interactive;
-                else interactive = null;
-            }
-        }
+        private void Awake() => Interactive = interactive as IInteractive;
     }
 }

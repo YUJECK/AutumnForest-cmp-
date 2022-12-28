@@ -20,13 +20,14 @@ namespace AutumnForest.Other
         }
         private void Start()
         {
-            if(Interactive != null)
+            if (Interactive != null)
             {
                 onTriggerEnter.OnEnter.AddListener(
                     delegate { ServiceLocator.GetService<PlayerInput>().AddInput(KeyCode.E, Interactive.Interact, false); });
                 onTriggerExit.OnExit.AddListener(
                     delegate { ServiceLocator.GetService<PlayerInput>().RemoveInput(KeyCode.E); });
             }
+            else Debug.Log(name);
         }
     }
 }

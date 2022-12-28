@@ -1,4 +1,3 @@
-using CreaturesAI.Pathfinding;
 using NaughtyAttributes;
 using System.Collections;
 using UnityEngine;
@@ -41,7 +40,7 @@ namespace CreaturesAI
         {
             if (newState != null)
             {
-                if (currentState != null) currentState.ExitState(this); 
+                if (currentState != null) currentState.ExitState(this);
                 currentState = newState;
                 currentStateName = currentState.StateName;
                 currentState.EnterState(this);
@@ -63,7 +62,7 @@ namespace CreaturesAI
         }
 
         //abstract methods
-        virtual public void StartStateMachine() 
+        virtual public void StartStateMachine()
         {
             if (stateMachineState != StateMachineState.Working)
             {
@@ -71,9 +70,9 @@ namespace CreaturesAI
                 stateMachineState = StateMachineState.Working;
                 OnMachineStarts.Invoke();
             }
-        } 
-        
-        virtual public void StopStateMachine() 
+        }
+
+        virtual public void StopStateMachine()
         {
             currentState.ExitState(this);
             stateMachineState = StateMachineState.Stopped;

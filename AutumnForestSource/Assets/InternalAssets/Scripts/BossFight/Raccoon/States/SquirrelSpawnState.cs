@@ -4,11 +4,12 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight.Raccoon
 {
-    public class SquirrelSpawnState : State
+    public class SquirrelSpawnState : MonoBehaviour, IState
     {
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject squirrel;
         [SerializeField] private Transform[] spawnPoints;
+        public float StateTransitionDelay { get; }
 
         private IEnumerator SquirellSpawn(StateMachine stateMachine)
         {
@@ -31,8 +32,8 @@ namespace AutumnForest.BossFight.Raccoon
             stateMachine.StateChoosing();
         }
 
-        public override void EnterState(StateMachine stateMachine) => StartCoroutine(SquirellSpawn(stateMachine)); 
-        public override void ExitState(StateMachine stateMachine) => StopAllCoroutines();
-        public override void UpdateState(StateMachine stateMachine) { }
+        public void EnterState(StateMachine stateMachine) => StartCoroutine(SquirellSpawn(stateMachine)); 
+        public void ExitState(StateMachine stateMachine) => StopAllCoroutines();
+        public void UpdateState(StateMachine stateMachine) { }
     }
 }

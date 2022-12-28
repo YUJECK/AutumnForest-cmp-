@@ -6,13 +6,15 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight
 {
-    public class SecondBossFightState : State
+    public class SecondBossFightState : MonoBehaviour, IState
     {
+        public float StateTransitionDelay { get; set; }
+
         //health barPresets
         [SerializeField] private HealthBarPreset foxPreset;
         [SerializeField] private HealthBar bossHealthBar;
 
-        public override void EnterState(StateMachine stateMachine)
+        public void EnterState(StateMachine stateMachine)
         {
             FoxStateMachine foxStateMachine = ServiceLocator.GetService<FoxStateMachine>();
             foxPreset.HealthTarget = foxStateMachine.GetComponent<Health>();
@@ -22,11 +24,26 @@ namespace AutumnForest.BossFight
             foxStateMachine.StartStateMachine();
         }
 
-        public override void ExitState(StateMachine stateMachine)
+        public void ExitState(StateMachine stateMachine)
         {
             ServiceLocator.GetService<FoxStateMachine>().gameObject.SetActive(false);
         }
 
-        public override void UpdateState(StateMachine stateMachine) => stateMachine.StateChoosing();
+        public void UpdateState(StateMachine stateMachine) => stateMachine.StateChoosing();
+
+        void IState.EnterState(StateMachine stateMachine)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void IState.UpdateState(StateMachine stateMachine)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void IState.ExitState(StateMachine stateMachine)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

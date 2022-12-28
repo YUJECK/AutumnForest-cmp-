@@ -3,13 +3,15 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight.Raccoon
 {
-    public class IdleRaccoonState : State
+    public class IdleRaccoonState : MonoBehaviour, IState
     {
         [SerializeField] private Animator animator;
         [SerializeField] private string idleAnimationName = "RaccoonIdle";
 
-        public override void EnterState(StateMachine stateMachine) => animator.Play(idleAnimationName);
-        public override void ExitState(StateMachine stateMachine) { }
-        public override void UpdateState(StateMachine stateMachine) => stateMachine.StateChoosing();
+        public float StateTransitionDelay { get; }
+
+        public void EnterState(StateMachine stateMachine) => animator.Play(idleAnimationName);
+        public void ExitState(StateMachine stateMachine) { }
+        public void UpdateState(StateMachine stateMachine) => stateMachine.StateChoosing();
     }
 }

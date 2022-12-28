@@ -6,11 +6,11 @@ namespace AutumnForest.BossFight.Fox
     public class FoxStateMachine : StateMachine
     {
         [Header("States")]
-        [SerializeField] private State swordThrowingState;
+        [SerializeField] private IState swordThrowingState;
 
         public override void StateChoosing()
         {
-            State nextState = swordThrowingState;
+            IState nextState = swordThrowingState;
 
             ChangeState(nextState);
         }

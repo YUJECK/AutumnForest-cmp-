@@ -5,12 +5,14 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight.Raccoon
 {
-    public class RaccoonHealingState : State
+    public class RaccoonHealingState : MonoBehaviour, IState
     {
         [SerializeField] private Health health;
         [SerializeField] private Animator animator;
         [SerializeField] private Transform healingPoint;
         [SerializeField] private Transform defaultPoint;
+
+        public float StateTransitionDelay { get; }
 
         private IEnumerator Healing(StateMachine stateMachine)
         {
@@ -25,12 +27,12 @@ namespace AutumnForest.BossFight.Raccoon
             }
         }
 
-        public override void EnterState(StateMachine stateMachine) => StartCoroutine(Healing(stateMachine));
-        public override void ExitState(StateMachine stateMachine)
+        public void EnterState(StateMachine stateMachine) => StartCoroutine(Healing(stateMachine));
+        public void ExitState(StateMachine stateMachine)
         {
             stateMachine.transform.position = defaultPoint.position;
             StopAllCoroutines();
         }
-        public override void UpdateState(StateMachine stateMachine) { }
+        public void UpdateState(StateMachine stateMachine) { }
     }
 }

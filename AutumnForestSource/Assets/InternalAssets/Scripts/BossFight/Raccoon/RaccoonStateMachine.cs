@@ -1,3 +1,4 @@
+using AutumnForest.Editor;
 using CreaturesAI;
 using CreaturesAI.Health;
 using UnityEngine;
@@ -9,16 +10,16 @@ namespace AutumnForest.BossFight.Raccoon
         //variables
         [SerializeField] private Health health;
         [Header("States")]
-        [SerializeField] private State idleState;
+        [Interface(typeof(IState)), SerializeField] private IState idleState;
         [Header("First Stage States")]
-        [SerializeField] private State dialogueState;
-        [SerializeField] private State shootingState;
-        [SerializeField] private State clothesThrowingState;
+        [Interface(typeof(IState)), SerializeField] private IState dialogueState;
+        [Interface(typeof(IState)), SerializeField] private IState shootingState;
+        [Interface(typeof(IState)), SerializeField] private IState clothesThrowingState;
         [Header("Second Stage States")]
-        [SerializeField] private State healingState;
+        [Interface(typeof(IState)), SerializeField] private IState healingState;
         [Header("Third Stage States")]
-        [SerializeField] private State waterJetState;
-        [SerializeField] private State squirrelSpawnState;
+        [Interface(typeof(IState)), SerializeField] private IState waterJetState;
+        [Interface(typeof(IState)), SerializeField] private IState squirrelSpawnState;
 
         private bool isStart = true;
         private BossFightStages currentStage;
@@ -28,7 +29,7 @@ namespace AutumnForest.BossFight.Raccoon
         //override methods
         public override void StateChoosing()
         {
-            State nextState = idleState;
+            IState nextState = idleState;
 
             if (health.CurrentHealth > 0)
             {
@@ -48,10 +49,10 @@ namespace AutumnForest.BossFight.Raccoon
                 CurrentState.UpdateState(this);
         }
         //stages
-        private State FirstStageStateChoosing()
+        private IState FirstStageStateChoosing()
         {
             int randomState = Random.Range(0, 2);
-            State nextState = idleState;
+            IState nextState = idleState;
 
             switch (randomState)
             {
@@ -71,10 +72,10 @@ namespace AutumnForest.BossFight.Raccoon
 
             return nextState;
         }
-        private State ThirdStageStateChoosing()
+        private IState ThirdStageStateChoosing()
         {
             int randomState = Random.Range(0, 2);
-            State nextState = idleState;
+            IState nextState = idleState;
 
             switch (randomState)
             {

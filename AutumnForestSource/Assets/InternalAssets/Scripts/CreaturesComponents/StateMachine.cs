@@ -5,26 +5,24 @@ using UnityEngine.Events;
 
 namespace CreaturesAI
 {
-    public enum StateMachineState
+    public enum StateMachineCondition
     {
         Working,
         Stopped
     }
-
     abstract public class StateMachine : MonoBehaviour
     {
         [Header("Some info")]
-        private State currentState;
-        [ReadOnly, SerializeField] private string currentStateName = "None";
-        private StateMachineState stateMachineState = StateMachineState.Stopped;
+        private IState currentState;
+        private StateMachineCondition stateMachineState = StateMachineCondition.Stopped;
 
         public UnityEvent OnMachineStarts = new();
         public UnityEvent OnMachineStops = new();
 
-        public State CurrentState => currentState;
-        public StateMachineState StateMachineState => stateMachineState;
+        public IState CurrentState => currentState;
+        public StateMachineCondition StateMachineState => stateMachineState;
 
-        protected async void ChangeState(State newState)
+        protected async void ChangeState(IState newState)
         {
             if (newState != null)
             {
@@ -35,7 +33,6 @@ namespace CreaturesAI
                 await Task.Delay(waitTime);
 
                 currentState = newState;
-                currentStateName = currentState.StateName;
                 currentState.EnterState(this);
             }
             else Debug.LogError("New State is null");
@@ -43,17 +40,17 @@ namespace CreaturesAI
 
         virtual public void StartStateMachine()
         {
-            if (stateMachineState != StateMachineState.Working)
+            if (stateMachineState != StateMachineCondition.Working)
             {
                 StateChoosing();
-                stateMachineState = StateMachineState.Working;
+                stateMachineState = StateMachineCondition.Working;
                 OnMachineStarts.Invoke();
             }
         }
         virtual public void StopStateMachine()
         {
             currentState.ExitState(this);
-            stateMachineState = StateMachineState.Stopped;
+            stateMachineState = StateMachineCondition.Stopped;
             OnMachineStops.Invoke();
         }
 

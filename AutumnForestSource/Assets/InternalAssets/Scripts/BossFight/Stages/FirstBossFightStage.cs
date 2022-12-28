@@ -5,13 +5,15 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight
 {
-    public class FirstBossFightStage : State
+    public class FirstBossFightStage : MonoBehaviour, IState
     {
         //health barPresets
         [SerializeField] private HealthBarPreset raccoonPreset;
         [SerializeField] private HealthBar bossHealthBar;
 
-        public override void EnterState(StateMachine stateMachine)
+        public float StateTransitionDelay { get; }
+
+        public void EnterState(StateMachine stateMachine)
         {
             ServiceLocator.GetService<RaccoonStateMachine>().TryGetComponent(out Health health);
             if (health != null) raccoonPreset.HealthTarget = health;
@@ -19,15 +21,7 @@ namespace AutumnForest.BossFight
             bossHealthBar.SetPreset(raccoonPreset);
             ServiceLocator.GetService<RaccoonStateMachine>().StartStateMachine();
         }
-
-        public override void ExitState(StateMachine stateMachine)
-        {
-
-        }
-
-        public override void UpdateState(StateMachine stateMachine)
-        {
-            stateMachine.StateChoosing();
-        }
+        public void ExitState(StateMachine stateMachine) { }
+        public void UpdateState(StateMachine stateMachine) => stateMachine.StateChoosing();
     }
 }

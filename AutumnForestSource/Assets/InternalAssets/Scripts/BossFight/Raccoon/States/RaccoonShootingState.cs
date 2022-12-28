@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight.Raccoon
 {
-    public class RaccoonShootingState : State
+    public class RaccoonShootingState : MonoBehaviour, IState
     {
         [Header("Components")]
         [SerializeField] private Shooting shooting;
@@ -13,7 +13,9 @@ namespace AutumnForest.BossFight.Raccoon
         [SerializeField] private ShootingPattern roundShootingFirstStage;
         private ShootingPattern currentPattern;
 
-        public override void EnterState(StateMachine stateMachine)
+        public float StateTransitionDelay { get; }
+
+        public void EnterState(StateMachine stateMachine)
         {
             int random = Random.Range(0, 2);
             currentPattern = null;
@@ -32,12 +34,12 @@ namespace AutumnForest.BossFight.Raccoon
             currentPattern.UsePattern(shooting);
         }
 
-        public override void ExitState(StateMachine stateMachine) 
+        public void ExitState(StateMachine stateMachine) 
         {
             currentPattern.CompletePattern(shooting);
             currentPattern.OnPatternEnd.RemoveListener(stateMachine.StateChoosing);
         }
 
-        public override void UpdateState(StateMachine stateMachine) { }
+        public void UpdateState(StateMachine stateMachine) { }
     }
 }

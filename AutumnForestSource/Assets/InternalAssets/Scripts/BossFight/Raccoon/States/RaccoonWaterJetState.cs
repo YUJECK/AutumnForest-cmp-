@@ -4,9 +4,11 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight.Raccoon
 {
-    public class RaccoonWaterJetState : State
+    public class RaccoonWaterJetState : MonoBehaviour, IState
     {
         [SerializeField] private Transform waterJet;
+
+        public float StateTransitionDelay { get; }
 
         private IEnumerator StateEnd(StateMachine stateMachine)
         {
@@ -14,19 +16,19 @@ namespace AutumnForest.BossFight.Raccoon
             stateMachine.StateChoosing();
         }
 
-        public override void EnterState(StateMachine stateMachine)
+        public void EnterState(StateMachine stateMachine)
         {
             waterJet.gameObject.SetActive(true);
             StartCoroutine(StateEnd(stateMachine));
         }
 
-        public override void ExitState(StateMachine stateMachine)
+        public void ExitState(StateMachine stateMachine)
         {
             waterJet.gameObject.SetActive(false);
             StopAllCoroutines();
         }
 
-        public override void UpdateState(StateMachine stateMachine)
+        public void UpdateState(StateMachine stateMachine)
         {
             waterJet.Rotate(0, 0, 0.5f);
         }

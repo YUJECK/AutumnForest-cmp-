@@ -19,9 +19,9 @@ namespace AutumnForest.BossFight
     {
         [ReadOnly] private BossFightStages currentStage;
         //bossfight stages
-        [SerializeField] private State firstStage;
-        [SerializeField] private State secondStage;
-        [SerializeField] private State thirdStage;
+        [SerializeField] private IState firstStage;
+        [SerializeField] private IState secondStage;
+        [SerializeField] private IState thirdStage;
         //some objects
         private Health raccoonHealth;
         private Health foxHealth;
@@ -40,7 +40,7 @@ namespace AutumnForest.BossFight
         }
         public override void StateChoosing()
         {
-            State nextStage = firstStage;
+            IState nextStage = firstStage;
 
             if (raccoonHealth.CurrentHealth < 0.5 * raccoonHealth.MaximumHealth)
             {

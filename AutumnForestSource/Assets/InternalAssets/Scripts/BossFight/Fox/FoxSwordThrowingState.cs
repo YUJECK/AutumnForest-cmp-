@@ -6,14 +6,17 @@ using CreaturesAI.CombatSkills;
 
 namespace AutumnForest.BossFight.Fox
 {
-    public class FoxSwordThrowingState : State
+    public sealed class FoxSwordThrowingState : MonoBehaviour, IState
     {
+        public float StateTransitionDelay { get; }
+        
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject swordPrefab;
         [SerializeField] private Transform[] swordPoints;
         [SerializeField] private Shooting shooting;
 
         private Stack<GameObject> spawnedSwords = new Stack<GameObject>();
+
 
         private void OnDestroy()
         {
@@ -41,12 +44,27 @@ namespace AutumnForest.BossFight.Fox
 
             stateMachine.StateChoosing();
         }
-        public override void EnterState(StateMachine stateMachine)
+        public void EnterState(StateMachine stateMachine)
         {
             animator.Play("FoxMagicBookOpen");
             StartCoroutine(SwordThrowing(stateMachine));
         }
-        public override void ExitState(StateMachine stateMachine) { }
-        public override void UpdateState(StateMachine stateMachine) { }
+        public void ExitState(StateMachine stateMachine) { }
+        public void UpdateState(StateMachine stateMachine) { }
+
+        void IState.EnterState(StateMachine stateMachine)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void IState.UpdateState(StateMachine stateMachine)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        void IState.ExitState(StateMachine stateMachine)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

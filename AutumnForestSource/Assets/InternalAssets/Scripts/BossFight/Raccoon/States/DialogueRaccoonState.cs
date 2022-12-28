@@ -4,18 +4,19 @@ using AutumnForest.DialogueSystem;
 
 namespace AutumnForest.BossFight.Raccoon
 {
-    public class DialogueRaccoonState : State
+    public class DialogueRaccoonState : MonoBehaviour, IState
     {
         [SerializeField] private Dialogue dialogue;
+        public float StateTransitionDelay { get; }
 
-        public override void EnterState(StateMachine stateMachine)
+        public void EnterState(StateMachine stateMachine)
         {
             dialogue.StartConversation();
             dialogue.OnConversationEnds.AddListener(stateMachine.StateChoosing);
         }
 
-        public override void ExitState(StateMachine stateMachine) { dialogue.OnConversationEnds.RemoveListener(stateMachine.StateChoosing); }
-        public override void UpdateState(StateMachine stateMachine)
+        public void ExitState(StateMachine stateMachine) { dialogue.OnConversationEnds.RemoveListener(stateMachine.StateChoosing); }
+        public void UpdateState(StateMachine stateMachine)
         {
             if (Input.GetKeyDown(KeyCode.E))
                 dialogue.NextPhrase();

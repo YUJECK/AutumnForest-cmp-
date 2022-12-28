@@ -1,5 +1,5 @@
-using AutumnForest.Player;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace AutumnForest.Other
 {
@@ -13,20 +13,19 @@ namespace AutumnForest.Other
         public OnTriggerEnterEvent OnTriggerEnter => onTriggerEnter;
         public OnTriggerExitEvent OnTriggerExit => onTriggerExit;
 
-        private void Awake()
+        private void OnEnable()
         {
             onTriggerEnter = GetComponent<OnTriggerEnterEvent>();
             onTriggerExit = GetComponent<OnTriggerExitEvent>();
-        }
-        private void Start()
-        {
+
             if (Interactive != null)
             {
-                //onTriggerEnter.OnEnter.AddListener(
-                //    delegate { ServiceLocator.GetService<PlayerInput>().AddInput(KeyCode.E, Interactive.Interact, false); });
-                //onTriggerExit.OnExit.AddListener(
-                //    delegate { ServiceLocator.GetService<PlayerInput>().RemoveInput(KeyCode.E); });
+                onTriggerEnter.OnEnter.AddListener(delegate { EnterEvent(); });
+                onTriggerExit.OnExit.AddListener(delegate { ExitEvent(); });
             }
         }
+        private void EnterEvent() => ServiceLocator.GetService<PlayerInput>().Player.Interact.started += Interact;
+        private void ExitEvent() => ServiceLocator.GetService<PlayerInput>().Player.Interact.started -= Interact;
+        private void Interact(InputAction.CallbackContext context) => Interactive.Interact();
     }
 }

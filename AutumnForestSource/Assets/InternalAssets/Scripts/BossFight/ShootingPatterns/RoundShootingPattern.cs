@@ -13,7 +13,7 @@ namespace AutumnForest.BossFight.Raccoon
         {
             shooting.StopPointRotation(true);
 
-            for (int i = 0; i < 36; i++)
+            for (int i = 1; i < 37; i++)
             {
                 Debug.Log("dsfds");
                 shooting.ShootWithInstantiate(cone, 7, 0, i * 30, ForceMode2D.Impulse);

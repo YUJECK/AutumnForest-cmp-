@@ -1,8 +1,9 @@
+using AutumnForest.Helpers;
 using UnityEngine;
 
 namespace CreaturesAI.Health
 {
-    public class CreatureHealth : Health
+    public class CreatureHealth : Health, ICreatureComponent
     {
         [SerializeField] private bool destroyOnDie = true;
 

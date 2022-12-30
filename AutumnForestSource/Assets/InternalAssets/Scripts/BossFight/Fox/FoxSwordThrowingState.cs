@@ -6,7 +6,7 @@ using CreaturesAI.CombatSkills;
 
 namespace AutumnForest.BossFight.Fox
 {
-    public sealed class FoxSwordThrowingState : MonoBehaviour, IState
+    public sealed class FoxSwordThrowingState : State
     {
         public float StateTransitionDelay { get; }
         
@@ -20,16 +20,16 @@ namespace AutumnForest.BossFight.Fox
 
         private void OnDestroy()
         {
-            foreach (GameObject sword in spawnedSwords)
-                Destroy(sword);
+            //foreach (GameObject sword in spawnedSwords)
+                //Destroy(sword);
         }
 
-        private IEnumerator SwordThrowing(StateMachine stateMachine)
+        private IEnumerator SwordThrowing(IStateMachineUser stateMachine)
         {
             //instantiate swords
             for (int i = 0; i < swordPoints.Length; i++)
             {
-                spawnedSwords.Push(Instantiate(swordPrefab, swordPoints[i].position, Quaternion.identity));
+                spawnedSwords.Push(GameObject.Instantiate(swordPrefab, swordPoints[i].position, Quaternion.identity));
                 yield return new WaitForSeconds(0.1f);
             }
 
@@ -44,27 +44,9 @@ namespace AutumnForest.BossFight.Fox
 
             stateMachine.StateChoosing();
         }
-        public void EnterState(StateMachine stateMachine)
+        public override void EnterState(IStateMachineUser stateMachine)
         {
             animator.Play("FoxMagicBookOpen");
-            StartCoroutine(SwordThrowing(stateMachine));
-        }
-        public void ExitState(StateMachine stateMachine) { }
-        public void UpdateState(StateMachine stateMachine) { }
-
-        void IState.EnterState(StateMachine stateMachine)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        void IState.UpdateState(StateMachine stateMachine)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        void IState.ExitState(StateMachine stateMachine)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

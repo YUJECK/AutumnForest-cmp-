@@ -15,8 +15,8 @@ namespace AutumnForest.BossFight
 
         public void Interact()
         {
-            ServiceLocator.GetService<MainCameraBrain>().SetLerp(lerp);
-            ServiceLocator.GetService<MainCameraBrain>().ChangeOrthographicSize(CameraSizeHelper.Slingshot);
+            GlobalServiceLocator.GetService<MainCameraBrain>().SetLerp(lerp);
+            GlobalServiceLocator.GetService<MainCameraBrain>().ChangeOrthographicSize(CameraSizeHelper.Slingshot);
 
             Time.timeScale = timeScale;
             FindObjectOfType<Cursor>().SetCursorIcon(cursor);

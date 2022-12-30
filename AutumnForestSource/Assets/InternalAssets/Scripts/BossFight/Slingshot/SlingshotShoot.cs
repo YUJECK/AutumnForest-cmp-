@@ -22,12 +22,12 @@ namespace AutumnForest.BossFight
 
         public void ActivateSlingshot()
         {
-            ServiceLocator.GetService<PlayerInput>().Player.Attack.performed += Shoot;
+            GlobalServiceLocator.GetService<PlayerInput>().Player.Attack.performed += Shoot;
             isActivated = true;
         }
         public void DisableSlingshot()
         {
-            ServiceLocator.GetService<PlayerInput>().Player.Attack.performed -= Shoot;
+            GlobalServiceLocator.GetService<PlayerInput>().Player.Attack.performed -= Shoot;
             isActivated = false;
         }
         private void Shoot(InputAction.CallbackContext context)

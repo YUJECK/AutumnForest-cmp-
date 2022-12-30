@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight.Raccoon
 {
-    public class RaccoonHealingState : MonoBehaviour, IState
+    public class RaccoonHealingState : State
     {
         [SerializeField] private Health health;
         [SerializeField] private Animator animator;
@@ -27,11 +27,11 @@ namespace AutumnForest.BossFight.Raccoon
             }
         }
 
-        public void EnterState(StateMachine stateMachine) => StartCoroutine(Healing(stateMachine));
+        //public void EnterState(StateMachine stateMachine) => StartCoroutine(Healing(stateMachine));
         public void ExitState(StateMachine stateMachine)
         {
             stateMachine.transform.position = defaultPoint.position;
-            StopAllCoroutines();
+            //StopAllCoroutines();
         }
         public void UpdateState(StateMachine stateMachine) { }
     }

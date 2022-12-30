@@ -39,9 +39,9 @@ namespace AutumnForest.Player
             OnDash.AddListener(delegate { GetComponent<PlayerMovable>().IsStopped = true; });
             AfterDash.AddListener(delegate { GetComponent<PlayerMovable>().IsStopped = false; });
 
-            ServiceLocator.GetService<PlayerInput>().Player.Dash.performed += StartDash;
+            GlobalServiceLocator.GetService<PlayerInput>().Player.Dash.performed += StartDash;
         }
-        private void OnDisable() => ServiceLocator.GetService<PlayerInput>().Player.Dash.performed -= StartDash;
+        private void OnDisable() => GlobalServiceLocator.GetService<PlayerInput>().Player.Dash.performed -= StartDash;
 
         private void SetMovement(Vector2 newMovement) => movement = newMovement;
         private void StartDash(InputAction.CallbackContext context)

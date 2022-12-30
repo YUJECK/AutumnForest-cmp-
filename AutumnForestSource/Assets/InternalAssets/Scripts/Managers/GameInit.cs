@@ -19,29 +19,29 @@ namespace AutumnForest
             RegisterBossFightServices();
             RegisterDialogueServices();
 
-            ServiceLocator.GetService<PlayerInput>().Enable();
+            GlobalServiceLocator.GetService<PlayerInput>().Enable();
 
             OnInit.Invoke();
         }
 
         private void RegisterPlayerServices()
         {
-            ServiceLocator.RegisterService(FindObjectOfType<PlayerMovable>());
-            ServiceLocator.RegisterService(FindObjectOfType<PlayerAttack>());
-            ServiceLocator.RegisterService(FindObjectOfType<PlayerDash>());
-            ServiceLocator.RegisterService(FindObjectOfType<PlayerFlipper>());
-            ServiceLocator.RegisterService(FindObjectOfType<MainCameraBrain>());
-            ServiceLocator.RegisterService(new PlayerInput());
+            GlobalServiceLocator.RegisterService(FindObjectOfType<PlayerMovable>());
+            GlobalServiceLocator.RegisterService(FindObjectOfType<PlayerAttack>());
+            GlobalServiceLocator.RegisterService(FindObjectOfType<PlayerDash>());
+            GlobalServiceLocator.RegisterService(FindObjectOfType<PlayerFlipper>());
+            GlobalServiceLocator.RegisterService(FindObjectOfType<MainCameraBrain>());
+            GlobalServiceLocator.RegisterService(new PlayerInput());
         }
         private void RegisterDialogueServices()
         {
-            ServiceLocator.RegisterService(FindObjectOfType<DialogueManager>());
+            GlobalServiceLocator.RegisterService(FindObjectOfType<DialogueManager>());
         }
         private void RegisterBossFightServices()
         {
-            ServiceLocator.RegisterService(FindObjectOfType<RaccoonStateMachine>());
-            ServiceLocator.RegisterService(FindObjectOfType<BossFightController>());
-            ServiceLocator.RegisterService(FindObjectOfType<FoxStateMachine>());
+            GlobalServiceLocator.RegisterService(FindObjectOfType<RaccoonStateMachine>());
+            GlobalServiceLocator.RegisterService(FindObjectOfType<BossFightController>());
+            GlobalServiceLocator.RegisterService(FindObjectOfType<FoxStateMachine>());
         }
     }
 }

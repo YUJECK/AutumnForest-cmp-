@@ -1,9 +1,10 @@
+using AutumnForest.Helpers;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace CreaturesAI.Health
 {
-    public abstract class Health : MonoBehaviour
+    public abstract class Health : MonoBehaviour, ICreatureComponent
     {
         //health indicators
         [SerializeField] protected int currentHealth = 60;

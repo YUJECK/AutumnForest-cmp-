@@ -6,44 +6,25 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight
 {
-    public class SecondBossFightState : MonoBehaviour, IState
+    public sealed class SecondBossFightState : State
     {
-        public float StateTransitionDelay { get; set; }
-
         //health barPresets
         [SerializeField] private HealthBarPreset foxPreset;
         [SerializeField] private HealthBar bossHealthBar;
 
-        public void EnterState(StateMachine stateMachine)
+        public override void EnterState(IStateMachineUser stateMachine)
         {
-            FoxStateMachine foxStateMachine = ServiceLocator.GetService<FoxStateMachine>();
+            FoxStateMachine foxStateMachine = GlobalServiceLocator.GetService<FoxStateMachine>();
             foxPreset.HealthTarget = foxStateMachine.GetComponent<Health>();
             bossHealthBar.SetPreset(foxPreset);
-            ServiceLocator.GetService<MainCameraBrain>().SetTargets(foxStateMachine.gameObject);
+            GlobalServiceLocator.GetService<MainCameraBrain>().SetTargets(foxStateMachine.gameObject);
             foxStateMachine.gameObject.SetActive(true);
-            foxStateMachine.StartStateMachine();
+            foxStateMachine.StateMachine.EnableStateMachine();
         }
 
-        public void ExitState(StateMachine stateMachine)
+        public override void ExitState(IStateMachineUser stateMachine)
         {
-            ServiceLocator.GetService<FoxStateMachine>().gameObject.SetActive(false);
-        }
-
-        public void UpdateState(StateMachine stateMachine) => stateMachine.StateChoosing();
-
-        void IState.EnterState(StateMachine stateMachine)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        void IState.UpdateState(StateMachine stateMachine)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        void IState.ExitState(StateMachine stateMachine)
-        {
-            throw new System.NotImplementedException();
+            GlobalServiceLocator.GetService<FoxStateMachine>().gameObject.SetActive(false);
         }
     }
 }

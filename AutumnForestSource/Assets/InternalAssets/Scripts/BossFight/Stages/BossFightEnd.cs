@@ -12,12 +12,12 @@ namespace AutumnForest.BossFight
     {
         [SerializeField] private Color newVignetteColor;
 
-        private void Start() => ServiceLocator.GetService<RaccoonStateMachine>().GetComponent<Health>().OnDie.AddListener(EndBossFight);
+        private void Start() => GlobalServiceLocator.GetService<RaccoonStateMachine>().GetComponent<Health>().OnDie.AddListener(EndBossFight);
         private async void EndBossFight()
         {
-            ServiceLocator.GetService<MainCameraBrain>().ChangeOrthographicSize(3f);
-            ServiceLocator.GetService<MainCameraBrain>().SetTargets(ServiceLocator.GetService<PlayerMovable>().gameObject);
-            Vignette vignette = ServiceLocator.GetService<MainCameraBrain>().GetPostProcessProfile().GetSetting<Vignette>();
+            GlobalServiceLocator.GetService<MainCameraBrain>().ChangeOrthographicSize(3f);
+            GlobalServiceLocator.GetService<MainCameraBrain>().SetTargets(GlobalServiceLocator.GetService<PlayerMovable>().gameObject);
+            Vignette vignette = GlobalServiceLocator.GetService<MainCameraBrain>().GetPostProcessProfile().GetSetting<Vignette>();
 
             Color startColor = vignette.color.value;
 

@@ -1,24 +1,23 @@
 using CreaturesAI;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace AutumnForest.BossFight.Fox
 {
-    public class FoxStateMachine : StateMachine
+    public class FoxStateMachine : MonoBehaviour, IStateMachineUser
     {
         [Header("States")]
-        [SerializeField] private IState swordThrowingState;
+        [SerializeField] private State swordThrowingState;
+        public UnityEvent<State> OnStateChanged => throw new System.NotImplementedException();
 
-        public override void StateChoosing()
+        public StateMachine StateMachine => throw new System.NotImplementedException();
+
+        public CreatureServiceLocator CreatureServiceLocator => throw new System.NotImplementedException();
+
+        public void StateChoosing()
         {
-            IState nextState = swordThrowingState;
-
-            ChangeState(nextState);
-        }
-
-        protected override void UpdateStates()
-        {
-            if (CurrentState != null)
-                CurrentState.UpdateState(this);
+            State nextState = swordThrowingState;
+            OnStateChanged.Invoke(nextState);
         }
     }
 }

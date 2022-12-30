@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight
 {
-    public class ThirdBossFightStage : MonoBehaviour, IState
+    public class ThirdBossFightStage : State
     {
         //health barPresets
         [SerializeField] private HealthBarPreset raccoonPreset;
@@ -16,10 +16,10 @@ namespace AutumnForest.BossFight
 
         public void EnterState(StateMachine stateMachine)
         {
-            RaccoonStateMachine raccoonStateMachine = ServiceLocator.GetService<RaccoonStateMachine>();
+            RaccoonStateMachine raccoonStateMachine = GlobalServiceLocator.GetService<RaccoonStateMachine>();
 
             raccoonPreset.HealthTarget = raccoonStateMachine.GetComponent<Health>();
-            ServiceLocator.GetService<MainCameraBrain>().SetTargets(raccoonStateMachine.gameObject);
+            GlobalServiceLocator.GetService<MainCameraBrain>().SetTargets(raccoonStateMachine.gameObject);
             bossHealthBar.SetPreset(raccoonPreset);
             raccoonStateMachine.StateChoosing();
         }

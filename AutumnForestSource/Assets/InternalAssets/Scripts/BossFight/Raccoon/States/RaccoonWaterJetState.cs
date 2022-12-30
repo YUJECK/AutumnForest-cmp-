@@ -1,36 +1,29 @@
 using CreaturesAI;
-using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace AutumnForest.BossFight.Raccoon
 {
-    public class RaccoonWaterJetState : MonoBehaviour, IState
+    public sealed class RaccoonWaterJetState : State
     {
-        [SerializeField] private Transform waterJet;
+        private GameObject waterJet;
+        private int waterJetStateDuration = 5000;
 
-        public float StateTransitionDelay { get; }
-
-        private IEnumerator StateEnd(StateMachine stateMachine)
+        public RaccoonWaterJetState(GameObject waterJet, int waterJetStateDuration)
         {
-            yield return new WaitForSeconds(10f);
-            stateMachine.StateChoosing();
+            this.waterJet = waterJet;
+            this.waterJetStateDuration = waterJetStateDuration;
         }
 
-        public void EnterState(StateMachine stateMachine)
+        private async void StartWaterJetTimer(IStateMachineUser stateMachine)
         {
-            waterJet.gameObject.SetActive(true);
-            StartCoroutine(StateEnd(stateMachine));
-        }
+            waterJet.SetActive(true);
 
-        public void ExitState(StateMachine stateMachine)
-        {
-            waterJet.gameObject.SetActive(false);
-            StopAllCoroutines();
-        }
+            await Task.Delay(waterJetStateDuration);
 
-        public void UpdateState(StateMachine stateMachine)
-        {
-            waterJet.Rotate(0, 0, 0.5f);
+            waterJet.SetActive(false);
+            //stateMachine.StateChoosing();
         }
+        public override void EnterState(IStateMachineUser stateMachine) => StartWaterJetTimer(stateMachine);
     }
 }

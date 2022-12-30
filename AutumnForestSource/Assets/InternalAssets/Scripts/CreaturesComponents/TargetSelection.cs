@@ -1,10 +1,11 @@
+using AutumnForest.Helpers;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace CreaturesAI
 {
-    public sealed class TargetSelection : MonoBehaviour
+    public sealed class TargetSelection : MonoBehaviour, ICreatureComponent
     {
         //variables
         private Target currentTarget;

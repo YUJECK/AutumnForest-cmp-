@@ -1,4 +1,5 @@
-using NaughtyAttributes;
+using AutumnForest;
+using AutumnForest.Helpers;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,53 +11,62 @@ namespace CreaturesAI
         Working,
         Stopped
     }
-    abstract public class StateMachine : MonoBehaviour
+
+    [DisallowMultipleComponent]
+    [RequireComponent(typeof(CreatureServiceLocator))]
+    [RequireComponent(typeof(IStateMachineUser))]
+    public class StateMachine : MonoBehaviour, ICreatureComponent
     {
-        [Header("Some info")]
-        private IState currentState;
-        private StateMachineCondition stateMachineState = StateMachineCondition.Stopped;
+        [SerializeField] private bool enableOnStart = true;
+        private IStateMachineUser stateMachineUser;
 
-        public UnityEvent OnMachineStarts = new();
-        public UnityEvent OnMachineStops = new();
+        public UnityEvent OnMachineEnabled { get; } = new();
+        public UnityEvent OnMachineDisabled { get; } = new();
 
-        public IState CurrentState => currentState;
-        public StateMachineCondition StateMachineState => stateMachineState;
+        public State CurrentState { get; private set; }
+        public StateMachineCondition StateMachineState { get; private set; }
 
-        protected async void ChangeState(IState newState)
+        private void OnEnable()
+        {
+            stateMachineUser = GetComponent<IStateMachineUser>();
+            stateMachineUser.OnStateChanged.AddListener(ChangeState);
+        }
+        private void Start()
+        {
+            if (enableOnStart)
+                EnableStateMachine();
+        }
+
+        private async void ChangeState(State newState)
         {
             if (newState != null)
             {
-                if (currentState != null) currentState.ExitState(this);
-                int waitTime = (int)(currentState.StateTransitionDelay * 1000);
-                currentState = null;
+                if (CurrentState != null) CurrentState.ExitState(stateMachineUser);
+                int waitTime = (int)(CurrentState.StateTransitionDelay * 1000);
+                CurrentState = null;
 
                 await Task.Delay(waitTime);
 
-                currentState = newState;
-                currentState.EnterState(this);
+                CurrentState = newState;
+                CurrentState.EnterState(stateMachineUser);
             }
             else Debug.LogError("New State is null");
         }
 
-        virtual public void StartStateMachine()
+        public void EnableStateMachine()
         {
-            if (stateMachineState != StateMachineCondition.Working)
+            if (StateMachineState != StateMachineCondition.Working)
             {
-                StateChoosing();
-                stateMachineState = StateMachineCondition.Working;
-                OnMachineStarts.Invoke();
+                stateMachineUser.StateChoosing();
+                StateMachineState = StateMachineCondition.Working;
+                OnMachineEnabled.Invoke();
             }
         }
-        virtual public void StopStateMachine()
+        public void DisableStateMachine()
         {
-            currentState.ExitState(this);
-            stateMachineState = StateMachineCondition.Stopped;
-            OnMachineStops.Invoke();
+            CurrentState.ExitState(stateMachineUser);
+            StateMachineState = StateMachineCondition.Stopped;
+            OnMachineDisabled.Invoke();
         }
-
-        abstract public void StateChoosing();
-        abstract protected void UpdateStates();
-
-        private void Update() => UpdateStates();
     }
 }

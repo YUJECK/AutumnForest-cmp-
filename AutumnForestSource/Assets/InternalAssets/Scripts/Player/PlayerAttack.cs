@@ -13,8 +13,8 @@ namespace AutumnForest.Player
         [SerializeField] GameObject attackAnimation;
         [SerializeField] private AreaHit areaHit;
 
-        private void OnEnable() => ServiceLocator.GetService<PlayerInput>().Player.Attack.performed += Attack;
-        private void OnDisable() => ServiceLocator.GetService<PlayerInput>().Player.Attack.performed -= Attack;
+        private void OnEnable() => GlobalServiceLocator.GetService<PlayerInput>().Player.Attack.performed += Attack;
+        private void OnDisable() => GlobalServiceLocator.GetService<PlayerInput>().Player.Attack.performed -= Attack;
 
         private void Attack(InputAction.CallbackContext context)
         {

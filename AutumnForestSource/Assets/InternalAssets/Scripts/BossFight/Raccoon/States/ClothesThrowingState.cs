@@ -1,37 +1,32 @@
-using AutumnForest.Player;
 using CreaturesAI;
-using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace AutumnForest
 {
-    public class ClothesThrowingState : MonoBehaviour, IState
+    public class ClothesThrowingState : State
     {
-        [SerializeField] private Animator animator;
-        [SerializeField] private string throwingAnimationName = "RaccoonThrowing";
-        [SerializeField] private float throwingDelay = 1f;
-        [SerializeField] private GameObject shirt;
-        [SerializeField] private int shirtsCount;
+        private Animator animator;
+        private string throwingAnimationName = "RaccoonThrowing";
+        private int throwingDelay = 1000;
+        private GameObject shirt;
+        private int shirtsCount;
 
-        public float StateTransitionDelay { get; }
-
-        private IEnumerator Throwing(StateMachine stateMachine)
+        private async void Throwing(IStateMachineUser stateMachine)
         {
             for (int i = 0; i < shirtsCount; i++)
             {
-                Instantiate(shirt, ServiceLocator.GetService<PlayerMovable>().transform.position, Quaternion.identity);
-                yield return new WaitForSeconds(throwingDelay);
+                GameObject.Instantiate(shirt, GlobalServiceLocator.GetService<PlayerMovable>().transform.position, Quaternion.identity);
+                await Task.Delay(throwingDelay);
             }
 
             stateMachine.StateChoosing();
         }
 
-        public void EnterState(StateMachine stateMachine)
+        public override void EnterState(IStateMachineUser stateMachine)
         {
             animator.Play(throwingAnimationName);
-            StartCoroutine(Throwing(stateMachine));
+            Throwing(stateMachine);
         }
-        public void ExitState(StateMachine stateMachine) => StopAllCoroutines();
-        public void UpdateState(StateMachine stateMachine) { }
     }
 }

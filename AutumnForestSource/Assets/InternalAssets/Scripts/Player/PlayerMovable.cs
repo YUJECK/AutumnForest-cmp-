@@ -17,7 +17,7 @@ namespace AutumnForest
 
         private void Awake()
         {
-            playerInput = ServiceLocator.GetService<PlayerInput>();
+            playerInput = GlobalServiceLocator.GetService<PlayerInput>();
             rigidbody2D = GetComponent<Rigidbody2D>();
         }
         private void FixedUpdate()

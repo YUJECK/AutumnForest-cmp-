@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight.Raccoon
 {
-    public class RaccoonShootingState : MonoBehaviour, IState
+    public class RaccoonShootingState : State
     {
         [Header("Components")]
         [SerializeField] private Shooting shooting;
@@ -13,9 +13,8 @@ namespace AutumnForest.BossFight.Raccoon
         [SerializeField] private ShootingPattern roundShootingFirstStage;
         private ShootingPattern currentPattern;
 
-        public float StateTransitionDelay { get; }
 
-        public void EnterState(StateMachine stateMachine)
+        public void EnterState(IStateMachineUser stateMachineUser)
         {
             int random = Random.Range(0, 2);
             currentPattern = null;
@@ -23,23 +22,20 @@ namespace AutumnForest.BossFight.Raccoon
             switch (random)
             {
                 case 0:
-                    currentPattern = Instantiate(roundShootingFirstStage);
+                    //currentPattern = Instantiate(roundShootingFirstStage);
                     break;
                 case 1:
-                    currentPattern = Instantiate(tripleShotFirstStage[Random.Range(0, tripleShotFirstStage.Length)]);
+                //    currentPattern = Instantiate(tripleShotFirstStage[Random.Range(0, tripleShotFirstStage.Length)]);
                     break;
             }
 
-            currentPattern.OnPatternEnd.AddListener(stateMachine.StateChoosing);
+            currentPattern.OnPatternEnd.AddListener(stateMachineUser.StateChoosing);
             currentPattern.UsePattern(shooting);
         }
-
-        public void ExitState(StateMachine stateMachine) 
+        public override void ExitState(IStateMachineUser stateMachineUser) 
         {
             currentPattern.CompletePattern(shooting);
-            currentPattern.OnPatternEnd.RemoveListener(stateMachine.StateChoosing);
+            currentPattern.OnPatternEnd.RemoveListener(stateMachineUser.StateChoosing);
         }
-
-        public void UpdateState(StateMachine stateMachine) { }
     }
 }

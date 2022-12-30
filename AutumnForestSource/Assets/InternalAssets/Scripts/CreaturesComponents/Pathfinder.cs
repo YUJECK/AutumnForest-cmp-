@@ -1,10 +1,11 @@
 using AutumnForest;
+using AutumnForest.Helpers;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace CreaturesAI.Pathfinding
 {
-    public sealed class Pathfinder : MonoBehaviour
+    public sealed class Pathfinder : MonoBehaviour, ICreatureComponent
     {
         //classes, enums
         private enum GCostDefining
@@ -71,7 +72,7 @@ namespace CreaturesAI.Pathfinding
         private int Heuristic(Point first, Point second) => Mathf.Abs(first.X - second.X) + Mathf.Abs(first.Y - second.Y);
         private bool CheckPointCollider(Point point)
         {
-            if (ServiceLocator.GetService<GridManager>().GetPoint(new Vector2Int(point.X, point.Y)) == 0) return true;
+            if (GlobalServiceLocator.GetService<GridManager>().GetPoint(new Vector2Int(point.X, point.Y)) == 0) return true;
             else return false;
         }
         
@@ -79,14 +80,14 @@ namespace CreaturesAI.Pathfinding
         public List<Vector2> FindPath(Vector2 start, Vector2 end)
         {
             //simple check endpoint for obstacle
-            if (ServiceLocator.GetService<GridManager>().GetPoint(end) == 1)
+            if (GlobalServiceLocator.GetService<GridManager>().GetPoint(end) == 1)
             {
                 Debug.LogWarning("End point is obstacle");
                 return new List<Vector2>();
             }
 
             List<Point> nextPoints = new List<Point>();
-            bool[,] visitedPoints = new bool[ServiceLocator.GetService<GridManager>().GridWidth, ServiceLocator.GetService<GridManager>().GridHeight];
+            bool[,] visitedPoints = new bool[GlobalServiceLocator.GetService<GridManager>().GridWidth, GlobalServiceLocator.GetService<GridManager>().GridHeight];
             Point startPoint = new Point((int)start.x, (int)start.y);
             Point endPoint = new Point((int)end.x, (int)end.y);
 

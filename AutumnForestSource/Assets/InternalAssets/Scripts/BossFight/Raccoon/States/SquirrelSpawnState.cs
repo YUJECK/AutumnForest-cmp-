@@ -1,21 +1,22 @@
 using CreaturesAI;
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace AutumnForest.BossFight.Raccoon
 {
-    public class SquirrelSpawnState : MonoBehaviour, IState
+    public class SquirrelSpawnState : State
     {
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject squirrel;
         [SerializeField] private Transform[] spawnPoints;
-        public float StateTransitionDelay { get; }
 
-        private IEnumerator SquirellSpawn(StateMachine stateMachine)
+        private async void SquirellSpawn(IStateMachineUser stateMachine)
         {
             animator.Play("Idle");
 
             int squirrelsCount = Random.Range(2, 3);
+            int squirrelSpawnDelay = 2000;
 
             for (int i = 0; i < squirrelsCount; i++)
             {
@@ -23,17 +24,14 @@ namespace AutumnForest.BossFight.Raccoon
 
                 if (Physics2D.Raycast(spawnPoints[spawnPointIndex].position, Vector2.zero).transform == null)
                 {
-                    Instantiate(squirrel, spawnPoints[spawnPointIndex].position, Quaternion.identity);
-                    yield return new WaitForSeconds(2f);
+                    GameObject.Instantiate(squirrel, spawnPoints[spawnPointIndex].position, Quaternion.identity);
+                    await Task.Delay(squirrelSpawnDelay);
                 }
                 else i--;
             }
 
             stateMachine.StateChoosing();
         }
-
-        public void EnterState(StateMachine stateMachine) => StartCoroutine(SquirellSpawn(stateMachine)); 
-        public void ExitState(StateMachine stateMachine) => StopAllCoroutines();
-        public void UpdateState(StateMachine stateMachine) { }
+        public override void EnterState(IStateMachineUser stateMachine) => SquirellSpawn(stateMachine);
     }
 }

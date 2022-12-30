@@ -15,32 +15,38 @@ namespace AutumnForest.BossFight
         ThirdStage,
     }
 
-    public class BossFightController : StateMachine
+    public class BossFightController : MonoBehaviour, IStateMachineUser
     {
         [ReadOnly] private BossFightStages currentStage;
         //bossfight stages
-        [SerializeField] private IState firstStage;
-        [SerializeField] private IState secondStage;
-        [SerializeField] private IState thirdStage;
+        [SerializeField] private State firstStage;
+        [SerializeField] private State secondStage;
+        [SerializeField] private State thirdStage;
         //some objects
         private Health raccoonHealth;
         private Health foxHealth;
         //events
-        public UnityEvent<BossFightStages> OnStageChanges = new UnityEvent<BossFightStages>();
+        public UnityEvent<BossFightStages> OnStageChanged = new UnityEvent<BossFightStages>();
 
         //getters
         public BossFightStages CurrentStage => currentStage;
 
+        public UnityEvent<State> OnStateChanged { get; private set; } = new();
+
+        public StateMachine StateMachine { get; private set; }
+
+        public CreatureServiceLocator CreatureServiceLocator { get; private set; } 
+
         //methods
-        private void Awake()
+        private void OnEnable()
         {
-            raccoonHealth = ServiceLocator.GetService<RaccoonStateMachine>().GetComponent<Health>();    
-            foxHealth = ServiceLocator.GetService<FoxStateMachine>().GetComponent<Health>();
-            FindObjectOfType<EnteringToBossFight>().OnInteract.AddListener(delegate { StartStateMachine(); });
+            raccoonHealth = GlobalServiceLocator.GetService<RaccoonStateMachine>().GetComponent<Health>();    
+            foxHealth = GlobalServiceLocator.GetService<FoxStateMachine>().GetComponent<Health>();
+            FindObjectOfType<EnteringToBossFight>().OnInteract.AddListener( delegate { StateMachine.EnableStateMachine(); });
         }
-        public override void StateChoosing()
+        public void StateChoosing()
         {
-            IState nextStage = firstStage;
+            State nextStage = firstStage;
 
             if (raccoonHealth.CurrentHealth < 0.5 * raccoonHealth.MaximumHealth)
             {
@@ -52,16 +58,8 @@ namespace AutumnForest.BossFight
                 nextStage = thirdStage;
                 currentStage = BossFightStages.ThirdStage;
             }
-            if (CurrentState != nextStage)
-            {
-                OnStageChanges.Invoke(currentStage);
-                ChangeState(nextStage);
-            }
-        }
-        protected override void UpdateStates()
-        {
-            if (CurrentState != null)
-                CurrentState.UpdateState(this);
+            if (StateMachine.CurrentState != nextStage)
+                OnStageChanged.Invoke(currentStage);
         }
     }
 }

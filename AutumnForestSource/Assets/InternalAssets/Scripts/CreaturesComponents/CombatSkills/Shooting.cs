@@ -1,9 +1,10 @@
+using AutumnForest.Helpers;
 using UnityEngine;
 
 namespace CreaturesAI.CombatSkills
 {
     [RequireComponent(typeof(PointRotation))]
-    public class Shooting : MonoBehaviour
+    public class Shooting : MonoBehaviour, ICreatureComponent
     {
         [SerializeField] private Transform firePoint;
         private PointRotation pointRotation;

@@ -8,6 +8,8 @@ namespace CreaturesAI
         public StateMachine StateMachine { get; }
         public CreatureServiceLocator CreatureServiceLocator { get; }
         public UnityEvent<State> OnStateChanged { get; } 
+        
+        public void InitServices();
         public void StateChoosing();
     }
-}   
+}

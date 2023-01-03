@@ -6,15 +6,13 @@ namespace AutumnForest.BossFight.Raccoon
 {
     public class RaccoonShootingState : State
     {
-        [Header("Components")]
-        [SerializeField] private Shooting shooting;
         [Header("Shooting patterns")]
         [SerializeField] private ShootingPattern[] tripleShotFirstStage;
         [SerializeField] private ShootingPattern roundShootingFirstStage;
         private ShootingPattern currentPattern;
 
 
-        public void EnterState(IStateMachineUser stateMachineUser)
+        public override void EnterState(IStateMachineUser stateMachineUser)
         {
             int random = Random.Range(0, 2);
             currentPattern = null;
@@ -30,11 +28,11 @@ namespace AutumnForest.BossFight.Raccoon
             }
 
             currentPattern.OnPatternEnd.AddListener(stateMachineUser.StateChoosing);
-            currentPattern.UsePattern(shooting);
+            currentPattern.UsePattern(stateMachineUser.CreatureServiceLocator.GetService<Shooting>());
         }
         public override void ExitState(IStateMachineUser stateMachineUser) 
         {
-            currentPattern.CompletePattern(shooting);
+            currentPattern.CompletePattern(stateMachineUser.CreatureServiceLocator.GetService<Shooting>());
             currentPattern.OnPatternEnd.RemoveListener(stateMachineUser.StateChoosing);
         }
     }

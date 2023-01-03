@@ -7,7 +7,6 @@ namespace AutumnForest
 {
     public class CreatureServiceLocator : MonoBehaviour
     {
-        [SerializeField] private List<SerializedDictionary<Type, object>> test;
         private readonly Dictionary<Type, object> services = new Dictionary<Type, object>();
 
         public void RegisterService<T>(T newService) where T : class, ICreatureComponent => services.Add(typeof(T), newService);

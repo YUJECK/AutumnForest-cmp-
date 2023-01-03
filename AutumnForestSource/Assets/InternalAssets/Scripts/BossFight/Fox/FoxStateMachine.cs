@@ -14,6 +14,11 @@ namespace AutumnForest.BossFight.Fox
 
         public CreatureServiceLocator CreatureServiceLocator => throw new System.NotImplementedException();
 
+        public void InitServices()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void StateChoosing()
         {
             State nextState = swordThrowingState;

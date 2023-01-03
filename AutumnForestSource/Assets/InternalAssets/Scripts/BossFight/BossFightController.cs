@@ -61,5 +61,10 @@ namespace AutumnForest.BossFight
             if (StateMachine.CurrentState != nextStage)
                 OnStageChanged.Invoke(currentStage);
         }
+
+        public void InitServices()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

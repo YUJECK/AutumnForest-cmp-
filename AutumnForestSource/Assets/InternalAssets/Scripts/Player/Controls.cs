@@ -64,6 +64,15 @@ namespace AutumnForest
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""89e7b15f-d6f0-4164-af14-ce582f173a9c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -154,6 +163,17 @@ namespace AutumnForest
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c67ef55a-b634-46b3-b9bd-71615e8f9e6a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -183,6 +203,7 @@ namespace AutumnForest
             m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
             m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
             m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+            m_Player_Dialogue = m_Player.FindAction("Dialogue", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -246,6 +267,7 @@ namespace AutumnForest
         private readonly InputAction m_Player_Attack;
         private readonly InputAction m_Player_Interact;
         private readonly InputAction m_Player_Dash;
+        private readonly InputAction m_Player_Dialogue;
         public struct PlayerActions
         {
             private @PlayerInput m_Wrapper;
@@ -254,6 +276,7 @@ namespace AutumnForest
             public InputAction @Attack => m_Wrapper.m_Player_Attack;
             public InputAction @Interact => m_Wrapper.m_Player_Interact;
             public InputAction @Dash => m_Wrapper.m_Player_Dash;
+            public InputAction @Dialogue => m_Wrapper.m_Player_Dialogue;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -275,6 +298,9 @@ namespace AutumnForest
                     @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                     @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                     @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                    @Dialogue.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDialogue;
+                    @Dialogue.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDialogue;
+                    @Dialogue.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDialogue;
                 }
                 m_Wrapper.m_PlayerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -291,6 +317,9 @@ namespace AutumnForest
                     @Dash.started += instance.OnDash;
                     @Dash.performed += instance.OnDash;
                     @Dash.canceled += instance.OnDash;
+                    @Dialogue.started += instance.OnDialogue;
+                    @Dialogue.performed += instance.OnDialogue;
+                    @Dialogue.canceled += instance.OnDialogue;
                 }
             }
         }
@@ -310,6 +339,7 @@ namespace AutumnForest
             void OnAttack(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
+            void OnDialogue(InputAction.CallbackContext context);
         }
     }
 }

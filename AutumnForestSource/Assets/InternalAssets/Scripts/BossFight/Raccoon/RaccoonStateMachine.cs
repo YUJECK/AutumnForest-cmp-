@@ -39,16 +39,16 @@ namespace AutumnForest.BossFight.Raccoon
             [SerializeField] private Shooting shooting;
             [SerializeField] private Dialogue dialogue;
             [SerializeField] private Health health;
-            [SerializeField] private Animator animator;
+            [SerializeField] private CreatureAnimator animator;
 
             public Shooting Shooting => shooting; 
             public Dialogue Dialogue => dialogue;
             public Health Health => health; 
-            public Animator Animator => animator; 
+            public CreatureAnimator Animator => animator; 
         }
 
         [SerializeField] private RaccoonStates raccoonStates;
-        [SerializeField] private RaccoonComponents raccoonCompoments;
+        [SerializeField] private RaccoonComponents raccoonComponents;
         private BossFightStages currentStage;
         private bool isStart = true;
 
@@ -61,13 +61,15 @@ namespace AutumnForest.BossFight.Raccoon
             StateMachine = GetComponent<StateMachine>();
             CreatureServiceLocator = GetComponent<CreatureServiceLocator>();
 
+            InitServices();
+
             GlobalServiceLocator.GetService<BossFightController>().OnStageChanged.AddListener(SetCurrentStage);
         }
 
         private void SetCurrentStage(BossFightStages newStage)
         {
             currentStage = newStage;
-            StateChoosing();
+            if(currentStage != BossFightStages.FirstStage) StateChoosing();
         }
         public void StateChoosing()
         {
@@ -126,7 +128,10 @@ namespace AutumnForest.BossFight.Raccoon
 
         public void InitServices()
         {
-            CreatureServiceLocator.RegisterService<typeof(raccoonCompoments.Animator)>();
+            CreatureServiceLocator.RegisterService(raccoonComponents.Animator);
+            CreatureServiceLocator.RegisterService(raccoonComponents.Dialogue);
+            CreatureServiceLocator.RegisterService(raccoonComponents.Health);
+            CreatureServiceLocator.RegisterService(raccoonComponents.Shooting);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace CreaturesAI
         public UnityEvent OnMachineDisabled { get; } = new();
 
         public State CurrentState { get; private set; }
-        public StateMachineCondition StateMachineState { get; private set; }
+        public StateMachineCondition StateMachineState { get; private set; } = StateMachineCondition.Stopped;
 
         private void OnEnable()
         {
@@ -41,11 +41,14 @@ namespace CreaturesAI
         {
             if (newState != null)
             {
-                if (CurrentState != null) CurrentState.ExitState(stateMachineUser);
-                int waitTime = (int)(CurrentState.StateTransitionDelay * 1000);
-                CurrentState = null;
+                if (CurrentState != null)
+                { 
+                    CurrentState.ExitState(stateMachineUser);
+                    int waitTime = (int)(CurrentState.StateTransitionDelay * 1000);
+                    CurrentState = null;
 
-                await Task.Delay(waitTime);
+                    await Task.Delay(waitTime);
+                }
 
                 CurrentState = newState;
                 CurrentState.EnterState(stateMachineUser);

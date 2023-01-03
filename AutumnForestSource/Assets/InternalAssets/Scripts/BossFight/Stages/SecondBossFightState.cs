@@ -1,4 +1,5 @@
 using AutumnForest.BossFight.Fox;
+using AutumnForest.BossFight.Raccoon;
 using AutumnForest.Other;
 using CreaturesAI;
 using CreaturesAI.Health;
@@ -19,6 +20,7 @@ namespace AutumnForest.BossFight
             bossHealthBar.SetPreset(foxPreset);
             GlobalServiceLocator.GetService<MainCameraBrain>().SetTargets(foxStateMachine.gameObject);
             foxStateMachine.gameObject.SetActive(true);
+            GlobalServiceLocator.GetService<RaccoonStateMachine>().StateMachine.DisableStateMachine();
             foxStateMachine.StateMachine.EnableStateMachine();
         }
 

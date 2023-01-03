@@ -22,8 +22,11 @@ namespace AutumnForest.DialogueSystem
             
             currentDialogue = dialogue;
             cloud.SetActive(true);
+            GlobalServiceLocator.GetService<PlayerInput>().Player.Dialogue.performed += DialogueInput;
             currentDialogue.OnNextPhrase.AddListener(ShowPhrase);
             currentDialogue.OnConversationEnds.AddListener(EndDialogue);
+
+            GlobalServiceLocator.GetService<PlayerInput>().Player.Dialogue.Enable();
         }
         private void EndDialogue()
         {
@@ -33,8 +36,13 @@ namespace AutumnForest.DialogueSystem
                 currentDialogue.OnConversationEnds.RemoveListener(EndDialogue);
                 currentDialogue = null;
                 cloud.SetActive(false);
+
+                GlobalServiceLocator.GetService<PlayerInput>().Player.Dialogue.Disable();
             }
         }
+        
+        private void DialogueInput(UnityEngine.InputSystem.InputAction.CallbackContext obj) => currentDialogue.NextPhrase();
+        
         private void ShowPhrase(string phrase, string name)
         {
             dialogueName.text = name;
@@ -60,6 +68,8 @@ namespace AutumnForest.DialogueSystem
             
             foreach (Dialogue dialogue in allDialogues)
                 dialogue.OnConversationStarts.AddListener(StartDialogue);
+
+            GlobalServiceLocator.GetService<PlayerInput>().Player.Dialogue.Disable();
         }
     }
 }

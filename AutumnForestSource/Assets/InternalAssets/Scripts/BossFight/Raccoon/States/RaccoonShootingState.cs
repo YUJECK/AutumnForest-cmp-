@@ -20,10 +20,10 @@ namespace AutumnForest.BossFight.Raccoon
             switch (random)
             {
                 case 0:
-                    //currentPattern = Instantiate(roundShootingFirstStage);
+                    currentPattern = Instantiate(roundShootingFirstStage);
                     break;
                 case 1:
-                //    currentPattern = Instantiate(tripleShotFirstStage[Random.Range(0, tripleShotFirstStage.Length)]);
+                    currentPattern = Instantiate(tripleShotFirstStage[Random.Range(0, tripleShotFirstStage.Length)]);
                     break;
             }
 

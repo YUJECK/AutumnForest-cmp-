@@ -15,7 +15,6 @@ namespace AutumnForest.BossFight.Raccoon
 
             for (int i = 1; i < 37; i++)
             {
-                Debug.Log("dsfds");
                 shooting.ShootWithInstantiate(cone, 7, 0, i * 30, ForceMode2D.Impulse);
                 yield return new WaitForSeconds(0.05f);
             }

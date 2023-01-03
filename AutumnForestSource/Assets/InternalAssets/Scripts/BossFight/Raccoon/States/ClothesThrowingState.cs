@@ -6,11 +6,10 @@ namespace AutumnForest
 {
     public class ClothesThrowingState : State
     {
-        private Animator animator;
-        private string throwingAnimationName = "RaccoonThrowing";
-        private int throwingDelay = 1000;
-        private GameObject shirt;
-        private int shirtsCount;
+        [SerializeField] private string throwingAnimationName = "RaccoonThrowing";
+        [SerializeField] private int throwingDelay = 1000;
+        [SerializeField] private GameObject shirt;
+        [SerializeField] private int shirtsCount;
 
         private async void Throwing(IStateMachineUser stateMachine)
         {
@@ -25,7 +24,7 @@ namespace AutumnForest
 
         public override void EnterState(IStateMachineUser stateMachine)
         {
-            animator.Play(throwingAnimationName);
+            stateMachine.CreatureServiceLocator.GetService<CreatureAnimator>().Play(throwingAnimationName);
             Throwing(stateMachine);
         }
     }

@@ -30,11 +30,8 @@ namespace AutumnForest.BossFight
 
         //getters
         public BossFightStages CurrentStage => currentStage;
-
         public UnityEvent<State> OnStateChanged { get; private set; } = new();
-
         public StateMachine StateMachine { get; private set; }
-
         public CreatureServiceLocator CreatureServiceLocator { get; private set; } 
 
         //methods
@@ -42,26 +39,33 @@ namespace AutumnForest.BossFight
         {
             raccoonHealth = GlobalServiceLocator.GetService<RaccoonStateMachine>().GetComponent<Health>();    
             foxHealth = GlobalServiceLocator.GetService<FoxStateMachine>().GetComponent<Health>();
-            FindObjectOfType<EnteringToBossFight>().OnInteract.AddListener( delegate { StateMachine.EnableStateMachine(); });
+            //FindObjectOfType<EnteringToBossFight>().OnInteract.AddListener( delegate { StateMachine.EnableStateMachine(); });
+
+            StateMachine = GetComponent<StateMachine>();
         }
+        private void Update() => StateChoosing();
+
         public void StateChoosing()
         {
-            State nextStage = firstStage;
+            State nextStageState = firstStage;
+            BossFightStages nextStage = BossFightStages.FirstStage;
 
             if (raccoonHealth.CurrentHealth < 0.5 * raccoonHealth.MaximumHealth)
             {
-                nextStage = secondStage;
-                currentStage = BossFightStages.SecondStage;
+                nextStageState = secondStage;
+                nextStage = BossFightStages.SecondStage;
             }
             if (foxHealth.CurrentHealth <= 0)
             {
-                nextStage = thirdStage;
-                currentStage = BossFightStages.ThirdStage;
+                nextStageState = thirdStage;
+                nextStage = BossFightStages.ThirdStage;
             }
-            if (StateMachine.CurrentState != nextStage)
+            if (currentStage != nextStage)
+            {
+                OnStateChanged.Invoke(nextStageState);
                 OnStageChanged.Invoke(currentStage);
+            }
         }
-
         public void InitServices()
         {
             throw new System.NotImplementedException();

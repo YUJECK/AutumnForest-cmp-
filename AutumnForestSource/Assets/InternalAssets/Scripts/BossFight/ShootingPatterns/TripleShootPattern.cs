@@ -7,7 +7,7 @@ namespace AutumnForest.BossFight.Raccoon
     [CreateAssetMenu]
     public class TripleShootPattern : ShootingPattern
     {
-        //variables 
+        //variables
         [SerializeField] private GameObject projectile;
         [SerializeField] private int projectilesCount = 3;
         [SerializeField] private float shootingRate = 0.5f;

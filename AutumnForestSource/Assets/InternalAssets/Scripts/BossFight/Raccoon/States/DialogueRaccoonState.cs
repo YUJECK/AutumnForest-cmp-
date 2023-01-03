@@ -13,8 +13,7 @@ namespace AutumnForest.BossFight.Raccoon
             dialogue.StartConversation();
             dialogue.OnConversationEnds.AddListener(stateMachine.StateChoosing);
         }
-
-        public override void ExitState(IStateMachineUser stateMachine) { dialogue.OnConversationEnds.RemoveListener(stateMachine.StateChoosing); }
+        public override void ExitState(IStateMachineUser stateMachine) => dialogue.OnConversationEnds.RemoveListener(stateMachine.StateChoosing); 
         public override void UpdateState(IStateMachineUser stateMachine)
         {
             if (Input.GetKeyDown(KeyCode.E))

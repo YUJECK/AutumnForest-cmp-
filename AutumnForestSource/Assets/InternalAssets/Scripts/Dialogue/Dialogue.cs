@@ -1,10 +1,11 @@
+using AutumnForest.Helpers;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace AutumnForest.DialogueSystem
 {
-    public class Dialogue : MonoBehaviour
+    public class Dialogue : MonoBehaviour, ICreatureComponent
     {
         //variables
         [SerializeField] private string name = "Somebody";

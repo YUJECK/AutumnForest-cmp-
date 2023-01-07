@@ -63,13 +63,13 @@ namespace AutumnForest.BossFight.Raccoon
 
             InitServices();
 
-            GlobalServiceLocator.GetService<BossFightController>().OnStageChanged.AddListener(SetCurrentStage);
+            GlobalServiceLocator.GetService<BossFightController>().OnBossFightStageChanged.AddListener(SetCurrentStage);
         }
 
         private void SetCurrentStage(BossFightStages newStage)
         {
             currentStage = newStage;
-            if(currentStage != BossFightStages.FirstStage) StateChoosing();
+            StateChoosing();
         }
         public void StateChoosing()
         {
@@ -132,6 +132,11 @@ namespace AutumnForest.BossFight.Raccoon
             CreatureServiceLocator.RegisterService(raccoonComponents.Dialogue);
             CreatureServiceLocator.RegisterService(raccoonComponents.Health);
             CreatureServiceLocator.RegisterService(raccoonComponents.Shooting);
+        }
+
+        public void StateMachineUpdate()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

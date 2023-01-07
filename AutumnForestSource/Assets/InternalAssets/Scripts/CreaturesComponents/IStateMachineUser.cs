@@ -10,6 +10,7 @@ namespace CreaturesAI
         public UnityEvent<State> OnStateChanged { get; } 
         
         public void InitServices();
+        public void StateMachineUpdate();
         public void StateChoosing();
     }
 }

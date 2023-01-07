@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace AutumnForest.BossFight.Fox
 {
-    public class FoxStateMachine : MonoBehaviour, IStateMachineUser
+    public class FoxStateMachine : MonoBehaviour, IStateMachineUser 
     {
         [Header("States")]
         [SerializeField] private State swordThrowingState;
@@ -23,6 +23,11 @@ namespace AutumnForest.BossFight.Fox
         {
             State nextState = swordThrowingState;
             OnStateChanged.Invoke(nextState);
+        }
+
+        public void StateMachineUpdate()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

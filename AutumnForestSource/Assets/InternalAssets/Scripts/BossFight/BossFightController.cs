@@ -10,6 +10,7 @@ namespace AutumnForest.BossFight
 {
     public enum BossFightStages
     {
+        None,
         FirstStage,
         SecondStage,
         ThirdStage,
@@ -17,7 +18,7 @@ namespace AutumnForest.BossFight
 
     public class BossFightController : MonoBehaviour, IStateMachineUser
     {
-        [ReadOnly] private BossFightStages currentStage;
+        [ReadOnly] private BossFightStages currentBossFightStage;
         //bossfight stages
         [SerializeField] private State firstStage;
         [SerializeField] private State secondStage;
@@ -26,10 +27,10 @@ namespace AutumnForest.BossFight
         private Health raccoonHealth;
         private Health foxHealth;
         //events
-        public UnityEvent<BossFightStages> OnStageChanged = new UnityEvent<BossFightStages>();
+        public UnityEvent<BossFightStages> OnBossFightStageChanged = new UnityEvent<BossFightStages>();
 
         //getters
-        public BossFightStages CurrentStage => currentStage;
+        public BossFightStages CurrentBossFightStage => currentBossFightStage;
         public UnityEvent<State> OnStateChanged { get; private set; } = new();
         public StateMachine StateMachine { get; private set; }
         public CreatureServiceLocator CreatureServiceLocator { get; private set; } 
@@ -39,36 +40,45 @@ namespace AutumnForest.BossFight
         {
             raccoonHealth = GlobalServiceLocator.GetService<RaccoonStateMachine>().GetComponent<Health>();    
             foxHealth = GlobalServiceLocator.GetService<FoxStateMachine>().GetComponent<Health>();
-            //FindObjectOfType<EnteringToBossFight>().OnInteract.AddListener( delegate { StateMachine.EnableStateMachine(); });
+            FindObjectOfType<EnteringToBossFight>().OnInteract.AddListener(delegate { StateMachine.EnableStateMachine(); });
 
             StateMachine = GetComponent<StateMachine>();
         }
-        private void Update() => StateChoosing();
 
         public void StateChoosing()
         {
-            State nextStageState = firstStage;
-            BossFightStages nextStage = BossFightStages.FirstStage;
+            State nextStage = StateMachine.CurrentState;
+            BossFightStages nextBossFightStage = currentBossFightStage;
 
+            if(currentBossFightStage == BossFightStages.None)
+            {
+                nextStage = firstStage;
+                nextBossFightStage = BossFightStages.FirstStage;
+            }
             if (raccoonHealth.CurrentHealth < 0.5 * raccoonHealth.MaximumHealth)
             {
-                nextStageState = secondStage;
-                nextStage = BossFightStages.SecondStage;
+                nextStage = secondStage;
+                nextBossFightStage = BossFightStages.SecondStage;
             }
             if (foxHealth.CurrentHealth <= 0)
             {
-                nextStageState = thirdStage;
-                nextStage = BossFightStages.ThirdStage;
+                nextStage = thirdStage;
+                nextBossFightStage = BossFightStages.ThirdStage;
             }
-            if (currentStage != nextStage)
+            
+            if (currentBossFightStage != nextBossFightStage)
             {
-                OnStateChanged.Invoke(nextStageState);
-                OnStageChanged.Invoke(currentStage);
+                OnStateChanged.Invoke(nextStage);
+                OnBossFightStageChanged.Invoke(currentBossFightStage);
             }
         }
         public void InitServices()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void StateMachineUpdate()
+        {
         }
     }
 }

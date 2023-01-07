@@ -30,6 +30,7 @@ namespace AutumnForest
             camera.SetTargets(GlobalServiceLocator.GetService<RaccoonStateMachine>().gameObject);
             camera.ChangeOrthographicSize(cameraSizeOnBossFight);
 
+            GlobalServiceLocator.GetService<BossFightController>().StateMachine.EnableStateMachine();
             GlobalServiceLocator.GetService<BossFightController>().StateChoosing();
 
             Destroy(this);

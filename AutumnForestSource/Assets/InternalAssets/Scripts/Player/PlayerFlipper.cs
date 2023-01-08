@@ -10,7 +10,7 @@ namespace AutumnForest.Player
         private void Awake()
         {
             playerMove = GetComponent<PlayerMovable>();
-            playerMove.OnMove.AddListener(Flip);
+            playerMove.OnMoved += Flip;
         }
         private void Flip(Vector2 movement)
         {

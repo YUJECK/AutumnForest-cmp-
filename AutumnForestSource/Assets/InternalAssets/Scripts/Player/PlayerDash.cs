@@ -35,7 +35,7 @@ namespace AutumnForest.Player
         {
             playerRigidbody = GetComponent<Rigidbody2D>();
 
-            GetComponent<PlayerMovable>().OnMove.AddListener(SetMovement);
+            GetComponent<PlayerMovable>().OnMoved += SetMovement;
             OnDash.AddListener(delegate { GetComponent<PlayerMovable>().IsStopped = true; });
             AfterDash.AddListener(delegate { GetComponent<PlayerMovable>().IsStopped = false; });
 

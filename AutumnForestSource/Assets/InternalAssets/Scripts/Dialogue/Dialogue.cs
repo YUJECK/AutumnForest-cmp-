@@ -1,39 +1,18 @@
 using AutumnForest.Helpers;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace AutumnForest.DialogueSystem
 {
     public class Dialogue : MonoBehaviour, ICreatureComponent
     {
-        //variables
-        [SerializeField] private string name = "Somebody";
-        [TextArea(2, 20)]
-        [SerializeField] private List<string> phrases = new List<string>();
-        private int currentPhrase = 0;
-        //events
-        public UnityEvent<Dialogue> OnConversationStarts = new UnityEvent<Dialogue>();
-        public UnityEvent<string, string> OnNextPhrase = new UnityEvent<string, string>();
-        public UnityEvent OnConversationEnds = new UnityEvent();
+        [field: SerializeField] private new string name { get; private set; } = "Somebody";
+        [field: SerializeField, TextArea(2, 20)] private string[] phrases { get; private set; }
 
-        //methods
-        public void StartConversation()
+        private void StartDialogue()
         {
-            currentPhrase = 0;
-            OnConversationStarts.Invoke(this);
-            NextPhrase();
-        }
-        public void EndConversation() => OnConversationEnds.Invoke();
-        public void NextPhrase()
-        {
-            if (currentPhrase >= phrases.Count)
-                OnConversationEnds.Invoke();
-            else
-            {
-                OnNextPhrase.Invoke(phrases[currentPhrase], name);
-                currentPhrase++;
-            }
+
         }
     }
 }

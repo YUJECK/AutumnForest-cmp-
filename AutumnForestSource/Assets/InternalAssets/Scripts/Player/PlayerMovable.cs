@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,7 +12,9 @@ namespace AutumnForest
         new private Rigidbody2D rigidbody2D;
         private PlayerInput playerInput;
 
-        public UnityEvent<Vector2> OnMove { get; private set; } = new();
+        public event Action<Vector2> OnMoved;
+        public event Action<Vector2> OnMoveReleased;
+
         public Vector2 Movement => movement;
         public bool IsStopped { get; set; }
 
@@ -22,12 +25,11 @@ namespace AutumnForest
         }
         private void FixedUpdate()
         {
-            if(!IsStopped)
-            {
-                movement = playerInput.Player.Move.ReadValue<Vector2>();
-                OnMove.Invoke(movement);
-                rigidbody2D.velocity = movement * moveSpeed;
-            }
+            movement = playerInput.Player.Move.ReadValue<Vector2>();
+            rigidbody2D.velocity = movement * moveSpeed;
+
+            if (movement != Vector2.zero) OnMoved?.Invoke(movement);
+            else OnMoveReleased?.Invoke(movement);
         }
     }
 }

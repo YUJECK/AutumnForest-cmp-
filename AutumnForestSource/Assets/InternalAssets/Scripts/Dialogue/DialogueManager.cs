@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,15 +7,22 @@ namespace AutumnForest.DialogueSystem
 {
     public class DialogueManager : MonoBehaviour
     {
-        //fields
-        [SerializeField] private GameObject cloud;
-        [SerializeField] private Text dialogueText;
-        [SerializeField] private Text dialogueName;
+        public event Action<Dialogue> OnConversationStarted;
+        public event Action<Dialogue> OnNextPhrase;
+        public event Action<Dialogue> OnConversationEnds;
 
         private Dialogue currentDialogue;
-        private Coroutine showText;
 
-        //methods
+        private void Awake ()
+        {
+            Dialogue[] allDialogues = FindObjectsOfType<Dialogue>();
+            
+            foreach (Dialogue dialogue in allDialogues)
+                dialogue.OnConversationStarted.AddListener(StartDialogue);
+
+            GlobalServiceLocator.GetService<PlayerInput>().Player.Dialogue.Disable();
+        }
+
         private void StartDialogue(Dialogue dialogue)
         {
             if (currentDialogue != null)
@@ -43,13 +51,7 @@ namespace AutumnForest.DialogueSystem
         
         private void DialogueInput(UnityEngine.InputSystem.InputAction.CallbackContext obj) => currentDialogue.NextPhrase();
         
-        private void ShowPhrase(string phrase, string name)
-        {
-            dialogueName.text = name;
-            
-            if (showText != null) StopCoroutine(showText);
-            showText = StartCoroutine(ShowText(phrase));
-        }
+
         private IEnumerator ShowText(string text)
         {
             dialogueText.text = "";
@@ -61,15 +63,5 @@ namespace AutumnForest.DialogueSystem
             }
         }
 
-        //unity methods
-        private void Awake ()
-        {
-            Dialogue[] allDialogues = FindObjectsOfType<Dialogue>();
-            
-            foreach (Dialogue dialogue in allDialogues)
-                dialogue.OnConversationStarts.AddListener(StartDialogue);
-
-            GlobalServiceLocator.GetService<PlayerInput>().Player.Dialogue.Disable();
-        }
     }
 }

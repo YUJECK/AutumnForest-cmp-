@@ -1,4 +1,5 @@
 ﻿using AutumnForest.Helpers;
+using System;
 using UnityEngine;
 
 namespace AutumnForest
@@ -7,23 +8,23 @@ namespace AutumnForest
     public class CreatureAnimator : MonoBehaviour, ICreatureComponent
     {
         [SerializeField] private string defaultAnimation = "Idle";
+        private string currentAnimation = "";
         private Animator animator;
 
-        private void OnEnable()
+        private void Awake()
         {
             animator = GetComponent<Animator>();
             SetDefault();
         }
 
-        public void SetDefault()
+        public void SetDefault() => PlayAnimation(defaultAnimation);
+        public void PlayAnimation(string animation)
         {
-            if (defaultAnimation != "") Play(defaultAnimation);
-            else Debug.LogError($"The DefaultAnimation field is not filled in {gameObject.name}");
-        }
-        public void Play(string animationName)
-        {
-            if (animator != null) animator.Play(animationName);
-            else Debug.LogError($"Animator is null; {gameObject.name}");
+            if(animation == "")
+                throw new NotImplementedException(nameof(defaultAnimation));
+
+            if (currentAnimation != animation)
+                animator.Play(animation);
         }
     }
 }

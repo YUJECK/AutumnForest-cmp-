@@ -1,10 +1,10 @@
-﻿using UnityEngine.Events;
+﻿using System;
 
 namespace AutumnForest.Other
 {
     public interface IInteractive
     {
-        public UnityEvent OnInteract { get; set; }
+        public event Action OnInteract;
 
         public virtual void Init() { }
         public void Interact();

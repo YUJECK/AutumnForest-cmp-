@@ -1,6 +1,7 @@
 using AutumnForest.BossFight;
 using AutumnForest.BossFight.Raccoon;
 using AutumnForest.Other;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +14,19 @@ namespace AutumnForest
         [SerializeField] private float cameraSizeOnBossFight = 7f;
 
         public UnityEvent OnInteract { get; set; } = new();
+
+        event Action IInteractive.OnInteract
+        {
+            add
+            {
+                throw new NotImplementedException();
+            }
+
+            remove
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         private void Start()
         {

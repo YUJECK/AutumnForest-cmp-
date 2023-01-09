@@ -1,5 +1,6 @@
 using AutumnForest.Helpers;
 using AutumnForest.Other;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,6 +13,19 @@ namespace AutumnForest.BossFight
         [SerializeField] private Sprite cursor;
 
         public UnityEvent OnInteract { get; set; } = new();
+
+        event Action IInteractive.OnInteract
+        {
+            add
+            {
+                throw new NotImplementedException();
+            }
+
+            remove
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public void Interact()
         {

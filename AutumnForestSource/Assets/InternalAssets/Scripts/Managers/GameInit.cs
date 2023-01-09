@@ -35,7 +35,7 @@ namespace AutumnForest
         }
         private void RegisterDialogueServices()
         {
-            GlobalServiceLocator.RegisterService(FindObjectOfType<DialogueManager>());
+            GlobalServiceLocator.RegisterService(new DialogueManager());
         }
         private void RegisterBossFightServices()
         {

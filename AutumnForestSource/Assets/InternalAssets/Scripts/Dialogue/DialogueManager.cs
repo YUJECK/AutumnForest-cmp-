@@ -1,67 +1,38 @@
-using System;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using System;
+using System.Collections.Generic;
 
 namespace AutumnForest.DialogueSystem
 {
-    public class DialogueManager : MonoBehaviour
+    public sealed class DialogueManager
     {
-        public event Action<Dialogue> OnConversationStarted;
-        public event Action<Dialogue> OnNextPhrase;
-        public event Action<Dialogue> OnConversationEnds;
+        public event Action<Dialogue> OnDialogueStarted;
+        public event Action</*name*/string, /*phrase*/string> OnPhraseSwitched;
+        public event Action<Dialogue> OnDialogueEnded;
 
-        private Dialogue currentDialogue;
+        private List<Dialogue> dialogues = new();
 
-        private void Awake ()
+        public void AddDialogue(Dialogue dialogue)
         {
-            Dialogue[] allDialogues = FindObjectsOfType<Dialogue>();
-            
-            foreach (Dialogue dialogue in allDialogues)
-                dialogue.OnConversationStarted.AddListener(StartDialogue);
+            dialogues.Add(dialogue);
 
-            GlobalServiceLocator.GetService<PlayerInput>().Player.Dialogue.Disable();
+            dialogue.OnDialogueStarted += OnDialogueStartedCallback;
+            dialogue.OnPhraseChanged += OnPhraseChangedCallback;
+            dialogue.OnDialogueEnded += OnDialogueEndedCallback;
         }
 
-        private void StartDialogue(Dialogue dialogue)
+        private void OnDialogueEndedCallback(Dialogue dialogue)
         {
-            if (currentDialogue != null)
-                EndDialogue(); 
-            
-            currentDialogue = dialogue;
-            cloud.SetActive(true);
-            GlobalServiceLocator.GetService<PlayerInput>().Player.Dialogue.performed += DialogueInput;
-            currentDialogue.OnNextPhrase.AddListener(ShowPhrase);
-            currentDialogue.OnConversationEnds.AddListener(EndDialogue);
-
-            GlobalServiceLocator.GetService<PlayerInput>().Player.Dialogue.Enable();
-        }
-        private void EndDialogue()
-        {
-            if(currentDialogue != null)
-            {
-                currentDialogue.OnNextPhrase.RemoveListener(ShowPhrase);
-                currentDialogue.OnConversationEnds.RemoveListener(EndDialogue);
-                currentDialogue = null;
-                cloud.SetActive(false);
-
-                GlobalServiceLocator.GetService<PlayerInput>().Player.Dialogue.Disable();
-            }
-        }
-        
-        private void DialogueInput(UnityEngine.InputSystem.InputAction.CallbackContext obj) => currentDialogue.NextPhrase();
-        
-
-        private IEnumerator ShowText(string text)
-        {
-            dialogueText.text = "";
-
-            foreach(char letter in text)
-            {
-                dialogueText.text = dialogueText.text + letter;
-                yield return new WaitForSeconds(0.05f);
-            }
+            OnDialogueStarted?.Invoke(dialogue);
         }
 
+        private void OnPhraseChangedCallback(string dialogueName, string dialogueText)
+        {
+            OnPhraseSwitched?.Invoke(dialogueName, dialogueText);
+        }
+
+        private void OnDialogueStartedCallback(Dialogue dialogue)
+        {
+            OnDialogueEnded?.Invoke(dialogue);
+        }
     }
 }

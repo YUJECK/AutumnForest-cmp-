@@ -26,12 +26,12 @@ namespace AutumnForest.DialogueSystem
             InitDialogue();
         }
 
-        private void StartDialogue()
+        public void StartDialogue()
         {
             OnDialogueStarted.Invoke(this);
             IsCurrentlyActive = true;
         }
-        private void NextPhrase()
+        public void NextPhrase()
         {
             if (nextPhrase >= dialoguePhrases.Length)
             {
@@ -43,7 +43,7 @@ namespace AutumnForest.DialogueSystem
             
             nextPhrase++;
         }
-        private void EndDialogue()
+        public void EndDialogue()
         {
             nextPhrase = 0;
             IsCurrentlyActive = false;

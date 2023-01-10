@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using AutumnForest.Extensions;
+using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +22,8 @@ namespace AutumnForest.DialogueSystem
 
         private void Start()
         {
+            animator = GetComponent<Animator>();
+
             GlobalServiceLocator.GetService<DialogueManager>().OnDialogueStarted += OnDialogueStarted;
             GlobalServiceLocator.GetService<DialogueManager>().OnDialogueEnded += OnDialogueEnded;
             GlobalServiceLocator.GetService<DialogueManager>().OnPhraseSwitched += ShowPhrase;
@@ -63,6 +66,8 @@ namespace AutumnForest.DialogueSystem
                 dialogueTextUI.text = "";
                 dialogueNameUI.text = "";
 
+                animator.Play(windowDisableAnimationName);
+                await animator.WaitForEndOfCurrentClip(0.8f);
                 
                 dialogueWindowUI.SetActive(false);
             }   

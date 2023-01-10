@@ -10,6 +10,7 @@ namespace AutumnForest.DialogueSystem
         public event Action<Dialogue> OnDialogueEnded;
 
         private List<Dialogue> dialogues = new();
+        private Dialogue currentDialogue;
 
         public void AddDialogue(Dialogue dialogue)
         {
@@ -22,7 +23,8 @@ namespace AutumnForest.DialogueSystem
 
         private void OnDialogueEndedCallback(Dialogue dialogue)
         {
-            OnDialogueStarted?.Invoke(dialogue);
+            currentDialogue = null;
+            OnDialogueEnded?.Invoke(dialogue);
         }
 
         private void OnPhraseChangedCallback(string dialogueName, string dialogueText)
@@ -32,7 +34,14 @@ namespace AutumnForest.DialogueSystem
 
         private void OnDialogueStartedCallback(Dialogue dialogue)
         {
-            OnDialogueEnded?.Invoke(dialogue);
+            if (currentDialogue != dialogue)
+            {
+                if (currentDialogue != null)
+                    currentDialogue.EndDialogue();
+
+                currentDialogue = dialogue;
+                OnDialogueStarted?.Invoke(dialogue);
+            }
         }
     }
 }

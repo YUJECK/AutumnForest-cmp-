@@ -1,4 +1,4 @@
-﻿using AutumnForest.Other;
+﻿using AutumnForest.Other;   
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,6 +21,14 @@ namespace AutumnForest
         {
             if (collision.TryGetComponent(out IInteractive interactive))
                 awailableInteractions.Add(interactive);
+        }
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.TryGetComponent(out IInteractive interactive))
+            {
+                if (awailableInteractions.Contains(interactive))
+                    awailableInteractions.Remove(interactive);
+            }
         }
     }
 }

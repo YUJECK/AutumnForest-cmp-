@@ -1,6 +1,7 @@
 ﻿using AutumnForest.Extensions;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,10 @@ namespace AutumnForest.DialogueSystem
         [SerializeField] private Text dialogueNameUI;
 
         [SerializeField] private float textSpeed = 0.02f;
+
+        private CancellationTokenSource token = new();
+        private UniTask disableTask;
+        //костыль момент
 
         private void Start()
         {
@@ -47,30 +52,37 @@ namespace AutumnForest.DialogueSystem
             for (int i = 0; i < text.Length; i++)
             {
                 dialogueTextUI.text += text[i];
-                await UniTask.Delay(TimeSpan.FromSeconds(textSpeed));            
+                await UniTask.Delay(TimeSpan.FromSeconds(textSpeed), cancellationToken: token.Token);
             }
         }
 
         protected override void SelfEnable()
         {
-            dialogueWindowUI.SetActive(true);
+            Enable();
 
-            animator.Play(windowEnableAnimationName);
+            async UniTaskVoid Enable()
+            {
+                if (disableTask.Status == UniTaskStatus.Pending)
+                    await disableTask;
+
+                dialogueWindowUI.SetActive(true);
+                animator.Play(windowEnableAnimationName);
+            }
         }
         protected override void SelfDisable()
         {
-            Disable();
+            disableTask = Disable();
 
-            async void Disable()
+            async UniTask Disable()
             {
                 dialogueTextUI.text = "";
                 dialogueNameUI.text = "";
 
                 animator.Play(windowDisableAnimationName);
                 await animator.WaitForEndOfCurrentClip(0.8f);
-                
+
                 dialogueWindowUI.SetActive(false);
-            }   
+            }
         }
     }
 }

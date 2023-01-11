@@ -27,6 +27,7 @@ namespace AutumnForest.DialogueSystem
 
         private void Start()
         {
+            dialogueWindowUI.SetActive(false);
             animator = GetComponent<Animator>();
 
             GlobalServiceLocator.GetService<DialogueManager>().OnDialogueStarted += OnDialogueStarted;

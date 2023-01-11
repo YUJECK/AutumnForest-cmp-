@@ -10,12 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6093305727848043067}
   - component: {fileID: 6093305727848043070}
-  - component: {fileID: 6093305727848043071}
-  - component: {fileID: 6093305727848043064}
-  - component: {fileID: 6093305727848043065}
-  - component: {fileID: 6093305727848043066}
   - component: {fileID: 6093305727848043068}
-  - component: {fileID: 7362518351345278040}
   m_Layer: 0
   m_Name: DialogueTrigger
   m_TagString: Untagged
@@ -50,96 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2c5e85b2aea8240888d6afea166195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  name: "\u041A\u0440\u044B\u0441 \u0422\u043E\u0440\u0433\u043E\u0432\u0435\u0446"
-  phrases:
-  - "\u041F\u0440\u0438\u0432\u0435\u0442! \u042F \u0432\u043E\u0442 \u0433\u043E\u0441\u0442\u0438\u043B
-    \u0442\u0443\u0442 \u0443 \u043F\u043E\u0434\u0440\u0443\u0433\u0438, \u0441\u043A\u043E\u0440\u043E
-    \u0432\u0435\u0440\u043D\u0443\u0441\u044C \u0434\u043E\u043C\u043E\u0439. \r\n"
-  - "\u041D\u0430\u0441\u043B\u044B\u0448\u0430\u043D \u043E \u0442\u043E\u043C,
-    \u0447\u0442\u043E \u0442\u044B \u0437\u0430\u0434\u043E\u043B\u0436\u0430\u043B
-    \u041C\u0430\u0444\u0438\u043D\u043E\u0442\u0443. \u0423\u0434\u0430\u0447\u0438
-    \u0442\u0435\u0431\u0435! \u041E\u043D\u0430 \u044F\u0432\u043D\u043E \u043F\u0440\u0438\u0433\u043E\u0434\u0438\u0442\u0441\u044F."
-  - "\u041D\u043E \u0434\u0430\u0432\u0430\u0439 \u043D\u0435 \u0431\u0443\u0434\u0435\u0442
-    \u043E \u043F\u043B\u043E\u0445\u043E\u043C. \u0421\u0435\u0433\u043E\u0434\u043D\u044F
-    \u0437\u0430\u043C\u0435\u0447\u0430\u0442\u0435\u043B\u044C\u043D\u0430\u044F
-    \u043E\u0441\u0435\u043D\u043D\u044F\u044F \u043F\u043E\u0433\u043E\u0434\u0430.
-    \u042F \u0442\u0430\u043A \u0443\u0441\u0442\u0430\u043B \u043E\u0442 \u043F\u043E\u0434\u0432\u0430\u043B\u0430,
-    \u043F\u0440\u0435\u0431\u044B\u0432\u0430\u043D\u0438\u0435 \u0442\u0443\u0442
-    \u044F\u0432\u043D\u043E \u043F\u043E\u0448\u043B\u043E \u043C\u043D\u0435 \u043D\u0430
-    \u043F\u043E\u043B\u044C\u0437\u0443! \r\n"
-  - "\u041F\u043E\u0440\u0430 \u0432\u043E\u0437\u0432\u0440\u0430\u0449\u0430\u0442\u044C\u0441\u044F
-    \u043A \u0440\u0430\u0431\u043E\u0442\u0435, \u0443\u0432\u0438\u0434\u0438\u043C\u0441\u044F
-    \u043B\u0435\u0442\u043E\u043C!"
-  OnConversationStarts:
-    m_PersistentCalls:
-      m_Calls: []
-  OnNextPhrase:
-    m_PersistentCalls:
-      m_Calls: []
-  OnConversationEnds:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &6093305727848043071
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6093305727848043060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 305e09f432381c54baffef3d6e79b3f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactive: {fileID: 0}
-  enterTags:
-  - Player
-  OnEnter:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &6093305727848043064
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6093305727848043060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78b55e269190c5b41b067d88062c48c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactive: {fileID: 0}
-  exitTags:
-  - Player
-  OnExit:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &6093305727848043065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6093305727848043060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2bb988baf5b58047b33c1811f13b980, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactive: {fileID: 7362518351345278040}
---- !u!114 &6093305727848043066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6093305727848043060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32d150c28fa5037458a9a5c9784963d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  dialogueName: "\u041A\u0440\u044B\u0441 \u0442\u043E\u0440\u0433\u043E\u0432\u0435\u0446"
+  dialoguePhrases: []
 --- !u!61 &6093305727848043068
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -166,19 +73,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.0001116, y: 2.012297}
   m_EdgeRadius: 0
---- !u!114 &7362518351345278040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6093305727848043060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e11f6f770bff4f4b985cbedb42f74a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue: {fileID: 6093305727848043070}
 --- !u!1 &6093305729500915113
 GameObject:
   m_ObjectHideFlags: 0

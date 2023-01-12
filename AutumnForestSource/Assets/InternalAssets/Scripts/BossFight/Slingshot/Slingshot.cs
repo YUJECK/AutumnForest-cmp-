@@ -20,6 +20,11 @@ namespace AutumnForest.BossFight.Slingshot
         public event Action OnShoot;
         public event Action OnTimer;
 
+
+        private void Start()
+        {
+            DisableSlingshot();
+        }
         private void OnEnable()
         {
             GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.performed += SlingshotInput;
@@ -37,7 +42,7 @@ namespace AutumnForest.BossFight.Slingshot
             if(canShoot)
             {
                 Instantiate(projectile, firePoint.position, firePoint.rotation);
-                OnShoot.Invoke();
+                OnShoot?.Invoke();
                 
                 Culldown();
             }

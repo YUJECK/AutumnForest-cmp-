@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight.Slingshot
 {
+    [RequireComponent(typeof(Slingshot))]
     public sealed class SlingshotInteractive : MonoBehaviour, IInteractive
     {
         [SerializeField] private float lerpOnZoom;
@@ -17,9 +18,13 @@ namespace AutumnForest.BossFight.Slingshot
         
         public event Action OnInteract;
 
+        private void Start()
+        {
+            slingshotShoot = GetComponent<Slingshot>();
+            slingshotShoot.OnShoot += Distance;
+        }
         private void OnEnable()
         {
-            slingshotShoot.OnShoot += Distance;
         }
 
         public void Interact()

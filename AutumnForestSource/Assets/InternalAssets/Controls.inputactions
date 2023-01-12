@@ -2,7 +2,7 @@
     "name": "Controls",
     "maps": [
         {
-            "name": "Player",
+            "name": "Inputs",
             "id": "f0a43ca5-13d6-4421-ac5d-de09678c52eb",
             "actions": [
                 {
@@ -45,6 +45,15 @@
                     "name": "Dialogue",
                     "type": "Button",
                     "id": "89e7b15f-d6f0-4164-af14-ce582f173a9c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Slingshot",
+                    "type": "Button",
+                    "id": "89e039ef-761f-4324-ac72-3ea00fbaa04d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -148,6 +157,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dialogue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5cb21134-409b-4d95-bf01-f48d83ac64b4",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Slingshot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

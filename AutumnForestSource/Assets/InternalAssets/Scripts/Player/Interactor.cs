@@ -8,8 +8,8 @@ namespace AutumnForest
     {
         private List<IInteractive> awailableInteractions = new();
 
-        private void OnEnable() => GlobalServiceLocator.GetService<PlayerInput>().Player.Interact.performed += Interact;
-        private void OnDisable() => GlobalServiceLocator.GetService<PlayerInput>().Player.Interact.performed -= Interact;
+        private void OnEnable() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.Interact.performed += Interact;
+        private void OnDisable() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.Interact.performed -= Interact;
 
         private void Interact(UnityEngine.InputSystem.InputAction.CallbackContext obj)
         {

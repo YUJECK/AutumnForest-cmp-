@@ -25,7 +25,7 @@ namespace AutumnForest
         }
         private void FixedUpdate()
         {
-            movement = playerInput.Player.Move.ReadValue<Vector2>();
+            movement = playerInput.Inputs.Move.ReadValue<Vector2>();
             rigidbody2D.velocity = movement * moveSpeed;
 
             if (movement != Vector2.zero) OnMoved?.Invoke(movement);

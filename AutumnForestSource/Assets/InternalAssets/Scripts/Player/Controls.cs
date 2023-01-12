@@ -26,7 +26,7 @@ namespace AutumnForest
     ""name"": ""Controls"",
     ""maps"": [
         {
-            ""name"": ""Player"",
+            ""name"": ""Inputs"",
             ""id"": ""f0a43ca5-13d6-4421-ac5d-de09678c52eb"",
             ""actions"": [
                 {
@@ -69,6 +69,15 @@ namespace AutumnForest
                     ""name"": ""Dialogue"",
                     ""type"": ""Button"",
                     ""id"": ""89e7b15f-d6f0-4164-af14-ce582f173a9c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Slingshot"",
+                    ""type"": ""Button"",
+                    ""id"": ""89e039ef-761f-4324-ac72-3ea00fbaa04d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -174,6 +183,17 @@ namespace AutumnForest
                     ""action"": ""Dialogue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5cb21134-409b-4d95-bf01-f48d83ac64b4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Slingshot"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -197,13 +217,14 @@ namespace AutumnForest
         }
     ]
 }");
-            // Player
-            m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-            m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-            m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-            m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
-            m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
-            m_Player_Dialogue = m_Player.FindAction("Dialogue", throwIfNotFound: true);
+            // Inputs
+            m_Inputs = asset.FindActionMap("Inputs", throwIfNotFound: true);
+            m_Inputs_Move = m_Inputs.FindAction("Move", throwIfNotFound: true);
+            m_Inputs_Attack = m_Inputs.FindAction("Attack", throwIfNotFound: true);
+            m_Inputs_Interact = m_Inputs.FindAction("Interact", throwIfNotFound: true);
+            m_Inputs_Dash = m_Inputs.FindAction("Dash", throwIfNotFound: true);
+            m_Inputs_Dialogue = m_Inputs.FindAction("Dialogue", throwIfNotFound: true);
+            m_Inputs_Slingshot = m_Inputs.FindAction("Slingshot", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -260,49 +281,54 @@ namespace AutumnForest
             return asset.FindBinding(bindingMask, out action);
         }
 
-        // Player
-        private readonly InputActionMap m_Player;
-        private IPlayerActions m_PlayerActionsCallbackInterface;
-        private readonly InputAction m_Player_Move;
-        private readonly InputAction m_Player_Attack;
-        private readonly InputAction m_Player_Interact;
-        private readonly InputAction m_Player_Dash;
-        private readonly InputAction m_Player_Dialogue;
-        public struct PlayerActions
+        // Inputs
+        private readonly InputActionMap m_Inputs;
+        private IInputsActions m_InputsActionsCallbackInterface;
+        private readonly InputAction m_Inputs_Move;
+        private readonly InputAction m_Inputs_Attack;
+        private readonly InputAction m_Inputs_Interact;
+        private readonly InputAction m_Inputs_Dash;
+        private readonly InputAction m_Inputs_Dialogue;
+        private readonly InputAction m_Inputs_Slingshot;
+        public struct InputsActions
         {
             private @PlayerInput m_Wrapper;
-            public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
-            public InputAction @Move => m_Wrapper.m_Player_Move;
-            public InputAction @Attack => m_Wrapper.m_Player_Attack;
-            public InputAction @Interact => m_Wrapper.m_Player_Interact;
-            public InputAction @Dash => m_Wrapper.m_Player_Dash;
-            public InputAction @Dialogue => m_Wrapper.m_Player_Dialogue;
-            public InputActionMap Get() { return m_Wrapper.m_Player; }
+            public InputsActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Move => m_Wrapper.m_Inputs_Move;
+            public InputAction @Attack => m_Wrapper.m_Inputs_Attack;
+            public InputAction @Interact => m_Wrapper.m_Inputs_Interact;
+            public InputAction @Dash => m_Wrapper.m_Inputs_Dash;
+            public InputAction @Dialogue => m_Wrapper.m_Inputs_Dialogue;
+            public InputAction @Slingshot => m_Wrapper.m_Inputs_Slingshot;
+            public InputActionMap Get() { return m_Wrapper.m_Inputs; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
             public bool enabled => Get().enabled;
-            public static implicit operator InputActionMap(PlayerActions set) { return set.Get(); }
-            public void SetCallbacks(IPlayerActions instance)
+            public static implicit operator InputActionMap(InputsActions set) { return set.Get(); }
+            public void SetCallbacks(IInputsActions instance)
             {
-                if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
+                if (m_Wrapper.m_InputsActionsCallbackInterface != null)
                 {
-                    @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                    @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                    @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                    @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                    @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                    @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                    @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                    @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                    @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                    @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                    @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                    @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                    @Dialogue.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDialogue;
-                    @Dialogue.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDialogue;
-                    @Dialogue.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDialogue;
+                    @Move.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnMove;
+                    @Move.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnMove;
+                    @Move.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnMove;
+                    @Attack.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnAttack;
+                    @Attack.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnAttack;
+                    @Attack.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnAttack;
+                    @Interact.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnInteract;
+                    @Interact.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnInteract;
+                    @Interact.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnInteract;
+                    @Dash.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnDash;
+                    @Dash.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnDash;
+                    @Dash.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnDash;
+                    @Dialogue.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnDialogue;
+                    @Dialogue.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnDialogue;
+                    @Dialogue.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnDialogue;
+                    @Slingshot.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnSlingshot;
+                    @Slingshot.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnSlingshot;
+                    @Slingshot.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnSlingshot;
                 }
-                m_Wrapper.m_PlayerActionsCallbackInterface = instance;
+                m_Wrapper.m_InputsActionsCallbackInterface = instance;
                 if (instance != null)
                 {
                     @Move.started += instance.OnMove;
@@ -320,10 +346,13 @@ namespace AutumnForest
                     @Dialogue.started += instance.OnDialogue;
                     @Dialogue.performed += instance.OnDialogue;
                     @Dialogue.canceled += instance.OnDialogue;
+                    @Slingshot.started += instance.OnSlingshot;
+                    @Slingshot.performed += instance.OnSlingshot;
+                    @Slingshot.canceled += instance.OnSlingshot;
                 }
             }
         }
-        public PlayerActions @Player => new PlayerActions(this);
+        public InputsActions @Inputs => new InputsActions(this);
         private int m_KeyboardMouseSchemeIndex = -1;
         public InputControlScheme KeyboardMouseScheme
         {
@@ -333,13 +362,14 @@ namespace AutumnForest
                 return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
             }
         }
-        public interface IPlayerActions
+        public interface IInputsActions
         {
             void OnMove(InputAction.CallbackContext context);
             void OnAttack(InputAction.CallbackContext context);
             void OnInteract(InputAction.CallbackContext context);
             void OnDash(InputAction.CallbackContext context);
             void OnDialogue(InputAction.CallbackContext context);
+            void OnSlingshot(InputAction.CallbackContext context);
         }
     }
 }

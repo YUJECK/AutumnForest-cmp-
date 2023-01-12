@@ -1,42 +1,44 @@
+using AutumnForest.Helpers;
 using AutumnForest.Other;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-namespace AutumnForest.BossFight
+namespace AutumnForest.BossFight.Slingshot
 {
-    [RequireComponent(typeof(InteractionField))]
-    public sealed class SlingshotShoot : MonoBehaviour
+    public sealed class Slingshot : MonoBehaviour
     {
+        [SerializeField] private int culldown = 5;
         [SerializeField] private GameObject projectile;
         [SerializeField] private Transform firePoint;
-        [SerializeField] private Text culldownText;
-        [SerializeField] private PointRotation pointRotation;
         private bool canShoot = true;
-        private bool isActivated = false;
 
-        public UnityEvent OnShoot = new();
-        public bool IsActivated => isActivated;
+        public event Action OnReady;
+        public event Action OnShoot;
+        public event Action OnTimer;
 
-        public void ActivateSlingshot()
+        private void OnEnable()
         {
-            GlobalServiceLocator.GetService<PlayerInput>().Player.Attack.performed += Shoot;
-            isActivated = true;
+            GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.performed += SlingshotInput;
         }
-        public void DisableSlingshot()
+        private void OnDisable()
         {
-            GlobalServiceLocator.GetService<PlayerInput>().Player.Attack.performed -= Shoot;
-            isActivated = false;
+            GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.performed -= SlingshotInput;
         }
-        private void Shoot(InputAction.CallbackContext context)
+
+        public void EnableSlingshot() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.Enable();
+        public void DisableSlingshot() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.Disable();
+
+        private void Shoot()
         {
-            if (canShoot)
+            if(canShoot)
             {
                 Instantiate(projectile, firePoint.position, firePoint.rotation);
                 OnShoot.Invoke();
-                DisableSlingshot();
+                
                 Culldown();
             }
         }
@@ -44,14 +46,16 @@ namespace AutumnForest.BossFight
         {
             canShoot = false;
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < culldown; i++)
             {
-                culldownText.text = (5 - i).ToString();
-                await Task.Delay(1000);
+                OnTimer?.Invoke();
+                await UniTask.Delay(1000);
             }
-            culldownText.text = "";
 
             canShoot = true;
+            OnReady?.Invoke();
         }
+
+        private void SlingshotInput(InputAction.CallbackContext obj) => Shoot();
     }
 }

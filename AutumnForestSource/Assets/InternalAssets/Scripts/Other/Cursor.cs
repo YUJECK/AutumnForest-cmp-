@@ -1,24 +1,24 @@
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
+using UnityEngine.WSA;
 
-[RequireComponent(typeof(Image))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class Cursor : MonoBehaviour
 {
-    //fields
     private Camera mainCamera;
-    private Image UIIcon;
+    private SpriteRenderer cursorIcon;
 
-    //unity methods
     void Awake()
     {
         mainCamera = Camera.main;
-        UIIcon = GetComponent<Image>();
+        cursorIcon = GetComponent<SpriteRenderer>();
     }
-    void Update()
+    void LateUpdate()
     {
-        transform.position = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = new Vector3(transform.position.x, transform.position.y, 0f);
+        Vector3 newPos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        transform.position = new Vector3(newPos.x, newPos.y, -100f);
     }
     //methods
-    public void SetCursorIcon(Sprite newIcon) => UIIcon.sprite = newIcon;
+    public void SetCursorIcon(Sprite newIcon) => cursorIcon.sprite = newIcon;
 }

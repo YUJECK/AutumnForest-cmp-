@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 namespace AutumnForest.Player
 {
     [RequireComponent(typeof(PlayerMovable))]
-    
+
     public sealed class PlayerDash : MonoBehaviour
     {
         private enum DashState
@@ -23,7 +23,7 @@ namespace AutumnForest.Player
         [SerializeField] private int dashCulldown = 1000;
         [SerializeField] private int layerIndex = 10;
 
-        [NaughtyAttributes.ReadOnly] private DashState dashState;    
+        [NaughtyAttributes.ReadOnly] private DashState dashState;
         //events
         private UnityEvent OnDash = new();
         private UnityEvent AfterDash = new();
@@ -46,16 +46,16 @@ namespace AutumnForest.Player
         private void SetMovement(Vector2 newMovement) => movement = newMovement;
         private void StartDash(InputAction.CallbackContext context)
         {
-            //some params
+            //деш нужно будет переписать
             float layerMaskTransitionDelay = 0.7f;
 
             if (movement != Vector2.zero && dashState == DashState.None)
             {
                 OnDash.Invoke();
-                StartCoroutine(Dashing());
+                Dashing();
             }
 
-            IEnumerator Dashing()
+            async UniTaskVoid Dashing()
             {
                 dashState = DashState.NowDashing;
                 int defaultLayer = gameObject.layer;
@@ -64,22 +64,26 @@ namespace AutumnForest.Player
                 float startTime = Time.time;
                 Vector2 movementOnDash = movement *= 10;
 
+                GlobalServiceLocator.GetService<PlayerMovable>().enabled = false;
+
                 while (Time.time <= startTime + dashDuration)
                 {
+                    Debug.Log(movement);
                     playerRigidbody.velocity = movementOnDash * dashSpeed;
-                    yield return new WaitForFixedUpdate();
+                    await UniTask.WaitForFixedUpdate();
                 }
 
                 AfterDash.Invoke();
 
+                GlobalServiceLocator.GetService<PlayerMovable>().enabled = true;
                 DashCulldown();
-                yield return new WaitForSeconds(layerMaskTransitionDelay);
+                await UniTask.Delay(TimeSpan.FromSeconds(layerMaskTransitionDelay));
                 gameObject.layer = defaultLayer;
             }
             async void DashCulldown()
             {
                 dashState = DashState.Culldown;
-                await Task.Delay(dashCulldown);
+                await UniTask.Delay(dashCulldown);
                 dashState = DashState.None;
             }
         }

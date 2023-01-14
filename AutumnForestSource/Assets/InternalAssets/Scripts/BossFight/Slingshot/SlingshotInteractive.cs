@@ -1,5 +1,6 @@
 ﻿using AutumnForest.Helpers;
 using AutumnForest.Other;
+using Cinemachine;
 using System;
 using UnityEngine;
 
@@ -35,15 +36,15 @@ namespace AutumnForest.BossFight.Slingshot
 
         private void Zoom()
         {
-            GlobalServiceLocator.GetService<MainCameraBrain>().SetLerp(lerpOnZoom);
-            GlobalServiceLocator.GetService<MainCameraBrain>().ChangeOrthographicSize(CameraSizeHelper.Slingshot);
-
+            GlobalServiceLocator.GetService<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.SetActive(false);
+            GlobalServiceLocator.GetService<VirtualCameraHelper>().SlingshotCamera.gameObject.SetActive(true);
+            
             FindObjectOfType<Cursor>().SetCursorIcon(slingshotCursor);
         }
         private void Distance()
         {
-            GlobalServiceLocator.GetService<MainCameraBrain>().SetLerp(lerpDefault);
-            GlobalServiceLocator.GetService<MainCameraBrain>().ChangeOrthographicSize(CameraSizeHelper.Slingshot);
+            GlobalServiceLocator.GetService<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.SetActive(false);
+            GlobalServiceLocator.GetService<VirtualCameraHelper>().BossfightCamera.gameObject.SetActive(true);
 
             FindObjectOfType<Cursor>().SetCursorIcon(cursorDefault);
         }

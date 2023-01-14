@@ -1,7 +1,4 @@
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.WSA;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class Cursor : MonoBehaviour

@@ -19,7 +19,6 @@ namespace AutumnForest.BossFight
             RaccoonStateMachine raccoonStateMachine = GlobalServiceLocator.GetService<RaccoonStateMachine>();
 
             raccoonPreset.HealthTarget = raccoonStateMachine.GetComponent<Health>();
-            GlobalServiceLocator.GetService<MainCameraBrain>().SetTargets(raccoonStateMachine.gameObject);
             bossHealthBar.SetPreset(raccoonPreset);
             raccoonStateMachine.StateChoosing();
         }

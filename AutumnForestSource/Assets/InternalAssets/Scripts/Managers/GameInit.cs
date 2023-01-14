@@ -2,8 +2,10 @@ using AutumnForest.BossFight;
 using AutumnForest.BossFight.Fox;
 using AutumnForest.BossFight.Raccoon;
 using AutumnForest.DialogueSystem;
+using AutumnForest.Helpers;
 using AutumnForest.Other;
 using AutumnForest.Player;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,17 +13,18 @@ namespace AutumnForest
 {
     public sealed class GameInit : MonoBehaviour
     {
-        public UnityEvent OnInit = new();
+        [SerializeField] private CinemachineVirtualCamera mainCamera;
+        [SerializeField] private CinemachineVirtualCamera bossfightCamera;
+        [SerializeField] private CinemachineVirtualCamera slingshotCamera;
 
         private void OnEnable()
         {
             RegisterPlayerServices();
             RegisterBossFightServices();
+            RegisterCameras();
             RegisterDialogueServices();
 
             GlobalServiceLocator.GetService<PlayerInput>().Enable();
-
-            OnInit.Invoke();
         }
 
         private void RegisterPlayerServices()
@@ -30,8 +33,12 @@ namespace AutumnForest
             GlobalServiceLocator.RegisterService(FindObjectOfType<PlayerAttack>());
             GlobalServiceLocator.RegisterService(FindObjectOfType<PlayerDash>());
             GlobalServiceLocator.RegisterService(FindObjectOfType<PlayerFlipper>());
-            GlobalServiceLocator.RegisterService(FindObjectOfType<MainCameraBrain>());
             GlobalServiceLocator.RegisterService(new PlayerInput());
+        }
+        private void RegisterCameras()
+        {
+            GlobalServiceLocator.RegisterService(new VirtualCameraHelper(mainCamera, bossfightCamera, slingshotCamera)) ;
+            GlobalServiceLocator.RegisterService(FindObjectOfType<CinemachineBrain>());
         }
         private void RegisterDialogueServices()
         {

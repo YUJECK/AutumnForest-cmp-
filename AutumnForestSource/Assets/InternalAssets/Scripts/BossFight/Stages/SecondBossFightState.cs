@@ -18,7 +18,6 @@ namespace AutumnForest.BossFight
             FoxStateMachine foxStateMachine = GlobalServiceLocator.GetService<FoxStateMachine>();
             foxPreset.HealthTarget = foxStateMachine.GetComponent<Health>();
             bossHealthBar.SetPreset(foxPreset);
-            GlobalServiceLocator.GetService<MainCameraBrain>().SetTargets(foxStateMachine.gameObject);
             foxStateMachine.gameObject.SetActive(true);
             GlobalServiceLocator.GetService<RaccoonStateMachine>().StateMachine.DisableStateMachine();
             foxStateMachine.StateMachine.EnableStateMachine();

@@ -68,7 +68,6 @@ namespace AutumnForest.Player
 
                 while (Time.time <= startTime + dashDuration)
                 {
-                    Debug.Log(movement);
                     playerRigidbody.velocity = movementOnDash * dashSpeed;
                     await UniTask.WaitForFixedUpdate();
                 }

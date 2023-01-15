@@ -12,8 +12,6 @@ namespace CreaturesAI
 
     public class StateMachine : ICreatureComponent
     {
-        private bool enableOnStart = true;
-        private IStateMachineUser stateMachineUser;
 
         public event Action OnMachineEnabled;
         public event Action OnMachineDisabled;
@@ -21,6 +19,8 @@ namespace CreaturesAI
         public State CurrentState { get; private set; }
         public StateMachineCondition StateMachineState { get; private set; } = StateMachineCondition.Stopped;
 
+        private IStateMachineUser stateMachineUser;
+     
         public StateMachine(IStateMachineUser stateMachineUser, bool enableImmediatly)
         {
             this.stateMachineUser = stateMachineUser;

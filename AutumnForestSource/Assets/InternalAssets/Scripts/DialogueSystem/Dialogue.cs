@@ -1,11 +1,9 @@
-using AutumnForest.Helpers;
-using AutumnForest.Other;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace AutumnForest.DialogueSystem
 {
-    public class Dialogue : MonoBehaviour, IInteractive, ICreatureComponent
+    public sealed class Dialogue : MonoBehaviour
     {
         private int nextPhrase = 0;
 
@@ -13,18 +11,12 @@ namespace AutumnForest.DialogueSystem
         public event Action</*name*/string, /*phrase*/string> OnPhraseChanged;
         public event Action<Dialogue> OnDialogueEnded;
 
-        public event Action OnInteract;
-
         public bool IsCurrentlyActive { get; private set; } = false;
 
         [SerializeField] public string dialogueName = "Somebody";
         [SerializeField, TextArea(2, 20)] public string[] dialoguePhrases;
 
-
-        private void Start()
-        {
-            InitDialogue();
-        }
+        private void Start() => InitDialogue();
 
         public void StartDialogue()
         {
@@ -40,7 +32,7 @@ namespace AutumnForest.DialogueSystem
             }
 
             OnPhraseChanged.Invoke(dialogueName, dialoguePhrases[nextPhrase]);
-            
+
             nextPhrase++;
         }
         public void EndDialogue()
@@ -59,12 +51,6 @@ namespace AutumnForest.DialogueSystem
                 dialogueManager.AddDialogue(this);
             else
                 throw new NullReferenceException(nameof(dialogueManager));
-        }
-
-        public void Interact()
-        {
-            if (!IsCurrentlyActive) StartDialogue();
-            else NextPhrase();
         }
     }
 }

@@ -1,6 +1,6 @@
 using AutumnForest.BossFight.Fox;
 using AutumnForest.BossFight.Raccoon;
-using CreaturesAI;
+using AutumnForest.StateMachineSystem;
 using CreaturesAI.Health;
 using NaughtyAttributes;
 using System;
@@ -52,11 +52,11 @@ namespace AutumnForest.BossFight
         //methods
         private void OnEnable()
         {
-            raccoonHealth = GlobalServiceLocator.GetService<RaccoonStateMachine>().GetComponent<Health>();    
+            raccoonHealth = GlobalServiceLocator.GetService<RaccoonStateMachine>().GetComponent<Health>();
             foxHealth = GlobalServiceLocator.GetService<FoxStateMachine>().GetComponent<Health>();
-            FindObjectOfType<EnteringToBossFight>().OnInteract.AddListener(delegate { StateMachine.EnableStateMachine(); });
+            FindObjectOfType<EnteringToBossFight>().OnInteract.AddListener((UnityAction)delegate { StateMachine.EnableStateMachine(); });
 
-            StateMachine = GetComponent<StateMachine>();
+            StateMachine = new StateMachine(this, false);
         }
 
         public void StateChoosing()
@@ -64,7 +64,7 @@ namespace AutumnForest.BossFight
             State nextStage = StateMachine.CurrentState;
             BossFightStages nextBossFightStage = currentBossFightStage;
 
-            if(currentBossFightStage == BossFightStages.None)
+            if (currentBossFightStage == BossFightStages.None)
             {
                 nextStage = firstStage;
                 nextBossFightStage = BossFightStages.FirstStage;
@@ -79,7 +79,7 @@ namespace AutumnForest.BossFight
                 nextStage = thirdStage;
                 nextBossFightStage = BossFightStages.ThirdStage;
             }
-            
+
             if (currentBossFightStage != nextBossFightStage)
             {
                 OnStateChanged.Invoke(nextStage);

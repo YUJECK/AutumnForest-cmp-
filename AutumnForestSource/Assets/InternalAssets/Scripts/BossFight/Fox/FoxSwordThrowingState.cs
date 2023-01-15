@@ -1,15 +1,15 @@
+using AutumnForest.StateMachineSystem;
+using CreaturesAI.CombatSkills;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CreaturesAI;
-using CreaturesAI.CombatSkills;
 
 namespace AutumnForest.BossFight.Fox
 {
     public sealed class FoxSwordThrowingState : State
     {
         public float StateTransitionDelay { get; }
-        
+
         [SerializeField] private Animator animator;
         [SerializeField] private GameObject swordPrefab;
         [SerializeField] private Transform[] swordPoints;
@@ -21,7 +21,7 @@ namespace AutumnForest.BossFight.Fox
         private void OnDestroy()
         {
             //foreach (GameObject sword in spawnedSwords)
-                //Destroy(sword);
+            //Destroy(sword);
         }
 
         private IEnumerator SwordThrowing(IStateMachineUser stateMachine)
@@ -34,9 +34,9 @@ namespace AutumnForest.BossFight.Fox
             }
 
             //shooting
-            while(spawnedSwords.Count != 0)
+            while (spawnedSwords.Count != 0)
             {
-                if(spawnedSwords.Peek() != null)
+                if (spawnedSwords.Peek() != null)
                     shooting.ShootWithoutInstantiate(spawnedSwords.Peek(), 10, 0, 0, ForceMode2D.Impulse);
                 spawnedSwords.Pop();
                 yield return new WaitForSeconds(1.5f);

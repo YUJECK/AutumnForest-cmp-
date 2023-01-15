@@ -1,7 +1,6 @@
 using AutumnForest.BossFight.Fox;
 using AutumnForest.BossFight.Raccoon;
-using AutumnForest.Other;
-using CreaturesAI;
+using AutumnForest.StateMachineSystem;
 using CreaturesAI.Health;
 using UnityEngine;
 

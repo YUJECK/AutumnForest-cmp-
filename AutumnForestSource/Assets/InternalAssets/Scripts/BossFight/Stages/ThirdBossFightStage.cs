@@ -1,6 +1,5 @@
 using AutumnForest.BossFight.Raccoon;
-using AutumnForest.Other;
-using CreaturesAI;
+using AutumnForest.StateMachineSystem;
 using CreaturesAI.Health;
 using UnityEngine;
 
@@ -14,7 +13,7 @@ namespace AutumnForest.BossFight
 
         public float StateTransitionDelay { get; }
 
-        public void EnterState(StateMachine stateMachine)
+        public void EnterState(StateMachine.StateMachineSystem stateMachine)
         {
             RaccoonStateMachine raccoonStateMachine = GlobalServiceLocator.GetService<RaccoonStateMachine>();
 
@@ -23,8 +22,8 @@ namespace AutumnForest.BossFight
             raccoonStateMachine.StateChoosing();
         }
 
-        public void ExitState(StateMachine stateMachine) { bossHealthBar.gameObject.SetActive(false); }
+        public void ExitState(StateMachine.StateMachineSystem stateMachine) { bossHealthBar.gameObject.SetActive(false); }
 
-        public void UpdateState(StateMachine stateMachine) { }
+        public void UpdateState(StateMachine.StateMachineSystem stateMachine) { }
     }
 }

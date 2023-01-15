@@ -1,9 +1,10 @@
-﻿using System;
+﻿using AutumnForest.Helpers;
+using System;
 using UnityEngine;
 
 namespace AutumnForest.DialogueSystem
 {
-    public sealed class Dialogue : MonoBehaviour
+    public sealed class Dialogue : MonoBehaviour, ICreatureComponent
     {
         private int nextPhrase = 0;
 

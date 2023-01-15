@@ -1,4 +1,4 @@
-using CreaturesAI;
+using AutumnForest.StateMachineSystem;
 using System;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,6 +14,8 @@ namespace AutumnForest.BossFight.Fox
         public StateMachine StateMachine => throw new System.NotImplementedException();
 
         public CreatureServiceLocator CreatureServiceLocator => throw new System.NotImplementedException();
+
+        StateMachine IStateMachineUser.StateMachine => throw new NotImplementedException();
 
         event Action<State> IStateMachineUser.OnStateChanged
         {

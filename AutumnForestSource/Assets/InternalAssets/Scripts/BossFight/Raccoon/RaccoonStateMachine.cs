@@ -1,4 +1,4 @@
-using CreaturesAI;
+using AutumnForest.StateMachineSystem;
 using CreaturesAI.Health;
 using System;
 using UnityEngine;
@@ -7,13 +7,15 @@ namespace AutumnForest.BossFight.Raccoon
 {
     public partial class RaccoonStateMachine : MonoBehaviour, IStateMachineUser
     {
-        [SerializeField] private RaccoonStates raccoonStates;
+        [SerializeField] private RaccoonStateContainer raccoonStates;
         [SerializeField] private RaccoonComponents raccoonComponents;
         private BossFightStages currentStage;
         private bool isStart = true;
 
         public StateMachine StateMachine { get; private set; }
         public CreatureServiceLocator CreatureServiceLocator { get; private set; }
+
+        StateMachine IStateMachineUser.StateMachine => throw new NotImplementedException();
 
         public event Action<State> OnStateChanged;
 
@@ -23,7 +25,6 @@ namespace AutumnForest.BossFight.Raccoon
             CreatureServiceLocator = GetComponent<CreatureServiceLocator>();
 
             InitServices();
-
             GlobalServiceLocator.GetService<BossFightController>().OnBossFightStageChanged.AddListener(SetCurrentBossfightStage);
         }
         public void Update()

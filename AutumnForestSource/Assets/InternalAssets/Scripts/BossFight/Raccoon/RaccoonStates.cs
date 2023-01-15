@@ -1,32 +1,33 @@
-﻿using CreaturesAI;
-using UnityEngine;
+﻿using AutumnForest.StateMachineSystem;
 
 namespace AutumnForest.BossFight.Raccoon
 {
-    public partial class RaccoonStateMachine
+    [System.Serializable]
+    public sealed class RaccoonStateContainer
     {
-        [System.Serializable]
-        private class RaccoonStates
-        {
-            [Header("States")]
-            [SerializeField] private State idleState;
-            [Header("First Stage States")]
-            [SerializeField] private State dialogueState;
-            [SerializeField] private State shootingState;
-            [SerializeField] private State clothesThrowingState;
-            [Header("Second Stage States")]
-            [SerializeField] private State healingState;
-            [Header("Third Stage States")]
-            [SerializeField] private State waterJetState;
-            [SerializeField] private State squirrelSpawnState;
+        public State IdleState { get; private set; }
+        public State DialogueState { get; private set; }
+        public State ShootingState { get; private set; }
+        public State ClothesThrowingState { get; private set; }
+        public State HealingState { get; private set; }
+        public State WaterJetState { get; private set; }
+        public State SquirrelSpawnState { get; private set; }
 
-            public State IdleState => idleState;
-            public State DialogueState => dialogueState;
-            public State ShootingState => shootingState;
-            public State ClothesThrowingState => clothesThrowingState;
-            public State HealingState => healingState;
-            public State WaterJetState => waterJetState;
-            public State SquirrelSpawnState => squirrelSpawnState;
+        public RaccoonStateContainer(State idleState,
+                                     State dialogueState,
+                                     State shootinState,
+                                     State clothesThrowingState,
+                                     State healingState,
+                                     State waterJetState,
+                                     State squirrelSpawnState)
+        {
+            SquirrelSpawnState = squirrelSpawnState;
+            DialogueState = dialogueState;
+            ShootingState = shootinState;
+            ClothesThrowingState = clothesThrowingState;
+            HealingState = healingState;
+            WaterJetState = waterJetState;
+            SquirrelSpawnState = squirrelSpawnState;
         }
     }
 }

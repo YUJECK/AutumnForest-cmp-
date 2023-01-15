@@ -1,10 +1,11 @@
 using CreaturesAI;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace AutumnForest.BossFight.Fox
 {
-    public class FoxStateMachine : MonoBehaviour, IStateMachineUser 
+    public class FoxStateMachine : MonoBehaviour, IStateMachineUser
     {
         [Header("States")]
         [SerializeField] private State swordThrowingState;
@@ -13,6 +14,19 @@ namespace AutumnForest.BossFight.Fox
         public StateMachine StateMachine => throw new System.NotImplementedException();
 
         public CreatureServiceLocator CreatureServiceLocator => throw new System.NotImplementedException();
+
+        event Action<State> IStateMachineUser.OnStateChanged
+        {
+            add
+            {
+                throw new NotImplementedException();
+            }
+
+            remove
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         public void InitServices()
         {
@@ -25,9 +39,8 @@ namespace AutumnForest.BossFight.Fox
             OnStateChanged.Invoke(nextState);
         }
 
-        public void StateMachineUpdate()
+        public void Update()
         {
-            throw new System.NotImplementedException();
         }
     }
 }

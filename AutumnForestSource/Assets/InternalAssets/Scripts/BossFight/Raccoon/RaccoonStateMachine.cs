@@ -1,72 +1,37 @@
-using AutumnForest.DialogueSystem;
 using CreaturesAI;
-using CreaturesAI.CombatSkills;
 using CreaturesAI.Health;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace AutumnForest.BossFight.Raccoon
 {
-    [RequireComponent(typeof(StateMachine))]
-    public class RaccoonStateMachine : MonoBehaviour, IStateMachineUser
+    public partial class RaccoonStateMachine : MonoBehaviour, IStateMachineUser
     {
-        [System.Serializable]
-        private class RaccoonStates
-        {
-            [Header("States")]
-            [SerializeField] private State idleState;
-            [Header("First Stage States")]
-            [SerializeField] private State dialogueState;
-            [SerializeField] private State shootingState;
-            [SerializeField] private State clothesThrowingState;
-            [Header("Second Stage States")]
-            [SerializeField] private State healingState;
-            [Header("Third Stage States")]
-            [SerializeField] private State waterJetState;
-            [SerializeField] private State squirrelSpawnState;
-
-            public State IdleState => idleState;
-            public State DialogueState => dialogueState;
-            public State ShootingState => shootingState;
-            public State ClothesThrowingState => clothesThrowingState;
-            public State HealingState => healingState;
-            public State WaterJetState => waterJetState;
-            public State SquirrelSpawnState => squirrelSpawnState;
-        }
-        [System.Serializable] 
-        private class RaccoonComponents
-        {
-            [SerializeField] private Shooting shooting;
-            [SerializeField] private Dialogue dialogue;
-            [SerializeField] private Health health;
-            [SerializeField] private CreatureAnimator animator;
-
-            public Shooting Shooting => shooting; 
-            public Dialogue Dialogue => dialogue;
-            public Health Health => health; 
-            public CreatureAnimator Animator => animator; 
-        }
-
         [SerializeField] private RaccoonStates raccoonStates;
         [SerializeField] private RaccoonComponents raccoonComponents;
         private BossFightStages currentStage;
         private bool isStart = true;
 
-        public UnityEvent<State> OnStateChanged { get; } = new();
         public StateMachine StateMachine { get; private set; }
         public CreatureServiceLocator CreatureServiceLocator { get; private set; }
 
-        private void OnEnable()
+        public event Action<State> OnStateChanged;
+
+        private void Awake()
         {
-            StateMachine = GetComponent<StateMachine>();
+            StateMachine = new StateMachine(this, true);
             CreatureServiceLocator = GetComponent<CreatureServiceLocator>();
 
             InitServices();
 
-            GlobalServiceLocator.GetService<BossFightController>().OnBossFightStageChanged.AddListener(SetCurrentStage);
+            GlobalServiceLocator.GetService<BossFightController>().OnBossFightStageChanged.AddListener(SetCurrentBossfightStage);
+        }
+        public void Update()
+        {
+            StateMachine.CurrentState?.UpdateState(this);
         }
 
-        private void SetCurrentStage(BossFightStages newStage)
+        private void SetCurrentBossfightStage(BossFightStages newStage)
         {
             currentStage = newStage;
             StateChoosing();
@@ -78,16 +43,16 @@ namespace AutumnForest.BossFight.Raccoon
             if (CreatureServiceLocator.GetService<Health>().CurrentHealth > 0)
             {
                 if (currentStage == BossFightStages.FirstStage) nextState = FirstStageStateChoosing();
-                else if (currentStage == BossFightStages.SecondStage) nextState = raccoonStates.HealingState;
+                else if (currentStage == BossFightStages.SecondStage) nextState = SecondStageStateChoosing();
                 else if (currentStage == BossFightStages.ThirdStage) nextState = ThirdStageStateChoosing();
             }
 
-            OnStateChanged.Invoke(nextState);
+            OnStateChanged?.Invoke(nextState);
         }
 
         private State FirstStageStateChoosing()
         {
-            int randomState = Random.Range(0, 2);
+            int randomState = UnityEngine.Random.Range(0, 2);
             State nextState = raccoonStates.IdleState;
 
             switch (randomState)
@@ -108,9 +73,13 @@ namespace AutumnForest.BossFight.Raccoon
 
             return nextState;
         }
+        private State SecondStageStateChoosing()
+        {
+            return raccoonStates.HealingState;
+        }
         private State ThirdStageStateChoosing()
         {
-            int randomState = Random.Range(0, 2);
+            int randomState = UnityEngine.Random.Range(0, 2);
             State nextState = raccoonStates.IdleState;
 
             switch (randomState)
@@ -132,11 +101,6 @@ namespace AutumnForest.BossFight.Raccoon
             CreatureServiceLocator.RegisterService(raccoonComponents.Dialogue);
             CreatureServiceLocator.RegisterService(raccoonComponents.Health);
             CreatureServiceLocator.RegisterService(raccoonComponents.Shooting);
-        }
-
-        public void StateMachineUpdate()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

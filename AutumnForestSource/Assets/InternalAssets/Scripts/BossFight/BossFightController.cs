@@ -3,6 +3,7 @@ using AutumnForest.BossFight.Raccoon;
 using CreaturesAI;
 using CreaturesAI.Health;
 using NaughtyAttributes;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -33,7 +34,20 @@ namespace AutumnForest.BossFight
         public BossFightStages CurrentBossFightStage => currentBossFightStage;
         public UnityEvent<State> OnStateChanged { get; private set; } = new();
         public StateMachine StateMachine { get; private set; }
-        public CreatureServiceLocator CreatureServiceLocator { get; private set; } 
+        public CreatureServiceLocator CreatureServiceLocator { get; private set; }
+
+        event Action<State> IStateMachineUser.OnStateChanged
+        {
+            add
+            {
+                throw new NotImplementedException();
+            }
+
+            remove
+            {
+                throw new NotImplementedException();
+            }
+        }
 
         //methods
         private void OnEnable()
@@ -79,6 +93,11 @@ namespace AutumnForest.BossFight
 
         public void StateMachineUpdate()
         {
+        }
+
+        public void Update()
+        {
+
         }
     }
 }

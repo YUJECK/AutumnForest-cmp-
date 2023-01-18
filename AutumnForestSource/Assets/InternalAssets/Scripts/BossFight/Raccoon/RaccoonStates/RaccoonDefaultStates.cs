@@ -5,9 +5,9 @@ namespace AutumnForest.BossFight.Raccoon.States
 {
     public class RaccoonDefaultStates : MonoBehaviour, IStateVariation
     {
-        public void InitStates()
+        public object InitStates()
         {
-            new RaccoonStateContainer(new RaccoonIdleState(),
+            return new RaccoonStateContainer(new RaccoonIdleState(),
                                       new RaccoonIdleState(),
                                       new RaccoonIdleState(),
                                       new RaccoonIdleState(),

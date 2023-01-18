@@ -17,10 +17,10 @@ namespace AutumnForest.Other
         {
             //нужно переписать
 
-            fightController.StateMachine.OnMachineEnabled +=
-                delegate { mainTheme.SetActive(false); bossTheme.SetActive(true); };
-            fightController.StateMachine.OnMachineEnabled +=
-                delegate { mainTheme.SetActive(true); bossTheme.SetActive(false); };
+            //fightController.StateMachine.OnMachineEnabled +=
+            //    delegate { mainTheme.SetActive(false); bossTheme.SetActive(true); };
+            //fightController.StateMachine.OnMachineEnabled +=
+            //    delegate { mainTheme.SetActive(true); bossTheme.SetActive(false); };
         }
     }
 }

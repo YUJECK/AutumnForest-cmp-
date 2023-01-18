@@ -1,16 +1,15 @@
 using AutumnForest.BossFight.Raccoon;
 using AutumnForest.StateMachineSystem;
-using CreaturesAI;
 using CreaturesAI.Health;
 using UnityEngine;
 
 namespace AutumnForest.BossFight
 {
-    public class FirstBossFightStage : State
+    public class FirstBossFightStage : StateBehaviour
     {
         //health barPresets
-        [SerializeField] private HealthBarPreset raccoonPreset;
-        [SerializeField] private HealthBar bossHealthBar;
+        private HealthBarPreset raccoonPreset;
+        private HealthBar bossHealthBar;
 
         public override void EnterState(IStateMachineUser stateMachine)
         {

@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight.Fox
 {
-    public sealed class FoxSwordThrowingState : State
+    public sealed class FoxSwordThrowingState : StateBehaviour
     {
         public float StateTransitionDelay { get; }
 
-        [SerializeField] private Animator animator;
-        [SerializeField] private GameObject swordPrefab;
-        [SerializeField] private Transform[] swordPoints;
-        [SerializeField] private Shooting shooting;
+        private Animator animator;
+        private GameObject swordPrefab;
+        private Transform[] swordPoints;
+        private Shooting shooting;
 
         private Stack<GameObject> spawnedSwords = new Stack<GameObject>();
 

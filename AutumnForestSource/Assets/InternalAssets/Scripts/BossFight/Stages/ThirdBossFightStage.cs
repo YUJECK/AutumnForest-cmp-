@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight
 {
-    public class ThirdBossFightStage : State
+    public class ThirdBossFightStage : StateBehaviour
     {
         //health barPresets
         [SerializeField] private HealthBarPreset raccoonPreset;

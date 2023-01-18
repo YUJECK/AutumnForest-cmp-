@@ -5,31 +5,31 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight.Raccoon
 {
+    [RequireComponent(typeof(CreatureServiceLocator))]
     public partial class RaccoonStateMachine : MonoBehaviour, IStateMachineUser
     {
-        [SerializeField] private RaccoonStateContainer raccoonStates;
+        private RaccoonStateContainer stateContainer;
+        private IStateVariation stateVariation;
         [SerializeField] private RaccoonComponents raccoonComponents;
         private BossFightStages currentStage;
         private bool isStart = true;
 
+        public event Action<StateBehaviour> OnStateChanged;
+
         public StateMachine StateMachine { get; private set; }
-        public CreatureServiceLocator CreatureServiceLocator { get; private set; }
+        public CreatureServiceLocator ServiceLocator { get; private set; }
 
-        StateMachine IStateMachineUser.StateMachine => throw new NotImplementedException();
-
-        public event Action<State> OnStateChanged;
 
         private void Awake()
         {
-            StateMachine = new StateMachine(this, true);
-            CreatureServiceLocator = GetComponent<CreatureServiceLocator>();
+            stateVariation = GetComponent<IStateVariation>();
 
-            InitServices();
+            ServiceLocator = GetComponent<CreatureServiceLocator>();
+            raccoonComponents.RegisterComponents(ServiceLocator);
+            stateContainer = stateVariation.InitStates() as RaccoonStateContainer;
             GlobalServiceLocator.GetService<BossFightController>().OnBossFightStageChanged.AddListener(SetCurrentBossfightStage);
-        }
-        public void Update()
-        {
-            StateMachine.CurrentState?.UpdateState(this);
+            
+            StateMachine = new StateMachine(this, true);
         }
 
         private void SetCurrentBossfightStage(BossFightStages newStage)
@@ -39,9 +39,9 @@ namespace AutumnForest.BossFight.Raccoon
         }
         public void StateChoosing()
         {
-            State nextState = raccoonStates.IdleState;
+            StateBehaviour nextState = stateContainer.IdleState;
 
-            if (CreatureServiceLocator.GetService<Health>().CurrentHealth > 0)
+            if (ServiceLocator.GetService<Health>().CurrentHealth > 0)
             {
                 if (currentStage == BossFightStages.FirstStage) nextState = FirstStageStateChoosing();
                 else if (currentStage == BossFightStages.SecondStage) nextState = SecondStageStateChoosing();
@@ -51,57 +51,32 @@ namespace AutumnForest.BossFight.Raccoon
             OnStateChanged?.Invoke(nextState);
         }
 
-        private State FirstStageStateChoosing()
+        private StateBehaviour FirstStageStateChoosing()
         {
-            int randomState = UnityEngine.Random.Range(0, 2);
-            State nextState = raccoonStates.IdleState;
-
-            switch (randomState)
-            {
-                case 0:
-                    nextState = raccoonStates.ClothesThrowingState;
-                    break;
-                case 1:
-                    nextState = raccoonStates.ShootingState;
-                    break;
-            }
-
             if (isStart)
             {
-                nextState = raccoonStates.DialogueState;
                 isStart = false;
+                return stateContainer.DialogueState;
             }
 
-            return nextState;
+            int randomState = UnityEngine.Random.Range(0, 2);
+            return randomState switch
+            {
+                0 => stateContainer.ClothesThrowingState,
+                1 => stateContainer.ShootingState,
+                _ => stateContainer.IdleState
+            };
         }
-        private State SecondStageStateChoosing()
-        {
-            return raccoonStates.HealingState;
-        }
-        private State ThirdStageStateChoosing()
+        private StateBehaviour SecondStageStateChoosing() => stateContainer.HealingState;
+        private StateBehaviour ThirdStageStateChoosing()
         {
             int randomState = UnityEngine.Random.Range(0, 2);
-            State nextState = raccoonStates.IdleState;
-
-            switch (randomState)
+            return randomState switch
             {
-                case 0:
-                    nextState = raccoonStates.SquirrelSpawnState;
-                    break;
-                case 1:
-                    nextState = raccoonStates.WaterJetState;
-                    break;
-            }
-
-            return nextState;
-        }
-
-        public void InitServices()
-        {
-            CreatureServiceLocator.RegisterService(raccoonComponents.Animator);
-            CreatureServiceLocator.RegisterService(raccoonComponents.Dialogue);
-            CreatureServiceLocator.RegisterService(raccoonComponents.Health);
-            CreatureServiceLocator.RegisterService(raccoonComponents.Shooting);
+                0 => stateContainer.SquirrelSpawnState,
+                1 => stateContainer.WaterJetState,
+                _ => stateContainer.IdleState
+            };
         }
     }
 }

@@ -5,12 +5,10 @@ namespace AutumnForest.StateMachineSystem
     public interface IStateMachineUser
     {
         StateMachine StateMachine { get; }
-        CreatureServiceLocator CreatureServiceLocator { get; }
+        CreatureServiceLocator ServiceLocator { get; }
 
-        event Action<State> OnStateChanged;
+        event Action<StateBehaviour> OnStateChanged;
 
-        void InitServices();
         void StateChoosing();
-        void Update();
     }
 }

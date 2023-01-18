@@ -8,16 +8,16 @@ namespace AutumnForest.BossFight.Fox
     public class FoxStateMachine : MonoBehaviour, IStateMachineUser
     {
         [Header("States")]
-        [SerializeField] private State swordThrowingState;
-        public UnityEvent<State> OnStateChanged => throw new System.NotImplementedException();
+        [SerializeField] private StateBehaviour swordThrowingState;
+        public UnityEvent<StateBehaviour> OnStateChanged => throw new System.NotImplementedException();
 
         public StateMachine StateMachine => throw new System.NotImplementedException();
 
-        public CreatureServiceLocator CreatureServiceLocator => throw new System.NotImplementedException();
+        public CreatureServiceLocator ServiceLocator => throw new System.NotImplementedException();
 
         StateMachine IStateMachineUser.StateMachine => throw new NotImplementedException();
 
-        event Action<State> IStateMachineUser.OnStateChanged
+        event Action<StateBehaviour> IStateMachineUser.OnStateChanged
         {
             add
             {
@@ -37,7 +37,7 @@ namespace AutumnForest.BossFight.Fox
 
         public void StateChoosing()
         {
-            State nextState = swordThrowingState;
+            StateBehaviour nextState = swordThrowingState;
             OnStateChanged.Invoke(nextState);
         }
 

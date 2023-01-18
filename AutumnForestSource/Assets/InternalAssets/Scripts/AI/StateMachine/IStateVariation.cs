@@ -2,6 +2,6 @@
 {
     public interface IStateVariation
     {
-        void InitStates();
+        object InitStates();
     }
 }

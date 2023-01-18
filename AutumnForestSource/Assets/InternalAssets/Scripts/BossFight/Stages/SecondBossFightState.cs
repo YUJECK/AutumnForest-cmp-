@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight
 {
-    public sealed class SecondBossFightState : State
+    public sealed class SecondBossFightState : StateBehaviour
     {
         //health barPresets
         [SerializeField] private HealthBarPreset foxPreset;

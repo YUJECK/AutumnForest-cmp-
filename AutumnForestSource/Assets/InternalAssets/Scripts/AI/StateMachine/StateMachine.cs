@@ -1,4 +1,3 @@
-using AutumnForest.Helpers;
 using Cysharp.Threading.Tasks;
 using System;
 
@@ -10,57 +9,60 @@ namespace AutumnForest.StateMachineSystem
         Stopped
     }
 
-    public class StateMachine : ICreatureComponent
+    public class StateMachine
     {
+        private StateBehaviour CurrentState;
+
         public event Action OnMachineEnabled;
         public event Action OnMachineDisabled;
 
-        public State CurrentState { get; private set; }
         public StateMachineCondition StateMachineState { get; private set; } = StateMachineCondition.Stopped;
-
-        private IStateMachineUser stateMachineUser;
+        public IStateMachineUser StateMachineUser { get; private set; }
 
         public StateMachine(IStateMachineUser stateMachineUser, bool enableImmediatly)
         {
-            this.stateMachineUser = stateMachineUser;
-            this.stateMachineUser.OnStateChanged += ChangeState;
+            this.StateMachineUser = stateMachineUser;
+            this.StateMachineUser.OnStateChanged += SwitchState;
 
             if (enableImmediatly)
                 EnableStateMachine();
-        }
-
-        private async void ChangeState(State newState)
-        {
-            if (newState != null)
-            {
-                if (CurrentState != null)
-                {
-                    CurrentState.ExitState(stateMachineUser);
-                    CurrentState = null;
-
-                    await UniTask.Delay(TimeSpan.FromSeconds(CurrentState.StateTransitionDelay));
-                }
-
-                CurrentState = newState;
-                CurrentState.EnterState(stateMachineUser);
-            }
-            else throw new NullReferenceException(nameof(newState));
         }
 
         public void EnableStateMachine()
         {
             if (StateMachineState != StateMachineCondition.Working)
             {
-                stateMachineUser.StateChoosing();
+                StateMachineUser.StateChoosing();
                 StateMachineState = StateMachineCondition.Working;
-                OnMachineEnabled.Invoke();
+                OnMachineEnabled?.Invoke();
             }
         }
         public void DisableStateMachine()
         {
-            CurrentState.ExitState(stateMachineUser);
+            CurrentState.ExitState(StateMachineUser);
             StateMachineState = StateMachineCondition.Stopped;
-            OnMachineDisabled.Invoke();
+            OnMachineDisabled?.Invoke();
+        }
+        
+        private async void SwitchState(StateBehaviour nextState)
+        {
+            if (nextState != null)
+            {
+                if(nextState.CanEnterNewState())
+                {
+                    if (CurrentState != null)
+                    {
+                        CurrentState.ExitState(StateMachineUser);
+                        CurrentState = null;
+
+                        await UniTask.Delay(TimeSpan.FromSeconds(CurrentState.StateTransitionDelay));
+                    }
+
+                    CurrentState = nextState;
+                    CurrentState.EnterState(StateMachineUser);
+                }
+            }
+            else throw new NullReferenceException(nameof(nextState));
         }
     }
 }

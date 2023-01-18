@@ -21,9 +21,9 @@ namespace AutumnForest.BossFight
     {
         [ReadOnly] private BossFightStages currentBossFightStage;
         //bossfight stages
-        [SerializeField] private State firstStage;
-        [SerializeField] private State secondStage;
-        [SerializeField] private State thirdStage;
+        [SerializeField] private StateBehaviour firstStage;
+        [SerializeField] private StateBehaviour secondStage;
+        [SerializeField] private StateBehaviour thirdStage;
         //some objects
         private Health raccoonHealth;
         private Health foxHealth;
@@ -32,36 +32,23 @@ namespace AutumnForest.BossFight
 
         //getters
         public BossFightStages CurrentBossFightStage => currentBossFightStage;
-        public UnityEvent<State> OnStateChanged { get; private set; } = new();
         public StateMachine StateMachine { get; private set; }
-        public CreatureServiceLocator CreatureServiceLocator { get; private set; }
+        public CreatureServiceLocator ServiceLocator { get; private set; }
 
-        event Action<State> IStateMachineUser.OnStateChanged
-        {
-            add
-            {
-                throw new NotImplementedException();
-            }
-
-            remove
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public event Action<StateBehaviour> OnStateChanged;
 
         //methods
-        private void OnEnable()
+        private void Awake()
         {
             raccoonHealth = GlobalServiceLocator.GetService<RaccoonStateMachine>().GetComponent<Health>();
             foxHealth = GlobalServiceLocator.GetService<FoxStateMachine>().GetComponent<Health>();
-            FindObjectOfType<EnteringToBossFight>().OnInteract.AddListener((UnityAction)delegate { StateMachine.EnableStateMachine(); });
 
             StateMachine = new StateMachine(this, false);
         }
 
         public void StateChoosing()
         {
-            State nextStage = StateMachine.CurrentState;
+            StateBehaviour nextStage = null;
             BossFightStages nextBossFightStage = currentBossFightStage;
 
             if (currentBossFightStage == BossFightStages.None)
@@ -80,24 +67,11 @@ namespace AutumnForest.BossFight
                 nextBossFightStage = BossFightStages.ThirdStage;
             }
 
-            if (currentBossFightStage != nextBossFightStage)
+            if (nextBossFightStage != null && currentBossFightStage != nextBossFightStage)
             {
                 OnStateChanged.Invoke(nextStage);
                 OnBossFightStageChanged.Invoke(currentBossFightStage);
             }
-        }
-        public void InitServices()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void StateMachineUpdate()
-        {
-        }
-
-        public void Update()
-        {
-
         }
     }
 }

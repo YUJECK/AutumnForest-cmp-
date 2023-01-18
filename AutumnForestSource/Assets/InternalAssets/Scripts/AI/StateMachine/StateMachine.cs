@@ -1,4 +1,3 @@
-using AutumnForest.BossFight.Raccoon;
 using AutumnForest.Helpers;
 using Cysharp.Threading.Tasks;
 using System;
@@ -13,7 +12,6 @@ namespace AutumnForest.StateMachineSystem
 
     public class StateMachine : ICreatureComponent
     {
-
         public event Action OnMachineEnabled;
         public event Action OnMachineDisabled;
 
@@ -21,7 +19,7 @@ namespace AutumnForest.StateMachineSystem
         public StateMachineCondition StateMachineState { get; private set; } = StateMachineCondition.Stopped;
 
         private IStateMachineUser stateMachineUser;
-     
+
         public StateMachine(IStateMachineUser stateMachineUser, bool enableImmediatly)
         {
             this.stateMachineUser = stateMachineUser;
@@ -46,8 +44,7 @@ namespace AutumnForest.StateMachineSystem
                 CurrentState = newState;
                 CurrentState.EnterState(stateMachineUser);
             }
-            else
-                throw new NullReferenceException(nameof(newState));
+            else throw new NullReferenceException(nameof(newState));
         }
 
         public void EnableStateMachine()
@@ -64,10 +61,6 @@ namespace AutumnForest.StateMachineSystem
             CurrentState.ExitState(stateMachineUser);
             StateMachineState = StateMachineCondition.Stopped;
             OnMachineDisabled.Invoke();
-        }
-
-        public class StateMachineSystem
-        {
         }
     }
 }

@@ -10,11 +10,14 @@ namespace AutumnForest.BossFight.Raccoon.States
         }
         public override void UpdateState(IStateMachineUser stateMachine)
         {
-            base.UpdateState(stateMachine);
         }
         public override void ExitState(IStateMachineUser stateMachine)
         {
-            base.ExitState(stateMachine);
+        }
+
+        public override void OnFoundNextState(IStateMachineUser stateMachine, State nextState)
+        {
+            nextState.EnterState(stateMachine);
         }
     }
 }

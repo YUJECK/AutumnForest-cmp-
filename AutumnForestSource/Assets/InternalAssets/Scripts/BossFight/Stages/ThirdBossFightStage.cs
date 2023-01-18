@@ -13,7 +13,7 @@ namespace AutumnForest.BossFight
 
         public float StateTransitionDelay { get; }
 
-        public void EnterState(StateMachine.StateMachineSystem stateMachine)
+        public void EnterState(StateMachine stateMachine)
         {
             RaccoonStateMachine raccoonStateMachine = GlobalServiceLocator.GetService<RaccoonStateMachine>();
 
@@ -22,8 +22,8 @@ namespace AutumnForest.BossFight
             raccoonStateMachine.StateChoosing();
         }
 
-        public void ExitState(StateMachine.StateMachineSystem stateMachine) { bossHealthBar.gameObject.SetActive(false); }
+        public void ExitState(StateMachine stateMachine) { bossHealthBar.gameObject.SetActive(false); }
 
-        public void UpdateState(StateMachine.StateMachineSystem stateMachine) { }
+        public void UpdateState(StateMachine stateMachine) { }
     }
 }

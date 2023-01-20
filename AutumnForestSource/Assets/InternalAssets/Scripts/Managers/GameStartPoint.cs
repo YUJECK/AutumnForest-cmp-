@@ -1,6 +1,3 @@
-using AutumnForest.BossFight;
-using AutumnForest.BossFight.Fox;
-using AutumnForest.BossFight.Raccoon;
 using AutumnForest.DialogueSystem;
 using AutumnForest.Helpers;
 using AutumnForest.Player;
@@ -18,7 +15,7 @@ namespace AutumnForest
         private void OnEnable()
         {
             RegisterPlayerServices();
-            RegisterBossFightServices();
+            //RegisterBossFightServices();
             RegisterCameras();
             RegisterDialogueServices();
 
@@ -42,11 +39,11 @@ namespace AutumnForest
         {
             GlobalServiceLocator.RegisterService(new DialogueManager());
         }
-        private void RegisterBossFightServices()
-        {
-            GlobalServiceLocator.RegisterService(FindObjectOfType<RaccoonStateMachine>());
-            GlobalServiceLocator.RegisterService(FindObjectOfType<BossFightController>());
-            GlobalServiceLocator.RegisterService(FindObjectOfType<FoxStateMachine>());
-        }
+        //private void RegisterBossFightServices()
+        //{
+        //    GlobalServiceLocator.RegisterService(FindObjectOfType<RaccoonStateMachine>());
+        //    GlobalServiceLocator.RegisterService(FindObjectOfType<BossFightController>());
+        //    GlobalServiceLocator.RegisterService(FindObjectOfType<FoxStateMachine>());
+        //}
     }
 }

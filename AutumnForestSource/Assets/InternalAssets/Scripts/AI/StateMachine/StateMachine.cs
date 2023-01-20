@@ -14,49 +14,63 @@ namespace AutumnForest.StateMachineSystem
         private StateBehaviour CurrentState;
 
         public event Action OnMachineEnabled;
+        public event Action OnMachineWorking;
         public event Action OnMachineDisabled;
 
-        public StateMachineCondition StateMachineState { get; private set; } = StateMachineCondition.Stopped;
+        public StateMachineCondition MachineCondition { get; private set; } = StateMachineCondition.Stopped;
         public IStateMachineUser StateMachineUser { get; private set; }
 
-        public StateMachine(IStateMachineUser stateMachineUser, bool enableImmediatly)
+        public StateMachine(IStateMachineUser stateMachineUser, bool enableImmediatly, params Action[] onWorking)
         {
             this.StateMachineUser = stateMachineUser;
             this.StateMachineUser.OnStateChanged += SwitchState;
+            
+            for (int i = 0; i < onWorking.Length; i++)
+                this.OnMachineWorking += onWorking[i];
 
             if (enableImmediatly)
                 EnableStateMachine();
+
+            Work();
         }
 
         public void EnableStateMachine()
         {
-            if (StateMachineState != StateMachineCondition.Working)
+            if (MachineCondition != StateMachineCondition.Working)
             {
-                StateMachineUser.StateChoosing();
-                StateMachineState = StateMachineCondition.Working;
+                //StateMachineUser.StateChoosing();
+                MachineCondition = StateMachineCondition.Working;
                 OnMachineEnabled?.Invoke();
+            }
+        }
+        private async void Work()
+        {
+            int machineWorkDelay = 1;
+
+            while (true)
+            {
+                if(MachineCondition == StateMachineCondition.Working)
+                {
+                    OnMachineWorking?.Invoke();
+                    await UniTask.Delay(machineWorkDelay);
+                }
             }
         }
         public void DisableStateMachine()
         {
             CurrentState.ExitState(StateMachineUser);
-            StateMachineState = StateMachineCondition.Stopped;
+            MachineCondition = StateMachineCondition.Stopped;
             OnMachineDisabled?.Invoke();
         }
         
-        private async void SwitchState(StateBehaviour nextState)
+        private void SwitchState(StateBehaviour nextState)
         {
             if (nextState != null)
             {
                 if(nextState.CanEnterNewState())
                 {
                     if (CurrentState != null)
-                    {
                         CurrentState.ExitState(StateMachineUser);
-                        CurrentState = null;
-
-                        await UniTask.Delay(TimeSpan.FromSeconds(CurrentState.StateTransitionDelay));
-                    }
 
                     CurrentState = nextState;
                     CurrentState.EnterState(StateMachineUser);

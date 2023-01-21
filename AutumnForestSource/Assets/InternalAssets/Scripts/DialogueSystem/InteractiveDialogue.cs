@@ -1,20 +1,30 @@
 using AutumnForest.Helpers;
 using AutumnForest.Other;
 using UnityEngine;
-using System;
 
 namespace AutumnForest.DialogueSystem
 {
     [RequireComponent(typeof(Dialogue))]
     public class InteractiveDialogue : MonoBehaviour, IInteractive, ICreatureComponent
     {
-        public event Action OnInteract;
+        private Dialogue dialogue;
+        public Dialogue Dialogue
+        {
+            get
+            {
+                if (dialogue == null)
+                    dialogue = GetComponent<Dialogue>();
 
-        public Dialogue Dialogue { get; private set; }
+                return dialogue;
+            }
+
+            private set => dialogue = value;
+        }
 
         private void Awake()
         {
-            Dialogue = GetComponent<Dialogue>();
+            if (dialogue != null)
+                dialogue = GetComponent<Dialogue>();
         }
 
         public void Interact()

@@ -1,5 +1,4 @@
-﻿using AutumnForest.Extensions;
-using Cysharp.Threading.Tasks;
+﻿using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
 using UnityEngine;
@@ -80,7 +79,9 @@ namespace AutumnForest.DialogueSystem
                 dialogueNameUI.text = "";
 
                 animator.Play(windowDisableAnimationName);
-                await animator.WaitForEndOfCurrentClip(0.8f);
+                float waitTime = animator.GetCurrentAnimatorStateInfo(0).length - 0.8f;
+
+                await UniTask.Delay(TimeSpan.FromSeconds(waitTime));
 
                 dialogueWindowUI.SetActive(false);
             }

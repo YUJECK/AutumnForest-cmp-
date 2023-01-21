@@ -9,29 +9,19 @@ namespace AutumnForest.BossFight.Slingshot
     [RequireComponent(typeof(Slingshot))]
     public sealed class SlingshotInteractive : MonoBehaviour, IInteractive
     {
-        [SerializeField] private float lerpOnZoom;
         [SerializeField] private Sprite slingshotCursor;
-
-        [SerializeField] private float lerpDefault;
         [SerializeField] private Sprite cursorDefault;
 
-        private Slingshot slingshotShoot;
-        
-        public event Action OnInteract;
+        private Slingshot slingshot;
 
-        private void Start()
-        {
-            slingshotShoot = GetComponent<Slingshot>();
-            slingshotShoot.OnShoot += Distance;
-        }
-        private void OnEnable()
-        {
-        }
+        private void Awake() => slingshot = GetComponent<Slingshot>();
+        private void OnEnable() => slingshot.OnShoot += Distance;
+        private void OnDisable() => slingshot.OnShoot -= Distance;
 
         public void Interact()
         {
             Zoom();
-            slingshotShoot.EnableSlingshot();
+            slingshot.EnableSlingshot();
         }
 
         private void Zoom()

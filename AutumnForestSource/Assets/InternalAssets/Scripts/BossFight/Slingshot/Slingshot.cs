@@ -15,6 +15,7 @@ namespace AutumnForest.BossFight.Slingshot
         [SerializeField] private GameObject projectile;
         [SerializeField] private Transform firePoint;
         private bool canShoot = true;
+        public bool Enabled { get; private set; } = false;
 
         public event Action OnReady;
         public event Action OnShoot;
@@ -34,12 +35,20 @@ namespace AutumnForest.BossFight.Slingshot
             GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.performed -= SlingshotInput;
         }
 
-        public void EnableSlingshot() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.Enable();
-        public void DisableSlingshot() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.Disable();
+        public void EnableSlingshot()
+        {
+            Enabled = true;
+            GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.Enable();
+        }
+        public void DisableSlingshot()
+        {
+            Enabled = false;
+            GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.Disable();
+        }
 
         private void Shoot()
         {
-            if(canShoot)
+            if(canShoot && Enabled)
             {
                 Instantiate(projectile, firePoint.position, firePoint.rotation);
                 OnShoot?.Invoke();

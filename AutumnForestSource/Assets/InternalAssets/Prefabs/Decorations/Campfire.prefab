@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 2807698552935558201}
   - component: {fileID: 2807698552935558200}
   m_Layer: 0
-  m_Name: Camp
+  m_Name: Campfire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4
   m_IsActive: 1
 --- !u!4 &2807698552935558207
 Transform:

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace AutumnForest
 {
@@ -9,7 +8,7 @@ namespace AutumnForest
         private readonly Dictionary<Type, object> services = new Dictionary<Type, object>();
         public int ServicesCount => services.Count;
 
-        public LocalServiceLocator(params object[] services) 
+        public LocalServiceLocator(params object[] services)
         {
             for (int i = 0; i < services.Length; i++)
                 RegisterService(services[i]);

@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace AutumnForest.StateMachineTest
 {
+    [RequireComponent(typeof(SpriteRenderer))]
+    [RequireComponent(typeof(IStateVariation))]
     public sealed class TestUser : MonoBehaviour, IStateMachineUser
     {
         public StateMachine StateMachine { get; private set; }
@@ -11,24 +13,22 @@ namespace AutumnForest.StateMachineTest
 
         public event Action<StateBehaviour> OnStateChanged;
 
-        private StateBehaviour state1 = new ColorSwitchState(Color.cyan);
-        private StateBehaviour state2 = new ColorSwitchState(Color.green);
-        private StateBehaviour state3 = new ColorSwitchState(Color.blue);
+        private ColorStateContainer stateContainer;
 
+        private void OnEnable() => StateMachine.OnMachineWorking += StateChoosing;
+        private void OnDisable() => StateMachine.OnMachineWorking -= StateChoosing;
         private void Awake()
         {
+            stateContainer = GetComponent<IStateVariation>().InitStates() as ColorStateContainer;
             ServiceLocator = new(GetComponent<SpriteRenderer>());
-            StateMachine = new(this, true, StateChoosing);
+            StateMachine = new(this, true);
         }
 
         private void StateChoosing()
         {
-            if (Input.GetKeyDown(KeyCode.A))
-                OnStateChanged.Invoke(state1);
-            if (Input.GetKeyDown(KeyCode.S))
-                OnStateChanged.Invoke(state2);
-            if (Input.GetKeyDown(KeyCode.D))
-                OnStateChanged.Invoke(state3);
+            if (Input.GetKeyDown(KeyCode.A)) OnStateChanged.Invoke(stateContainer.State1);
+            if (Input.GetKeyDown(KeyCode.S)) OnStateChanged.Invoke(stateContainer.State2);
+            if (Input.GetKeyDown(KeyCode.D)) OnStateChanged.Invoke(stateContainer.State3);
         }
     }
 }

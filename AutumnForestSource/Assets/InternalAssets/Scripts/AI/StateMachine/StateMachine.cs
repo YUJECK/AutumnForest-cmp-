@@ -3,12 +3,6 @@ using System;
 
 namespace AutumnForest.StateMachineSystem
 {
-    public enum StateMachineCondition
-    {
-        Working,
-        Stopped
-    }
-
     public class StateMachine
     {
         private StateBehaviour CurrentState;
@@ -17,16 +11,13 @@ namespace AutumnForest.StateMachineSystem
         public event Action OnMachineWorking;
         public event Action OnMachineDisabled;
 
-        public StateMachineCondition MachineCondition { get; private set; } = StateMachineCondition.Stopped;
+        public bool Enabled { get; private set; } = false;
         public IStateMachineUser StateMachineUser { get; private set; }
 
-        public StateMachine(IStateMachineUser stateMachineUser, bool enableImmediatly, params Action[] onWorking)
+        public StateMachine(IStateMachineUser stateMachineUser, bool enableImmediatly)
         {
             this.StateMachineUser = stateMachineUser;
             this.StateMachineUser.OnStateChanged += SwitchState;
-            
-            for (int i = 0; i < onWorking.Length; i++)
-                this.OnMachineWorking += onWorking[i];
 
             if (enableImmediatly)
                 EnableStateMachine();
@@ -36,10 +27,9 @@ namespace AutumnForest.StateMachineSystem
 
         public void EnableStateMachine()
         {
-            if (MachineCondition != StateMachineCondition.Working)
+            if (!Enabled)
             {
-                //StateMachineUser.StateChoosing();
-                MachineCondition = StateMachineCondition.Working;
+                Enabled = true;
                 OnMachineEnabled?.Invoke();
             }
         }
@@ -49,9 +39,10 @@ namespace AutumnForest.StateMachineSystem
 
             while (true)
             {
-                if(MachineCondition == StateMachineCondition.Working)
+                if (Enabled)
                 {
                     OnMachineWorking?.Invoke();
+                    CurrentState?.UpdateState(StateMachineUser);
                     await UniTask.Delay(machineWorkDelay);
                 }
             }
@@ -59,7 +50,7 @@ namespace AutumnForest.StateMachineSystem
         public void DisableStateMachine()
         {
             CurrentState.ExitState(StateMachineUser);
-            MachineCondition = StateMachineCondition.Stopped;
+            Enabled = false;
             OnMachineDisabled?.Invoke();
         }
         

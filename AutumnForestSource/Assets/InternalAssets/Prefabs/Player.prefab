@@ -65,8 +65,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e2d6eda589f3d24599cab9591b200f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashSpeed: 5
-  dashDuration: 0.055
+  dashSpeed: 5.5
+  dashDuration: 0.045
   dashCulldown: 1000
   layerIndex: 10
 --- !u!114 &857177195470058298

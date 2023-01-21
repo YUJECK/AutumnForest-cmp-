@@ -2,9 +2,9 @@
 using AutumnForest.StateMachineTest;
 using UnityEngine;
 
-public class TestUserCBGStateVaritation : MonoBehaviour, IStateVariation
+public class TestUserColorStateVaritator : MonoBehaviour, IStateContainerVariator
 {
-    public object InitStates() => new ColorStateContainer(
+    public IStateContainer InitStates() => new TestUserStateContainer(
         new ColorSwitchState(Color.cyan),
         new ColorSwitchState(Color.blue),
         new ColorSwitchState(Color.green)

@@ -9,6 +9,7 @@ namespace CreaturesAI.Health
 
         [SerializeField] private int currentHealth;
         [SerializeField] private int maximumHealth;
+
         public int CurrentHealth { get => currentHealth; private set => currentHealth = value; }
         public int MaximumHealth { get => maximumHealth; private set => maximumHealth = value; }
 
@@ -19,32 +20,31 @@ namespace CreaturesAI.Health
 
         public void DecreaseMaximumHealth(int damagePoints)
         {
-            MaximumHealth -= damagePoints;
-            OnHealthChange?.Invoke(CurrentHealth, MaximumHealth);
+            maximumHealth -= damagePoints;
+            OnHealthChange?.Invoke(currentHealth, maximumHealth);
         }
-
-        public void Heal(int healPoints)
-        {
-            CurrentHealth += healPoints;
-            OnHeal?.Invoke(CurrentHealth, MaximumHealth);
-            OnHealthChange?.Invoke(CurrentHealth, MaximumHealth);
-
-            if (CurrentHealth > MaximumHealth)
-                CurrentHealth = MaximumHealth;
-        }
-
         public void IncreaseMaximumHealth(int healPoints)
         {
-            MaximumHealth += healPoints;
-            OnHealthChange?.Invoke(CurrentHealth, MaximumHealth);
+            maximumHealth += healPoints;
+            OnHealthChange?.Invoke(currentHealth, maximumHealth);
+        }
+        
+        public void Heal(int healPoints)
+        {
+            currentHealth += healPoints;
+            OnHeal?.Invoke(currentHealth, maximumHealth);
+            OnHealthChange?.Invoke(currentHealth, maximumHealth);
+
+            if (currentHealth > maximumHealth)
+                currentHealth = maximumHealth;
         }
         public void TakeHit(int damagePoints)
         {
-            CurrentHealth -= damagePoints;
-            OnTakeHit?.Invoke(CurrentHealth, MaximumHealth);
-            OnHealthChange?.Invoke(CurrentHealth, MaximumHealth);
+            currentHealth -= damagePoints;
+            OnTakeHit?.Invoke(currentHealth, maximumHealth);
+            OnHealthChange?.Invoke(currentHealth, maximumHealth);
 
-            if (CurrentHealth <= 0)
+            if (currentHealth <= 0)
             {
                 OnDie?.Invoke();
                 if (destroyOnDie) Destroy(gameObject);

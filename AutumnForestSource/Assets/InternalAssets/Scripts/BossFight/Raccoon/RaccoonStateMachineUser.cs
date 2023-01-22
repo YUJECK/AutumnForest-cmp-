@@ -19,11 +19,16 @@ namespace AutumnForest.BossFight.Raccoon
 
         public event Action<StateBehaviour> OnStateChanged;
 
+        private StateBehaviour idleState = new RaccoonIdleState();
+
         private void Awake()
         {
             //нужно прописать сервисы
             ServiceLocator = new(creatureAnimator, shooting, (IHealth)healthObject);
             StateMachine = new(this, false);
+            StateMachine.OnMachineWorking += StateChoosing;
+
+            BossFightManager.OnBossFightStarts += StateMachine.EnableStateMachine;
         }
         private void OnEnable()
         {
@@ -36,6 +41,7 @@ namespace AutumnForest.BossFight.Raccoon
 
         private void StateChoosing()
         {
+
             //первая стадия
             if (BossFightManager.CurrentStage == BossFightStage.First)
                 FirstStageChoosing();
@@ -48,7 +54,6 @@ namespace AutumnForest.BossFight.Raccoon
 
         private void ThirdStageChoosing()
         {
-
         }
 
         private void SecondStageChoosing()
@@ -58,7 +63,7 @@ namespace AutumnForest.BossFight.Raccoon
 
         private void FirstStageChoosing()
         {
-
+            OnStateChanged?.Invoke(idleState);
         }
     }
 }

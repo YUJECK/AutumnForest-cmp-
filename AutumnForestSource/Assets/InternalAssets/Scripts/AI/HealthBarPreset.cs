@@ -8,11 +8,11 @@ namespace CreaturesAI.Health
         //fields
         [SerializeField] private string healthBarName = "Some creature";
         [SerializeField] private Sprite healthBarIcon;
-        [SerializeField] private Health healthTarget;
+        [SerializeField] private IHealth healthTarget;
 
         //getters
         public string HealthBarName => healthBarName;
         public Sprite HealthBarIcon => healthBarIcon;
-        public Health HealthTarget { get => healthTarget; set { if (value != null) healthTarget = value; } }
+        public IHealth HealthTarget { get => healthTarget; set { if (value != null) healthTarget = value; } }
     }
 }

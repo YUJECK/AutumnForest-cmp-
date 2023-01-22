@@ -1,28 +1,21 @@
-using AutumnForest.Helpers;
-using UnityEngine;
-using UnityEngine.Events;
+using System;
 
 namespace CreaturesAI.Health
 {
-    public abstract class Health : MonoBehaviour, ICreatureComponent
+    public interface IHealth
     {
-        //health indicators
-        [SerializeField] protected int currentHealth = 60;
-        [SerializeField] protected int maximumHealth = 60;
-        [Space]
-        //events
-        public UnityEvent<int, int> OnHealthChange = new UnityEvent<int, int>();
-        public UnityEvent<int, int> OnHeal = new UnityEvent<int, int>();
-        public UnityEvent<int, int> OnTakeHit = new UnityEvent<int, int>();
-        public UnityEvent OnDie = new UnityEvent();
-        //getters
-        public int CurrentHealth => currentHealth;
-        public int MaximumHealth => maximumHealth;
+        int CurrentHealth { get; }
+        int MaximumHealth { get; }
+
+        event Action<int, int> OnHealthChange;
+        event Action<int, int> OnHeal;
+        event Action<int, int> OnTakeHit;
+        event Action OnDie;
 
         //abstract methods
-        public abstract void TakeHit(int damagePoints);
-        public abstract void Heal(int healPoints);
-        public abstract void DecreaseMaximumHealth(int damagePoints);
-        public abstract void IncreaseMaximumHealth(int healPoints);
+        void TakeHit(int damagePoints);
+        void Heal(int healPoints);
+        void DecreaseMaximumHealth(int damagePoints);
+        void IncreaseMaximumHealth(int healPoints);
     }
 }

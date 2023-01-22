@@ -25,7 +25,7 @@ namespace AutumnForest
             //checking every hit objects for the presence of a Health component
             foreach (Collider2D obj in hitObj)
             {
-                if (obj.TryGetComponent(out Health health))
+                if (obj.TryGetComponent(out IHealth health))
                     health.TakeHit(damage);
             }
         }

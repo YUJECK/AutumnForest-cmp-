@@ -11,7 +11,7 @@ namespace AutumnForest.BossFight.Raccoon
         [Header("Services")]
         [SerializeField] private CreatureAnimator creatureAnimator;
         [SerializeField] private Shooting shooting;
-        [SerializeField] private Health health;
+        [SerializeField] private IHealth health;
 
         public StateMachine StateMachine { get; private set; }
         public LocalServiceLocator ServiceLocator { get; private set; }
@@ -26,11 +26,11 @@ namespace AutumnForest.BossFight.Raccoon
         }
         private void OnEnable()
         {
-            StateMachine.OnMachineWorking += StateChoosing;
+            //StateMachine.OnMachineWorking += StateChoosing;
         }
         private void OnDisable()
         {
-            StateMachine.OnMachineWorking -= StateChoosing;
+            //StateMachine.OnMachineWorking -= StateChoosing;
         }
 
         private void StateChoosing()

@@ -1,43 +1,50 @@
-using AutumnForest.Helpers;
+using System;
 using UnityEngine;
 
 namespace CreaturesAI.Health
 {
-    public class CreatureHealth : Health, ICreatureComponent
+    public class CreatureHealth : MonoBehaviour, IHealth
     {
         [SerializeField] private bool destroyOnDie = true;
 
-        public override void DecreaseMaximumHealth(int damagePoints)
+        public int CurrentHealth { get; private set; }
+        public int MaximumHealth { get; private set; }
+
+        public event Action<int, int> OnHealthChange;
+        public event Action<int, int> OnHeal;
+        public event Action<int, int> OnTakeHit;
+        public event Action OnDie;
+
+        public void DecreaseMaximumHealth(int damagePoints)
         {
-            maximumHealth -= damagePoints;
-            OnHealthChange.Invoke(currentHealth, maximumHealth);
+            MaximumHealth -= damagePoints;
+            OnHealthChange?.Invoke(CurrentHealth, MaximumHealth);
         }
 
-        public override void Heal(int healPoints)
+        public void Heal(int healPoints)
         {
-            currentHealth += healPoints;
-            OnHeal.Invoke(currentHealth, maximumHealth);
-            OnHealthChange.Invoke(currentHealth, maximumHealth);
+            CurrentHealth += healPoints;
+            OnHeal?.Invoke(CurrentHealth, MaximumHealth);
+            OnHealthChange?.Invoke(CurrentHealth, MaximumHealth);
 
-            if (currentHealth > maximumHealth)
-                currentHealth = maximumHealth;
+            if (CurrentHealth > MaximumHealth)
+                CurrentHealth = MaximumHealth;
         }
 
-        public override void IncreaseMaximumHealth(int healPoints)
+        public void IncreaseMaximumHealth(int healPoints)
         {
-            maximumHealth += healPoints;
-            OnHealthChange.Invoke(currentHealth, maximumHealth);
+            MaximumHealth += healPoints;
+            OnHealthChange?.Invoke(CurrentHealth, MaximumHealth);
         }
-
-        public override void TakeHit(int damagePoints)
+        public void TakeHit(int damagePoints)
         {
-            currentHealth -= damagePoints;
-            OnTakeHit.Invoke(currentHealth, maximumHealth);
-            OnHealthChange.Invoke(currentHealth, maximumHealth);
+            CurrentHealth -= damagePoints;
+            OnTakeHit?.Invoke(CurrentHealth, MaximumHealth);
+            OnHealthChange?.Invoke(CurrentHealth, MaximumHealth);
 
-            if (currentHealth <= 0)
+            if (CurrentHealth <= 0)
             {
-                OnDie.Invoke();
+                OnDie?.Invoke();
                 if (destroyOnDie) Destroy(gameObject);
             }
         }

@@ -13,7 +13,7 @@ namespace AutumnForest.Projectiles
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (!ignoringTags.Contains(collision.collider.tag))
-                if (collision.gameObject.TryGetComponent(out Health health))
+                if (collision.gameObject.TryGetComponent(out IHealth health))
                     health.TakeHit(damage);
 
             if (destroy) Destroy(gameObject);

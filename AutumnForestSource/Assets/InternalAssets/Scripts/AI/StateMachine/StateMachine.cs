@@ -43,8 +43,8 @@ namespace AutumnForest.StateMachineSystem
                 {
                     OnMachineWorking?.Invoke();
                     CurrentState?.UpdateState(StateMachineUser);
-                    await UniTask.Delay(machineWorkDelay);
                 }
+                await UniTask.Delay(machineWorkDelay);
             }
         }
         public void DisableStateMachine()

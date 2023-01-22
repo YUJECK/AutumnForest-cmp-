@@ -8,7 +8,7 @@ public class CollsionHeal : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            collision.collider.GetComponent<Health>().Heal(heal);
+            collision.collider.GetComponent<IHealth>().Heal(heal);
             Destroy(gameObject);
         }
     }

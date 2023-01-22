@@ -7,8 +7,10 @@ namespace CreaturesAI.Health
     {
         [SerializeField] private bool destroyOnDie = true;
 
-        public int CurrentHealth { get; private set; }
-        public int MaximumHealth { get; private set; }
+        [SerializeField] private int currentHealth;
+        [SerializeField] private int maximumHealth;
+        public int CurrentHealth { get => currentHealth; private set => currentHealth = value; }
+        public int MaximumHealth { get => maximumHealth; private set => maximumHealth = value; }
 
         public event Action<int, int> OnHealthChange;
         public event Action<int, int> OnHeal;

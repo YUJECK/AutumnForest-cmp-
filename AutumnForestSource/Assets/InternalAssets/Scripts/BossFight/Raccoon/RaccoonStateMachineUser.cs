@@ -1,3 +1,4 @@
+using AutumnForest.Editor;
 using AutumnForest.StateMachineSystem;
 using CreaturesAI.CombatSkills;
 using CreaturesAI.Health;
@@ -11,7 +12,7 @@ namespace AutumnForest.BossFight.Raccoon
         [Header("Services")]
         [SerializeField] private CreatureAnimator creatureAnimator;
         [SerializeField] private Shooting shooting;
-        [SerializeField] private IHealth health;
+        [SerializeField, Interface(typeof(IHealth))] private UnityEngine.Object healthObject;
 
         public StateMachine StateMachine { get; private set; }
         public LocalServiceLocator ServiceLocator { get; private set; }
@@ -21,7 +22,7 @@ namespace AutumnForest.BossFight.Raccoon
         private void Awake()
         {
             //нужно прописать сервисы
-            ServiceLocator = new(creatureAnimator, shooting, health);
+            ServiceLocator = new(creatureAnimator, shooting, (IHealth)healthObject);
             StateMachine = new(this, false);
         }
         private void OnEnable()

@@ -1,26 +1,22 @@
-using AutumnForest.Helpers;
-using AutumnForest.Other;
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 namespace AutumnForest.BossFight.Slingshot
 {
     public sealed class Slingshot : MonoBehaviour
     {
-        [SerializeField] private int culldown = 5;
         [SerializeField] private GameObject projectile;
         [SerializeField] private Transform firePoint;
+        [SerializeField] private int culldown = 5;
+        
         private bool canShoot = true;
         public bool Enabled { get; private set; } = false;
 
         public event Action OnReady;
         public event Action OnShoot;
         public event Action OnTimer;
-
 
         private void Start()
         {
@@ -48,11 +44,11 @@ namespace AutumnForest.BossFight.Slingshot
 
         private void Shoot()
         {
-            if(canShoot && Enabled)
+            if (canShoot && Enabled)
             {
                 Instantiate(projectile, firePoint.position, firePoint.rotation);
                 OnShoot?.Invoke();
-                
+
                 Culldown();
             }
         }

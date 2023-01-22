@@ -26,5 +26,15 @@ namespace AutumnForest
             if (currentAnimation != animation)
                 animator.Play(animation);
         }
+        public void DisableAnimator()
+        {
+            SetDefault();
+            animator.enabled = false;
+        }
+        public void EnableAnimator()
+        {
+            animator.enabled = true;
+            SetDefault();
+        }
     }
 }

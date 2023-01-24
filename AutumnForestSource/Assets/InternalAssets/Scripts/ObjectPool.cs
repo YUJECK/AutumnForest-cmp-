@@ -12,7 +12,7 @@ namespace AutumnForest.Assets.InternalAssets.Scripts
 
         private List<T> pool = new();
 
-        private ObjectPool(T prefab, Transform container, int poolSize, bool autoExpand)
+        public ObjectPool(T prefab, Transform container, int poolSize, bool autoExpand)
         {
             this.prefab = prefab;
             this.poolContainer = container;

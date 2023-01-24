@@ -13,57 +13,70 @@ namespace AutumnForest.BossFight.Raccoon
         [SerializeField] private CreatureAnimator creatureAnimator;
         [SerializeField] private Shooting shooting;
         [SerializeField, Interface(typeof(IHealth))] private UnityEngine.Object healthObject;
+        private BossFightManager bossFightManager;
+        private RaccoonStatesContainer raccoonStatesContainer;
 
+        public event Action<StateBehaviour> OnStateChanged;
         public StateMachine StateMachine { get; private set; }
         public LocalServiceLocator ServiceLocator { get; private set; }
 
-        public event Action<StateBehaviour> OnStateChanged;
-
-        private StateBehaviour idleState = new RaccoonIdleState();
 
         private void Awake()
         {
             //нужно прописать сервисы
             ServiceLocator = new(creatureAnimator, shooting, (IHealth)healthObject);
+            raccoonStatesContainer = GetComponent<IStateContainerVariator>().InitStates() as RaccoonStatesContainer; 
+
             StateMachine = new(this, false);
             StateMachine.OnMachineWorking += StateChoosing;
 
-            BossFightManager.OnBossFightStarts += StateMachine.EnableStateMachine;
+            bossFightManager = GlobalServiceLocator.GetService<BossFightManager>();
         }
         private void OnEnable()
         {
-            //StateMachine.OnMachineWorking += StateChoosing;
+            bossFightManager.OnBossFightStarted += StateMachine.EnableStateMachine;
+            StateMachine.OnMachineWorking += StateChoosing;
         }
         private void OnDisable()
         {
-            //StateMachine.OnMachineWorking -= StateChoosing;
+            bossFightManager.OnBossFightStarted -= StateMachine.EnableStateMachine;
+            StateMachine.OnMachineWorking -= StateChoosing;
         }
 
         private void StateChoosing()
         {
+            StateBehaviour nextState = null;
 
-            //первая стадия
-            if (BossFightManager.CurrentStage == BossFightStage.First)
-                FirstStageChoosing();
-            else if (BossFightManager.CurrentStage == BossFightStage.Second)
-                SecondStageChoosing();
-            else if (BossFightManager.CurrentStage == BossFightStage.Third)
-                ThirdStageChoosing();
-            //третья стадия
+            if (bossFightManager.CurrentStage == BossFightStage.First)
+                nextState = FirstStageChoosing();
+            else if (bossFightManager.CurrentStage == BossFightStage.Second)
+                nextState = SecondStageChoosing();
+            else if (bossFightManager.CurrentStage == BossFightStage.Third)
+                nextState = ThirdStageChoosing();
+
+            //тут должны еще быть разные проверки
+            if(nextState != null)
+            {
+                OnStateChanged?.Invoke(nextState);
+                Debug.Log("adsdsd");
+            }
         }
 
-        private void ThirdStageChoosing()
+        private StateBehaviour ThirdStageChoosing()
         {
+            throw new NotImplementedException("что же не так");
         }
 
-        private void SecondStageChoosing()
+        private StateBehaviour SecondStageChoosing()
         {
-
+            throw new NotImplementedException("что же не так");
         }
 
-        private void FirstStageChoosing()
+        private StateBehaviour FirstStageChoosing()
         {
-            OnStateChanged?.Invoke(idleState);
+            Debug.Log("asdl;adla;sdlsa;k");
+
+            return raccoonStatesContainer.ConeRoundShotState;
         }
     }
 }

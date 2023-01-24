@@ -1,5 +1,4 @@
 using AutumnForest.StateMachineSystem;
-using UnityEngine;
 
 namespace AutumnForest
 {
@@ -7,8 +6,8 @@ namespace AutumnForest
     {
         public override void EnterState(IStateMachineUser stateMachine)
         {
-            Debug.Log("idle state");
             stateMachine.ServiceLocator.GetService<CreatureAnimator>().SetDefault();
+            IsCompleted = true;
         }
     }
 }

@@ -5779,7 +5779,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229860903}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.086884, y: 0.20304999, z: -13.043479}
+  m_LocalPosition: {x: 4.1858535, y: 0.32305, z: -13.043479}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -13552,6 +13552,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 201344373221496976, guid: f360df0feb6fe9c4b8208db0c61bf87f, type: 3}
   m_PrefabInstance: {fileID: 594306910}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &595974493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 595974494}
+  m_Layer: 0
+  m_Name: Projectiles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &595974494
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595974493}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.2673645, y: -4.388288, z: -0.05004494}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &597877313
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22430,6 +22461,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1025024693}
   - component: {fileID: 1025024695}
+  - component: {fileID: 1025024696}
   m_Layer: 0
   m_Name: Raccoon
   m_TagString: Untagged
@@ -22470,6 +22502,21 @@ MonoBehaviour:
   creatureAnimator: {fileID: 1155370345}
   shooting: {fileID: 1809685870}
   healthObject: {fileID: 1918005425}
+--- !u!114 &1025024696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025024692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbcf4729fc9c352409b771f04970a875, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectileContainer: {fileID: 595974494}
+  conePrefab: {fileID: 5767805362926127976, guid: e8c0b2bb56593f3429477322396d7488, type: 3}
+  shirtPrefab: {fileID: 0}
 --- !u!1 &1029327000
 GameObject:
   m_ObjectHideFlags: 0

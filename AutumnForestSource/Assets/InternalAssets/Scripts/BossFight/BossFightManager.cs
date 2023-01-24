@@ -1,25 +1,28 @@
 ﻿using System;
+using UnityEngine;
+using UnityEngine.Events;
 
 namespace AutumnForest.BossFight
 {
     public enum BossFightStage
     {
+        NotStarted,
         First,
         Second,
         Third
     }
 
-    public static class BossFightManager
+    public class BossFightManager
     {
-        public static BossFightStage CurrentStage { get; private set; } = BossFightStage.First;
-        public static event Action OnBossFightStarts;
+        public BossFightStage CurrentStage { get; private set; } = BossFightStage.NotStarted;
 
-        public static void StartBossFight()
-        {
-            //многа кода(а может и мало)
-            OnBossFightStarts?.Invoke();
-        }
+        public event Action<BossFightStage> OnStageChanged;
 
-        //реализовать смену стадий
+        public event Action OnBossFightStarted;
+        public event Action OnBossFightEnded;
+        public UnityEvent test;
+
+        public void StartBossFight() { OnBossFightStarted?.Invoke(); CurrentStage = BossFightStage.First; }
+        public void EndBossFight() => OnBossFightEnded?.Invoke();
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace AutumnForest
 {
@@ -13,14 +12,15 @@ namespace AutumnForest
         {
             if (services.ContainsKey(typeof(T)))
                 services.Remove(typeof(T));
-            else Debug.LogError("Service isnt registered");
+
+            throw new NullReferenceException("Service is not registered");
         }
         public static T GetService<T>() where T : class
         {
-            if (services.TryGetValue(typeof(T), out var service)) return service as T;
-            else Debug.Log("Service isnt registered");
+            if (services.TryGetValue(typeof(T), out var service))
+                return service as T;
 
-            return null;
+            throw new NullReferenceException("Service is not registered");
         }
     }
 }

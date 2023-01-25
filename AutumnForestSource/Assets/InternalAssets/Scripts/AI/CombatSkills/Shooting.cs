@@ -1,37 +1,43 @@
 using AutumnForest.Helpers;
+using AutumnForest.Other;
+using System;
 using UnityEngine;
 
 namespace CreaturesAI.CombatSkills
 {
-    [RequireComponent(typeof(PointRotation))]
+    [RequireComponent(typeof(MonoRotator))]
     public class Shooting : MonoBehaviour, ICreatureComponent
     {
         [SerializeField] private Transform firePoint;
-        private PointRotation pointRotation;
+        public TransformRotation TransformRotation { get; private set; }
+        
+        private void Awake() => TransformRotation = GetComponent<MonoRotator>().TransfromRotation;
 
-        public void StopPointRotation(bool active) => pointRotation.StopRotating(active);
-        public void ShootWithInstantiate(GameObject projectile, float speed, float shootOffset, float spawnOffset, ForceMode2D forceMode2D)
+        public void ShootWithInstantiate(Rigidbody2D projectile, float speed, float shootOffset, ForceMode2D forceMode2D)
         {
             if (firePoint != null)
             {
-                pointRotation.offset = spawnOffset;
-                GameObject newProjectile = Instantiate(projectile, firePoint.position, firePoint.rotation);
+                Rigidbody2D newProjectile = Instantiate(projectile, firePoint.position, firePoint.rotation);
                 newProjectile.transform.Rotate(new Vector3(0, 0, shootOffset));
-                Rigidbody2D projectileRigidbody = newProjectile.GetComponent<Rigidbody2D>();
-                projectileRigidbody.AddForce(newProjectile.transform.up * speed, forceMode2D);
+                newProjectile.AddForce(newProjectile.transform.up * speed, forceMode2D);
             }
-            else Debug.LogWarning("Fire point is null");
+            else if (firePoint == null)
+                throw new NullReferenceException(nameof(firePoint));
+            else if (projectile == null)
+                throw new NullReferenceException(nameof(projectile));
         }
-        public void ShootWithoutInstantiate(GameObject projectile, float speed, float shootOffset, float spawnOffset, ForceMode2D forceMode2D)
+        public void ShootWithoutInstantiate(Rigidbody2D projectile, float speed, float shootOffset, ForceMode2D forceMode2D)
         {
-            if (firePoint != null)
+            if (firePoint != null && projectile != null)
             {
-                pointRotation.offset = spawnOffset;
                 projectile.transform.rotation = firePoint.rotation;
-                projectile.GetComponent<Rigidbody2D>().AddForce(projectile.transform.up * speed, forceMode2D);
+                projectile.transform.Rotate(new Vector3(0, 0, shootOffset));
+                projectile.AddForce(projectile.transform.up * speed, forceMode2D);
             }
-            else Debug.LogWarning("Fire point is null");
+            else if(firePoint == null) 
+                throw new NullReferenceException(nameof(firePoint));
+            else if(projectile == null)
+                throw new NullReferenceException(nameof(projectile));
         }
-        private void Awake() => pointRotation = GetComponent<PointRotation>();
     }
 }

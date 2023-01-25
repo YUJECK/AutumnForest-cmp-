@@ -7,7 +7,6 @@ namespace CreaturesAI.Pathfinding
 {
     public sealed class Pathfinder : MonoBehaviour, ICreatureComponent
     {
-        //classes, enums
         private enum GCostDefining
         {
             Distance,
@@ -16,33 +15,23 @@ namespace CreaturesAI.Pathfinding
         private sealed class Point
         {
             //position
-            private int x;
-            private int y;
+            public int X { get; private set; }
+            public int Y { get; private set; }
+            
             //costs
-            private float g = 0;
-            private float h = 0;
-
-            private Point previosPoint;
+            public float G { get; private set; }
+            public float H { get; private set; }
+            public float F => G + H;
 
             public Point(int x, int y)
             {
-                this.x = x;
-                this.y = y;
+                this.X = x;
+                this.Y = y;
             }
             
-            public Point PreviosPoint => previosPoint;
-            public float G => g;
-            public float H => h;
-            public float F => g + h;
-            public int X => x;
-            public int Y => y;
-            public void SetCosts(float g, float h) { this.g = g; this.h = h; }
-            public void SetPreviosPoint(Point startingPoint) => previosPoint = startingPoint;
-            public void SetXY(Vector2 point)
-            {
-                x = (int)point.x;
-                y = (int)point.y;
-            }
+            public Point PreviosPoint { get; set; }
+            
+            public void SetCosts(float g, float h) { this.G = g; this.H = h; }
         }
         private sealed class PointComparer : IComparer<Point>
         {
@@ -54,10 +43,45 @@ namespace CreaturesAI.Pathfinding
             }
         }
         
-        //variables
         [SerializeField] private GCostDefining gCostDefining;
 
-        //methods helpers
+        public List<Vector2> FindPath(Vector2 start, Vector2 end)
+        {
+            if (GlobalServiceLocator.GetService<GridManager>().GetPoint(end) == 1)
+            {
+                Debug.LogWarning("End point is obstacle");
+                return new List<Vector2>();
+            }
+
+            List<Point> nextPoints = new List<Point>();
+            bool[,] visitedPoints = new bool[GlobalServiceLocator.GetService<GridManager>().GridWidth, GlobalServiceLocator.GetService<GridManager>().GridHeight];
+            Point startPoint = new Point((int)start.x, (int)start.y);
+            Point endPoint = new Point((int)end.x, (int)end.y);
+
+            Point currentPoint = startPoint;
+
+            while (true)
+            {
+                if (currentPoint.X == endPoint.X && currentPoint.Y == endPoint.Y)
+                    return RestorePath(currentPoint);
+
+                List<Point> neibhourPoints = GetNeibhourPoints(currentPoint, visitedPoints);
+
+                foreach (Point point in neibhourPoints)
+                {
+                    point.SetCosts(currentPoint.G + DefineGCost(currentPoint, point), Heuristic(point, endPoint));
+                    point.PreviosPoint = currentPoint;
+                    nextPoints.Add(point);
+
+                    visitedPoints[point.X, point.Y] = true;
+                }
+                nextPoints.Sort(new PointComparer());
+
+                currentPoint = nextPoints[0];
+                nextPoints.Remove(currentPoint);
+            }
+        }
+        
         private float DefineGCost(Point startPoint, Point endPoint)
         {
             switch (gCostDefining)
@@ -76,67 +100,25 @@ namespace CreaturesAI.Pathfinding
             else return false;
         }
         
-        //main methods
-        public List<Vector2> FindPath(Vector2 start, Vector2 end)
-        {
-            //simple check endpoint for obstacle
-            if (GlobalServiceLocator.GetService<GridManager>().GetPoint(end) == 1)
-            {
-                Debug.LogWarning("End point is obstacle");
-                return new List<Vector2>();
-            }
-
-            List<Point> nextPoints = new List<Point>();
-            bool[,] visitedPoints = new bool[GlobalServiceLocator.GetService<GridManager>().GridWidth, GlobalServiceLocator.GetService<GridManager>().GridHeight];
-            Point startPoint = new Point((int)start.x, (int)start.y);
-            Point endPoint = new Point((int)end.x, (int)end.y);
-
-            Point currentPoint = startPoint;
-
-            while (true)
-            {
-                //if we have reached to the end
-                if (currentPoint.X == endPoint.X && currentPoint.Y == endPoint.Y)
-                    return RestorePath(currentPoint);
-
-                //getting neibhours
-                List<Point> neibhourPoints = GetNeibhourPoints(currentPoint, visitedPoints);
-
-                //defining costs, previos point
-                foreach (Point point in neibhourPoints)
-                {
-                    point.SetCosts(currentPoint.G + DefineGCost(currentPoint, point), Heuristic(point, endPoint));
-                    point.SetPreviosPoint(currentPoint);
-                    nextPoints.Add(point);
-
-                    visitedPoints[point.X, point.Y] = true;
-                }
-                //sorting points
-                nextPoints.Sort(new PointComparer());
-
-                //choosing the best point
-                currentPoint = nextPoints[0];
-                nextPoints.Remove(currentPoint);
-            }
-        }
         private List<Point> GetNeibhourPoints(Point point, bool[,] ignoredPoints)
         {
             List<Point> neibhourPoints = new List<Point>();
-            List<Point> pointsToCheck = new List<Point>();
-            //adding points to check
-            pointsToCheck.Add(new Point(point.X, point.Y + 1));
-            pointsToCheck.Add(new Point(point.X, point.Y - 1));
-            pointsToCheck.Add(new Point(point.X + 1, point.Y));
-            pointsToCheck.Add(new Point(point.X - 1, point.Y));
-            pointsToCheck.Add(new Point(point.X + 1, point.Y + 1));
-            pointsToCheck.Add(new Point(point.X - 1, point.Y - 1));
-            pointsToCheck.Add(new Point(point.X + 1, point.Y - 1));
-            pointsToCheck.Add(new Point(point.X - 1, point.Y + 1));
-            //cheking points
-            foreach (Point nextPoint in pointsToCheck)
+            List<Point> pointsToCheck = new List<Point>
             {
-                if (CheckPointCollider(nextPoint) && !ignoredPoints[nextPoint.X, nextPoint.Y])
-                    neibhourPoints.Add(nextPoint);
+                new Point(point.X, point.Y + 1),
+                new Point(point.X, point.Y - 1),
+                new Point(point.X + 1, point.Y),
+                new Point(point.X - 1, point.Y),
+                new Point(point.X + 1, point.Y + 1),
+                new Point(point.X - 1, point.Y - 1),
+                new Point(point.X + 1, point.Y - 1),
+                new Point(point.X - 1, point.Y + 1)
+            };
+
+            for(int i = 0; i < pointsToCheck.Count; i++)
+            {
+                if (CheckPointCollider(pointsToCheck[i]) && !ignoredPoints[pointsToCheck[i].X, pointsToCheck[i].Y])
+                    neibhourPoints.Add(pointsToCheck[i]);
             }
             return neibhourPoints;
         }
@@ -145,14 +127,13 @@ namespace CreaturesAI.Pathfinding
             Point current = endPoint;
             List<Vector2> path = new List<Vector2>();
 
-            //go from end point to starting point
             while(current.PreviosPoint != null)
             {
                 path.Add(new Vector2(current.X, current.Y));
                 current = current.PreviosPoint;
             } 
 
-            path.Reverse(); //reversing path
+            path.Reverse(); 
             return path;
         }
     }

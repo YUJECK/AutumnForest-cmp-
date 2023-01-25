@@ -56,10 +56,7 @@ namespace AutumnForest.BossFight.Raccoon
 
             //тут должны еще быть разные проверки
             if(nextState != null)
-            {
                 OnStateChanged?.Invoke(nextState);
-                Debug.Log("adsdsd");
-            }
         }
 
         private StateBehaviour ThirdStageChoosing()
@@ -74,8 +71,6 @@ namespace AutumnForest.BossFight.Raccoon
 
         private StateBehaviour FirstStageChoosing()
         {
-            Debug.Log("asdl;adla;sdlsa;k");
-
             return raccoonStatesContainer.ConeRoundShotState;
         }
     }

@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System;
+using UnityEngine;
 
 namespace AutumnForest.StateMachineSystem
 {
@@ -58,16 +59,25 @@ namespace AutumnForest.StateMachineSystem
         {
             if (nextState != null)
             {
-                if(nextState.CanEnterNewState())
+                if (CurrentState != null)
                 {
-                    if (CurrentState != null)
-                        CurrentState.ExitState(StateMachineUser);
+                    if (CurrentState.CanEnterNewState())
+                    {
+                        Debug.Log("New state can be entered");
 
-                    CurrentState = nextState;
-                    CurrentState.EnterState(StateMachineUser);
+                        CurrentState.ExitState(StateMachineUser);
+                        Switch();
+                    }
                 }
+                else Switch();
             }
             else throw new NullReferenceException(nameof(nextState));
+    
+            void Switch()
+            {
+                CurrentState = nextState;
+                CurrentState.EnterState(StateMachineUser);
+            }
         }
     }
 }

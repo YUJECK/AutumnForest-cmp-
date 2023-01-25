@@ -11,8 +11,6 @@ namespace AutumnForest
         private Projectile conePrefab;
         private ObjectPool<Projectile> conePool;
 
-        private bool nowWork = false;
-
         public RaccoonRoundShotState(Projectile conePrefab, Transform coneContainer)
         {
             this.conePrefab = conePrefab;
@@ -30,7 +28,6 @@ namespace AutumnForest
 
             for (int i = 0; i < totalCones; i++)
             {
-                Debug.Log(i);
                 await UniTask.Delay(shotRate);
                 //async cycle shooting
             }
@@ -39,8 +36,7 @@ namespace AutumnForest
         }
         public override void EnterState(IStateMachineUser stateMachine)
         {
-            Debug.Log("asdasd");
-
+            IsCompleted = false;
             SpawnCones();
         }
 

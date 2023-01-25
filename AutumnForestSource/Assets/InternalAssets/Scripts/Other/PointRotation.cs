@@ -6,6 +6,8 @@ public enum PointRotationTargetType
     Mouse,
     Other
 }
+
+//Необходиме переписать этот скрипт
 public sealed class PointRotation : MonoBehaviour
 {
     [Header("Settings")]

@@ -14,7 +14,7 @@ namespace AutumnForest.Other
 
         private void Awake()
         {
-            TransfromRotation = new(transform, target, 1, rotateType);
+            TransfromRotation = new(transform, target, coefficent, rotateType);
         }
         private void OnValidate()
         {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-namespace AutumnForest.Editor
+namespace AutumnForest.EditorScripts
 {
     public class InterfaceAttribute : PropertyAttribute
     {

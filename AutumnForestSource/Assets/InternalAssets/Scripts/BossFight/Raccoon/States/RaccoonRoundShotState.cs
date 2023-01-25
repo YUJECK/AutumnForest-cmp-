@@ -1,6 +1,7 @@
 using AutumnForest.Assets.InternalAssets.Scripts;
 using AutumnForest.Projectiles;
 using AutumnForest.StateMachineSystem;
+using CreaturesAI.CombatSkills;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -17,8 +18,10 @@ namespace AutumnForest
             conePool = new(conePrefab, coneContainer, 48, true);
         }
 
-        private async void SpawnCones()
+        private async void SpawnCones(IStateMachineUser stateMachine)
         {
+            Shooting shooting = stateMachine.ServiceLocator.GetService<Shooting>();
+            
             //params
             int coneCountPerCycle = 3;
             int cycles = 16;
@@ -26,10 +29,12 @@ namespace AutumnForest
 
             int shotRate = 100; //in milliseconds
 
+            shooting.TransformRotation.RotationType = TransformRotation.RotateType.Around;
+
             for (int i = 0; i < totalCones; i++)
             {
                 await UniTask.Delay(shotRate);
-                //async cycle shooting
+                shooting.ShootWithoutInstantiate(conePool.GetFree().GetComponent<Rigidbody2D>(), 10, 0, ForceMode2D.Impulse);
             }
 
             IsCompleted = true;
@@ -37,7 +42,7 @@ namespace AutumnForest
         public override void EnterState(IStateMachineUser stateMachine)
         {
             IsCompleted = false;
-            SpawnCones();
+            SpawnCones(stateMachine);
         }
 
         public override bool CanEnterNewState() => IsCompleted;

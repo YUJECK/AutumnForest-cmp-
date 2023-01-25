@@ -345,7 +345,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1774923035316629330}
-  - component: {fileID: 1774923035316629331}
+  - component: {fileID: 3505529241374428493}
   m_Layer: 0
   m_Name: PointRotation
   m_TagString: Untagged
@@ -369,7 +369,7 @@ Transform:
   m_Father: {fileID: 1774923034886314181}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1774923035316629331
+--- !u!114 &3505529241374428493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -378,15 +378,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1774923035316629333}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80433a10ef25dd24697b243beb570018, type: 3}
+  m_Script: {fileID: 11500000, guid: 493c608a42b82f647a2f121df5e29e2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetType: 1
-  usePlayerAsTarget: 0
+  rotateType: 0
+  coefficent: 1
   target: {fileID: 0}
-  offset: 0
-  coefficient: 1
-  angle: 0
 --- !u!1 &7568950238347224627
 GameObject:
   m_ObjectHideFlags: 0

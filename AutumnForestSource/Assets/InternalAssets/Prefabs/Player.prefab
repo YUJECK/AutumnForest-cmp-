@@ -81,21 +81,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce26d5c78b628b8468827465b4ac22d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnDie: 0
   currentHealth: 30
   maximumHealth: 30
-  OnHealthChange:
-    m_PersistentCalls:
-      m_Calls: []
-  OnHeal:
-    m_PersistentCalls:
-      m_Calls: []
-  OnTakeHit:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDie:
-    m_PersistentCalls:
-      m_Calls: []
-  destroyOnDie: 0
 --- !u!50 &857177195470058299
 Rigidbody2D:
   serializedVersion: 4
@@ -225,8 +213,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 857177196026291517}
-  - component: {fileID: 857177196026291516}
   - component: {fileID: 826260431224906066}
+  - component: {fileID: 943193133366047761}
   m_Layer: 9
   m_Name: Attack
   m_TagString: Untagged
@@ -250,24 +238,6 @@ Transform:
   m_Father: {fileID: 857177195470058290}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &857177196026291516
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 857177196026291514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80433a10ef25dd24697b243beb570018, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetType: 0
-  usePlayerAsTarget: 0
-  target: {fileID: 0}
-  offset: 0
-  coefficient: 1
-  angle: 0
 --- !u!114 &826260431224906066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +254,21 @@ MonoBehaviour:
   attackRate: 1000
   attackAnimation: {fileID: 3445538434664142156, guid: 5ee9a27a0635ab24a9c7081272acc08a, type: 3}
   areaHit: {fileID: 857177196607111390}
+--- !u!114 &943193133366047761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857177196026291514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 493c608a42b82f647a2f121df5e29e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateType: 0
+  coefficent: 1
+  target: {fileID: 0}
 --- !u!1 &857177196607111391
 GameObject:
   m_ObjectHideFlags: 0

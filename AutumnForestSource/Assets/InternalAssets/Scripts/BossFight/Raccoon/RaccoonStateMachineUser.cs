@@ -1,4 +1,4 @@
-using AutumnForest.Editor;
+using AutumnForest.EditorScripts;
 using AutumnForest.StateMachineSystem;
 using CreaturesAI.CombatSkills;
 using CreaturesAI.Health;
@@ -13,6 +13,7 @@ namespace AutumnForest.BossFight.Raccoon
         [SerializeField] private CreatureAnimator creatureAnimator;
         [SerializeField] private Shooting shooting;
         [SerializeField, Interface(typeof(IHealth))] private UnityEngine.Object healthObject;
+        
         private BossFightManager bossFightManager;
         private RaccoonStatesContainer raccoonStatesContainer;
 
@@ -23,7 +24,6 @@ namespace AutumnForest.BossFight.Raccoon
 
         private void Awake()
         {
-            //нужно прописать сервисы
             ServiceLocator = new(creatureAnimator, shooting, (IHealth)healthObject);
             raccoonStatesContainer = GetComponent<IStateContainerVariator>().InitStates() as RaccoonStatesContainer; 
 

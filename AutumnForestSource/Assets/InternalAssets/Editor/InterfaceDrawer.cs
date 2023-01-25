@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace AutumnForest.Editor
+namespace AutumnForest.EditorScripts
 {
     [CustomPropertyDrawer(typeof(InterfaceAttribute))]
     public class InterfaceDrawer : PropertyDrawer

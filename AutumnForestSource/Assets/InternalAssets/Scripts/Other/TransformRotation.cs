@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System;
+using Unity.Profiling;
 using UnityEngine;
 
 public sealed class TransformRotation

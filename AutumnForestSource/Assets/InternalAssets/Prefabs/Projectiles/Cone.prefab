@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 4
-  destroy: 1
+  destroy: 0
   ignoringTags: []
 --- !u!50 &5767805362926127977
 Rigidbody2D:

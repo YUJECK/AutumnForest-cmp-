@@ -17,6 +17,7 @@ namespace AutumnForest.Projectiles
                     health.TakeHit(damage);
 
             if (destroy) Destroy(gameObject);
+            else gameObject.SetActive(false);
         }
     }
 }

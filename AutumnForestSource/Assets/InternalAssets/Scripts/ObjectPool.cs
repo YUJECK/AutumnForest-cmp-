@@ -39,7 +39,7 @@ namespace AutumnForest.Assets.InternalAssets.Scripts
         {
             for (int i = 0; i < pool.Count; i++)
             {
-                if (pool[i].gameObject.activeInHierarchy)
+                if (!pool[i].gameObject.activeInHierarchy)
                 {
                     element = pool[i];
                     return true;

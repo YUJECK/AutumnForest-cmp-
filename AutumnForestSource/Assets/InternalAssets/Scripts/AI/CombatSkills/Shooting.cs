@@ -10,8 +10,8 @@ namespace CreaturesAI.CombatSkills
     {
         [SerializeField] private Transform firePoint;
         public TransformRotation TransformRotation { get; private set; }
-        
-        private void Awake() => TransformRotation = GetComponent<MonoRotator>().TransfromRotation;
+
+        private void Start() => TransformRotation = GetComponent<MonoRotator>().TransfromRotation;
 
         public void ShootWithInstantiate(Rigidbody2D projectile, float speed, float shootOffset, ForceMode2D forceMode2D)
         {
@@ -30,6 +30,7 @@ namespace CreaturesAI.CombatSkills
         {
             if (firePoint != null && projectile != null)
             {
+                projectile.transform.position = firePoint.position;
                 projectile.transform.rotation = firePoint.rotation;
                 projectile.transform.Rotate(new Vector3(0, 0, shootOffset));
                 projectile.AddForce(projectile.transform.up * speed, forceMode2D);

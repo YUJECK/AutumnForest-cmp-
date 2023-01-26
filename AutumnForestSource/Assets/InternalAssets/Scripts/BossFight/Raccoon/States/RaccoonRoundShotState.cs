@@ -42,6 +42,9 @@ namespace AutumnForest
         public override void EnterState(IStateMachineUser stateMachine)
         {
             IsCompleted = false;
+            //позже нужно будет сделать какой-нибудь RaccoonAnimationsHelper 
+            //и в конструктор этого состояния передавать R..A..H.Throwing
+            stateMachine.ServiceLocator.GetService<CreatureAnimator>().PlayAnimation("RaccoonThrowing");
             SpawnCones(stateMachine);
         }
 

@@ -1,6 +1,5 @@
 using Cysharp.Threading.Tasks;
 using System;
-using Unity.Profiling;
 using UnityEngine;
 
 public sealed class TransformRotation
@@ -34,15 +33,13 @@ public sealed class TransformRotation
 
     public void Enable() => Enabled = true;
     public void Disable() => Enabled = false;
-    
+
     private float GetAngle()
     {
         Vector2 direction = target.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
         OnAngleCalculated?.Invoke(angle);
-
-        Debug.Log(angle);
 
         return Coefficient * angle;
     }

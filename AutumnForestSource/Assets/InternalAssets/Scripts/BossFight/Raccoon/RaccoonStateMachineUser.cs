@@ -7,12 +7,13 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight.Raccoon
 {
+    [RequireComponent(typeof(IStateContainerVariator))]
     public class RaccoonStateMachineUser : MonoBehaviour, IStateMachineUser
     {
         [Header("Services")]
         [SerializeField] private CreatureAnimator creatureAnimator;
         [SerializeField] private Shooting shooting;
-        [SerializeField, Interface(typeof(IHealth))] private UnityEngine.Object healthObject;
+        [SerializeField] private CreatureHealth healthObject;
         
         private BossFightManager bossFightManager;
         private RaccoonStatesContainer raccoonStatesContainer;
@@ -24,22 +25,22 @@ namespace AutumnForest.BossFight.Raccoon
 
         private void Awake()
         {
-            ServiceLocator = new(creatureAnimator, shooting, (IHealth)healthObject);
-            raccoonStatesContainer = GetComponent<IStateContainerVariator>().InitStates() as RaccoonStatesContainer; 
+            ServiceLocator = new(creatureAnimator, shooting, healthObject);
+            raccoonStatesContainer = GetComponent<IStateContainerVariator>().InitStates() as RaccoonStatesContainer;
 
             StateMachine = new(this, false);
             StateMachine.OnMachineWorking += StateChoosing;
-
+        }
+        private void Start()
+        {
             bossFightManager = GlobalServiceLocator.GetService<BossFightManager>();
         }
         private void OnEnable()
         {
-            bossFightManager.OnBossFightStarted += StateMachine.EnableStateMachine;
             StateMachine.OnMachineWorking += StateChoosing;
         }
         private void OnDisable()
         {
-            bossFightManager.OnBossFightStarted -= StateMachine.EnableStateMachine;
             StateMachine.OnMachineWorking -= StateChoosing;
         }
 
@@ -61,11 +62,13 @@ namespace AutumnForest.BossFight.Raccoon
 
         private StateBehaviour ThirdStageChoosing()
         {
+            OnStateChanged?.Invoke(raccoonStatesContainer.IdleState);
             throw new NotImplementedException("что же не так");
         }
 
         private StateBehaviour SecondStageChoosing()
         {
+            OnStateChanged?.Invoke(raccoonStatesContainer.IdleState);
             throw new NotImplementedException("что же не так");
         }
 

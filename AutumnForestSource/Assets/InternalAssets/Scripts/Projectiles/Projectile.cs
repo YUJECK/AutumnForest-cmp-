@@ -7,14 +7,16 @@ namespace AutumnForest.Projectiles
     public class Projectile : MonoBehaviour
     {
         [SerializeField, Min(0)] private int damage;
-        [SerializeField] private GameObject hitEffect;
+        [SerializeField] private GameObject collideEffect;
+        [SerializeField] private AudioSource hitSoundEffect;
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.TryGetComponent(out IHealth health))
                 health.TakeHit(damage);
          
-            if(hitEffect != null) Instantiate(hitEffect, transform.position, transform.rotation);
+            if(collideEffect != null) Instantiate(collideEffect, transform.position, transform.rotation);
+            if(hitSoundEffect != null) hitSoundEffect.Play();
             gameObject.SetActive(false);
         }
     }

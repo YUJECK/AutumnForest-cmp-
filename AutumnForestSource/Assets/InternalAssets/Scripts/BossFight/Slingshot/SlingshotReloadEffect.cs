@@ -10,7 +10,7 @@ namespace AutumnForest.BossFight.Slingshot
         private Animator effectAnimator;
         
         private Slingshot slingshot;
-        private string reloadAnimation = "Exploit";
+        [SerializeField] private string reloadAnimation = "Exploit";
 
         private void Awake()
         {
@@ -22,8 +22,8 @@ namespace AutumnForest.BossFight.Slingshot
             slingshot = GetComponent<Slingshot>();
         }
 
-        private void OnEnable() => slingshot.OnReady += OnReload;
-        private void OnDisable() => slingshot.OnReady -= OnReload;
+        private void OnEnable() => slingshot.OnReload += OnReload;
+        private void OnDisable() => slingshot.OnReload -= OnReload;
 
         private void OnReload() => effectAnimator.Play(reloadAnimation);
     }

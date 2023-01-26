@@ -14,9 +14,9 @@ namespace AutumnForest.BossFight.Slingshot
         private bool canShoot = true;
         public bool Enabled { get; private set; } = false;
 
-        public event Action OnReady;
+        public event Action OnReload;
         public event Action OnShoot;
-        public event Action OnTimer;
+        public event Action<int> OnTimer;
 
         private void Start()
         {
@@ -58,12 +58,12 @@ namespace AutumnForest.BossFight.Slingshot
 
             for (int i = 0; i < culldown; i++)
             {
-                OnTimer?.Invoke();
+                OnTimer?.Invoke(i);
                 await UniTask.Delay(1000);
             }
 
             canShoot = true;
-            OnReady?.Invoke();
+            OnReload?.Invoke();
         }
 
         private void SlingshotInput(InputAction.CallbackContext obj) => Shoot();

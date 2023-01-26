@@ -1,4 +1,5 @@
 ﻿using AutumnForest.Helpers;
+using AutumnForest.Managers;
 using AutumnForest.Other;
 using Cinemachine;
 using UnityEngine;
@@ -41,7 +42,7 @@ namespace AutumnForest.BossFight.Slingshot
             if(!currentlyZoomed)
             {
                 GlobalServiceLocator.GetService<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.SetActive(false);
-                GlobalServiceLocator.GetService<VirtualCameraHelper>().SlingshotCamera.gameObject.SetActive(true);
+                GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToSlingshotCamera();
             
                 FindObjectOfType<Cursor>().SetCursorIcon(slingshotCursor);
                 currentlyZoomed = true;
@@ -52,7 +53,7 @@ namespace AutumnForest.BossFight.Slingshot
             if(currentlyZoomed)
             {
                 GlobalServiceLocator.GetService<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.SetActive(false);
-                GlobalServiceLocator.GetService<VirtualCameraHelper>().BossfightCamera.gameObject.SetActive(true);
+                GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToPrevious();
 
                 FindObjectOfType<Cursor>().SetCursorIcon(cursorDefault);
                 currentlyZoomed = false;

@@ -9,39 +9,34 @@ namespace AutumnForest.Managers
         private GameObject bossfightCamera;
         private GameObject slingshotCamera;
 
+        private GameObject currentCamera;
+        private GameObject previousCamera;
+
         public CameraSwitcher(CinemachineVirtualCamera mainCamera, CinemachineVirtualCamera bossfightCamera, CinemachineVirtualCamera slingshotCamera)
         {
             this.mainCamera = mainCamera.gameObject;
             this.bossfightCamera = bossfightCamera.gameObject;
             this.slingshotCamera = slingshotCamera.gameObject;
+
+            mainCamera.gameObject.SetActive(false);
+            slingshotCamera.gameObject.SetActive(false);
+            bossfightCamera.gameObject.SetActive(false);
+
+            SwichToMainCamera();
         }
 
-        public void SwichToMainCamera()
+        public void SwichToMainCamera() => Switch(mainCamera);
+        public void SwitchToBossFightCamera() => Switch(bossfightCamera);
+        public void SwitchToSlingshotCamera() => Switch(slingshotCamera);
+        public void SwitchToPrevious() => Switch(previousCamera);
+    
+        private void Switch(GameObject camera)
         {
-            if (slingshotCamera.gameObject.activeInHierarchy)
-                slingshotCamera.gameObject.SetActive(false);
-            if (bossfightCamera.gameObject.activeInHierarchy)
-                bossfightCamera.gameObject.SetActive(false);
+            previousCamera = currentCamera;
+            previousCamera?.SetActive(false);
 
-            mainCamera.SetActive(true);
-        }
-        public void SwitchToBossFightCamera()
-        {
-            if (slingshotCamera.gameObject.activeInHierarchy)
-                slingshotCamera.gameObject.SetActive(false);
-            if (mainCamera.gameObject.activeInHierarchy)
-                mainCamera.gameObject.SetActive(false);
-
-            bossfightCamera.SetActive(true);
-        }
-        public void SwitchToSlingshotCamera()
-        {
-            if (mainCamera.gameObject.activeInHierarchy)
-                mainCamera.gameObject.SetActive(false);
-            if (bossfightCamera.gameObject.activeInHierarchy)
-                bossfightCamera.gameObject.SetActive(false);
-
-            slingshotCamera.SetActive(true);
+            currentCamera = camera;
+            currentCamera.SetActive(true);
         }
     }
 }

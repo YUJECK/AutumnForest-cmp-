@@ -16,7 +16,7 @@ namespace AutumnForest
             if (collision.CompareTag(TagHelper.PlayerTag))
             {
                 if (bossFightManager.CurrentStage == BossFightStage.NotStarted)
-                    bossFightManager.StartBossFight();            
+                    bossFightManager.StartBossFight();
             }
         }
     }

@@ -1,6 +1,6 @@
 using System;
 
-namespace CreaturesAI.Health
+namespace AutumnForest.Health
 {
     public interface IHealth
     {

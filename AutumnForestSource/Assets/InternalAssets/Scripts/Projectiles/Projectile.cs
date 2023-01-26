@@ -1,4 +1,4 @@
-using CreaturesAI.Health;
+using AutumnForest.Health;
 using UnityEngine;
 
 namespace AutumnForest.Projectiles

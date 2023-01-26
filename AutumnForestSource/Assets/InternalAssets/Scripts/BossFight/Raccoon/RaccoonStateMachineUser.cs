@@ -1,7 +1,7 @@
 using AutumnForest.EditorScripts;
 using AutumnForest.StateMachineSystem;
 using CreaturesAI.CombatSkills;
-using CreaturesAI.Health;
+using AutumnForest.Health;
 using System;
 using UnityEngine;
 

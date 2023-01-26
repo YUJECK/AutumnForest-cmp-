@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
 
-namespace CreaturesAI.Health
+namespace AutumnForest.Health
 {
     public class CreatureHealth : MonoBehaviour, IHealth
     {
+        [field: SerializeField] public HealthBarConfig healthBarConfig { get; private set; }
         [SerializeField] private bool destroyOnDie = true;
 
         [SerializeField] private int currentHealth;
@@ -17,6 +18,12 @@ namespace CreaturesAI.Health
         public event Action<int, int> OnHeal;
         public event Action<int, int> OnTakeHit;
         public event Action OnDie;
+
+        private void Awake()
+        {
+            if(healthBarConfig != null)
+                healthBarConfig.HealthTarget = this;
+        }
 
         public void DecreaseMaximumHealth(int damagePoints)
         {

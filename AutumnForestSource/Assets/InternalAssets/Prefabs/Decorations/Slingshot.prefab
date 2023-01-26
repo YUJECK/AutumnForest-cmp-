@@ -589,6 +589,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7279167105589751977, guid: 69b547fd058f0974d9f9dab2dea54cbb, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7279167105589751979, guid: 69b547fd058f0974d9f9dab2dea54cbb, type: 3}
       propertyPath: m_Name
       value: SlingshotReloadEffect

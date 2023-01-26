@@ -1,4 +1,6 @@
 using AutumnForest.BossFight;
+using AutumnForest.Health;
+using AutumnForest.Managers;
 using UnityEngine;
 
 namespace AutumnForest
@@ -6,6 +8,8 @@ namespace AutumnForest
     public class BossFightTrigger : MonoBehaviour
     {
         private BossFightManager bossFightManager;
+        [SerializeField] private HealthBar bossfightHealthBar; //временно
+        [SerializeField] private CreatureHealth creatureHealth; //временно
 
         private void Awake()
         {
@@ -16,7 +20,11 @@ namespace AutumnForest
             if (collision.CompareTag(TagHelper.PlayerTag))
             {
                 if (bossFightManager.CurrentStage == BossFightStage.NotStarted)
+                {
                     bossFightManager.StartBossFight();
+                    GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToBossFightCamera(); //временно
+                    bossfightHealthBar.SetConfig(creatureHealth.healthBarConfig); //временно
+                }
             }
         }
     }

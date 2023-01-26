@@ -1,37 +1,38 @@
+using NaughtyAttributes;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CreaturesAI.Health
+namespace AutumnForest.Health
 {
     public class HealthBar : MonoBehaviour
     {
-        [SerializeField] private Slider healthBar;
+        [SerializeField, Expandable] HealthBarConfig healthBarConfig;
+        [SerializeField] private Image healthBar;
         [SerializeField] private Image healthBarIcon;
         [SerializeField] private Text healthBarText;
         
         private IHealth healthTarget;
 
         //methods
-        public void SetPreset(HealthBarPreset healthBarPreset)
+        public void SetConfig(HealthBarConfig healthBarConfig)
         {
-            if (healthBarPreset != null)
+            if (healthBarConfig != null)
             {
-                healthTarget = healthBarPreset.HealthTarget;
-                healthBarIcon.sprite = healthBarPreset.HealthBarIcon;
-                healthBarText.text = healthBarPreset.HealthBarName;
+                healthTarget = healthBarConfig.HealthTarget;
+                healthBarIcon.sprite = healthBarConfig.HealthBarIcon;
+                healthBarText.text = healthBarConfig.HealthBarName;
 
                 healthTarget.OnHealthChange += UpdateHealthBar;
                 UpdateHealthBar(healthTarget.CurrentHealth, healthTarget.MaximumHealth);
             }
-            else throw new NullReferenceException(nameof(healthBarPreset));
+            else throw new NullReferenceException(nameof(healthBarConfig));
         }
         private void UpdateHealthBar(int currentHealth, int maximumHealth)
         {
             if (healthBar != null)
             {
-                healthBar.value = currentHealth;
-                healthBar.maxValue = maximumHealth;
+                healthBar.fillAmount = (float)currentHealth / (float)maximumHealth;
             }
             else throw new NullReferenceException(nameof(healthBar));
         }

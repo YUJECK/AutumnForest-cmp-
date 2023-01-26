@@ -21,8 +21,8 @@ namespace AutumnForest.DialogueSystem
         [SerializeField] private float textSpeed = 0.02f;
 
         private CancellationTokenSource token = new();
-        private UniTask disableTask;
         //костыль момент
+        private UniTask disableTask;
 
         private void Start()
         {
@@ -56,35 +56,25 @@ namespace AutumnForest.DialogueSystem
             }
         }
 
-        protected override void SelfEnable()
+        protected override async void SelfEnable()
         {
-            Enable();
+            if (disableTask.Status == UniTaskStatus.Pending)
+                await disableTask;
 
-            async UniTaskVoid Enable()
-            {
-                if (disableTask.Status == UniTaskStatus.Pending)
-                    await disableTask;
-
-                dialogueWindowUI.SetActive(true);
-                animator.Play(windowEnableAnimationName);
-            }
+            dialogueWindowUI.SetActive(true);
+            animator.Play(windowEnableAnimationName);
         }
-        protected override void SelfDisable()
+        protected override async void SelfDisable()
         {
-            disableTask = Disable();
+            dialogueTextUI.text = "";
+            dialogueNameUI.text = "";
 
-            async UniTask Disable()
-            {
-                dialogueTextUI.text = "";
-                dialogueNameUI.text = "";
+            animator.Play(windowDisableAnimationName);
+            float waitTime = animator.GetCurrentAnimatorStateInfo(0).length - 0.8f;
 
-                animator.Play(windowDisableAnimationName);
-                float waitTime = animator.GetCurrentAnimatorStateInfo(0).length - 0.8f;
+            await UniTask.Delay(TimeSpan.FromSeconds(waitTime));
 
-                await UniTask.Delay(TimeSpan.FromSeconds(waitTime));
-
-                dialogueWindowUI.SetActive(false);
-            }
+            dialogueWindowUI.SetActive(false);
         }
     }
 }

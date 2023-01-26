@@ -1,17 +1,16 @@
-﻿using AutumnForest.DialogueSystem;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace AutumnForest
 {
     public abstract class UIWindow : MonoBehaviour
     {
-        public bool CurrentlyActive { get; private set; } 
+        public bool CurrentlyActive { get; private set; }
 
         public event Action OnWindowEnabled;
         public event Action OnWindowDisabled;
 
-        public void EnableWindow(Dialogue dialogue)
+        public void EnableWindow()
         {
             CurrentlyActive = true;
 
@@ -20,7 +19,7 @@ namespace AutumnForest
         }
         protected abstract void SelfEnable();
 
-        public void DisableWindow(Dialogue dialogue)
+        public void DisableWindow()
         {
             CurrentlyActive = false;
 

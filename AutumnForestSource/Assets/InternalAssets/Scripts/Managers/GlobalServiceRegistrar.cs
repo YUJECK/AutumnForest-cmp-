@@ -1,6 +1,6 @@
 using AutumnForest.BossFight;
 using AutumnForest.DialogueSystem;
-using AutumnForest.Helpers;
+using AutumnForest.Managers;
 using AutumnForest.Player;
 using Cinemachine;
 using UnityEngine;
@@ -33,7 +33,7 @@ namespace AutumnForest
         }
         private void RegisterCameras()
         {
-            GlobalServiceLocator.RegisterService(new VirtualCameraHelper(mainCamera, bossfightCamera, slingshotCamera));
+            GlobalServiceLocator.RegisterService(new CameraSwitcher(mainCamera, bossfightCamera, slingshotCamera));
             GlobalServiceLocator.RegisterService(FindObjectOfType<CinemachineBrain>());
         }
         private void RegisterDialogueServices()

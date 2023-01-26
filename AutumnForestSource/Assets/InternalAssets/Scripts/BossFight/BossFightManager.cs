@@ -1,6 +1,4 @@
 ﻿using System;
-using UnityEngine;
-using UnityEngine.Events;
 
 namespace AutumnForest.BossFight
 {
@@ -20,9 +18,8 @@ namespace AutumnForest.BossFight
 
         public event Action OnBossFightStarted;
         public event Action OnBossFightEnded;
-        public UnityEvent test;
 
-        public void StartBossFight() { OnBossFightStarted?.Invoke(); CurrentStage = BossFightStage.First; }
+        public void StartBossFight() { CurrentStage = BossFightStage.First; OnBossFightStarted?.Invoke(); }
         public void EndBossFight() => OnBossFightEnded?.Invoke();
     }
 }

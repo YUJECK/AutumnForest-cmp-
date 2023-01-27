@@ -31,8 +31,7 @@ namespace AutumnForest.Health
         }
         private void OnHealthChanged(int currentHealth, int maximumHealth)
         {
-            if (healthBar != null)
-                UpdateHealthBar(currentHealth, maximumHealth);
+            if (healthBar != null) UpdateHealthBar(currentHealth, maximumHealth);
             else throw new NullReferenceException(nameof(healthBar));
         }
         private async UniTask UpdateHealthBar(int currentHealth, int maximumHealth)

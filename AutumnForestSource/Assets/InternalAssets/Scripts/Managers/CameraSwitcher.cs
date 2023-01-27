@@ -7,6 +7,8 @@ namespace AutumnForest.Managers
     {
         private GameObject mainCamera;
         private GameObject bossfightCamera;
+        private GameObject houseCamera;
+        private GameObject basementCamera;
         private GameObject slingshotCamera;
 
         private GameObject currentCamera;
@@ -27,7 +29,9 @@ namespace AutumnForest.Managers
 
         public void SwichToMainCamera() => Switch(mainCamera);
         public void SwitchToBossFightCamera() => Switch(bossfightCamera);
+        public void SwitchToHouseCamera() => Switch(houseCamera);
         public void SwitchToSlingshotCamera() => Switch(slingshotCamera);
+        public void SwitchToBasementCamera() => Switch(basementCamera);
         public void SwitchToPrevious() => Switch(previousCamera);
     
         private void Switch(GameObject camera)

@@ -16,6 +16,8 @@ namespace AutumnForest
         [SerializeField] private CinemachineVirtualCamera mainCamera;
         [SerializeField] private CinemachineVirtualCamera bossfightCamera;
         [SerializeField] private CinemachineVirtualCamera slingshotCamera;
+        [SerializeField] private CinemachineVirtualCamera houseCamera;
+        [SerializeField] private CinemachineVirtualCamera basementCamera;
         [Header("Health bars")]
         [SerializeField] private HealthBar bossHealthBar;
         [SerializeField] private HealthBar playerHealthBar;

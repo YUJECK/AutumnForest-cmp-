@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight
 {
-    public sealed class BossfightStarter : MonoBehaviour
+    public sealed class BossfightInit : MonoBehaviour
     {
         [SerializeField] private HealthBar healthBar;
         [SerializeField] private GameObject log;
@@ -24,6 +24,10 @@ namespace AutumnForest.BossFight
 
             bossFightManager.OnBossFightStarted += EnableLog;
             bossFightManager.OnBossFightStarted += DisableLog;
+
+            GlobalServiceLocator.GetService<RaccoonStateMachineUser>().ServiceLocator
+                .GetService<CreatureHealth>()
+                .OnDie += bossFightManager.EndBossFight;
         }
 
         private void OnDisable()
@@ -36,6 +40,8 @@ namespace AutumnForest.BossFight
 
             bossFightManager.OnBossFightStarted -= EnableLog;
             bossFightManager.OnBossFightStarted -= DisableLog;
+            
+            GlobalServiceLocator.GetService<RaccoonStateMachineUser>().ServiceLocator.GetService<CreatureHealth>().OnDie -= bossFightManager.EndBossFight;
         }
 
         private void EnableHealthBar() => healthBar.gameObject.SetActive(true);

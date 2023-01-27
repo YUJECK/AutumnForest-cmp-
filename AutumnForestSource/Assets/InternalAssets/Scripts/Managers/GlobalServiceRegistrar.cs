@@ -43,7 +43,7 @@ namespace AutumnForest
         }
         private void RegisterCameras()
         {
-            GlobalServiceLocator.RegisterService(new CameraSwitcher(mainCamera, bossfightCamera, slingshotCamera));
+            GlobalServiceLocator.RegisterService(new CameraSwitcher(mainCamera, bossfightCamera, slingshotCamera, houseCamera, basementCamera));
             GlobalServiceLocator.RegisterService(FindObjectOfType<CinemachineBrain>(true));
         }
         private void RegisterDialogueServices()

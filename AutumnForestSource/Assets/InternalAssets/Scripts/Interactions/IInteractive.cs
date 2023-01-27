@@ -1,10 +1,9 @@
-﻿using System;
-
-namespace AutumnForest.Other
+﻿namespace AutumnForest.Other
 {
     public interface IInteractive
     {
-        public virtual void Init() { }
+        public void Detect();
         public void Interact();
+        public void DetectionReleased();
     }
 }

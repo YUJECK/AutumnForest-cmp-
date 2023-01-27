@@ -20,14 +20,20 @@ namespace AutumnForest
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.TryGetComponent(out IInteractive interactive))
+            {
+                interactive.Detect();
                 awailableInteractions.Add(interactive);
+            }
         }
         private void OnTriggerExit2D(Collider2D collision)
         {
             if (collision.TryGetComponent(out IInteractive interactive))
             {
                 if (awailableInteractions.Contains(interactive))
+                {
+                    interactive.DetectionReleased();
                     awailableInteractions.Remove(interactive);
+                }
             }
         }
     }

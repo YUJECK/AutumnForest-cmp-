@@ -27,10 +27,8 @@ namespace AutumnForest.DialogueSystem
                 dialogue = GetComponent<Dialogue>();
         }
 
-        public void Interact()
-        {
-            if (!Dialogue.IsCurrentlyActive) Dialogue.StartDialogue();
-            else Dialogue.NextPhrase();
-        }
+        public void Detect() => Dialogue.StartDialogue();
+        public void Interact() => Dialogue.NextPhrase();
+        public void DetectionReleased() => Dialogue.EndDialogue();  
     }
 }

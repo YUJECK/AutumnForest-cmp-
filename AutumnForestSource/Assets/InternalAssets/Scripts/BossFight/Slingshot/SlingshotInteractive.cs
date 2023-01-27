@@ -1,5 +1,4 @@
-﻿using AutumnForest.Helpers;
-using AutumnForest.Managers;
+﻿using AutumnForest.Managers;
 using AutumnForest.Other;
 using Cinemachine;
 using UnityEngine;
@@ -19,38 +18,33 @@ namespace AutumnForest.BossFight.Slingshot
         private void Awake() => slingshot = GetComponent<Slingshot>();
         private void OnEnable() => slingshot.OnShoot += Distance;
         private void OnDisable() => slingshot.OnShoot -= Distance;
-        
-        // мне если честно не особо нравится такое решение отключения рогатки,
-        // но я хз что еще придумать(мне лень) 
-        private void OnTriggerExit2D(Collider2D collision)
-        {
-            if (collision.CompareTag(TagHelper.PlayerTag))
-            {
-                slingshot.DisableSlingshot();
-                Distance();
-            }
-        }
 
+        public void Detect() { }
         public void Interact()
         {
             Zoom();
             slingshot.EnableSlingshot();
         }
+        public void DetectionReleased()
+        {
+            slingshot.DisableSlingshot();
+            Distance();
+        }
 
         private void Zoom()
         {
-            if(!currentlyZoomed)
+            if (!currentlyZoomed)
             {
                 GlobalServiceLocator.GetService<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.SetActive(false);
                 GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToSlingshotCamera();
-            
+
                 FindObjectOfType<Cursor>().SetCursorIcon(slingshotCursor);
                 currentlyZoomed = true;
             }
         }
         private void Distance()
         {
-            if(currentlyZoomed)
+            if (currentlyZoomed)
             {
                 GlobalServiceLocator.GetService<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.SetActive(false);
                 GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToPrevious();

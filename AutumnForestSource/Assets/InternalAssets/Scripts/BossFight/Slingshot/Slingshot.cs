@@ -33,13 +33,19 @@ namespace AutumnForest.BossFight.Slingshot
 
         public void EnableSlingshot()
         {
-            Enabled = true;
-            GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.Enable();
+            if (!Enabled)
+            {
+                Enabled = true;
+                GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.Enable();
+            }
         }
         public void DisableSlingshot()
         {
-            Enabled = false;
-            GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.Disable();
+            if (Enabled)
+            {
+                Enabled = false;
+                GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.Disable();
+            }
         }
 
         private void Shoot()

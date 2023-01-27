@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using NaughtyAttributes;
 using System;
 using UnityEngine;
@@ -23,18 +24,27 @@ namespace AutumnForest.Health
                 healthBarIcon.sprite = healthBarConfig.HealthBarIcon;
                 healthBarText.text = healthBarConfig.HealthBarName;
 
-                healthTarget.OnHealthChange += UpdateHealthBar;
-                UpdateHealthBar(healthTarget.CurrentHealth, healthTarget.MaximumHealth);
+                healthTarget.OnHealthChange += OnHealthChanged;
+                OnHealthChanged(healthTarget.CurrentHealth, healthTarget.MaximumHealth);
             }
             else throw new NullReferenceException(nameof(healthBarConfig));
         }
-        private void UpdateHealthBar(int currentHealth, int maximumHealth)
+        private void OnHealthChanged(int currentHealth, int maximumHealth)
         {
             if (healthBar != null)
-            {
-                healthBar.fillAmount = (float)currentHealth / (float)maximumHealth;
-            }
+                UpdateHealthBar(currentHealth, maximumHealth);
             else throw new NullReferenceException(nameof(healthBar));
+        }
+        private async UniTask UpdateHealthBar(int currentHealth, int maximumHealth)
+        {
+            float lastFillAmount = healthBar.fillAmount;
+            float toFillAmount = currentHealth / (float)maximumHealth;
+
+            for (float i = 0; i <= 1; i += 0.1f)
+            {
+                healthBar.fillAmount = Mathf.Lerp(lastFillAmount, toFillAmount, i);
+                await UniTask.Delay(10);
+            }
         }
     }
 }

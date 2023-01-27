@@ -1,6 +1,8 @@
 using AutumnForest.BossFight;
 using AutumnForest.BossFight.Raccoon;
 using AutumnForest.DialogueSystem;
+using AutumnForest.Health;
+using AutumnForest.Helpers;
 using AutumnForest.Managers;
 using AutumnForest.Player;
 using Cinemachine;
@@ -10,12 +12,17 @@ namespace AutumnForest
 {
     public sealed class GlobalServiceRegistrar : MonoBehaviour
     {
+        [Header("Cameras")]
         [SerializeField] private CinemachineVirtualCamera mainCamera;
         [SerializeField] private CinemachineVirtualCamera bossfightCamera;
         [SerializeField] private CinemachineVirtualCamera slingshotCamera;
+        [Header("Health bars")]
+        [SerializeField] private HealthBar bossHealthBar;
+        [SerializeField] private HealthBar playerHealthBar;
 
         private void Awake()
         {
+            RegisterHelpers();
             RegisterPlayerServices();
             RegisterCameras();
             RegisterDialogueServices();
@@ -40,6 +47,10 @@ namespace AutumnForest
         private void RegisterDialogueServices()
         {
             GlobalServiceLocator.RegisterService(new DialogueManager());
+        }
+        private void RegisterHelpers()
+        {
+            GlobalServiceLocator.RegisterService(new HealthBarHelper(bossHealthBar, playerHealthBar));
         }
         private void RegisterBossFightServices()
         {

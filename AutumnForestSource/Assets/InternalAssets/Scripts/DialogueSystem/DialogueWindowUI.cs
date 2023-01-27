@@ -1,6 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
 using System;
-using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -68,7 +67,7 @@ namespace AutumnForest.DialogueSystem
 
             dialogueWindowUI.SetActive(true);
             animator.Play(windowEnableAnimation.name);
-         
+
             await UniTask.Delay(TimeSpan.FromSeconds(windowEnableAnimation.length));
         }
         protected async UniTask SelfDisable()

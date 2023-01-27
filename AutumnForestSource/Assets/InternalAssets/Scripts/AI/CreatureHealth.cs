@@ -5,7 +5,7 @@ namespace AutumnForest.Health
 {
     public class CreatureHealth : MonoBehaviour, IHealth
     {
-        [field: SerializeField] public HealthBarConfig healthBarConfig { get; private set; }
+        [field: SerializeField] public HealthBarConfig HealthBarConfig { get; private set; }
         [SerializeField] private bool destroyOnDie = true;
 
         [SerializeField] private int currentHealth;
@@ -21,8 +21,8 @@ namespace AutumnForest.Health
 
         private void Awake()
         {
-            if(healthBarConfig != null)
-                healthBarConfig.HealthTarget = this;
+            if(HealthBarConfig != null)
+                HealthBarConfig.HealthTarget = this;
         }
 
         public void DecreaseMaximumHealth(int damagePoints)

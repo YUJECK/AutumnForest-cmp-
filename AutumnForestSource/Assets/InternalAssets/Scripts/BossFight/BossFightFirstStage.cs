@@ -1,5 +1,6 @@
 ﻿using AutumnForest.BossFight.Raccoon;
-using AutumnForest.Managers;
+using AutumnForest.Health;
+using AutumnForest.Helpers;
 using AutumnForest.StateMachineSystem;
 
 namespace AutumnForest.BossFight
@@ -8,8 +9,9 @@ namespace AutumnForest.BossFight
     {
         public override void EnterState(IStateMachineUser stateMachine)
         {
-            GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToBossFightCamera();
             GlobalServiceLocator.GetService<RaccoonStateMachineUser>().StateMachine.EnableStateMachine();
+            HealthBarHelper.BossHealthBar.SetConfig(GlobalServiceLocator.GetService<RaccoonStateMachineUser>()
+                .ServiceLocator.GetService<CreatureHealth>().HealthBarConfig);
         }
     }
 }

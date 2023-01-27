@@ -9,8 +9,8 @@ namespace AutumnForest.BossFight.Slingshot
     [RequireComponent(typeof(Collider2D))]
     public sealed class SlingshotInteractive : MonoBehaviour, IInteractive
     {
-        [SerializeField] private Sprite slingshotCursor;
-        [SerializeField] private Sprite cursorDefault;
+        [SerializeField] private Texture2D slingshotCursor;
+        [SerializeField] private Texture2D cursorDefault;
 
         private bool currentlyZoomed = false;
         private Slingshot slingshot;
@@ -38,7 +38,7 @@ namespace AutumnForest.BossFight.Slingshot
                 GlobalServiceLocator.GetService<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.SetActive(false);
                 GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToSlingshotCamera();
 
-                FindObjectOfType<Cursor>().SetCursorIcon(slingshotCursor);
+                FindObjectOfType<CursorManager>().SetCursor(slingshotCursor);
                 currentlyZoomed = true;
             }
         }
@@ -49,7 +49,7 @@ namespace AutumnForest.BossFight.Slingshot
                 GlobalServiceLocator.GetService<CinemachineBrain>().ActiveVirtualCamera.VirtualCameraGameObject.SetActive(false);
                 GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToPrevious();
 
-                FindObjectOfType<Cursor>().SetCursorIcon(cursorDefault);
+                FindObjectOfType<CursorManager>().SetCursor(cursorDefault);
                 currentlyZoomed = false;
             }
         }

@@ -189,8 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 535146dd75fc5b1499bd8d4b464fb5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slingshotCursor: {fileID: 1378333012, guid: e6a9ce140f110bd41a5b530e232e3b7f, type: 3}
-  cursorDefault: {fileID: 82707731993968007, guid: e6a9ce140f110bd41a5b530e232e3b7f, type: 3}
+  slingshotCursor: {fileID: 2800000, guid: c8ecc212bf460ad4a903fdf27364aeac, type: 3}
+  cursorDefault: {fileID: 2800000, guid: 26ab53c59a1e1ac4db2da0742835e06f, type: 3}
 --- !u!114 &1774923034886314205
 MonoBehaviour:
   m_ObjectHideFlags: 0

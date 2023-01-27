@@ -149,6 +149,7 @@ MonoBehaviour:
   dialogueName: "\u041A\u0440\u044B\u0441"
   dialoguePhrases:
   - "\u0442\u0435\u0441\u0442"
+  - ...
 --- !u!114 &1252549804581898358
 MonoBehaviour:
   m_ObjectHideFlags: 0

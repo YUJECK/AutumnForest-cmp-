@@ -1,4 +1,5 @@
 using AutumnForest.Assets.InternalAssets.Scripts;
+using AutumnForest.Helpers;
 using AutumnForest.Projectiles;
 using AutumnForest.StateMachineSystem;
 using CreaturesAI.CombatSkills;
@@ -14,18 +15,17 @@ namespace AutumnForest
         private readonly AudioSource throwSoundEffect;
         private ObjectPool<Projectile> conePool;
 
-        public RaccoonRoundShotState(Projectile conePrefab, Transform coneContainer, AudioSource throwSoundEffect)
+        public RaccoonRoundShotState(Projectile conePrefab, AudioSource throwSoundEffect)
         {
-            if (conePrefab != null && throwSoundEffect != null && coneContainer != null)
+            if (conePrefab != null && throwSoundEffect != null)
             {
                 this.conePrefab = conePrefab;
                 this.throwSoundEffect = throwSoundEffect;
             }
             else if (throwSoundEffect == null) throw new NullReferenceException(nameof(throwSoundEffect));
             else if (conePrefab == null) throw new NullReferenceException(nameof(conePrefab));
-            else if (coneContainer == null) throw new NullReferenceException(nameof(coneContainer));
 
-            conePool = new(conePrefab, coneContainer, 48, true);
+            conePool = new(conePrefab, GlobalServiceLocator.GetService<ContainerHelper>().ProjectileContainer, 20, true);
         }
 
         private async void SpawnCones(IStateMachineUser stateMachine)

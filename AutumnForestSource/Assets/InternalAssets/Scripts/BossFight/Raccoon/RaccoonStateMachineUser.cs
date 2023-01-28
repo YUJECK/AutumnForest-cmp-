@@ -63,13 +63,13 @@ namespace AutumnForest.BossFight.Raccoon
         private StateBehaviour ThirdStageChoosing()
         {
             OnStateChanged?.Invoke(raccoonStatesContainer.IdleState);
-            throw new NotImplementedException("что же не так");
+            throw new NotImplementedException("что же не так. ведь какой-то коля точно сделал метод для выбора состояний третьей стадии, как и сами состояния");
         }
 
         private StateBehaviour SecondStageChoosing()
         {
             OnStateChanged?.Invoke(raccoonStatesContainer.IdleState);
-            throw new NotImplementedException("что же не так");
+            throw new NotImplementedException("что же не так. ведь какой-то коля точно сделал метод для выбора состояний второй стадии, как и сами состояния");
         }
 
         private StateBehaviour FirstStageChoosing()

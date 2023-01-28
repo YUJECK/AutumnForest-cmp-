@@ -21,6 +21,10 @@ namespace AutumnForest
         [Header("Health bars")]
         [SerializeField] private HealthBar bossHealthBar;
         [SerializeField] private HealthBar playerHealthBar;
+        [Header("Containers")]
+        [SerializeField] private Transform projectileContainer;
+        [SerializeField] private Transform creatureContainer;
+        [SerializeField] private Transform otherContainer;
 
         private void Awake()
         {
@@ -53,6 +57,7 @@ namespace AutumnForest
         private void RegisterHelpers()
         {
             GlobalServiceLocator.RegisterService(new HealthBarHelper(bossHealthBar, playerHealthBar));
+            GlobalServiceLocator.RegisterService(new ContainerHelper(projectileContainer, creatureContainer, otherContainer));
         }
         private void RegisterBossFightServices()
         {

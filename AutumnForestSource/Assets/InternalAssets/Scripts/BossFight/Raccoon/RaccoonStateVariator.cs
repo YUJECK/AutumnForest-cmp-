@@ -11,14 +11,13 @@ namespace AutumnForest.Raccoon
         [SerializeField] private Projectile conePrefab;
         [SerializeField] private Projectile shirtPrefab;
         [Space]
-        [SerializeField] private Transform projectileContainer;
         [SerializeField] private AudioSource throwEffect;
 
         public IStateContainer InitStates()
         {
             return new RaccoonStatesContainer(
                 new RaccoonIdleState(),
-                new RaccoonRoundShotState(conePrefab, projectileContainer, throwEffect));
+                new RaccoonRoundShotState(conePrefab, throwEffect));
         }
     }
 }

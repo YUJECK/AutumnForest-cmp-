@@ -10,6 +10,13 @@ namespace AutumnForest.Projectiles
         [SerializeField] private GameObject collideEffect;
         [SerializeField] private AudioSource hitSoundEffect;
 
+        [field: SerializeField] public Rigidbody2D Rigidbody2D { get; private set; }
+
+        private void Awake()
+        {
+            if(Rigidbody2D == null)
+                Rigidbody2D = GetComponent<Rigidbody2D>();
+        }
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.TryGetComponent(out IHealth health))

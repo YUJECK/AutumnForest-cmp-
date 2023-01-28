@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  asPlayer: 1
 --- !u!61 &3538509849446323279
 BoxCollider2D:
   m_ObjectHideFlags: 0

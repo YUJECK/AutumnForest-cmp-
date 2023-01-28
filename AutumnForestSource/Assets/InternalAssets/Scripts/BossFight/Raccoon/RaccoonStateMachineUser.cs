@@ -13,7 +13,7 @@ namespace AutumnForest.BossFight.Raccoon
         [SerializeField] private CreatureAnimator creatureAnimator;
         [SerializeField] private Shooting shooting;
         [SerializeField] private CreatureHealth healthObject;
-        [SerializeField] private PointContainer PointContainer;
+        [SerializeField] private SpawnPlace pointContainer;
 
         private BossFightManager bossFightManager;
         private RaccoonStatesContainer raccoonStatesContainer;
@@ -25,7 +25,7 @@ namespace AutumnForest.BossFight.Raccoon
 
         private void Awake()
         {
-            ServiceLocator = new(creatureAnimator, shooting, healthObject);
+            ServiceLocator = new(creatureAnimator, shooting, healthObject, pointContainer);
             raccoonStatesContainer = GetComponent<IStateContainerVariator>().InitStates() as RaccoonStatesContainer;
 
             StateMachine = new(this, false);
@@ -60,21 +60,19 @@ namespace AutumnForest.BossFight.Raccoon
                 OnStateChanged?.Invoke(nextState);
         }
 
-        private StateBehaviour ThirdStageChoosing()
-        {
-            OnStateChanged?.Invoke(raccoonStatesContainer.IdleState);
-            throw new NotImplementedException("что же не так. ведь какой-то коля точно сделал метод для выбора состояний третьей стадии, как и сами состояния");
-        }
-
-        private StateBehaviour SecondStageChoosing()
-        {
-            OnStateChanged?.Invoke(raccoonStatesContainer.IdleState);
-            throw new NotImplementedException("что же не так. ведь какой-то коля точно сделал метод для выбора состояний второй стадии, как и сами состояния");
-        }
-
         private StateBehaviour FirstStageChoosing()
         {
-            return raccoonStatesContainer.ConeRoundShotState;
+            return raccoonStatesContainer.DefaultSquirrelSpawnState;
+        }
+        private StateBehaviour SecondStageChoosing()
+        {
+            OnStateChanged?.Invoke(raccoonStatesContainer.ConeRoundShotState);
+            throw new NotImplementedException("что же не так. ведь какой-то коля точно сделал метод для выбора состояний второй стадии, как и сами состояния");
+        }
+        private StateBehaviour ThirdStageChoosing()
+        {
+            OnStateChanged?.Invoke(raccoonStatesContainer.DefaultSquirrelSpawnState);
+            throw new NotImplementedException("что же не так. ведь какой-то коля точно сделал метод для выбора состояний третьей стадии, как и сами состояния");
         }
     }
 }

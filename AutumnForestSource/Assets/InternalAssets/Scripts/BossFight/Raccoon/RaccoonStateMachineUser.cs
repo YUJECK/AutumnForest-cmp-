@@ -1,7 +1,6 @@
-using AutumnForest.EditorScripts;
+using AutumnForest.Health;
 using AutumnForest.StateMachineSystem;
 using CreaturesAI.CombatSkills;
-using AutumnForest.Health;
 using System;
 using UnityEngine;
 
@@ -14,7 +13,8 @@ namespace AutumnForest.BossFight.Raccoon
         [SerializeField] private CreatureAnimator creatureAnimator;
         [SerializeField] private Shooting shooting;
         [SerializeField] private CreatureHealth healthObject;
-        
+        [SerializeField] private PointContainer PointContainer;
+
         private BossFightManager bossFightManager;
         private RaccoonStatesContainer raccoonStatesContainer;
 
@@ -55,8 +55,8 @@ namespace AutumnForest.BossFight.Raccoon
             else if (bossFightManager.CurrentStage == BossFightStage.Third)
                 nextState = ThirdStageChoosing();
 
-            //тут должны еще быть разные проверки
-            if(nextState != null)
+            //тут мб должны еще быть разные проверки
+            if (nextState != null)
                 OnStateChanged?.Invoke(nextState);
         }
 

@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 3538509849446323250}
   - component: {fileID: 3538509849446323249}
   - component: {fileID: 3538509849446323248}
-  - component: {fileID: 3538509849446323279}
   - component: {fileID: 3538509849446323278}
+  - component: {fileID: 3538509849446323279}
   m_Layer: 0
   m_Name: Squirrel
   m_TagString: Untagged
@@ -109,7 +109,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2156081303824848856, guid: 0ae5106b118e74947a37a26d3f1f06d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -173,6 +173,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   asPlayer: 1
+--- !u!114 &3538509849446323278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3538509849446323253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce26d5c78b628b8468827465b4ac22d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <HealthBarConfig>k__BackingField: {fileID: 0}
+  destroyOnDie: 1
+  currentHealth: 1
+  maximumHealth: 1
 --- !u!61 &3538509849446323279
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -199,22 +215,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.44770813, y: 0.2789427}
   m_EdgeRadius: 0
---- !u!114 &3538509849446323278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3538509849446323253}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce26d5c78b628b8468827465b4ac22d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <HealthBarConfig>k__BackingField: {fileID: 0}
-  destroyOnDie: 1
-  currentHealth: 1
-  maximumHealth: 1
 --- !u!1 &3538509849648730497
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,6 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateType: 0
+  asPlayer: 1
   coefficent: 1
   target: {fileID: 0}
 --- !u!114 &3538509849648730527

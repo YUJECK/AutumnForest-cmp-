@@ -13,13 +13,11 @@ namespace AutumnForest.BossFight.Raccoon
         public RaccoonStatesContainer(
             StateBehaviour idleState, 
             StateBehaviour coneRoundShotState,
-            StateBehaviour defaultSquirrelSpawnState,
-            StateBehaviour fireSquirrelSpawnState)
+            StateBehaviour defaultSquirrelSpawnState)
         {
             IdleState = idleState;
             ConeRoundShotState = coneRoundShotState;
             DefaultSquirrelSpawnState = defaultSquirrelSpawnState;
-            FireSquirrelSpawnState = fireSquirrelSpawnState;
         }
     }
 }

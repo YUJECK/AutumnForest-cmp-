@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AutumnForest.Assets.InternalAssets.Scripts
+namespace AutumnForest
 {
     public sealed class ObjectPool<T> where T : MonoBehaviour
     {
@@ -14,8 +14,14 @@ namespace AutumnForest.Assets.InternalAssets.Scripts
 
         public ObjectPool(T prefab, Transform container, int poolSize, bool autoExpand)
         {
+            if (prefab == null) 
+                throw new NullReferenceException(nameof(prefab));
             this.prefab = prefab;
+            
+            if (container == null)
+                throw new NullReferenceException(nameof(container));
             this.poolContainer = container;
+            
             this.autoExpand = autoExpand;
 
             InitPool(poolSize);

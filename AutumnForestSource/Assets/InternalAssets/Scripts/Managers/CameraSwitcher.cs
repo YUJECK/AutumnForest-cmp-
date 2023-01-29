@@ -1,8 +1,10 @@
 ﻿using Cinemachine;
+using System;
 using UnityEngine;
 
 namespace AutumnForest.Managers
 {
+    [Serializable]
     public sealed class CameraSwitcher
     {
         private GameObject mainCamera;

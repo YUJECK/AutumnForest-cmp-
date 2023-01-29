@@ -5,6 +5,7 @@ namespace AutumnForest.Other
     public sealed class MonoRotator : MonoBehaviour
     {
         [SerializeField] private TransformRotation.RotateType rotateType;
+        [SerializeField] private bool asPlayer;
         [SerializeField] private float coefficent = 1;
         [SerializeField] private Transform target;
 
@@ -14,6 +15,9 @@ namespace AutumnForest.Other
 
         private void Awake()
         {
+            if (asPlayer)
+                target = GameObject.FindGameObjectWithTag(TagHelper.PlayerTag).transform;
+
             TransfromRotation = new(transform, target, coefficent, rotateType);
         }
         private void OnValidate()

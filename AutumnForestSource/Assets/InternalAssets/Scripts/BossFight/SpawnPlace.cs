@@ -22,7 +22,7 @@ namespace AutumnForest.BossFight
             while (true)
             {
                 if(!ContaintsColliders(GetHits(out Vector2 position)))
-                return position;
+                    return position;
             }
         }
 

@@ -62,7 +62,19 @@ namespace AutumnForest.BossFight.Raccoon
 
         private StateBehaviour FirstStageChoosing()
         {
-            return raccoonStatesContainer.DefaultSquirrelSpawnState;
+            StateBehaviour nextState = raccoonStatesContainer.IdleState;
+
+            switch (UnityEngine.Random.Range(0, 2))
+            {
+                case 0:
+                    nextState = raccoonStatesContainer.ConeRoundShotState;
+                    break;
+                case 1:
+                    nextState = raccoonStatesContainer.DefaultSquirrelSpawnState;
+                    break;
+            }
+
+            return nextState;
         }
         private StateBehaviour SecondStageChoosing()
         {

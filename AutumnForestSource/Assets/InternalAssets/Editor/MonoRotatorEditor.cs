@@ -11,6 +11,7 @@ namespace AutumnForest.EditorScripts
         private SerializedProperty rotateType;
         private SerializedProperty coefficent;
         private SerializedProperty rotateTarget;
+        private SerializedProperty asPlayer;
 
         private void OnEnable()
         {
@@ -19,6 +20,7 @@ namespace AutumnForest.EditorScripts
             rotateType = serializedObject.FindProperty("rotateType");
             coefficent = serializedObject.FindProperty("coefficent");
             rotateTarget = serializedObject.FindProperty("target");
+            asPlayer = serializedObject.FindProperty("asPlayer");
         }
         public override void OnInspectorGUI()
         {
@@ -28,7 +30,10 @@ namespace AutumnForest.EditorScripts
             EditorGUILayout.PropertyField(coefficent);
 
             if (monoRotator.RotateType == TransformRotation.RotateType.ByTarget)
+            {
                 EditorGUILayout.PropertyField(rotateTarget);
+                EditorGUILayout.PropertyField(asPlayer);
+            }
 
             serializedObject.ApplyModifiedProperties();
         }

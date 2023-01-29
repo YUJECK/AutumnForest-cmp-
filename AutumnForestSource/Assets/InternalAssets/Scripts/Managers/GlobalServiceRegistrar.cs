@@ -5,6 +5,7 @@ using AutumnForest.Health;
 using AutumnForest.Helpers;
 using AutumnForest.Managers;
 using AutumnForest.Player;
+using AutumnForest.Projectiles;
 using Cinemachine;
 using UnityEngine;
 
@@ -12,6 +13,10 @@ namespace AutumnForest
 {
     public sealed class GlobalServiceRegistrar : MonoBehaviour
     {
+        [Header("Pool")]
+        [SerializeField] private Projectile acorn;
+        [SerializeField] private Projectile cone;
+        [SerializeField] private AcornHeal acornHeal;
         [Header("Cameras")]
         [SerializeField] private CinemachineVirtualCamera mainCamera;
         [SerializeField] private CinemachineVirtualCamera bossfightCamera;
@@ -29,6 +34,7 @@ namespace AutumnForest
         private void Awake()
         {
             RegisterHelpers();
+            RegisterPools();
             RegisterPlayerServices();
             RegisterCameras();
             RegisterDialogueServices();
@@ -37,6 +43,10 @@ namespace AutumnForest
             GlobalServiceLocator.GetService<PlayerInput>().Enable();
         }
 
+        private void RegisterPools()
+        {
+            GlobalServiceLocator.RegisterService(new SomePoolsContainer(acorn, cone, acornHeal));
+        }
         private void RegisterPlayerServices()
         {
             GlobalServiceLocator.RegisterService(FindObjectOfType<PlayerMovable>(true));
@@ -56,8 +66,8 @@ namespace AutumnForest
         }
         private void RegisterHelpers()
         {
-            GlobalServiceLocator.RegisterService(new HealthBarHelper(bossHealthBar, playerHealthBar));
             GlobalServiceLocator.RegisterService(new ContainerHelper(projectileContainer, creatureContainer, otherContainer));
+            GlobalServiceLocator.RegisterService(new HealthBarHelper(bossHealthBar, playerHealthBar));
         }
         private void RegisterBossFightServices()
         {

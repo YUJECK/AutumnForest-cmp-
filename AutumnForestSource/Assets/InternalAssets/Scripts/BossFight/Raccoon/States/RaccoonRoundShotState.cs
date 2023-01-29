@@ -1,4 +1,3 @@
-using AutumnForest.Assets.InternalAssets.Scripts;
 using AutumnForest.Helpers;
 using AutumnForest.Projectiles;
 using AutumnForest.StateMachineSystem;

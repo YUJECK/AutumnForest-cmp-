@@ -6,6 +6,8 @@ namespace AutumnForest.BossFight
     [Serializable]
     public sealed class SpawnPlace
     {
+        int layer = 0 << 2;
+
         [SerializeField] private Vector2 leftDownCorner;
         [SerializeField] private Vector2 rightUpCorner;
 
@@ -19,8 +21,8 @@ namespace AutumnForest.BossFight
         {
             while (true)
             {
-                if (!ContaintsColliders(GetHits(out Vector2 position)))
-                    return position;
+                if(!ContaintsColliders(GetHits(out Vector2 position)))
+                return position;
             }
         }
 
@@ -28,7 +30,7 @@ namespace AutumnForest.BossFight
         {
             position = new Vector2(UnityEngine.Random.Range(leftDownCorner.x, rightUpCorner.x),
                                           UnityEngine.Random.Range(leftDownCorner.y, rightUpCorner.y));
-            return Physics2D.RaycastAll(position, Vector2.zero);
+            return Physics2D.RaycastAll(position, Vector2.zero, ~layer);
         }
         private bool ContaintsColliders(RaycastHit2D[] hits)
         {

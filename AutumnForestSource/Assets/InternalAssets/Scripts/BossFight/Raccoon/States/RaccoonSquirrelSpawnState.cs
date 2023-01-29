@@ -33,7 +33,7 @@ namespace AutumnForest.Raccoon.States
 
             for (int i = 0; i < squirrelCount; i++)
             {
-                GameObject.Instantiate(squirrelPrefab, Vector2.down, Quaternion.identity);
+                GameObject.Instantiate(squirrelPrefab, stateMachine.ServiceLocator.GetService<SpawnPlace>().GetPosition(), Quaternion.identity);
                 await UniTask.Delay(TimeSpan.FromSeconds(spawnRate));
             }
 

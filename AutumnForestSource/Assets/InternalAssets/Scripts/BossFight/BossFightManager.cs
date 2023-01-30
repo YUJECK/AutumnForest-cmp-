@@ -71,7 +71,7 @@ namespace AutumnForest.BossFight
             raccoonHealth = GlobalServiceLocator.GetService<RaccoonStateMachineUser>().ServiceLocator.GetService<CreatureHealth>();
 
             CurrentStage = BossFightStage.First;
-            OnStateChanged.Invoke(firstStage);
+            OnStateChanged?.Invoke(firstStage);
 
             OnBossFightStarted?.Invoke(); 
         }

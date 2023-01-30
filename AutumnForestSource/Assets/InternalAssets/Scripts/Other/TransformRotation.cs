@@ -29,13 +29,12 @@ public sealed class TransformRotation
 
         this.RotationType = defaultType;
 
-        this.RotationLoop(token);
+        RotationLoop(token);
     }
 
     public void Enable() => Enabled = true;
     public void Disable() => Enabled = false;
 
-    //надо добавлять токены
     private float GetAngle()
     {
         Vector2 direction = target.position - transform.position;
@@ -66,7 +65,6 @@ public sealed class TransformRotation
             }
 
             await UniTask.WaitForFixedUpdate();
-        
         }
     }
 }

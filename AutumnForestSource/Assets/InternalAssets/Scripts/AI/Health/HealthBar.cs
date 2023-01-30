@@ -1,40 +1,39 @@
+using AutumnForest.Health;
 using Cysharp.Threading.Tasks;
-using NaughtyAttributes;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace AutumnForest.Health
+namespace AutumnForest
 {
-    public class HealthBar : MonoBehaviour
+    public sealed class HealthBar
     {
-        [SerializeField, Expandable] HealthBarConfig healthBarConfig;
-        [SerializeField] private Image healthBar;
-        [SerializeField] private Image healthBarIcon;
-        [SerializeField] private Text healthBarText;
-        
         private IHealth healthTarget;
+        [SerializeField] private Image healthBar;
 
-        //methods
-        public void SetConfig(HealthBarConfig healthBarConfig)
+        public HealthBar(Image healthBar, IHealth healthTarget = null)
         {
-            if (healthBarConfig != null)
-            {
-                healthTarget = healthBarConfig.HealthTarget;
-                healthBarIcon.sprite = healthBarConfig.HealthBarIcon;
-                healthBarText.text = healthBarConfig.HealthBarName;
+            if (healthBar == null) throw new NullReferenceException(nameof(healthBar));
+            this.healthBar = healthBar;
 
-                healthTarget.OnHealthChange += OnHealthChanged;
-                OnHealthChanged(healthTarget.CurrentHealth, healthTarget.MaximumHealth);
-            }
-            else throw new NullReferenceException(nameof(healthBarConfig));
+            if (healthTarget != null)
+                SwitchTarget(healthTarget);
         }
+
+        public void SwitchTarget(IHealth healthTarget)
+        {
+            this.healthTarget = healthTarget;
+            this.healthTarget.OnHealthChange += OnHealthChanged;
+            
+            UpdateHealthBar(healthTarget.CurrentHealth, healthTarget.MaximumHealth);
+        }
+
         private void OnHealthChanged(int currentHealth, int maximumHealth)
         {
             if (healthBar != null) UpdateHealthBar(currentHealth, maximumHealth);
             else throw new NullReferenceException(nameof(healthBar));
         }
-        private async UniTask UpdateHealthBar(int currentHealth, int maximumHealth)
+        private async void UpdateHealthBar(int currentHealth, int maximumHealth)
         {
             float lastFillAmount = healthBar.fillAmount;
             float toFillAmount = currentHealth / (float)maximumHealth;

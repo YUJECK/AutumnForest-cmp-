@@ -22,6 +22,9 @@ namespace AutumnForest.Other
 
             TransfromRotation = new(transform, target, coefficent, rotateType, this.GetCancellationTokenOnDestroy());
         }
+        private void OnEnable() => TransfromRotation.Enable();
+        private void OnDisable() => TransfromRotation.Disable();
+
         private void OnValidate()
         {
             if(TransfromRotation != null)

@@ -9,11 +9,10 @@ namespace AutumnForest.BossFight
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.collider.CompareTag(TagHelper.PlayerTag))
-            {
-                collision.collider.GetComponent<IHealth>().Heal(heal);
-                gameObject.SetActive(false);
-            }
+            if (collision.collider.TryGetComponent(out IHealth health))
+                health.Heal(heal);
+            
+            gameObject.SetActive(false);
         }
     }
 }

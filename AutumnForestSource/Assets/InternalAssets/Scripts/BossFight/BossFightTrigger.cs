@@ -1,6 +1,4 @@
 using AutumnForest.BossFight;
-using AutumnForest.Health;
-using AutumnForest.Managers;
 using UnityEngine;
 
 namespace AutumnForest

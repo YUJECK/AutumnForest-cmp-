@@ -7,7 +7,7 @@ namespace AutumnForest.BossFight
 {
     public sealed class BossfightInit : MonoBehaviour
     {
-        [SerializeField] private HealthBar healthBar;
+        [SerializeField] private BossFightHealthBar healthBar;
         [SerializeField] private GameObject log;
 
         BossFightManager bossFightManager;

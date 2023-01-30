@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 namespace AutumnForest.Other
 {
@@ -19,7 +20,7 @@ namespace AutumnForest.Other
             if (asPlayer)
                 target = GameObject.FindGameObjectWithTag(TagHelper.PlayerTag).transform;
 
-            TransfromRotation = new(transform, target, coefficent, rotateType);
+            TransfromRotation = new(transform, target, coefficent, rotateType, this.GetCancellationTokenOnDestroy());
         }
         private void OnValidate()
         {

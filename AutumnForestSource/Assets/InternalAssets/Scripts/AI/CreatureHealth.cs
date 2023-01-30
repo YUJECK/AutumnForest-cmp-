@@ -5,14 +5,18 @@ namespace AutumnForest.Health
 {
     public class CreatureHealth : MonoBehaviour, IHealth
     {
+        public enum DieEvents
+        {
+            Destroy,
+            Disable,
+            Nothing
+        }
+
+        [SerializeField] private DieEvents dieEvent;
         [field: SerializeField] public HealthBarConfig HealthBarConfig { get; private set; }
-        [SerializeField] private bool destroyOnDie = true;
 
-        [SerializeField] private int currentHealth;
-        [SerializeField] private int maximumHealth;
-
-        public int CurrentHealth { get => currentHealth; private set => currentHealth = value; }
-        public int MaximumHealth { get => maximumHealth; private set => maximumHealth = value; }
+        [field: SerializeField] public int CurrentHealth { get; private set; }
+        [field: SerializeField] public int MaximumHealth { get; private set; }
 
         public event Action<int, int> OnHealthChange;
         public event Action<int, int> OnHeal;
@@ -24,37 +28,39 @@ namespace AutumnForest.Health
             if(HealthBarConfig != null)
                 HealthBarConfig.HealthTarget = this;
         }
-
-        public void DecreaseMaximumHealth(int damagePoints)
-        {
-            maximumHealth -= damagePoints;
-            OnHealthChange?.Invoke(currentHealth, maximumHealth);
-        }
-        public void IncreaseMaximumHealth(int healPoints)
-        {
-            maximumHealth += healPoints;
-            OnHealthChange?.Invoke(currentHealth, maximumHealth);
-        }
         
         public void Heal(int healPoints)
         {
-            currentHealth += healPoints;
-            OnHeal?.Invoke(currentHealth, maximumHealth);
-            OnHealthChange?.Invoke(currentHealth, maximumHealth);
+            CurrentHealth += healPoints;
 
-            if (currentHealth > maximumHealth)
-                currentHealth = maximumHealth;
+            OnHeal?.Invoke(CurrentHealth, MaximumHealth);
+            OnHealthChange?.Invoke(CurrentHealth, MaximumHealth);
+
+            if (CurrentHealth > MaximumHealth)
+                CurrentHealth = MaximumHealth;
         }
         public void TakeHit(int damagePoints)
         {
-            currentHealth -= damagePoints;
-            OnTakeHit?.Invoke(currentHealth, maximumHealth);
-            OnHealthChange?.Invoke(currentHealth, maximumHealth);
+            CurrentHealth -= damagePoints;
 
-            if (currentHealth <= 0)
+            OnTakeHit?.Invoke(CurrentHealth, MaximumHealth);
+            OnHealthChange?.Invoke(CurrentHealth, MaximumHealth);
+
+            if (CurrentHealth <= 0)
             {
                 OnDie?.Invoke();
-                if (destroyOnDie) Destroy(gameObject);
+
+                switch (dieEvent)
+                {
+                    case DieEvents.Destroy:
+                        Destroy(gameObject);
+                        break;
+                    case DieEvents.Disable:
+                        gameObject.SetActive(false);
+                        break;
+                    case DieEvents.Nothing:
+                        return;
+                }
             }
         }
     }

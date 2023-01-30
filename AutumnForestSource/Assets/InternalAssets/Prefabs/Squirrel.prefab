@@ -153,7 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f8f6154b420d824d80b002f1e124efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acornPrefab: {fileID: 5767805362926127976, guid: 7cf482e6256aee948b492812460e089e, type: 3}
   shooting: {fileID: 3538509849648730527}
   shotAnimation: SquirrelThrow
   shootRate: 2.5
@@ -185,10 +184,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce26d5c78b628b8468827465b4ac22d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dieEvent: 1
   <HealthBarConfig>k__BackingField: {fileID: 0}
-  destroyOnDie: 1
-  currentHealth: 1
-  maximumHealth: 1
+  <CurrentHealth>k__BackingField: 1
+  <MaximumHealth>k__BackingField: 1
 --- !u!61 &3538509849446323279
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -205,7 +204,7 @@ BoxCollider2D:
   m_Offset: {x: -0.095508575, y: -0.16134638}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.33333334, y: 0.4166667}
     oldSize: {x: 0.75, y: 0.75}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
@@ -262,9 +261,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateType: 0
+  target: {fileID: 0}
   asPlayer: 1
   coefficent: 1
-  target: {fileID: 0}
 --- !u!114 &3538509849648730527
 MonoBehaviour:
   m_ObjectHideFlags: 0

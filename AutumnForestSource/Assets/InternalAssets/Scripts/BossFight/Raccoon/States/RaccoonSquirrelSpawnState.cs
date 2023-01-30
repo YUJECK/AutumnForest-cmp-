@@ -4,7 +4,6 @@ using AutumnForest.Helpers;
 using AutumnForest.StateMachineSystem;
 using Cysharp.Threading.Tasks;
 using System;
-using UnityEngine;
 
 namespace AutumnForest.Raccoon.States
 {
@@ -18,8 +17,7 @@ namespace AutumnForest.Raccoon.States
 
         public RaccoonSquirrelSpawnState(Squirrel squirrelPrefab, int squirrelMinCount, int squirrelMaxCount, float spawnRate)
         {
-            squirrelPool = new(squirrelPrefab, GlobalServiceLocator.GetService<ContainerHelper>().CreatureContainer,
-                UnityEngine.Random.Range(squirrelMinCount, squirrelMaxCount), true);
+            squirrelPool = new(squirrelPrefab, GlobalServiceLocator.GetService<ContainerHelper>().CreatureContainer, squirrelMaxCount, true);
 
             this.squirrelMinCount = squirrelMinCount;
             this.squirrelMaxCount = squirrelMaxCount;
@@ -36,7 +34,7 @@ namespace AutumnForest.Raccoon.States
 
                 for (int i = 0; i < squirrelCount; i++)
                 {
-                    GameObject.Instantiate(squirrelPool.GetFree(), stateMachine.ServiceLocator.GetService<SpawnPlace>().GetPosition(), Quaternion.identity);
+                    squirrelPool.GetFree().transform.position = stateMachine.ServiceLocator.GetService<SpawnPlace>().GetPosition();
                     await UniTask.Delay(TimeSpan.FromSeconds(spawnRate));
                 }
             }

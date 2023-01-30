@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System;
+using System.Threading;
 using UnityEngine;
 
 public sealed class TransformRotation
@@ -20,7 +21,7 @@ public sealed class TransformRotation
 
     private event Action<float> OnAngleCalculated;
 
-    public TransformRotation(Transform transform, Transform target, float coefficient, RotateType defaultType)
+    public TransformRotation(Transform transform, Transform target, float coefficient, RotateType defaultType, CancellationToken token)
     {
         this.Coefficient = coefficient;
         this.transform = transform;
@@ -28,12 +29,13 @@ public sealed class TransformRotation
 
         this.RotationType = defaultType;
 
-        RotationLoop();
+        this.RotationLoop(token);
     }
 
     public void Enable() => Enabled = true;
     public void Disable() => Enabled = false;
 
+    //надо добавлять токены
     private float GetAngle()
     {
         Vector2 direction = target.position - transform.position;
@@ -43,10 +45,13 @@ public sealed class TransformRotation
 
         return Coefficient * angle;
     }
-    private async void RotationLoop()
+    private async void RotationLoop(CancellationToken token)
     {
         while (true)
         {
+            if (token.IsCancellationRequested)
+                return;
+
             if (Enabled)
             {
                 switch (RotationType)
@@ -61,6 +66,7 @@ public sealed class TransformRotation
             }
 
             await UniTask.WaitForFixedUpdate();
+        
         }
     }
 }

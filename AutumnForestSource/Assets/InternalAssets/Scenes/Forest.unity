@@ -1294,7 +1294,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -21.140259, y: -712.3081}
+  m_AnchoredPosition: {x: -21.140137, y: -712.3081}
   m_SizeDelta: {x: 320, y: 92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &29760656
@@ -57374,7 +57374,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809685868}
-  m_LocalRotation: {x: 0, y: 0, z: 0.70090973, w: 0.71325}
+  m_LocalRotation: {x: 0, y: 0, z: 0.78801113, w: 0.61566097}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -61576,10 +61576,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce26d5c78b628b8468827465b4ac22d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dieEvent: 0
   <HealthBarConfig>k__BackingField: {fileID: 11400000, guid: f42455fc5862c734f974153d8402f075, type: 2}
-  destroyOnDie: 1
-  currentHealth: 180
-  maximumHealth: 180
+  <CurrentHealth>k__BackingField: 180
+  <MaximumHealth>k__BackingField: 180
 --- !u!61 &1918005426
 BoxCollider2D:
   m_ObjectHideFlags: 0

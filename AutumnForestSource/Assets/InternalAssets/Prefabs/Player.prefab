@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 857177195470058290}
   - component: {fileID: 857177195470058288}
   - component: {fileID: 857177195470058289}
+  - component: {fileID: 5099769274306359923}
   - component: {fileID: 857177195470058298}
   - component: {fileID: 8592892610495999201}
   - component: {fileID: 857177195470058299}
@@ -69,6 +70,21 @@ MonoBehaviour:
   dashDuration: 0.045
   dashCulldown: 1000
   layerIndex: 10
+--- !u!114 &5099769274306359923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857177195470058278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3072e8224c3b35c48ad44f6902f8cdf2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <HealthBarConfig>k__BackingField: {fileID: 0}
+  <CurrentHealth>k__BackingField: 30
+  <MaximumHealth>k__BackingField: 30
 --- !u!114 &857177195470058298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,8 +284,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateType: 0
-  coefficent: 1
   target: {fileID: 0}
+  asPlayer: 0
+  coefficent: 1
 --- !u!1 &857177196607111391
 GameObject:
   m_ObjectHideFlags: 0

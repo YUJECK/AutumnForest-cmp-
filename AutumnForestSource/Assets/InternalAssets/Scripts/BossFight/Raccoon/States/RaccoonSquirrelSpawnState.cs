@@ -1,4 +1,5 @@
 ﻿using AutumnForest.BossFight;
+using AutumnForest.BossFight.Squirrels;
 using AutumnForest.Helpers;
 using AutumnForest.StateMachineSystem;
 using Cysharp.Threading.Tasks;

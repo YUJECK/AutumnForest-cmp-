@@ -1,5 +1,6 @@
 ﻿using AutumnForest.BossFight;
 using AutumnForest.BossFight.Raccoon;
+using AutumnForest.BossFight.Squirrels;
 using AutumnForest.Projectiles;
 using AutumnForest.Raccoon.States;
 using AutumnForest.StateMachineSystem;

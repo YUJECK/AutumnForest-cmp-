@@ -6,8 +6,8 @@ namespace AutumnForest.BossFight.Squirrels
 {
     public sealed class FireSquirrel : Squirrel
     {   
-        private int radius = 3;
-        private float castRate = 3.5f;
+        [SerializeField] private float radius = 1;
+        [SerializeField] private float castRate = 3.5f;
 
         public SquirrelFirePlace FirePlace { get; private set; } = new();
 

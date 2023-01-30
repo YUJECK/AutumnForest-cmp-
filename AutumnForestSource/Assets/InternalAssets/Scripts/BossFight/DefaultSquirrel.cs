@@ -1,4 +1,3 @@
-using AutumnForest.BossFight;
 using AutumnForest.Health;
 using AutumnForest.Helpers;
 using CreaturesAI.CombatSkills;
@@ -6,7 +5,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 
-namespace AutumnForest
+namespace AutumnForest.BossFight.Squirrels
 {
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(CreatureHealth))]

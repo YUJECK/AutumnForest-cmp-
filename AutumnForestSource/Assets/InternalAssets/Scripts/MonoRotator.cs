@@ -5,13 +5,14 @@ namespace AutumnForest.Other
     public sealed class MonoRotator : MonoBehaviour
     {
         [SerializeField] private TransformRotation.RotateType rotateType;
-        [SerializeField] private bool asPlayer;
-        [SerializeField] private float coefficent = 1;
         [SerializeField] private Transform target;
+        [SerializeField] private bool asPlayer;
+        
+        [SerializeField] private float coefficent = 1;
 
         public TransformRotation.RotateType RotateType => rotateType;
-
         public TransformRotation TransfromRotation { get; private set; }
+
 
         private void Awake()
         {

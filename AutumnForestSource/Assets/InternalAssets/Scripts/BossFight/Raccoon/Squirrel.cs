@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AutumnForest.BossFight
+namespace AutumnForest.BossFight.Squirrels
 {
     public abstract class Squirrel : MonoBehaviour
     { 

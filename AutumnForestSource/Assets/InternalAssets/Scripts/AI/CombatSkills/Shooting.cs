@@ -15,10 +15,6 @@ namespace CreaturesAI.CombatSkills
 
         public event Action<Rigidbody2D> OnShoot;
 
-        //debug
-        [SerializeField] private GameObject test2;
-
-
         private void Start() => TransformRotation = GetComponent<MonoRotator>().TransfromRotation;
 
         public void ShootWithInstantiate(Rigidbody2D projectile, float speed, float shootOffset, ForceMode2D forceMode2D)
@@ -47,19 +43,6 @@ namespace CreaturesAI.CombatSkills
                 projectile.AddForce(projectile.transform.up * speed, forceMode2D);
 
                 OnShoot?.Invoke(projectile);
-
-                //bebug
-                if(test != null)
-                {
-                    GameObject test3 = Instantiate(test2, transform.position, Quaternion.identity);
-
-                    if(test.activeSelf) test3.GetComponent<SpriteRenderer>().color = Color.green;
-                    else test3.GetComponent<SpriteRenderer>().color = Color.red;
-
-                    test3.GetComponent<TestSquirrel>().owner = test;
-                }
-
-
             }
             else if(firePoint == null) 
                 throw new NullReferenceException(nameof(firePoint));

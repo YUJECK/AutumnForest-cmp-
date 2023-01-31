@@ -155,8 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooting: {fileID: 3538509849648730527}
   shotAnimation: SquirrelThrow
-  shootMinimumRate: 2
-  shootMaximumRate: 3.5
+  shootMinimumRate: 1.3
+  shootMaximumRate: 2.5
   shootSpeed: 10
   spread: 10
 --- !u!114 &3538509849446323248
@@ -278,4 +278,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 3538509848148200146}
-  test2: {fileID: 2360951966894268932, guid: 104e56e9af8036f4ba9ea4b36fe14a80, type: 3}

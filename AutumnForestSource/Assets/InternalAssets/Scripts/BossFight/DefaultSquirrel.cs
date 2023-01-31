@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace AutumnForest.BossFight.Squirrels
 {
+    //супер костыль моментный скрипт
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Animator))]
     [RequireComponent(typeof(CreatureHealth))]
@@ -53,27 +54,22 @@ namespace AutumnForest.BossFight.Squirrels
         }
         public void Disable()
         {
-            token.Cancel();
+            if (!token.IsCancellationRequested)
+                token.Cancel();
         }
 
         private async void Shooting(CancellationToken token)
         {
-            while (true)
+            while (!token.IsCancellationRequested)
             {
-                try
-                {
-                    await UniTask.Delay(TimeSpan.FromSeconds(UnityEngine.Random.Range(shootMinimumRate, shootMaximumRate)), cancellationToken: token);
-                    
+                await UniTask.Delay(TimeSpan.FromSeconds(UnityEngine.Random.Range(shootMinimumRate, shootMaximumRate)));
+
+                //костыль момент
+                if (gameObject.activeInHierarchy)
                     shooting.ShootWithoutInstantiate(GlobalServiceLocator.GetService<SomePoolsContainer>().AcornPool.GetFree().Rigidbody2D,
                         shootSpeed, UnityEngine.Random.Range(0, spread), ForceMode2D.Impulse, gameObject);
-                }
-                catch
-                {
-                    Debug.Log("Canceled");
-                    this.token.Dispose();
-                    return;
-                }
             }
+            this.token.Dispose();
         }
 
         private void SpawnHealAcorn()

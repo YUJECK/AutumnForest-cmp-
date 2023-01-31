@@ -1,12 +1,12 @@
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace AutumnForest.Player
 {
     [RequireComponent(typeof(PlayerMovable))]
+    [RequireComponent(typeof(Rigidbody2D))]
 
     public sealed class PlayerDash : MonoBehaviour
     {
@@ -16,75 +16,62 @@ namespace AutumnForest.Player
             NowDashing,
             Culldown
         }
-
-        //dash params
         [SerializeField] private float dashSpeed = 5f;
         [SerializeField] private float dashDuration = 1f;
-        [SerializeField] private int dashCulldown = 1000;
+        [SerializeField] private int dashCulldown = 1;
         [SerializeField] private int layerIndex = 10;
 
         [NaughtyAttributes.ReadOnly] private DashState dashState;
-        //events
-        private UnityEvent OnDash = new();
-        private UnityEvent AfterDash = new();
-        //some components
-        private Rigidbody2D playerRigidbody;
-        private Vector2 movement;
 
-        private void OnEnable()
+        public event Action OnDashed;
+        public event Action OnDashReleased;
+        public event Action OnCulldown;
+
+        private PlayerMovable playerMovable;
+        private Rigidbody2D playerRigidbody;
+        private Vector2 dashMovement => playerMovable.Movement * dashSpeed;
+
+        private void Awake()
         {
             playerRigidbody = GetComponent<Rigidbody2D>();
-
-            GetComponent<PlayerMovable>().OnMoved += SetMovement;
-            OnDash.AddListener(delegate { GetComponent<PlayerMovable>().IsStopped = true; });
-            AfterDash.AddListener(delegate { GetComponent<PlayerMovable>().IsStopped = false; });
-
-            GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dash.performed += StartDash;
+            playerMovable = GetComponent<PlayerMovable>();
         }
-        private void OnDisable() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dash.performed -= StartDash;
-
-        private void SetMovement(Vector2 newMovement) => movement = newMovement;
-        private void StartDash(InputAction.CallbackContext context)
+        private void OnEnable()
         {
-            //деш нужно будет переписать
-            float layerMaskTransitionDelay = 0.7f;
+            GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dash.performed += InvokeDash;
 
-            if (movement != Vector2.zero && dashState == DashState.None)
+        }
+        private void OnDisable()
+        {
+            GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dash.performed -= InvokeDash;
+        }
+
+        private async void InvokeDash(InputAction.CallbackContext context)
+        {
+            if(dashState == DashState.None)
             {
-                OnDash.Invoke();
-                Dashing();
-            }
+                playerMovable.enabled = false; 
 
-            async void Dashing()
-            {
-                dashState = DashState.NowDashing;
-                int defaultLayer = gameObject.layer;
-                gameObject.layer = layerIndex;
+                await Dashing();
 
-                float startTime = Time.time;
-                Vector2 movementOnDash = movement *= 10;
-
-                GlobalServiceLocator.GetService<PlayerMovable>().enabled = false;
-
-                while (Time.time <= startTime + dashDuration)
-                {
-                    playerRigidbody.velocity = movementOnDash * dashSpeed;
-                    await UniTask.WaitForFixedUpdate();
-                }
-
-                AfterDash.Invoke();
-
-                GlobalServiceLocator.GetService<PlayerMovable>().enabled = true;
-                DashCulldown();
-                await UniTask.Delay(TimeSpan.FromSeconds(layerMaskTransitionDelay));
-                gameObject.layer = defaultLayer;
-            }
-            async void DashCulldown()
-            {
-                dashState = DashState.Culldown;
-                await UniTask.Delay(dashCulldown);
+                playerMovable.enabled = true;
+                
+                await CullDown();
                 dashState = DashState.None;
             }
+        }
+        private async UniTask Dashing()
+        {
+            OnDashed?.Invoke();
+            playerRigidbody.AddForce(dashMovement, ForceMode2D.Impulse);
+
+            await UniTask.Delay(TimeSpan.FromSeconds(dashDuration));
+            OnDashReleased?.Invoke();
+        }
+        private async UniTask CullDown()
+        {
+            dashState = DashState.Culldown;
+            await UniTask.Delay(TimeSpan.FromSeconds(dashCulldown));
         }
     }
 }

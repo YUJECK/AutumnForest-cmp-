@@ -17,7 +17,8 @@ namespace AutumnForest.BossFight.Squirrels
         private Animator animator;
 
         [SerializeField] private string shotAnimation;
-        [SerializeField] private float shootRate = 2.5f;
+        [SerializeField] private float shootMinimumRate = 2f;
+        [SerializeField] private float shootMaximumRate = 3.5f;
         [SerializeField] private float shootSpeed = 10;
         [SerializeField] private float spread = 10;
 
@@ -59,6 +60,8 @@ namespace AutumnForest.BossFight.Squirrels
         {
             while (true)
             {
+                Debug.Log("Shooting", gameObject);
+
                 if (token.IsCancellationRequested)
                     return;
 
@@ -67,7 +70,7 @@ namespace AutumnForest.BossFight.Squirrels
                     shooting.ShootWithoutInstantiate(GlobalServiceLocator.GetService<SomePoolsContainer>().AcornPool.GetFree().Rigidbody2D,
                         shootSpeed, UnityEngine.Random.Range(0, spread), ForceMode2D.Impulse);
                 }
-                await UniTask.Delay(TimeSpan.FromSeconds(shootRate));
+                await UniTask.Delay(TimeSpan.FromSeconds(UnityEngine.Random.Range(shootMinimumRate, shootMaximumRate)));
             }
         }
     }

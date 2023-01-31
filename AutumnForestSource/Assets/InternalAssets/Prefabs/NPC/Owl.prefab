@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8064744978450491083}
   - component: {fileID: 8064744978450491085}
   - component: {fileID: 8064744978450491084}
-  - component: {fileID: 4608928960394560102}
   - component: {fileID: 2759391514517729424}
   m_Layer: 0
   m_Name: OwlSprite
@@ -107,19 +106,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &4608928960394560102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8064744978450491082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dec82f7750b116042b9e9b69c721ce46, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultAnimation: OwlIdle
 --- !u!114 &2759391514517729424
 MonoBehaviour:
   m_ObjectHideFlags: 0

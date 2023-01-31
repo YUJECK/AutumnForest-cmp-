@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace AutumnForest.NPC
 {
-    [RequireComponent(typeof(CreatureAnimator))]
+    [RequireComponent(typeof(Animator))]
     public class OwlAnimator : MonoBehaviour
     {
-        private CreatureAnimator creatureAnimator;
+        private Animator creatureAnimator;
         [SerializeField] private InteractiveDialogue interactiveDialogue;
 
         [SerializeField] private string owlComeOutAnimation = "OwlComingOut";
@@ -14,7 +14,7 @@ namespace AutumnForest.NPC
 
         private void Awake()
         {
-            creatureAnimator = GetComponent<CreatureAnimator>();
+            creatureAnimator = GetComponent<Animator>();
         }
         private void OnEnable()
         {
@@ -27,7 +27,7 @@ namespace AutumnForest.NPC
             interactiveDialogue.Dialogue.OnDialogueEnded -= OwlComeIn;
         }
 
-        private void OwlComeIn(Dialogue obj) => creatureAnimator.PlayAnimation(owlComeInAnimation);
-        private void OwlComeOut(Dialogue obj) => creatureAnimator.PlayAnimation(owlComeOutAnimation);
+        private void OwlComeIn(Dialogue obj) => creatureAnimator.Play(owlComeInAnimation);
+        private void OwlComeOut(Dialogue obj) => creatureAnimator.Play(owlComeOutAnimation);
     }
 }

@@ -15,7 +15,7 @@ namespace AutumnForest.Projectiles
 
         private void Start() => TransformRotation = GetComponent<MonoRotator>().TransfromRotation;
 
-        public void ShootWithInstantiate(Rigidbody2D projectile, float speed, float shootOffset, ForceMode2D forceMode2D)
+        public void ShootWithInstantiate(Rigidbody2D projectile, float speed, float shootOffset, ForceMode2D forceMode2D = ForceMode2D.Impulse)
         {
             if (firePoint != null)
             {
@@ -28,7 +28,7 @@ namespace AutumnForest.Projectiles
             else if (firePoint == null) throw new NullReferenceException(nameof(firePoint));
             else if (projectile == null) throw new NullReferenceException(nameof(projectile));
         }
-        public void ShootWithoutInstantiate(Rigidbody2D projectile, float speed, float shootOffset, ForceMode2D forceMode2D, GameObject test = null)
+        public void ShootWithoutInstantiate(Rigidbody2D projectile, float speed, float shootOffset, ForceMode2D forceMode2D = ForceMode2D.Impulse)
         {
             if (firePoint != null && projectile != null)
             {

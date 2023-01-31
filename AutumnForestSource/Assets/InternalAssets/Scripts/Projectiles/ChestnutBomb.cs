@@ -4,7 +4,7 @@ using UnityEngine;
 namespace AutumnForest.Projectiles
 {
     [RequireComponent(typeof(AreaHit))]
-    public class ChestnutBomb : MonoBehaviour
+    public class ChestnutBomb : Projectile
     {
         //fields
         [SerializeField] private int damage;

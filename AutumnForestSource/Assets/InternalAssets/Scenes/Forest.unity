@@ -32802,6 +32802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbcf4729fc9c352409b771f04970a875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chestnut: {fileID: 160220853299425897, guid: 5f030ef350067734298dd4434b921de1, type: 3}
   shirtPrefab: {fileID: 0}
   defaultSquirrelPrefab: {fileID: 3538509849446323249, guid: bbc8f79cb335d4f4a83a32449059d8be, type: 3}
   fireSquirrelPrefab: {fileID: 0}
@@ -57491,7 +57492,7 @@ MonoBehaviour:
   rotateType: 1
   target: {fileID: 860168339}
   asPlayer: 0
-  coefficent: 15
+  coefficent: 1
 --- !u!1001 &1812862937
 PrefabInstance:
   m_ObjectHideFlags: 0

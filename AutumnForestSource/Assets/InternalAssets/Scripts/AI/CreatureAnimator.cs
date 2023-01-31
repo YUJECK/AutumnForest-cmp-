@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace AutumnForest
 {
+    [DisallowMultipleComponent]
     [RequireComponent(typeof(Animator))]
     public class CreatureAnimator : MonoBehaviour, ICreatureComponent
     {

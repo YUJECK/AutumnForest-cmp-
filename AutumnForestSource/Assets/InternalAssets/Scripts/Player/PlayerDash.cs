@@ -55,7 +55,7 @@ namespace AutumnForest.Player
                 Dashing();
             }
 
-            async UniTaskVoid Dashing()
+            async void Dashing()
             {
                 dashState = DashState.NowDashing;
                 int defaultLayer = gameObject.layer;

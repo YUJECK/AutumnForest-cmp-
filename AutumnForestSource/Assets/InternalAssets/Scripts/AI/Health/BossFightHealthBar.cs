@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace AutumnForest.Health
 {
+    [DisallowMultipleComponent]
     public class BossFightHealthBar : MonoBehaviour
     {
         [SerializeField, Expandable] HealthBarConfig healthBarConfig;
@@ -15,15 +16,12 @@ namespace AutumnForest.Health
 
         private HealthBar healthBar;
 
-        private void Awake()
+        private void OnEnable()
         {
             healthBar = new(healthBarFill);
 
             if (healthBarConfig != null)
                 SetConfig(healthBarConfig);
-
-            //костыли
-            gameObject.SetActive(false);
         }
 
         public void SetConfig(HealthBarConfig healthBarConfig)

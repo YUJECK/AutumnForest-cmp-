@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 namespace AutumnForest
 {
+    [DisallowMultipleComponent]
     [RequireComponent(typeof(IHealth))]
     public class SimpleHealthBar : MonoBehaviour
     {

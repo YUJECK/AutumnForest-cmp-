@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace AutumnForest
 {
+    [DisallowMultipleComponent]
     public class BossFightTrigger : MonoBehaviour
     {
         private BossFightManager bossFightManager;

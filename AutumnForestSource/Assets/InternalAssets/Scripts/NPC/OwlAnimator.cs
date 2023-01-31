@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace AutumnForest.NPC
 {
+    [DisallowMultipleComponent]
     [RequireComponent(typeof(Animator))]
     public class OwlAnimator : MonoBehaviour
     {

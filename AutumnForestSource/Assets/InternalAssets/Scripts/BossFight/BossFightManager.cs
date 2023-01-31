@@ -1,5 +1,6 @@
 ﻿using AutumnForest.BossFight.Raccoon;
 using AutumnForest.Health;
+using AutumnForest.Helpers;
 using AutumnForest.StateMachineSystem;
 using System;
 
@@ -69,6 +70,7 @@ namespace AutumnForest.BossFight
             //TODO:
             //foxHealth = GlobalServiceLocator.GetService<FoxStateMachineUser>().ServiceLocator.GetService<CreatureHealth>();
             raccoonHealth = GlobalServiceLocator.GetService<RaccoonStateMachineUser>().ServiceLocator.GetService<CreatureHealth>();
+            HealthBarHelper.BossHealthBar.gameObject.SetActive(true);
 
             CurrentStage = BossFightStage.First;
             OnStateChanged?.Invoke(firstStage);

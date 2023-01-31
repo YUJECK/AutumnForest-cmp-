@@ -1,10 +1,9 @@
-using AutumnForest.Helpers;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CreaturesAI
+namespace AutumnForest
 {
-    public sealed class Target : MonoBehaviour, ICreatureComponent
+    public sealed class Target : MonoBehaviour
     {
         public sealed class TargetComparator : IComparer<Target>
         {

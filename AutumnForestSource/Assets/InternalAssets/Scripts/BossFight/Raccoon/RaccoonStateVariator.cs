@@ -1,5 +1,7 @@
 ﻿using AutumnForest.BossFight.Raccoon;
+using AutumnForest.BossFight.Raccoon.States;
 using AutumnForest.BossFight.Squirrels;
+using AutumnForest.DialogueSystem;
 using AutumnForest.Projectiles;
 using AutumnForest.Raccoon.States;
 using AutumnForest.StateMachineSystem;
@@ -15,6 +17,7 @@ namespace AutumnForest.Raccoon
         [SerializeField] private Squirrel fireSquirrelPrefab;
         [Space]
         [SerializeField] private AudioSource throwEffect;
+        [SerializeField] private Dialogue dialogue;
 
         public IStateContainer InitStates()
         {
@@ -22,7 +25,8 @@ namespace AutumnForest.Raccoon
                 new RaccoonIdleState(),
                 new RaccoonRoundShotState(throwEffect),
                 //да мне лень было добавлять отдельные поля для настройки состояний
-                new RaccoonSquirrelSpawnState(defaultSquirrelPrefab, 5, 7, 2.5f));
+                new RaccoonSquirrelSpawnState(defaultSquirrelPrefab, 5, 7, 2.5f),
+                new RaccoonDialogueState(dialogue));
             //new RaccoonSquirrelSpawnState(fireSquirrelPrefab, 3, 5, 2.5f));
         }
     }

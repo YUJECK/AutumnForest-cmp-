@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
-  collideEffect: {fileID: 0}
+  collideEffect: {fileID: 8288446103499334202, guid: 65ea51d7dbb99f2428fdf664e0677273, type: 3}
   hitSoundEffect: {fileID: 0}
   <Rigidbody2D>k__BackingField: {fileID: 5767805362926127977}
 --- !u!50 &5767805362926127977

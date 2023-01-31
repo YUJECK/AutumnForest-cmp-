@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CreaturesAI.Pathfinding
+namespace AutumnForest.Pathfinding
 {
     public enum ObstacleDefining { AllColliders, CustomTags }
     public sealed class GridManager : MonoBehaviour

@@ -20,6 +20,7 @@ namespace AutumnForest
         [Header("Cameras")]
         [SerializeField] private CinemachineVirtualCamera mainCamera;
         [SerializeField] private CinemachineVirtualCamera bossfightCamera;
+        [SerializeField] private CinemachineVirtualCamera dialogueCamera;
         [SerializeField] private CinemachineVirtualCamera slingshotCamera;
         [SerializeField] private CinemachineVirtualCamera houseCamera;
         [SerializeField] private CinemachineVirtualCamera basementCamera;
@@ -57,7 +58,7 @@ namespace AutumnForest
         }
         private void RegisterCameras()
         {
-            GlobalServiceLocator.RegisterService(new CameraSwitcher(mainCamera, bossfightCamera, slingshotCamera, houseCamera, basementCamera));
+            GlobalServiceLocator.RegisterService(new CameraSwitcher(mainCamera, bossfightCamera, slingshotCamera, dialogueCamera, houseCamera, basementCamera));
             GlobalServiceLocator.RegisterService(FindObjectOfType<CinemachineBrain>(true));
         }
         private void RegisterDialogueServices()

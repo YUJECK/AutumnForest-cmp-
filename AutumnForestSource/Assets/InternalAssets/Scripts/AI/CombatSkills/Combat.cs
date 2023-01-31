@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CreaturesAI.CombatSkills
+namespace AutumnForest.CombatSkills
 {
     [RequireComponent(typeof(TriggerChecker))]
     [RequireComponent(typeof(AreaHit))]

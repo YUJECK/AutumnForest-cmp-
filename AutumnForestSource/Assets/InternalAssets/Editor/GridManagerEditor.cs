@@ -1,4 +1,4 @@
-using CreaturesAI.Pathfinding;
+using AutumnForest.Pathfinding;
 using UnityEditor;
 
 [CanEditMultipleObjects]

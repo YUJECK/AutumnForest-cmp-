@@ -1,7 +1,7 @@
 using AutumnForest.Helpers;
+using AutumnForest.Projectiles;
 using AutumnForest.Raccoon;
 using AutumnForest.StateMachineSystem;
-using CreaturesAI.CombatSkills;
 using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;

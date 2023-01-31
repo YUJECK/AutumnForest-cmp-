@@ -1,6 +1,6 @@
 using AutumnForest.Health;
 using AutumnForest.Helpers;
-using CreaturesAI.CombatSkills;
+using AutumnForest.Projectiles;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
@@ -15,8 +15,7 @@ namespace AutumnForest.BossFight.Squirrels
     public class DefaultSquirrel : Squirrel
     {
         [SerializeField] private Shooting shooting;
-        private CreatureHealth health;
-        private Animator animator;
+        [SerializeField] private AudioSource shotAudio;
 
         [SerializeField] private string shotAnimation;
         [SerializeField] private float shootMinimumRate = 2f;
@@ -24,6 +23,8 @@ namespace AutumnForest.BossFight.Squirrels
         [SerializeField] private float shootSpeed = 10;
         [SerializeField] private float spread = 25;
 
+        private Animator animator;
+        private CreatureHealth health;
         private CancellationTokenSource token = new();
 
         private void Awake()
@@ -33,26 +34,30 @@ namespace AutumnForest.BossFight.Squirrels
         }
         private void OnEnable()
         {
-            health.OnDie += SpawnHealAcorn;
+            health.OnDie += OnDie;
             shooting.OnShoot += OnShoot;
 
-            Enable();
+            EnableSShooting();
         }
         private void OnDisable()
         {
-            health.OnDie -= SpawnHealAcorn;
+            health.OnDie -= OnDie;
             shooting.OnShoot -= OnShoot;
 
-            Disable();
+            DisableShooting();
         }
-        private void OnDestroy() => Disable();
+        private void OnDestroy()
+        {
+            DisableShooting();
+            this.token.Dispose();
+        }
 
-        public void Enable()
+        public void EnableSShooting()
         {
             token = new();
             Shooting(token.Token);
         }
-        public void Disable()
+        public void DisableShooting()
         {
             if (!token.IsCancellationRequested)
                 token.Cancel();
@@ -64,21 +69,18 @@ namespace AutumnForest.BossFight.Squirrels
             {
                 await UniTask.Delay(TimeSpan.FromSeconds(UnityEngine.Random.Range(shootMinimumRate, shootMaximumRate)));
 
-                //костыль момент
                 if (gameObject.activeInHierarchy)
                     shooting.ShootWithoutInstantiate(GlobalServiceLocator.GetService<SomePoolsContainer>().AcornPool.GetFree().Rigidbody2D,
-                        shootSpeed, UnityEngine.Random.Range(0, spread), ForceMode2D.Impulse, gameObject);
+                        shootSpeed, UnityEngine.Random.Range(0, spread), ForceMode2D.Impulse);
             }
-            this.token.Dispose();
         }
 
-        private void SpawnHealAcorn()
-        {
-            GlobalServiceLocator.GetService<SomePoolsContainer>().AcornHealPool.GetFree().transform.position = transform.position;
-        }
+        private void OnDie() => GlobalServiceLocator.GetService<SomePoolsContainer>().AcornHealPool.GetFree().transform.position = transform.position;
         private void OnShoot(Rigidbody2D obj)
         {
             animator.Play(shotAnimation);
+            shotAudio.pitch = UnityEngine.Random.Range(0.35f, 0.75f);
+            shotAudio.Play();
         }
     }
 }

@@ -1,6 +1,6 @@
 using AutumnForest.Health;
+using AutumnForest.Projectiles;
 using AutumnForest.StateMachineSystem;
-using CreaturesAI.CombatSkills;
 using System;
 using UnityEngine;
 
@@ -22,10 +22,11 @@ namespace AutumnForest.BossFight.Raccoon
         public StateMachine StateMachine { get; private set; }
         public LocalServiceLocator ServiceLocator { get; private set; }
 
+        private bool isStart = true;
 
         private void Awake()
         {
-            ServiceLocator = new(creatureAnimator, shooting, healthObject, pointContainer);
+            ServiceLocator = new(creatureAnimator, shooting, healthObject, pointContainer, transform);
             raccoonStatesContainer = GetComponent<IStateContainerVariator>().InitStates() as RaccoonStatesContainer;
 
             StateMachine = new(this, false);
@@ -63,6 +64,12 @@ namespace AutumnForest.BossFight.Raccoon
         private StateBehaviour FirstStageChoosing()
         {
             StateBehaviour nextState = raccoonStatesContainer.IdleState;
+
+            if (isStart)
+            {
+                isStart = false;
+                return raccoonStatesContainer.DialogueState;
+            }
 
             switch (UnityEngine.Random.Range(0, 2))
             {

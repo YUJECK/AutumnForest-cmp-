@@ -1,14 +1,12 @@
-using AutumnForest;
 using AutumnForest.Helpers;
 using AutumnForest.Other;
 using System;
-using System.Net.NetworkInformation;
 using UnityEngine;
 
-namespace CreaturesAI.CombatSkills
+namespace AutumnForest.Projectiles
 {
     [RequireComponent(typeof(MonoRotator))]
-    public class Shooting : MonoBehaviour, ICreatureComponent
+    public class Shooting : MonoBehaviour
     {
         [SerializeField] private Transform firePoint;
         public TransformRotation TransformRotation { get; private set; }
@@ -27,10 +25,8 @@ namespace CreaturesAI.CombatSkills
 
                 OnShoot?.Invoke(newProjectile);
             }
-            else if (firePoint == null)
-                throw new NullReferenceException(nameof(firePoint));
-            else if (projectile == null)
-                throw new NullReferenceException(nameof(projectile));
+            else if (firePoint == null) throw new NullReferenceException(nameof(firePoint));
+            else if (projectile == null) throw new NullReferenceException(nameof(projectile));
         }
         public void ShootWithoutInstantiate(Rigidbody2D projectile, float speed, float shootOffset, ForceMode2D forceMode2D, GameObject test = null)
         {
@@ -44,10 +40,8 @@ namespace CreaturesAI.CombatSkills
 
                 OnShoot?.Invoke(projectile);
             }
-            else if(firePoint == null) 
-                throw new NullReferenceException(nameof(firePoint));
-            else if(projectile == null)
-                throw new NullReferenceException(nameof(projectile));
+            else if (firePoint == null) throw new NullReferenceException(nameof(firePoint));
+            else if (projectile == null) throw new NullReferenceException(nameof(projectile));
         }
     }
 }

@@ -1,12 +1,12 @@
 using AutumnForest.Helpers;
-using CreaturesAI.Pathfinding;
+using AutumnForest.Pathfinding;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CreaturesAI
+namespace AutumnForest
 {
     [RequireComponent(typeof(DynamicPathfinding))]
-    public class Moving : MonoBehaviour, ICreatureComponent
+    public class Moving : MonoBehaviour
     {
         private List<Vector2> currentPath = new List<Vector2>();
         [SerializeField] private float defaultMoveSpeed = 0.05f;

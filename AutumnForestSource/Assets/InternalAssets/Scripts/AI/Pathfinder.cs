@@ -1,11 +1,9 @@
-using AutumnForest;
-using AutumnForest.Helpers;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CreaturesAI.Pathfinding
+namespace AutumnForest.Pathfinding
 {
-    public sealed class Pathfinder : MonoBehaviour, ICreatureComponent
+    public sealed class Pathfinder : MonoBehaviour
     {
         private enum GCostDefining
         {
@@ -17,7 +15,7 @@ namespace CreaturesAI.Pathfinding
             //position
             public int X { get; private set; }
             public int Y { get; private set; }
-            
+
             //costs
             public float G { get; private set; }
             public float H { get; private set; }
@@ -28,9 +26,9 @@ namespace CreaturesAI.Pathfinding
                 this.X = x;
                 this.Y = y;
             }
-            
+
             public Point PreviosPoint { get; set; }
-            
+
             public void SetCosts(float g, float h) { this.G = g; this.H = h; }
         }
         private sealed class PointComparer : IComparer<Point>
@@ -42,7 +40,7 @@ namespace CreaturesAI.Pathfinding
                 return 0;
             }
         }
-        
+
         [SerializeField] private GCostDefining gCostDefining;
 
         public List<Vector2> FindPath(Vector2 start, Vector2 end)
@@ -81,7 +79,7 @@ namespace CreaturesAI.Pathfinding
                 nextPoints.Remove(currentPoint);
             }
         }
-        
+
         private float DefineGCost(Point startPoint, Point endPoint)
         {
             switch (gCostDefining)
@@ -99,7 +97,7 @@ namespace CreaturesAI.Pathfinding
             if (GlobalServiceLocator.GetService<GridManager>().GetPoint(new Vector2Int(point.X, point.Y)) == 0) return true;
             else return false;
         }
-        
+
         private List<Point> GetNeibhourPoints(Point point, bool[,] ignoredPoints)
         {
             List<Point> neibhourPoints = new List<Point>();
@@ -115,7 +113,7 @@ namespace CreaturesAI.Pathfinding
                 new Point(point.X - 1, point.Y + 1)
             };
 
-            for(int i = 0; i < pointsToCheck.Count; i++)
+            for (int i = 0; i < pointsToCheck.Count; i++)
             {
                 if (CheckPointCollider(pointsToCheck[i]) && !ignoredPoints[pointsToCheck[i].X, pointsToCheck[i].Y])
                     neibhourPoints.Add(pointsToCheck[i]);
@@ -127,13 +125,13 @@ namespace CreaturesAI.Pathfinding
             Point current = endPoint;
             List<Vector2> path = new List<Vector2>();
 
-            while(current.PreviosPoint != null)
+            while (current.PreviosPoint != null)
             {
                 path.Add(new Vector2(current.X, current.Y));
                 current = current.PreviosPoint;
-            } 
+            }
 
-            path.Reverse(); 
+            path.Reverse();
             return path;
         }
     }

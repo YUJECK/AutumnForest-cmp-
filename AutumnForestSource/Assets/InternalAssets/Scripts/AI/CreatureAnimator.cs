@@ -6,7 +6,7 @@ namespace AutumnForest
 {
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Animator))]
-    public class CreatureAnimator : MonoBehaviour, ICreatureComponent
+    public class CreatureAnimator : MonoBehaviour
     {
         [SerializeField] private string defaultAnimation = "Idle";
         private string currentAnimation = "";

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AutumnForest.DialogueSystem
 {
-    public sealed class Dialogue : MonoBehaviour, ICreatureComponent
+    public sealed class Dialogue : MonoBehaviour
     {
         private int nextPhrase = 0;
 

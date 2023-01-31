@@ -1,13 +1,12 @@
-using AutumnForest.Helpers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace CreaturesAI.Pathfinding
+namespace AutumnForest.Pathfinding
 {
     [RequireComponent(typeof(Pathfinder))]
-    public sealed class DynamicPathfinding : MonoBehaviour, ICreatureComponent
+    public sealed class DynamicPathfinding : MonoBehaviour
     {
         //variables
         [SerializeField] private float pathfindingRate = 0.5f;
@@ -18,7 +17,7 @@ namespace CreaturesAI.Pathfinding
         private Coroutine pathFindingCoroutine;
 
         //getters
-        public bool IsNowWorking 
+        public bool IsNowWorking
         {
             ///<summary>
             ///simple check pathFindingCoroutine

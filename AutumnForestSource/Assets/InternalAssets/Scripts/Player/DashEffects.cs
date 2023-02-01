@@ -1,46 +1,47 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace AutumnForest.Player
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public sealed class DashEffects : MonoBehaviour
     {
-        private SpriteRenderer spriteRenderer;
+        [SerializeField] private GameObject dashIndicator;
+        [SerializeField] private ParticleSystem dashParticle;
+        
         private PlayerDash playerDash;
 
         private void Awake()
         {
-            spriteRenderer = GetComponent<SpriteRenderer>();
             playerDash = GlobalServiceLocator.GetService<PlayerDash>();
+
+            if (dashIndicator == null) throw new NullReferenceException(nameof(dashIndicator));
+            if (dashParticle == null) throw new NullReferenceException(nameof(dashParticle));
         }
         private void OnEnable()
         {
             playerDash.OnDashed += OnDashed;
-            playerDash.OnDashReleased += OnDashReleased;
+            playerDash.OnReloaded += OnReloaded; 
+            
+            dashIndicator.SetActive(true);
+        }
+        private void OnDisable()
+        {
+            playerDash.OnDashed -= OnDashed;
+            playerDash.OnReloaded -= OnReloaded;
+
+            dashIndicator.SetActive(false);
         }
 
-        private void OnDashReleased()
+        private void OnReloaded()
         {
-            spriteRenderer.color = new Color(
-                spriteRenderer.color.r,
-                spriteRenderer.color.g,
-                spriteRenderer.color.b,
-                1);
+            dashIndicator.SetActive(true);
         }
 
         private void OnDashed()
         {
-            spriteRenderer.color = new Color(
-                spriteRenderer.color.r,
-                spriteRenderer.color.g,
-                spriteRenderer.color.b,
-                0.5f);
+            dashIndicator.SetActive(false);
+            dashParticle.Play();
         }
-
-        private void OnDisable()
-        {
-
-        }
-
     }
 }

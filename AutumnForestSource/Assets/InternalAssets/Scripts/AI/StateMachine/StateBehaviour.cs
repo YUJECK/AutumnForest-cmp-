@@ -9,5 +9,6 @@ namespace AutumnForest.StateMachineSystem
         public virtual void ExitState(IStateMachineUser stateMachine) { }
 
         public virtual bool CanEnterNewState() => true;
+        public virtual bool Repeatable() => true;
     }
 }

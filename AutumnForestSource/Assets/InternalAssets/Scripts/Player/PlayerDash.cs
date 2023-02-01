@@ -18,14 +18,15 @@ namespace AutumnForest.Player
         }
         [SerializeField] private float dashSpeed = 5f;
         [SerializeField] private float dashDuration = 1f;
-        [SerializeField] private int dashCulldown = 1;
-        [SerializeField] private int layerIndex = 10;
+        [SerializeField] private float dashCulldown = 1;
+        [SerializeField] private int dashLayerIndex = 10;
 
         [NaughtyAttributes.ReadOnly] private DashState dashState;
 
         public event Action OnDashed;
         public event Action OnDashReleased;
         public event Action OnCulldown;
+        public event Action OnReloaded;
 
         private PlayerMovable playerMovable;
         private Rigidbody2D playerRigidbody;
@@ -48,30 +49,39 @@ namespace AutumnForest.Player
 
         private async void InvokeDash(InputAction.CallbackContext context)
         {
-            if(dashState == DashState.None)
+            if (dashState == DashState.None)
             {
-                playerMovable.enabled = false; 
+                playerMovable.enabled = false;
 
                 await Dashing();
 
                 playerMovable.enabled = true;
-                
+
                 await CullDown();
+
                 dashState = DashState.None;
             }
         }
         private async UniTask Dashing()
         {
-            OnDashed?.Invoke();
-            playerRigidbody.AddForce(dashMovement, ForceMode2D.Impulse);
+            dashState = DashState.NowDashing;
 
-            await UniTask.Delay(TimeSpan.FromSeconds(dashDuration));
+            OnDashed?.Invoke();
+            {
+                playerRigidbody.AddForce(dashMovement, ForceMode2D.Impulse);
+                int previousLayer = gameObject.layer;
+                gameObject.layer = dashLayerIndex;
+
+                await UniTask.Delay(TimeSpan.FromSeconds(dashDuration));
+                gameObject.layer = previousLayer;
+            }
             OnDashReleased?.Invoke();
         }
         private async UniTask CullDown()
         {
             dashState = DashState.Culldown;
             await UniTask.Delay(TimeSpan.FromSeconds(dashCulldown));
+            OnReloaded?.Invoke();
         }
     }
 }

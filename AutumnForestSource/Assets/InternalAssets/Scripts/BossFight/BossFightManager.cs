@@ -58,11 +58,11 @@ namespace AutumnForest.BossFight
                 OnStateChanged.Invoke(secondStage);
                 CurrentStage = BossFightStage.Second;
             }
-            else if(CurrentStage == BossFightStage.Second && foxHealth.CurrentHealth < 0)
-            {
-                OnStateChanged.Invoke(thirdStage);
-                CurrentStage = BossFightStage.Third;
-            }
+            //else if(CurrentStage == BossFightStage.Second && foxHealth.CurrentHealth < 0)
+            //{
+            //    OnStateChanged.Invoke(thirdStage);
+            //    CurrentStage = BossFightStage.Third;
+            //}
         }
 
         public void StartBossFight() 

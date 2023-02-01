@@ -37,6 +37,7 @@ namespace AutumnForest.Raccoon
             return new RaccoonStatesContainer(
                 new RaccoonIdleState(),
                 new RaccoonDialogueState(dialogue),
+                new RaccoonHealingState(1, 3),
                 firstStageStates,
                 thirdStageStates);
         }

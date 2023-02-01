@@ -6,6 +6,7 @@ namespace AutumnForest.BossFight.Raccoon
     {
         public StateBehaviour IdleState { get; private set; }
         public StateBehaviour DialogueState { get; private set; }
+        public StateBehaviour HealingState { get; private set; }
 
         public StateBehaviour[] FirstStageStates { get; private set; }
         public StateBehaviour[] ThirdStageStates { get; private set; }
@@ -14,11 +15,13 @@ namespace AutumnForest.BossFight.Raccoon
         public RaccoonStatesContainer(
             StateBehaviour idleState, 
             StateBehaviour dialogueState, 
+            StateBehaviour healingState, 
             StateBehaviour[] firstStageStates,
             StateBehaviour[] thirdStageStates)
         {
             IdleState = idleState;
             DialogueState = dialogueState;
+            HealingState = healingState;
 
             FirstStageStates = firstStageStates;
             ThirdStageStates = thirdStageStates;

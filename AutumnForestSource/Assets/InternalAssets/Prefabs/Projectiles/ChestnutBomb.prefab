@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28b320c53d320014291b8875992a0ab0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
+  damage: 2
   timeToExpoit: 1
   spikePrefab: {fileID: 2978243615303353880, guid: 75626fae24954e24fbd4b87abb307b15, type: 3}
   exploitPrefab: {fileID: 8288446103499334202, guid: 65ea51d7dbb99f2428fdf664e0677273, type: 3}

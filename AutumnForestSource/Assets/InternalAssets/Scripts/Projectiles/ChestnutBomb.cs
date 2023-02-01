@@ -4,9 +4,8 @@ using UnityEngine;
 namespace AutumnForest.Projectiles
 {
     [RequireComponent(typeof(AreaHit))]
-    public class ChestnutBomb : Projectile
+    public class ChestnutBomb : MonoBehaviour
     {
-        //fields
         [SerializeField] private int damage;
         [SerializeField] private float timeToExpoit = 1f;
         private AreaHit areaHit;
@@ -14,12 +13,10 @@ namespace AutumnForest.Projectiles
         [SerializeField] private GameObject exploitPrefab;
         [SerializeField] private Transform[] spikesSpawnPoints;
 
-        //unity methods
         private void Awake() => areaHit = GetComponent<AreaHit>();
         private void Start() => StartCoroutine(StartExploit());
         private void OnCollisionEnter2D(Collision2D collision) => Exploit();
 
-        //methods
         private IEnumerator StartExploit()
         {
             yield return new WaitForSeconds(timeToExpoit);

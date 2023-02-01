@@ -57,7 +57,6 @@ namespace AutumnForest.BossFight.Raccoon
             else if (bossFightManager.CurrentStage == BossFightStage.Third)
                 nextState = ThirdStageChoosing();
 
-            //тут мб должны еще быть разные проверки
             if (nextState != null)
                 OnStateChanged?.Invoke(nextState);
         }
@@ -72,7 +71,7 @@ namespace AutumnForest.BossFight.Raccoon
 
             return ObjectRandomizer.GetRandom(raccoonStatesContainer.FirstStageStates);
         }
-        private StateBehaviour SecondStageChoosing() => raccoonStatesContainer.IdleState;
+        private StateBehaviour SecondStageChoosing() => raccoonStatesContainer.HealingState;
         private StateBehaviour ThirdStageChoosing() => ObjectRandomizer.GetRandom(raccoonStatesContainer.ThirdStageStates);
     }
 }

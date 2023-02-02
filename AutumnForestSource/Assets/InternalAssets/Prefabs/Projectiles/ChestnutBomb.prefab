@@ -199,7 +199,7 @@ GameObject:
   - component: {fileID: 7126267040360185623}
   - component: {fileID: 7126267040360185622}
   - component: {fileID: 160220853299425897}
-  - component: {fileID: 1894099638321507657}
+  - component: {fileID: 7411600998543681391}
   m_Layer: 8
   m_Name: ChestnutBomb
   m_TagString: Untagged
@@ -297,7 +297,7 @@ MonoBehaviour:
   OnHitting:
     m_PersistentCalls:
       m_Calls: []
-  attackRange: 0.61
+  attackRange: 0.6
   damageLayer: 0
 --- !u!114 &7126267040360185622
 MonoBehaviour:
@@ -314,7 +314,7 @@ MonoBehaviour:
   damage: 2
   timeToExpoit: 1
   spikePrefab: {fileID: 2978243615303353880, guid: 75626fae24954e24fbd4b87abb307b15, type: 3}
-  exploitPrefab: {fileID: 8288446103499334202, guid: 65ea51d7dbb99f2428fdf664e0677273, type: 3}
+  exploitPrefab: {fileID: 8288446103499334202, guid: f25e79532e5d42746ae8e5d9c37b4e08, type: 3}
   spikesSpawnPoints:
   - {fileID: 7126267040557311356}
   - {fileID: 7126267039091833692}
@@ -345,8 +345,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &1894099638321507657
-BoxCollider2D:
+--- !u!58 &7411600998543681391
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -358,19 +358,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.002626747, y: 0.010405362}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.49649766, y: 0.57705086}
-    oldSize: {x: 0.75, y: 0.75}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0.002626747, y: 0.0037365258}
   serializedVersion: 2
-  m_Size: {x: 0.24931899, y: 0.35431224}
-  m_EdgeRadius: 0
+  m_Radius: 0.17897949
 --- !u!1 &7126267040557311359
 GameObject:
   m_ObjectHideFlags: 0

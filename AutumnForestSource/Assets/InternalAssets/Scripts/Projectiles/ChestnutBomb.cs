@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -8,24 +10,27 @@ namespace AutumnForest.Projectiles
     {
         [SerializeField] private int damage;
         [SerializeField] private float timeToExpoit = 1f;
-        private AreaHit areaHit;
         [SerializeField] private GameObject spikePrefab;
         [SerializeField] private GameObject exploitPrefab;
         [SerializeField] private Transform[] spikesSpawnPoints;
+        
+        private AreaHit areaHit;
 
         private void Awake() => areaHit = GetComponent<AreaHit>();
-        private void Start() => StartCoroutine(StartExploit());
+        private void Start() => WaitForExplosion();
         private void OnCollisionEnter2D(Collision2D collision) => Exploit();
 
-        private IEnumerator StartExploit()
+        private IEnumerator WaitForExplosion()
         {
-            yield return new WaitForSeconds(timeToExpoit);
+            //await UniTask.Delay(TimeSpan.FromSeconds(timeToExpoit));
+
+            yield return new WaitForSeconds(1f);
+            
             Exploit();
         }
         private void Exploit()
         {
             areaHit.Hit(damage);
-
             Instantiate(exploitPrefab, transform.position, transform.rotation);
 
             foreach (Transform point in spikesSpawnPoints)

@@ -21,7 +21,7 @@ namespace AutumnForest.Player
         [SerializeField] private float dashCulldown = 1;
         [SerializeField] private int dashLayerIndex = 10;
 
-        [NaughtyAttributes.ReadOnly] private DashState dashState;
+        [SerializeField, NaughtyAttributes.ReadOnly] private DashState dashState;
 
         public event Action OnDashed;
         public event Action OnDashReleased;

@@ -17,20 +17,21 @@ namespace AutumnForest.Raccoon
         [SerializeField] private Squirrel defaultSquirrelPrefab;
         [SerializeField] private Squirrel fireSquirrelPrefab;
         [Space]
-        [SerializeField] private AudioSource throwEffect;
+        [SerializeField] private AudioSource throwLoopedSoundEffect;
+        [SerializeField] private AudioSource shotSoundEffect;
         [SerializeField] private Dialogue dialogue;
 
         public IStateContainer InitStates()
         {
             StateBehaviour[] firstStageStates =
             {
-                new RaccoonRoundShotState(throwEffect),
+                new RaccoonRoundShotState(throwLoopedSoundEffect),
                 new RaccoonSquirrelSpawnState(defaultSquirrelPrefab, 5, 7, 2.5f),
-                new TripleShotState(chestnut, 10, 25, 0.5f)
+                new TripleShotState(chestnut, shotSoundEffect, 10, 25, 0.5f)
             };
             StateBehaviour[] thirdStageStates =
             {
-                new RaccoonRoundShotState(throwEffect),
+                new RaccoonRoundShotState(throwLoopedSoundEffect),
                 new RaccoonSquirrelSpawnState(fireSquirrelPrefab, 3, 4, 1.5f)
             };
 

@@ -14,7 +14,7 @@ namespace AutumnForest.BossFight.Raccoon
         [SerializeField] private CreatureAnimator creatureAnimator;
         [SerializeField] private Shooting shooting;
         [SerializeField] private CreatureHealth healthObject;
-        [SerializeField] private SpawnPlace pointContainer;
+        [SerializeField] private SpawnPlace spawnPlace;
 
         private BossFightManager bossFightManager;
         private RaccoonStatesContainer raccoonStatesContainer;
@@ -27,7 +27,7 @@ namespace AutumnForest.BossFight.Raccoon
 
         private void Awake()
         {
-            ServiceLocator = new(creatureAnimator, shooting, healthObject, pointContainer, transform);
+            ServiceLocator = new(creatureAnimator, shooting, healthObject, spawnPlace, transform);
             raccoonStatesContainer = GetComponent<IStateContainerVariator>().InitStates() as RaccoonStatesContainer;
 
             StateMachine = new(this, false);

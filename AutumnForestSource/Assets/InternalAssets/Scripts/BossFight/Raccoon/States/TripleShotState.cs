@@ -50,7 +50,5 @@ namespace AutumnForest.BossFight.Raccoon.States
                 await UniTask.Delay(TimeSpan.FromSeconds(shotRate));
             }
         }
-
-        public override bool CanEnterNewState() => IsCompleted;
     }
 }

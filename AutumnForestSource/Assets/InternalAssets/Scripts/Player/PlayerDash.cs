@@ -49,7 +49,7 @@ namespace AutumnForest.Player
 
         private async void InvokeDash(InputAction.CallbackContext context)
         {
-            if (dashState == DashState.None)
+            if (dashState == DashState.None && dashMovement != Vector2.zero)
             {
                 playerMovable.enabled = false;
 

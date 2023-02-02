@@ -1,14 +1,23 @@
-﻿using UnityEngine;
+﻿using AutumnForest.Projectiles;
+using UnityEngine;
 
 namespace AutumnForest.BossFight.Raccoon
 {
-    public sealed class Cone : MonoBehaviour, IFireable
+    public sealed class Cone : Projectile, IFireable
     {
-        public bool Fired => throw new System.NotImplementedException("иди имплементируй лодырь");
+        [SerializeField] private GameObject fireEffect;
+
+        public bool Fired { get; private set; }
 
         public void Fire()
         {
-            Debug.Log("Fired");
+            if (!Fired)
+            {
+                damage += 3;
+                fireEffect.SetActive(true);
+            }
+            //типо сгорает
+            else gameObject.SetActive(false);
         }
     }
 }

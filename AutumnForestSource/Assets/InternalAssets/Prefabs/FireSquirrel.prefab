@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4786743961527444980}
   - component: {fileID: 4786743961527444987}
   - component: {fileID: 4786743961527444986}
+  - component: {fileID: 8549307188414591390}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -105,6 +106,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+--- !u!58 &8549307188414591390
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4786743961527444981}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.031220436, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.3022718
 --- !u!1 &4786743962429496198
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,8 +217,9 @@ GameObject:
   - component: {fileID: 4786743963374172456}
   - component: {fileID: 4786743963374172457}
   - component: {fileID: 4786743963374172463}
-  - component: {fileID: 4786743963374172462}
   - component: {fileID: 4786743963374172461}
+  - component: {fileID: 4786743963374172462}
+  - component: {fileID: 4347749350737321882}
   m_Layer: 0
   m_Name: FireSquirrel
   m_TagString: Untagged
@@ -291,7 +309,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 1.5
-  castRate: 3.5
+  castRate: 1.5
+--- !u!114 &4786743963374172461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4786743963374172458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2218ac98f3e09d443a0d5ef5d9ab2266, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  squirrelAnimator: {fileID: 4786743963374172462}
+  firePlaceAnimator: {fileID: 4786743961527444986}
+  fireSquirrel: {fileID: 4786743963374172463}
 --- !u!95 &4786743963374172462
 Animator:
   serializedVersion: 5
@@ -312,18 +345,29 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &4786743963374172461
-MonoBehaviour:
+--- !u!61 &4347749350737321882
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4786743963374172458}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2218ac98f3e09d443a0d5ef5d9ab2266, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  squirrelAnimator: {fileID: 4786743963374172462}
-  firePlaceAnimator: {fileID: 4786743961527444986}
-  fireSquirrel: {fileID: 4786743963374172463}
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.015899658, y: -0.019256294}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.33333334, y: 0.4166667}
+    oldSize: {x: 0.75, y: 0.75}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5516968, y: 0.9135126}
+  m_EdgeRadius: 0

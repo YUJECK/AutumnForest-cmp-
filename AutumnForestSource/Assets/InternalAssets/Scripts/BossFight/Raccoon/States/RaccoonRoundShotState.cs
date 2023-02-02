@@ -58,7 +58,5 @@ namespace AutumnForest
             stateMachine.ServiceLocator.GetService<Shooting>().TransformRotation.Coefficient = 1;
             throwSoundEffect.Stop();
         }
-
-        public override bool CanEnterNewState() => IsCompleted;
     }
 }

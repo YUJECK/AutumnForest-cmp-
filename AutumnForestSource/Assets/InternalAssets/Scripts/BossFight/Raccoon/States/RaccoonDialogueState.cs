@@ -37,7 +37,5 @@ namespace AutumnForest.BossFight.Raccoon.States
         {
             GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToPrevious();
         }
-
-        public override bool CanEnterNewState() => IsCompleted;
     }
 }

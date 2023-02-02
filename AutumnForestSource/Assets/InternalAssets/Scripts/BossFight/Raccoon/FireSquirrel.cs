@@ -12,19 +12,33 @@ namespace AutumnForest.BossFight.Squirrels
 
         public SquirrelFirePlace FirePlace { get; private set; } = new();
 
+        private CancellationTokenSource cancellationToken;
+
+        private void OnEnable()
+        {
+            cancellationToken = new();
+            Casting(cancellationToken.Token);
+        }
+        private void OnDisable()
+        {
+            cancellationToken.Cancel();
+            cancellationToken.Dispose();
+        }
+
         private async void Casting(CancellationToken token)
         {
-            try
+            while (true)
             {
-                Debug.Log("Casting");
-                
-                FirePlace.CastFirePlace(transform.position, radius);
-                await UniTask.Delay(TimeSpan.FromSeconds(castRate));
-            }
-            finally
-            {
-                Debug.Log("Finally");
-            }
+                try
+                {
+                    FirePlace.CastFirePlace(transform.position, radius);
+                    await UniTask.Delay(TimeSpan.FromSeconds(castRate), cancellationToken: token);
+                }
+                catch
+                {
+                    return;
+                }
+            }   
         }
 
         private void OnDrawGizmos()

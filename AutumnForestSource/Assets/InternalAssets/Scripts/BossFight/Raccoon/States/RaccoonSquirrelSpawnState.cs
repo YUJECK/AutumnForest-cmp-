@@ -40,7 +40,5 @@ namespace AutumnForest.Raccoon.States
             }
             IsCompleted = true;
         }
-
-        public override bool CanEnterNewState() => IsCompleted;
     }
 }

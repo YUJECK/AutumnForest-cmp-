@@ -61,7 +61,7 @@ namespace AutumnForest.StateMachineSystem
                 if (CurrentState != null)
                 {
                     if (CurrentState == nextState && !CurrentState.Repeatable()) return;
-                    if (!CurrentState.CanEnterNewState()) return;
+                    if (!CurrentState.CanExit()) return;
 
                     CurrentState.ExitState(StateMachineUser);
                     Switch();

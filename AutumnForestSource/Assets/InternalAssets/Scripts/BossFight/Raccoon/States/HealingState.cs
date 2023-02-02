@@ -13,6 +13,7 @@ namespace AutumnForest.BossFight.Raccoon.States
 
         private float healRate;
         private int healPoints;
+
         public override bool Repeatable() => false;
 
         public RaccoonHealingState(float healRate, int healPoints)
@@ -49,6 +50,5 @@ namespace AutumnForest.BossFight.Raccoon.States
                 }
             }
         }
-
     }
 }

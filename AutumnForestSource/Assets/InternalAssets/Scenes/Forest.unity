@@ -32863,9 +32863,9 @@ MonoBehaviour:
   creatureAnimator: {fileID: 1155370345}
   shooting: {fileID: 1809685870}
   healthObject: {fileID: 1918005425}
-  pointContainer:
+  spawnPlace:
     leftDownCorner: {x: 19, y: -7}
-    rightUpCorner: {x: 29, y: 1.8}
+    rightUpCorner: {x: 29, y: 1.5}
 --- !u!114 &1025024696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32881,7 +32881,7 @@ MonoBehaviour:
   chestnut: {fileID: 160220853299425897, guid: 5f030ef350067734298dd4434b921de1, type: 3}
   shirtPrefab: {fileID: 0}
   defaultSquirrelPrefab: {fileID: 3538509849446323249, guid: bbc8f79cb335d4f4a83a32449059d8be, type: 3}
-  fireSquirrelPrefab: {fileID: 0}
+  fireSquirrelPrefab: {fileID: 4786743963374172463, guid: 8be165a019008924ebf764f79c336822, type: 3}
   throwEffect: {fileID: 1513363127}
   dialogue: {fileID: 968301942}
 --- !u!1 &1029327000
@@ -49087,7 +49087,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acorn: {fileID: 5767805362926127976, guid: 7cf482e6256aee948b492812460e089e, type: 3}
-  cone: {fileID: 5767805362926127976, guid: e8c0b2bb56593f3429477322396d7488, type: 3}
+  cone: {fileID: 4270532997081402518, guid: e8c0b2bb56593f3429477322396d7488, type: 3}
   acornHeal: {fileID: 3450856270622030853, guid: 780c9b573169bad45a66ee76974e3210, type: 3}
   mainCamera: {fileID: 521083795}
   bossfightCamera: {fileID: 1599793235}
@@ -65561,11 +65561,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 201344373221496976, guid: f360df0feb6fe9c4b8208db0c61bf87f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.971
+      value: 14.953
       objectReference: {fileID: 0}
     - target: {fileID: 201344373221496976, guid: f360df0feb6fe9c4b8208db0c61bf87f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.2930002
+      value: -3.452
       objectReference: {fileID: 0}
     - target: {fileID: 201344373221496976, guid: f360df0feb6fe9c4b8208db0c61bf87f, type: 3}
       propertyPath: m_LocalPosition.z

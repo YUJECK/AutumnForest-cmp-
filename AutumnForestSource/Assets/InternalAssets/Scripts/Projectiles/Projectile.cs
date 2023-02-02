@@ -6,11 +6,11 @@ namespace AutumnForest.Projectiles
     [RequireComponent(typeof(Rigidbody2D))]
     public class Projectile : MonoBehaviour
     {
-        [SerializeField, Min(0)] private int damage;
+        [SerializeField, Min(0)] protected int damage;
         [SerializeField] private GameObject collideEffect;
         [SerializeField] private AudioSource hitSoundEffect;
 
-        [field: SerializeField] public Rigidbody2D Rigidbody2D { get; private set; }
+        public Rigidbody2D Rigidbody2D { get; private set; }
 
         private void Awake()
         {

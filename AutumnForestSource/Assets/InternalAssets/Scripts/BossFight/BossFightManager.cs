@@ -1,4 +1,5 @@
 ﻿using AutumnForest.BossFight.Raccoon;
+using AutumnForest.BossFight.Stages;
 using AutumnForest.Health;
 using AutumnForest.Helpers;
 using AutumnForest.StateMachineSystem;
@@ -37,7 +38,7 @@ namespace AutumnForest.BossFight
         public event Action OnBossFightEnded;
 
         private StateBehaviour firstStage = new BossFightFirstStage();
-        private StateBehaviour secondStage = new BossFightFirstStage();
+        private StateBehaviour secondStage = new BossFightSecondStage();
         private StateBehaviour thirdStage = new BossFightFirstStage();
 
         private IHealth raccoonHealth;
@@ -55,20 +56,19 @@ namespace AutumnForest.BossFight
         {
             if (CurrentStage == BossFightStage.First && raccoonHealth.CurrentHealth <= raccoonHealth.MaximumHealth * 0.7)
             {
-                OnStateChanged.Invoke(secondStage);
+                OnStateChanged?.Invoke(secondStage);
                 CurrentStage = BossFightStage.Second;
             }
-            //else if(CurrentStage == BossFightStage.Second && foxHealth.CurrentHealth < 0)
-            //{
-            //    OnStateChanged.Invoke(thirdStage);
-            //    CurrentStage = BossFightStage.Third;
-            //}
+            else if (CurrentStage == BossFightStage.Second && foxHealth.CurrentHealth < 0)
+            {
+                OnStateChanged?.Invoke(thirdStage);
+                CurrentStage = BossFightStage.Third;
+            }
         }
 
         public void StartBossFight() 
         {
-            //TODO:
-            //foxHealth = GlobalServiceLocator.GetService<FoxStateMachineUser>().ServiceLocator.GetService<CreatureHealth>();
+            foxHealth = GlobalServiceLocator.GetService<FoxStateMachineUser>().ServiceLocator.GetService<CreatureHealth>();
             raccoonHealth = GlobalServiceLocator.GetService<RaccoonStateMachineUser>().ServiceLocator.GetService<CreatureHealth>();
             HealthBarHelper.BossHealthBar.gameObject.SetActive(true);
 

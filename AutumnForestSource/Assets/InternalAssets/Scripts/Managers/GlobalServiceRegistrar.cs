@@ -74,6 +74,7 @@ namespace AutumnForest
         private void RegisterBossFightServices()
         {
             GlobalServiceLocator.RegisterService(FindObjectOfType<RaccoonStateMachineUser>(true));
+            GlobalServiceLocator.RegisterService(FindObjectOfType<FoxStateMachineUser>(true));
             GlobalServiceLocator.RegisterService(new BossFightManager());
         }
     }

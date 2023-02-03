@@ -20,6 +20,8 @@ namespace AutumnForest.Raccoon
         [SerializeField] private AudioSource throwLoopedSoundEffect;
         [SerializeField] private AudioSource shotSoundEffect;
         [SerializeField] private Dialogue dialogue;
+        [SerializeField] private Transform healPoint;
+        [SerializeField] private Transform defaultPosition;
 
         public IStateContainer InitStates()
         {
@@ -38,7 +40,7 @@ namespace AutumnForest.Raccoon
             return new RaccoonStatesContainer(
                 new RaccoonIdleState(),
                 new RaccoonDialogueState(dialogue),
-                new RaccoonHealingState(1, 3),
+                new RaccoonHealingState(/*rate*/1, /*healPoints*/3, healPoint, defaultPosition),
                 firstStageStates,
                 thirdStageStates);
         }

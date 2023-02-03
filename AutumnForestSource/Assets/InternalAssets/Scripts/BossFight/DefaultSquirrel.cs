@@ -71,7 +71,7 @@ namespace AutumnForest.BossFight.Squirrels
 
                 if (gameObject.activeInHierarchy)
                     shooting.ShootWithoutInstantiate(GlobalServiceLocator.GetService<SomePoolsContainer>().AcornPool.GetFree().Rigidbody2D,
-                        shootSpeed, UnityEngine.Random.Range(0, spread), ForceMode2D.Impulse);
+                        shootSpeed, UnityEngine.Random.Range(0, spread), true, ForceMode2D.Impulse);
             }
         }
 

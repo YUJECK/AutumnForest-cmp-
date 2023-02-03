@@ -25,7 +25,6 @@ namespace AutumnForest
             throwSoundEffect.Play();
             Shooting shooting = stateMachine.ServiceLocator.GetService<Shooting>();
 
-            //params
             int coneCountPerCycle = 3;
             int cycles = 16;
             int totalCones = coneCountPerCycle * cycles;
@@ -35,7 +34,7 @@ namespace AutumnForest
             for (int i = 0; i < totalCones; i++)
             {
                 await UniTask.Delay(shotRate);
-                shooting.ShootWithoutInstantiate(GlobalServiceLocator.GetService<SomePoolsContainer>().ConePool.GetFree().GetComponent<Rigidbody2D>(), 10, 0, ForceMode2D.Impulse);
+                shooting.ShootWithoutInstantiate(GlobalServiceLocator.GetService<SomePoolsContainer>().ConePool.GetFree().GetComponent<Rigidbody2D>(), 10, 0, true, ForceMode2D.Impulse);
             }
         }
         public override async void EnterState(IStateMachineUser stateMachine)

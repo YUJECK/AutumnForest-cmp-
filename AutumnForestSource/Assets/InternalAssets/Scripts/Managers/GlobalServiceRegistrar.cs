@@ -17,6 +17,7 @@ namespace AutumnForest
         [SerializeField] private Projectile acorn;
         [SerializeField] private Projectile cone;
         [SerializeField] private AcornHeal acornHeal;
+        [SerializeField] private Projectile defaultSword;
         [Header("Cameras")]
         [SerializeField] private CinemachineVirtualCamera mainCamera;
         [SerializeField] private CinemachineVirtualCamera bossfightCamera;
@@ -46,7 +47,7 @@ namespace AutumnForest
 
         private void RegisterPools()
         {
-            GlobalServiceLocator.RegisterService(new SomePoolsContainer(acorn, cone, acornHeal));
+            GlobalServiceLocator.RegisterService(new SomePoolsContainer(acorn, cone, acornHeal, defaultSword));
         }
         private void RegisterPlayerServices()
         {

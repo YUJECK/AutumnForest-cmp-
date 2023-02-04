@@ -15,7 +15,7 @@ namespace AutumnForest.Assets.InternalAssets.Scripts.BossFight
 
         public override bool Repeatable() => false;
 
-        public async void EnterState(IStateMachineUser stateMachine)
+        public async override void EnterState(IStateMachineUser stateMachine)
         {
             IsCompleted = false;
             await UniTask.Delay(TimeSpan.FromSeconds(timing));

@@ -7,6 +7,7 @@ using AutumnForest.Managers;
 using AutumnForest.Player;
 using AutumnForest.Projectiles;
 using Cinemachine;
+using System;
 using UnityEngine;
 
 namespace AutumnForest
@@ -25,6 +26,11 @@ namespace AutumnForest
         [SerializeField] private CinemachineVirtualCamera slingshotCamera;
         [SerializeField] private CinemachineVirtualCamera houseCamera;
         [SerializeField] private CinemachineVirtualCamera basementCamera;
+        [Header("Music themes")]
+        [SerializeField] private AudioSource mainTheme;
+        [SerializeField] private AudioSource bossfightTheme;
+        [SerializeField] private AudioSource basementAmbientTheme;
+        [SerializeField] private AudioSource gramophoneTheme;
         [Header("Health bars")]
         [SerializeField] private BossFightHealthBar bossHealthBar;
         [SerializeField] private BossFightHealthBar playerHealthBar;
@@ -39,10 +45,17 @@ namespace AutumnForest
             RegisterPools();
             RegisterPlayerServices();
             RegisterCameras();
+            RegisterMusicThemes();
             RegisterDialogueServices();
             RegisterBossFightServices();
 
             GlobalServiceLocator.GetService<PlayerInput>().Enable();
+        }
+
+        private void RegisterMusicThemes()
+        {
+            GlobalServiceLocator.RegisterService(new MusicSwitcher(
+                mainTheme, bossfightTheme, basementAmbientTheme, gramophoneTheme));
         }
 
         private void RegisterPools()

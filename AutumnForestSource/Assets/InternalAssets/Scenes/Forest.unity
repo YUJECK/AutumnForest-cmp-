@@ -6074,6 +6074,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1961033743}
     m_Modifications:
+    - target: {fileID: 5448195002205780104, guid: 5701863aa87a5b54abf31c0208beaa29, type: 3}
+      propertyPath: <DialogueName>k__BackingField.english
+      value: Mole
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448195002205780104, guid: 5701863aa87a5b54abf31c0208beaa29, type: 3}
+      propertyPath: <DialogueName>k__BackingField.russian
+      value: "\u041A\u0438\u043D\u0434\u0430 \u0441\u0430\u0441\u043F\u0438\u0448\u043E\u0441"
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448195002205780104, guid: 5701863aa87a5b54abf31c0208beaa29, type: 3}
+      propertyPath: <DialoguePhrases>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448195002205780104, guid: 5701863aa87a5b54abf31c0208beaa29, type: 3}
+      propertyPath: <DialoguePhrases>k__BackingField.Array.data[0].english
+      value: YEYEYEY
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448195002205780104, guid: 5701863aa87a5b54abf31c0208beaa29, type: 3}
+      propertyPath: <DialoguePhrases>k__BackingField.Array.data[0].russian
+      value: "\u0415\u0415\u0415!\u0415\u0415\u0401"
+      objectReference: {fileID: 0}
     - target: {fileID: 8591143540242827482, guid: 5701863aa87a5b54abf31c0208beaa29, type: 3}
       propertyPath: m_FlipX
       value: 1
@@ -35669,10 +35689,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a2c5e85b2aea8240888d6afea166195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueName: "\u041C\u0430\u0444\u0438\u043D\u043E\u0442"
-  dialoguePhrases:
-  - "\u0445\u0438\u0445\u0438\u0445\u0430\u0445\u0430"
-  - "\u043A\u0438\u0440\u0438\u0449\u0438\u0449\u0438\u0449\u0449\u0438"
+  <DialogueName>k__BackingField:
+    english: 
+    russian: 
+  <DialoguePhrases>k__BackingField: []
 --- !u!114 &968301943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36188,6 +36208,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1961033743}
     m_Modifications:
+    - target: {fileID: 3176573529977074301, guid: 1b7b3bcd0c2dc15489bcf8344b1c4c8a, type: 3}
+      propertyPath: <DialogueName>k__BackingField.english
+      value: I am owl
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176573529977074301, guid: 1b7b3bcd0c2dc15489bcf8344b1c4c8a, type: 3}
+      propertyPath: <DialogueName>k__BackingField.russian
+      value: "\u042F \u0441\u043E\u0432\u0430"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176573529977074301, guid: 1b7b3bcd0c2dc15489bcf8344b1c4c8a, type: 3}
+      propertyPath: <DialoguePhrases>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176573529977074301, guid: 1b7b3bcd0c2dc15489bcf8344b1c4c8a, type: 3}
+      propertyPath: <DialoguePhrases>k__BackingField.Array.data[0].english
+      value: Shsuhsuhsush
+      objectReference: {fileID: 0}
+    - target: {fileID: 3176573529977074301, guid: 1b7b3bcd0c2dc15489bcf8344b1c4c8a, type: 3}
+      propertyPath: <DialoguePhrases>k__BackingField.Array.data[0].russian
+      value: "\u0428\u0443\u0428\u0448\u0443\u0448\u0443\u0448\u0443\u0448\u0443"
+      objectReference: {fileID: 0}
     - target: {fileID: 8064744979187976076, guid: 1b7b3bcd0c2dc15489bcf8344b1c4c8a, type: 3}
       propertyPath: m_Name
       value: Owl
@@ -42687,6 +42727,14 @@ PrefabInstance:
     - target: {fileID: 1452846315363661967, guid: d7a56730bad26f74795553e2a0ae9251, type: 3}
       propertyPath: m_FlipX
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1452846315363661967, guid: d7a56730bad26f74795553e2a0ae9251, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1452846315363661967, guid: d7a56730bad26f74795553e2a0ae9251, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1796813397
       objectReference: {fileID: 0}
     - target: {fileID: 1978785409736023562, guid: d7a56730bad26f74795553e2a0ae9251, type: 3}
       propertyPath: dashParticle

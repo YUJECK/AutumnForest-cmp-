@@ -44,7 +44,7 @@ namespace AutumnForest.DialogueSystem
         private void OnDialogueStarted(Dialogue dialogue)
         {
             enableTask = SelfEnable();
-            dialogueNameUI.text = dialogue.dialogueName;
+            dialogueNameUI.text = dialogue.DialogueName.Value;
         }
         private void OnDialogueEnded(Dialogue dialogue) => disableTask = SelfDisable();
 

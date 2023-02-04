@@ -14,8 +14,8 @@ namespace AutumnForest.DialogueSystem
 
         public bool IsCurrentlyActive { get; private set; } = false;
 
-        [SerializeField] public string dialogueName = "Somebody";
-        [SerializeField, TextArea(2, 20)] public string[] dialoguePhrases;
+        [field: SerializeField] public LocalizatedString DialogueName { get; private set; }
+        [field: SerializeField] public LocalizatedString[] DialoguePhrases { get; private set; }
 
         private void Start() => InitDialogue();
 
@@ -31,13 +31,13 @@ namespace AutumnForest.DialogueSystem
         }
         public void NextPhrase()
         {
-            if (nextPhrase >= dialoguePhrases.Length)
+            if (nextPhrase >= DialoguePhrases.Length)
             {
                 EndDialogue();
                 return;
             }
 
-            OnPhraseChanged.Invoke(dialogueName, dialoguePhrases[nextPhrase]);
+            OnPhraseChanged.Invoke(DialogueName.Value, DialoguePhrases[nextPhrase].Value);
 
             nextPhrase++;
         }

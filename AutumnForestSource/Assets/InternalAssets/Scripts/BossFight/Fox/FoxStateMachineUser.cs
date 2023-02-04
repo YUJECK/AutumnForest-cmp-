@@ -1,3 +1,4 @@
+using AutumnForest.Assets.InternalAssets.Scripts.BossFight;
 using AutumnForest.BossFight.Fox.States;
 using AutumnForest.Health;
 using AutumnForest.Helpers;
@@ -28,7 +29,9 @@ namespace AutumnForest
         {
             StateBehaviour[] patterns =
             {
-                new FoxFirstFlowerPattern(points),
+                new TimingState(2.5f),
+                new FoxFirstFlowerPattern(points, 2f),
+                new FoxFirstFlowerPattern(points, 1f),
                 new FoxTurnedRoundSwordThrowingState(0.2f, 15, points),
                 new FoxTurnedRoundSwordThrowingState(0.1f, 20 , points)
             };

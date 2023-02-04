@@ -8,7 +8,7 @@ namespace AutumnForest.Player
     [RequireComponent(typeof(PlayerMovable))]
     [RequireComponent(typeof(Rigidbody2D))]
 
-    public sealed class PlayerDash : MonoBehaviour
+    public sealed class PlayerDash : MonoBehaviour, IDisablable
     {
         private enum DashState
         {
@@ -32,10 +32,17 @@ namespace AutumnForest.Player
         private Rigidbody2D playerRigidbody;
         private Vector2 dashMovement => playerMovable.Movement * dashSpeed;
 
+        public bool Enabled { get; private set; }
+
+        public event Action OnEnabled;
+        public event Action OnDisabled;
+
         private void Awake()
         {
             playerRigidbody = GetComponent<Rigidbody2D>();
             playerMovable = GetComponent<PlayerMovable>();
+
+            Disable();
         }
         private void OnEnable()
         {
@@ -82,6 +89,18 @@ namespace AutumnForest.Player
             dashState = DashState.Culldown;
             await UniTask.Delay(TimeSpan.FromSeconds(dashCulldown));
             OnReloaded?.Invoke();
+        }
+
+        public void Enable()
+        {
+            this.enabled = true;
+            OnEnabled?.Invoke();
+        }
+
+        public void Disable()
+        {
+            this.enabled = false;
+            OnDisabled?.Invoke();
         }
     }
 }

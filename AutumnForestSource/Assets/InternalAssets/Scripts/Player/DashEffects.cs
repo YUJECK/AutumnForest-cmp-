@@ -17,15 +17,19 @@ namespace AutumnForest.Player
 
             if (dashIndicator == null) throw new NullReferenceException(nameof(dashIndicator));
             if (dashParticle == null) throw new NullReferenceException(nameof(dashParticle));
+
+            playerDash.OnEnabled += OnEnabled;
+            playerDash.OnDisabled += OnDisabled;
         }
-        private void OnEnable()
+
+        private void OnEnabled()
         {
             playerDash.OnDashed += OnDashed;
-            playerDash.OnReloaded += OnReloaded; 
-            
+            playerDash.OnReloaded += OnReloaded;
+
             dashIndicator.SetActive(true);
         }
-        private void OnDisable()
+        private void OnDisabled()
         {
             playerDash.OnDashed -= OnDashed;
             playerDash.OnReloaded -= OnReloaded;
@@ -37,7 +41,6 @@ namespace AutumnForest.Player
         {
             dashIndicator.SetActive(true);
         }
-
         private void OnDashed()
         {
             dashIndicator.SetActive(false);

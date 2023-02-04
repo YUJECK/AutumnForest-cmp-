@@ -11,13 +11,15 @@ namespace AutumnForest.BossFight.Fox.States
 {
     public sealed class FoxFirstFlowerPattern : StateBehaviour
     {
+        private float shotDelay = 2f;
         private int repeatsCount = 4;
         private Transform[] swordPoints;
 
         private CancellationTokenSource cancellationToken;
         
-        public FoxFirstFlowerPattern(Transform[] swordPoints)
+        public FoxFirstFlowerPattern(Transform[] swordPoints, float shotDelay)
         {
+            this.shotDelay = shotDelay;
             this.swordPoints = swordPoints;
         }
 
@@ -42,15 +44,7 @@ namespace AutumnForest.BossFight.Fox.States
                 {
                     for (int i = 0; i < repeatsCount; i++)
                     {
-
-                        int firstSword;
-
-                        int isEven = i % 2;
-                    
-                        if (isEven == 0) firstSword = 0;
-                        else firstSword = 1;
-                    
-                        for (int j = firstSword; j < swordPoints.Length; j += 2)
+                        for (int j = FirstSwordIndex(i); j < swordPoints.Length; j += 2)
                         {
                             Projectile newSword = GlobalServiceLocator.GetService<SomePoolsContainer>().DefaultSwordPool.GetFree();
                             newSword.transform.position = swordPoints[j].transform.position;
@@ -59,7 +53,7 @@ namespace AutumnForest.BossFight.Fox.States
                             spawnedSwords.Add(newSword);
                         }
 
-                        await UniTask.Delay(TimeSpan.FromSeconds(2f), cancellationToken: token);
+                        await UniTask.Delay(TimeSpan.FromSeconds(shotDelay), cancellationToken: token);
 
                         foreach (Projectile sword in spawnedSwords)
                             sword.Rigidbody2D.AddForce(sword.transform.up * 10, ForceMode2D.Impulse);
@@ -76,6 +70,14 @@ namespace AutumnForest.BossFight.Fox.States
                 }
             }
             IsCompleted = true;
+        }
+    
+        private int FirstSwordIndex(int cycleIndex)
+        {
+            int isEven = cycleIndex % 2;
+
+            if (isEven == 0) return 0;
+            else return 1;
         }
     }
 }

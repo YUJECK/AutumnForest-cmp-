@@ -6,6 +6,8 @@ namespace AutumnForest
 {
     public sealed class Interactor : MonoBehaviour
     {
+        [SerializeField] private GameObject vizualization;
+
         private List<IInteractive> awailableInteractions = new();
 
         private void OnEnable() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.Interact.performed += Interact;
@@ -23,6 +25,8 @@ namespace AutumnForest
             {
                 interactive.Detect();
                 awailableInteractions.Add(interactive);
+
+                vizualization.SetActive(true);
             }
         }
         private void OnTriggerExit2D(Collider2D collision)
@@ -33,6 +37,9 @@ namespace AutumnForest
                 {
                     interactive.DetectionReleased();
                     awailableInteractions.Remove(interactive);
+
+                    if (awailableInteractions.Count == 0)
+                        vizualization.SetActive(false);
                 }
             }
         }

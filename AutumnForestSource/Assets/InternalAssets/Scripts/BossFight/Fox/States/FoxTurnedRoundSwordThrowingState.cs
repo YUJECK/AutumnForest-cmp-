@@ -3,6 +3,7 @@ using AutumnForest.Projectiles;
 using AutumnForest.StateMachineSystem;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Threading;
 using UnityEngine;
 
 namespace AutumnForest.BossFight.Fox.States
@@ -14,6 +15,8 @@ namespace AutumnForest.BossFight.Fox.States
 
         private Transform[] swordPoits;
 
+        private CancellationTokenSource cancellationToken;
+
         public FoxTurnedRoundSwordThrowingState(float shotRate, float swordForce, Transform[] swordPoits)
         {
             this.shotRate = shotRate;
@@ -23,21 +26,36 @@ namespace AutumnForest.BossFight.Fox.States
 
         public override async void EnterState(IStateMachineUser stateMachine)
         {
+            cancellationToken = new();
+
             IsCompleted = false;
             {
-                for (int i = 0; i < swordPoits.Length; i++)
+                try
                 {
-                    Projectile nextSword = GlobalServiceLocator.GetService<SomePoolsContainer>().DefaultSwordPool.GetFree();
+                    for (int i = 0; i < swordPoits.Length; i++)
+                    {
+                        Projectile nextSword = GlobalServiceLocator.GetService<SomePoolsContainer>().DefaultSwordPool.GetFree();
 
-                    nextSword.transform.position = swordPoits[i].transform.position;
-                    nextSword.transform.rotation = swordPoits[i].transform.rotation;
+                        nextSword.transform.position = swordPoits[i].transform.position;
+                        nextSword.transform.rotation = swordPoits[i].transform.rotation;
 
-                    nextSword.Rigidbody2D.AddForce(nextSword.transform.up* swordForce, ForceMode2D.Impulse);
+                        nextSword.Rigidbody2D.AddForce(nextSword.transform.up * swordForce, ForceMode2D.Impulse);
 
-                    await UniTask.Delay(TimeSpan.FromSeconds(shotRate));
+                        await UniTask.Delay(TimeSpan.FromSeconds(shotRate), cancellationToken: cancellationToken.Token);
+                    }
+                }
+                catch
+                {
+                    IsCompleted = true;
+                    return;
                 }
             }
             IsCompleted = true;
+        }
+        public override void ExitState(IStateMachineUser stateMachine)
+        {
+            cancellationToken.Cancel();
+            cancellationToken.Dispose();
         }
     }
 }

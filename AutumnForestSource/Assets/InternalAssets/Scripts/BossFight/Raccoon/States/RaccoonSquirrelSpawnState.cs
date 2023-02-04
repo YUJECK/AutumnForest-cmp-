@@ -4,6 +4,7 @@ using AutumnForest.Helpers;
 using AutumnForest.StateMachineSystem;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Threading;
 
 namespace AutumnForest.Raccoon.States
 {
@@ -14,6 +15,8 @@ namespace AutumnForest.Raccoon.States
         private int squirrelMinCount;
         private int squirrelMaxCount;
         private float spawnRate;
+
+        private CancellationTokenSource cancellationToken;
 
         public RaccoonSquirrelSpawnState(Squirrel squirrelPrefab, int squirrelMinCount, int squirrelMaxCount, float spawnRate)
         {
@@ -27,18 +30,32 @@ namespace AutumnForest.Raccoon.States
         public override async void EnterState(IStateMachineUser stateMachine)
         {
             stateMachine.ServiceLocator.GetService<CreatureAnimator>().SetDefault();
+            cancellationToken = new();
 
             IsCompleted = false;
             {
-                int squirrelCount = UnityEngine.Random.Range(squirrelMinCount, squirrelMaxCount);
-
-                for (int i = 0; i < squirrelCount; i++)
+                try
                 {
-                    squirrelPool.GetFree().transform.position = stateMachine.ServiceLocator.GetService<SpawnPlace>().GetPosition();
-                    await UniTask.Delay(TimeSpan.FromSeconds(spawnRate));
+                    int squirrelCount = UnityEngine.Random.Range(squirrelMinCount, squirrelMaxCount);
+
+                    for (int i = 0; i < squirrelCount; i++)
+                    {
+                        squirrelPool.GetFree().transform.position = stateMachine.ServiceLocator.GetService<SpawnPlace>().GetPosition();
+                        await UniTask.Delay(TimeSpan.FromSeconds(spawnRate), cancellationToken: cancellationToken.Token);
+                    }
+                }
+                catch
+                {
+                    IsCompleted = true;
+                    return;
                 }
             }
             IsCompleted = true;
+        }
+        public override void ExitState(IStateMachineUser stateMachine)
+        {
+            cancellationToken.Cancel();
+            cancellationToken.Dispose();
         }
     }
 }

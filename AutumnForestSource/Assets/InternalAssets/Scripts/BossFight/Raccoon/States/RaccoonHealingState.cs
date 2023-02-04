@@ -27,6 +27,8 @@ namespace AutumnForest.BossFight.Raccoon.States
             this.defaultPosition = defaultPosition;
         }
 
+        public override bool CanExit() => true;
+
         public override void EnterState(IStateMachineUser stateMachine)
         {
             cancellationToken = new();

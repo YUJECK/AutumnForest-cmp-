@@ -10,9 +10,10 @@ namespace AutumnForest
 {
     public class FoxStateMachineUser : MonoBehaviour, IStateMachineUser
     {
+        [SerializeField] private ParticleSystem jumpParticle;
         [Header("Services")]
         [SerializeField] private Shooting shooting;
-        [SerializeField] private CreatureAnimator creatureAnimator;
+        [SerializeField] private Animator animator;
         [SerializeField] private CreatureHealth creatureHealth;
         [SerializeField] private Transform[] points;
 
@@ -34,14 +35,23 @@ namespace AutumnForest
 
             attackPatterns = patterns;
 
+            creatureHealth.OnDie += OnDie;
+
             ServiceLocator = new(shooting, creatureHealth);
             StateMachine = new(this, false);
 
             StateMachine.OnMachineWorking += StateChoosing;
 
-            gameObject.SetActive(false);
+            DisableObject();
         }
 
+        private void OnDie()
+        {
+            StateMachine.DisableStateMachine();
+            animator.Play("FoxJump");
+        }
+        private void DisableObject() => gameObject.SetActive(false); //for animator
+        private void PlayJumpParticle() => jumpParticle.Play(); //for animator
         private void StateChoosing()
         {
             OnStateChanged?.Invoke(ObjectRandomizer.GetRandom(attackPatterns));

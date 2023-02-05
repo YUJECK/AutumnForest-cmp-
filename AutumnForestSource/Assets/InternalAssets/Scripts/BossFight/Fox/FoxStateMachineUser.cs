@@ -31,8 +31,8 @@ namespace AutumnForest
             {
                 new TimingState(2.5f),
                 new TimingState(3.5f),
-                new FoxFirstFlowerPattern(points, 2f),
                 new FoxFirstFlowerPattern(points, 1f),
+                new FoxFirstFlowerPattern(points, 0.5f),
                 new FoxTurnedRoundSwordThrowingState(0.2f, 15, points),
                 new FoxTurnedRoundSwordThrowingState(0.1f, 20 , points)
             };

@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using System;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,6 +24,8 @@ namespace AutumnForest.DialogueSystem
         private UniTask disableTask;
         private UniTask enableTask;
 
+        private CancellationTokenSource cancellationToken;
+
         private void Start()
         {
             dialogueWindowUI.SetActive(false);
@@ -32,14 +35,31 @@ namespace AutumnForest.DialogueSystem
         {
             GlobalServiceLocator.GetService<DialogueManager>().OnDialogueStarted += OnDialogueStarted;
             GlobalServiceLocator.GetService<DialogueManager>().OnDialogueEnded += OnDialogueEnded;
-            GlobalServiceLocator.GetService<DialogueManager>().OnPhraseSwitched += ShowPhrase;
+            GlobalServiceLocator.GetService<DialogueManager>().OnPhraseSwitched += OnPhraseSwitched;
+
+            cancellationToken = new();
         }
         private void OnDisable()
         {
             GlobalServiceLocator.GetService<DialogueManager>().OnDialogueStarted -= OnDialogueStarted;
             GlobalServiceLocator.GetService<DialogueManager>().OnDialogueEnded -= OnDialogueEnded;
-            GlobalServiceLocator.GetService<DialogueManager>().OnPhraseSwitched -= ShowPhrase;
+            GlobalServiceLocator.GetService<DialogueManager>().OnPhraseSwitched -= OnPhraseSwitched;
+
+            cancellationToken.Dispose();
         }
+        private void OnDestroy()
+        {
+            cancellationToken.Dispose();
+        }
+
+        private void OnPhraseSwitched(string name, string phrase)
+        {
+            cancellationToken.Cancel();
+            
+            cancellationToken = new();
+            ShowPhrase(name, phrase, cancellationToken.Token);
+        }
+
 
         private void OnDialogueStarted(Dialogue dialogue)
         {
@@ -48,15 +68,22 @@ namespace AutumnForest.DialogueSystem
         }
         private void OnDialogueEnded(Dialogue dialogue) => disableTask = SelfDisable();
 
-        private async void ShowPhrase(string name, string text)
+        private async void ShowPhrase(string name, string text, CancellationToken token)
         {
             dialogueNameUI.text = name;
             dialogueTextUI.text = "";
 
-            for (int i = 0; i < text.Length; i++)
+            try
             {
-                dialogueTextUI.text += text[i];
-                await UniTask.Delay(TimeSpan.FromSeconds(textSpeed));
+                for (int i = 0; i < text.Length; i++)
+                {
+                    dialogueTextUI.text += text[i];
+                    await UniTask.Delay(TimeSpan.FromSeconds(textSpeed), cancellationToken: token);
+                }
+            }
+            catch
+            {
+                return;
             }
         }
 

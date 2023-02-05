@@ -44,6 +44,7 @@ namespace AutumnForest.BossFight.Raccoon
         private void OnDisable()
         {
             StateMachine.OnMachineWorking -= StateChoosing;
+            StateMachine.DisableStateMachine();
         }
 
         private void StateChoosing()

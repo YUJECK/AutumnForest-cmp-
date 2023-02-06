@@ -13,15 +13,15 @@ namespace AutumnForest.Health
         }
 
         [SerializeField] private DieEvents dieEvent;
-        [field: SerializeField] public HealthBarConfig HealthBarConfig { get; private set; }
+        [field: SerializeField] public BossFightHealthBarConfig HealthBarConfig { get; private set; }
 
         [field: SerializeField] public int CurrentHealth { get; private set; }
         [field: SerializeField] public int MaximumHealth { get; private set; }
 
-        public event Action<int, int> OnHealthChange;
-        public event Action<int, int> OnHeal;
+        public event Action<int, int> OnHealthChanged;
+        public event Action<int, int> OnHealed;
         public event Action<int, int> OnTakeHit;
-        public event Action OnDie;
+        public event Action OnDied;
 
         private void Awake()
         {
@@ -33,8 +33,8 @@ namespace AutumnForest.Health
         {
             CurrentHealth += healPoints;
 
-            OnHeal?.Invoke(CurrentHealth, MaximumHealth);
-            OnHealthChange?.Invoke(CurrentHealth, MaximumHealth);
+            OnHealed?.Invoke(CurrentHealth, MaximumHealth);
+            OnHealthChanged?.Invoke(CurrentHealth, MaximumHealth);
 
             if (CurrentHealth > MaximumHealth)
                 CurrentHealth = MaximumHealth;
@@ -44,11 +44,11 @@ namespace AutumnForest.Health
             CurrentHealth -= damagePoints;
 
             OnTakeHit?.Invoke(CurrentHealth, MaximumHealth);
-            OnHealthChange?.Invoke(CurrentHealth, MaximumHealth);
+            OnHealthChanged?.Invoke(CurrentHealth, MaximumHealth);
 
             if (CurrentHealth <= 0)
             {
-                OnDie?.Invoke();
+                OnDied?.Invoke();
 
                 switch (dieEvent)
                 {

@@ -28,12 +28,12 @@ namespace AutumnForest
         private void OnEnable()
         {
             health.OnTakeHit += OnTakeHit;
-            health.OnHeal += OnHeal;
+            health.OnHealed += OnHeal;
         }  
         private void OnDisable()
         {
             health.OnTakeHit -= OnTakeHit;
-            health.OnHeal -= OnHeal;
+            health.OnHealed -= OnHeal;
         }
 
         private async void OnHeal(int arg1, int arg2)

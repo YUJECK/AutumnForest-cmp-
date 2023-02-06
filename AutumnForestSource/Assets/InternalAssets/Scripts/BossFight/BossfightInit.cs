@@ -31,7 +31,7 @@ namespace AutumnForest.BossFight
 
             GlobalServiceLocator.GetService<RaccoonStateMachineUser>().ServiceLocator
                 .GetService<CreatureHealth>()
-                .OnDie += bossFightManager.EndBossFight;
+                .OnDied += bossFightManager.EndBossFight;
         }
 
         private void OnDisable()
@@ -48,7 +48,7 @@ namespace AutumnForest.BossFight
             bossFightManager.OnBossFightStarted -= EnableLog;
             bossFightManager.OnBossFightStarted -= DisableLog;
             
-            GlobalServiceLocator.GetService<RaccoonStateMachineUser>().ServiceLocator.GetService<CreatureHealth>().OnDie -= bossFightManager.EndBossFight;
+            GlobalServiceLocator.GetService<RaccoonStateMachineUser>().ServiceLocator.GetService<CreatureHealth>().OnDied -= bossFightManager.EndBossFight;
         }
 
         private void EnableHealthBar() => healthBar.gameObject.SetActive(true);

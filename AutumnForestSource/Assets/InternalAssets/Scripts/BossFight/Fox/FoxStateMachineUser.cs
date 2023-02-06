@@ -39,7 +39,7 @@ namespace AutumnForest
 
             attackPatterns = patterns;
 
-            creatureHealth.OnDie += OnDie;
+            creatureHealth.OnDied += OnDie;
 
             ServiceLocator = new(shooting, creatureHealth);
             StateMachine = new(this, false);

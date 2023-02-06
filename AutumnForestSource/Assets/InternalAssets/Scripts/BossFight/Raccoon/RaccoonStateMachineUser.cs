@@ -19,6 +19,8 @@ namespace AutumnForest.BossFight.Raccoon
         private BossFightManager bossFightManager;
         private RaccoonStatesContainer raccoonStatesContainer;
 
+        public event Action OnEnteredHealingState;
+
         public event Action<StateBehaviour> OnStateChanged;
         public StateMachine StateMachine { get; private set; }
         public LocalServiceLocator ServiceLocator { get; private set; }
@@ -73,6 +75,7 @@ namespace AutumnForest.BossFight.Raccoon
             return ObjectRandomizer.GetRandom(raccoonStatesContainer.FirstStageStates);
         }
         private StateBehaviour SecondStageChoosing() => raccoonStatesContainer.HealingState;
+        public void HealingStateEntered() => OnEnteredHealingState?.Invoke(); 
         private StateBehaviour ThirdStageChoosing() => ObjectRandomizer.GetRandom(raccoonStatesContainer.ThirdStageStates);
     }
 }

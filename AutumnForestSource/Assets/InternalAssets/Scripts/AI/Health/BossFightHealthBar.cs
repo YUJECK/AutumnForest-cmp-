@@ -8,7 +8,7 @@ namespace AutumnForest.Health
     [DisallowMultipleComponent]
     public class BossFightHealthBar : MonoBehaviour
     {
-        [SerializeField, Expandable] HealthBarConfig healthBarConfig;
+        [SerializeField, Expandable] BossFightHealthBarConfig healthBarConfig;
 
         [SerializeField] private Image healthBarIcon;
         [SerializeField] private Image healthBarFill;
@@ -24,7 +24,7 @@ namespace AutumnForest.Health
                 SetConfig(healthBarConfig);
         }
 
-        public void SetConfig(HealthBarConfig healthBarConfig)
+        public void SetConfig(BossFightHealthBarConfig healthBarConfig)
         {
             if (healthBarConfig == null)
                 throw new NullReferenceException(nameof(healthBarConfig));

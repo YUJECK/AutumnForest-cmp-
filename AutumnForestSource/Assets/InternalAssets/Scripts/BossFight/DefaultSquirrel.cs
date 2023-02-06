@@ -34,14 +34,14 @@ namespace AutumnForest.BossFight.Squirrels
         }
         private void OnEnable()
         {
-            health.OnDie += OnDie;
+            health.OnDied += OnDie;
             shooting.OnShoot += OnShoot;
 
             EnableSShooting();
         }
         private void OnDisable()
         {
-            health.OnDie -= OnDie;
+            health.OnDied -= OnDie;
             shooting.OnShoot -= OnShoot;
 
             DisableShooting();

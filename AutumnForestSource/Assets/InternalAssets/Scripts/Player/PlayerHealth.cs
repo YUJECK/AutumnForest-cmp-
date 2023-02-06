@@ -8,7 +8,7 @@ namespace AutumnForest.Player
 {
     public class PlayerHealth : MonoBehaviour, IHealth, IFireable
     {
-        [field: SerializeField] public HealthBarConfig HealthBarConfig { get; private set; }
+        [field: SerializeField] public BossFightHealthBarConfig HealthBarConfig { get; private set; }
 
         //здесь можно было добавить всякие проверки в сеттер этого свойства, но мне было лень
         //и поэтому я чисто их прикостылил в методы ниже
@@ -21,17 +21,17 @@ namespace AutumnForest.Player
 
         public bool Fired { get; private set; }
 
-        public event Action<int, int> OnHealthChange;
-        public event Action<int, int> OnHeal;
+        public event Action<int, int> OnHealthChanged;
+        public event Action<int, int> OnHealed;
         public event Action<int, int> OnTakeHit;
-        public event Action OnDie;
+        public event Action OnDied;
 
         public void Heal(int healPoints)
         {
             CurrentHealth += healPoints;
 
-            OnHeal?.Invoke(CurrentHealth, MaximumHealth);
-            OnHealthChange?.Invoke(CurrentHealth, MaximumHealth);
+            OnHealed?.Invoke(CurrentHealth, MaximumHealth);
+            OnHealthChanged?.Invoke(CurrentHealth, MaximumHealth);
 
             if (CurrentHealth > MaximumHealth)
                 CurrentHealth = MaximumHealth;
@@ -41,11 +41,11 @@ namespace AutumnForest.Player
             CurrentHealth -= damagePoints;
 
             OnTakeHit?.Invoke(CurrentHealth, MaximumHealth);
-            OnHealthChange?.Invoke(CurrentHealth, MaximumHealth);
+            OnHealthChanged?.Invoke(CurrentHealth, MaximumHealth);
 
             if (CurrentHealth <= 0)
             {
-                OnDie?.Invoke();
+                OnDied?.Invoke();
                 //GameManager.Restart();
             }
         }

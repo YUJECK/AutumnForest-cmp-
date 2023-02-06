@@ -25,13 +25,15 @@ namespace AutumnForest.BossFight.Raccoon.States
             this.healPoints = healPoints;
             this.healPosition = healPosition;
             this.defaultPosition = defaultPosition;
-        }
+        }   
 
         public override bool CanExit() => true;
 
         public override void EnterState(IStateMachineUser stateMachine)
         {
             cancellationToken = new();
+
+            GlobalServiceLocator.GetService<RaccoonStateMachineUser>().HealingStateEntered();
 
             stateMachine.ServiceLocator.GetService<Transform>().position = healPosition.position;
             stateMachine.ServiceLocator.GetService<CreatureAnimator>().PlayAnimation(RaccoonAnimationsHelper.Idle);

@@ -4,6 +4,7 @@ using AutumnForest.Health;
 using AutumnForest.Helpers;
 using AutumnForest.StateMachineSystem;
 using System;
+using UnityEngine;
 
 namespace AutumnForest.BossFight
 {
@@ -49,18 +50,25 @@ namespace AutumnForest.BossFight
             StateMachine = new(this, false);
 
             OnBossFightStarted += StateMachine.EnableStateMachine;
-            StateMachine.OnMachineWorking += StateChoosing; 
+            StateMachine.OnMachineWorking += StateChoosing;
+
+            GlobalServiceLocator.GetService<RaccoonStateMachineUser>().OnEnteredHealingState += OnEnteredHealingState;
+        }
+
+        private void OnEnteredHealingState()
+        {
+            OnStateChanged?.Invoke(secondStage);
         }
 
         private void StateChoosing()
         {
             if (CurrentStage == BossFightStage.First && raccoonHealth.CurrentHealth <= raccoonHealth.MaximumHealth * 0.7)
-            {
-                OnStateChanged?.Invoke(secondStage);
                 CurrentStage = BossFightStage.Second;
-            }
-            else if (CurrentStage == BossFightStage.Second && foxHealth.CurrentHealth < 0)
+            
+            else if (CurrentStage == BossFightStage.Second && foxHealth.CurrentHealth <= 0)
             {
+                Debug.Log("Enter third stage");
+
                 OnStateChanged?.Invoke(thirdStage);
                 CurrentStage = BossFightStage.Third;
             }

@@ -7,7 +7,7 @@ namespace AutumnForest.Projectiles
     {
         [SerializeField] private ForceMode2D forceMode;
         [SerializeField] private float force;
-        private Rigidbody2D rigidbody;
+        private new Rigidbody2D rigidbody;
 
         void Start()
         {

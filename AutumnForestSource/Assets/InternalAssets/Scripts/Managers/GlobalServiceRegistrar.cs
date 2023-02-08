@@ -7,14 +7,13 @@ using AutumnForest.Managers;
 using AutumnForest.Player;
 using AutumnForest.Projectiles;
 using Cinemachine;
-using System;
 using UnityEngine;
 
 namespace AutumnForest
 {
     public sealed class GlobalServiceRegistrar : MonoBehaviour
     {
-        [Header("Pool")]
+        [Header("Pools prefabs")]
         [SerializeField] private Projectile acorn;
         [SerializeField] private Projectile cone;
         [SerializeField] private AcornHeal acornHeal;
@@ -33,7 +32,6 @@ namespace AutumnForest
         [SerializeField] private AudioSource gramophoneTheme;
         [Header("Health bars")]
         [SerializeField] private BossFightHealthBar bossHealthBar;
-        [SerializeField] private BossFightHealthBar playerHealthBar;
         [Header("Containers")]
         [SerializeField] private Transform projectileContainer;
         [SerializeField] private Transform creatureContainer;
@@ -82,10 +80,10 @@ namespace AutumnForest
         private void RegisterHelpers()
         {
             GlobalServiceLocator.RegisterService(new ContainerHelper(projectileContainer, creatureContainer, otherContainer));
-            GlobalServiceLocator.RegisterService(new HealthBarHelper(bossHealthBar, playerHealthBar));
         }
         private void RegisterBossFightServices()
         {
+            GlobalServiceLocator.RegisterService(FindObjectOfType<BossFightHealthBar>(true));
             GlobalServiceLocator.RegisterService(FindObjectOfType<RaccoonStateMachineUser>(true));
             GlobalServiceLocator.RegisterService(FindObjectOfType<FoxStateMachineUser>(true));
             GlobalServiceLocator.RegisterService(new BossFightManager());

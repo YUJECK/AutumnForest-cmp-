@@ -33,7 +33,6 @@ namespace AutumnForest.BossFight
                 .GetService<CreatureHealth>()
                 .OnDied += bossFightManager.EndBossFight;
         }
-
         private void OnDisable()
         {
             bossFightManager.OnBossFightStarted -= GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToBossFightCamera;

@@ -67,8 +67,6 @@ namespace AutumnForest.BossFight
             
             else if (CurrentStage == BossFightStage.Second && foxHealth.CurrentHealth <= 0)
             {
-                Debug.Log("Enter third stage");
-
                 OnStateChanged?.Invoke(thirdStage);
                 CurrentStage = BossFightStage.Third;
             }
@@ -78,7 +76,7 @@ namespace AutumnForest.BossFight
         {
             foxHealth = GlobalServiceLocator.GetService<FoxStateMachineUser>().ServiceLocator.GetService<CreatureHealth>();
             raccoonHealth = GlobalServiceLocator.GetService<RaccoonStateMachineUser>().ServiceLocator.GetService<CreatureHealth>();
-            HealthBarHelper.BossHealthBar.gameObject.SetActive(true);
+            GlobalServiceLocator.GetService<BossFightHealthBar>().gameObject.SetActive(true);
 
             CurrentStage = BossFightStage.First;
             OnStateChanged?.Invoke(firstStage);

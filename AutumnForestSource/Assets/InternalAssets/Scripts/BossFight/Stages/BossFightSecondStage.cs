@@ -11,7 +11,7 @@ namespace AutumnForest.BossFight.Stages
         {
             GlobalServiceLocator.GetService<FoxStateMachineUser>().gameObject.SetActive(true);
             
-            HealthBarHelper.BossHealthBar.SetConfig(GlobalServiceLocator.GetService<FoxStateMachineUser>()
+            GlobalServiceLocator.GetService<BossFightHealthBar>().SetConfig(GlobalServiceLocator.GetService<FoxStateMachineUser>()
                 .ServiceLocator.GetService<CreatureHealth>().HealthBarConfig);
             
             GlobalServiceLocator.GetService<FoxStateMachineUser>().StateMachine.EnableStateMachine();

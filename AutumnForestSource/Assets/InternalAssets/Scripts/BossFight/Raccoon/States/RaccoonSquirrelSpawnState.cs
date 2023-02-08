@@ -27,6 +27,7 @@ namespace AutumnForest.Raccoon.States
             this.spawnRate = spawnRate;
         }
 
+        public override bool Repeatable() => false;
         public override async void EnterState(IStateMachineUser stateMachine)
         {
             stateMachine.ServiceLocator.GetService<CreatureAnimator>().SetDefault();

@@ -36,6 +36,7 @@ namespace AutumnForest.BossFight.Raccoon.States
         public override void ExitState(IStateMachineUser stateMachine)
         {
             GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToPrevious();
+            GlobalServiceLocator.GetService<MusicSwitcher>().SwitchToBossFightTheme();
         }
     }
 }

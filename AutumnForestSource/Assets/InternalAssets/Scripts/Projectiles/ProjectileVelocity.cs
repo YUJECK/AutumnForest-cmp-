@@ -7,7 +7,7 @@ namespace AutumnForest.Projectiles
     {
         public Vector2 velocity;
         public float speed = 1;
-        private Rigidbody2D rigidbody2D;
+        private new Rigidbody2D rigidbody2D;
 
         private void Start() => rigidbody2D = GetComponent<Rigidbody2D>();
         private void Update() => rigidbody2D.velocity = velocity * speed;

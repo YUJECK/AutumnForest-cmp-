@@ -1,5 +1,4 @@
 using AutumnForest.Health;
-using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,7 +8,6 @@ namespace AutumnForest
     {
         public UnityEvent OnHitting = new();
         [SerializeField] private float attackRange = 0.3f;
-        [SerializeField, Layer] private int damageLayer = 0;
 
         private void OnDrawGizmos() => Gizmos.DrawWireSphere(transform.position, attackRange);
 

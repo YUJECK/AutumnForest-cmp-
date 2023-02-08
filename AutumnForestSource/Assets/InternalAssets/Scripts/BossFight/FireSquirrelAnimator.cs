@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AutumnForest.BossFight.Squirrels
 {
@@ -7,28 +9,36 @@ namespace AutumnForest.BossFight.Squirrels
     public sealed class FireSquirrelAnimator : MonoBehaviour
     {
         [SerializeField] private Animator squirrelAnimator;
-        [SerializeField] private Animator firePlaceAnimator;
+        [SerializeField] private Image field;
         [SerializeField] private FireSquirrel fireSquirrel;
 
         private void Awake()
         {
-            if (squirrelAnimator == null) throw new NullReferenceException(nameof(squirrelAnimator));
-            if (firePlaceAnimator == null) throw new NullReferenceException(nameof(firePlaceAnimator));
+            if (squirrelAnimator == null)
+                throw new NullReferenceException(nameof(squirrelAnimator));
         }
 
-        private void OnEnable()
-        {
-            fireSquirrel.FirePlace.OnCasted += OnCasted;
-        }
-        private void OnDisable()
-        {
-            fireSquirrel.FirePlace.OnCasted += OnCasted;
-        }
+        private void OnEnable() => fireSquirrel.FirePlace.OnCasted += OnCasted;
+        private void OnDisable() => fireSquirrel.FirePlace.OnCasted += OnCasted;
 
         private void OnCasted()
         {
             squirrelAnimator.Play("Cast");
-            firePlaceAnimator.Play("Cast");
+            FieldFilling();
+        }
+
+        private async void FieldFilling()
+        {
+            float startTime = Time.time;
+            float addValue = 1 / fireSquirrel.CastRate;
+
+            field.fillAmount = 0;
+
+            while (Time.time <= startTime + fireSquirrel.CastRate)
+            {
+                field.fillAmount += addValue;
+                await UniTask.Delay(TimeSpan.FromSeconds(1));
+            }
         }
     }
 }

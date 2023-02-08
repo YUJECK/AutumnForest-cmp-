@@ -2,14 +2,15 @@
 using System;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AutumnForest.BossFight.Squirrels
 {
     public sealed class FireSquirrel : Squirrel
     {
         [SerializeField] private float radius = 1;
-        [SerializeField] private float castRate = 3.5f;
 
+        [field: SerializeField] public float CastRate { get; private set; }  = 3.5f;
         public SquirrelFirePlace FirePlace { get; private set; } = new();
 
         private CancellationTokenSource cancellationToken;
@@ -32,7 +33,7 @@ namespace AutumnForest.BossFight.Squirrels
                 try
                 {
                     FirePlace.CastFirePlace(transform.position, radius);
-                    await UniTask.Delay(TimeSpan.FromSeconds(castRate), cancellationToken: token);
+                    await UniTask.Delay(TimeSpan.FromSeconds(CastRate), cancellationToken: token);
                 }
                 catch
                 {

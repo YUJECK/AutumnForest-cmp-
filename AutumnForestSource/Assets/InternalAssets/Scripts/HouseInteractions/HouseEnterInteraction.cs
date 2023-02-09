@@ -14,6 +14,8 @@ namespace AutumnForest
         public void DetectionReleased() { }
         public void Interact()
         {
+            FindObjectOfType<BlackoutTransition>().StartBlackout();
+
             GlobalServiceLocator.GetService<PlayerMovable>().transform.position = housePosition.position;
             GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToHouseCamera();
 

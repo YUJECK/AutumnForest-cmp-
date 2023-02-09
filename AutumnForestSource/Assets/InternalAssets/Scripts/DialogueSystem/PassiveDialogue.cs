@@ -11,8 +11,8 @@ namespace AutumnForest.DialogueSystem
         {
             Dialogue = GetComponent<Dialogue>();
 
-            Dialogue.OnDialogueEnded += OnDialogueEnded;
             Dialogue.OnDialogueStarted += OnDialogueStarted;
+            Dialogue.OnDialogueEnded += OnDialogueEnded;
         }
 
         public void Enable() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dialogue.performed += DialogueInput;

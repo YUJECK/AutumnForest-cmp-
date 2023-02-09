@@ -4,8 +4,6 @@ namespace AutumnForest.Health
 {
     public interface IHealth
     {
-        BossFightHealthBarConfig HealthBarConfig { get; }
-
         int CurrentHealth { get; }
         int MaximumHealth { get; }
 

@@ -1,15 +1,12 @@
 ﻿using AutumnForest.Health;
 using Cysharp.Threading.Tasks;
 using System;
-using System.Threading;
 using UnityEngine;
 
 namespace AutumnForest.Player
 {
     public class PlayerHealth : MonoBehaviour, IHealth, IFireable
     {
-        [field: SerializeField] public BossFightHealthBarConfig HealthBarConfig { get; private set; }
-
         //здесь можно было добавить всякие проверки в сеттер этого свойства, но мне было лень
         //и поэтому я чисто их прикостылил в методы ниже
         //да и по сути впринципи можно было бы обойтись чисто сеттером, без методов ниже

@@ -15,14 +15,9 @@ namespace AutumnForest.DialogueSystem
             Dialogue.OnDialogueStarted += OnDialogueStarted;
         }
 
-        public void Enable()
-        {
-            GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dialogue.performed += DialogueInput;
-        }
-        public void Disable()
-        {
-            GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dialogue.performed -= DialogueInput;
-        }
+        public void Enable() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dialogue.performed += DialogueInput;
+        public void Disable() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dialogue.performed -= DialogueInput;
+
         private void OnDialogueStarted(Dialogue obj) => Enable();
         private void OnDialogueEnded(Dialogue obj) => Disable();
 

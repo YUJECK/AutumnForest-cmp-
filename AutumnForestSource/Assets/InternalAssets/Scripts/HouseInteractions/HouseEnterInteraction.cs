@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AutumnForest
 {
-    public class HouseInteraction : MonoBehaviour, IInteractive
+    public class HouseEnterInteraction : MonoBehaviour, IInteractive
     {
         [SerializeField] private Transform housePosition;
 

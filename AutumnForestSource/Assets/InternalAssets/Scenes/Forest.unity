@@ -8700,7 +8700,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229860903}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.52648, y: -1.95013, z: -13.043479}
+  m_LocalPosition: {x: 24.502464, y: -1.99296, z: -13.043479}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14287,7 +14287,10 @@ Transform:
   m_LocalPosition: {x: 1.6310349, y: 0.3678627, z: 0.6404668}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1404594687}
+  - {fileID: 1799241897}
+  - {fileID: 509052038}
   m_Father: {fileID: 1198629255}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14304,6 +14307,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basementEnterPoint: {fileID: 1116303294}
+  interactTrysDialogues:
+  - {fileID: 1404594689}
+  - {fileID: 1799241899}
+  - {fileID: 509052040}
 --- !u!61 &254784433
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -14328,7 +14335,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6875, y: 0.6875}
+  m_Size: {x: 0.27128047, y: 0.3029211}
   m_EdgeRadius: 0
 --- !u!1001 &258831032
 PrefabInstance:
@@ -22751,6 +22758,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 201344373221496976, guid: f360df0feb6fe9c4b8208db0c61bf87f, type: 3}
   m_PrefabInstance: {fileID: 508610616}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &509052037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 509052038}
+  - component: {fileID: 509052040}
+  - component: {fileID: 509052039}
+  m_Layer: 0
+  m_Name: FirstDialogue (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &509052038
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509052037}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 254784431}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &509052039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509052037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f931261341722043980e37f373dc057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &509052040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 509052037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2c5e85b2aea8240888d6afea166195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DialogueName>k__BackingField:
+    english: Trapdoor21
+    russian: "\u041B\u044E\u043A21"
+  <DialoguePhrases>k__BackingField:
+  - english: Test21
+    russian: "\u0422\u0435\u0441\u044221"
+  - english: ...
+    russian: ...
 --- !u!1001 &514342322
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50509,6 +50581,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 201344373221496976, guid: f360df0feb6fe9c4b8208db0c61bf87f, type: 3}
   m_PrefabInstance: {fileID: 1402453421}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1404594686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1404594687}
+  - component: {fileID: 1404594689}
+  - component: {fileID: 1404594688}
+  m_Layer: 0
+  m_Name: FirstDialogue
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1404594687
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404594686}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 254784431}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1404594688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404594686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f931261341722043980e37f373dc057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1404594689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404594686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2c5e85b2aea8240888d6afea166195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DialogueName>k__BackingField:
+    english: Trapdoor
+    russian: "\u041B\u044E\u043A"
+  <DialoguePhrases>k__BackingField:
+  - english: Test
+    russian: "\u0422\u0435\u0441\u0442"
+  - english: ...
+    russian: ...
 --- !u!1001 &1405631183
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63746,6 +63883,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 201344373221496976, guid: f360df0feb6fe9c4b8208db0c61bf87f, type: 3}
   m_PrefabInstance: {fileID: 1797421070}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1799241896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1799241897}
+  - component: {fileID: 1799241899}
+  - component: {fileID: 1799241898}
+  m_Layer: 0
+  m_Name: FirstDialogue (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1799241897
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799241896}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 254784431}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1799241898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799241896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f931261341722043980e37f373dc057, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1799241899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799241896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a2c5e85b2aea8240888d6afea166195, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DialogueName>k__BackingField:
+    english: Trapdoor2
+    russian: "\u041B\u044E\u043A2"
+  <DialoguePhrases>k__BackingField:
+  - english: Test2
+    russian: "\u0422\u0435\u0441\u04422"
+  - english: ...
+    russian: ...
 --- !u!1001 &1800222879
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
-﻿using AutumnForest.Helpers;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace AutumnForest
@@ -21,7 +20,7 @@ namespace AutumnForest
         public void SetDefault() => PlayAnimation(defaultAnimation);
         public void PlayAnimation(string animation)
         {
-            if(animation == "")
+            if (animation == "")
                 throw new NotImplementedException(nameof(defaultAnimation));
 
             if (currentAnimation != animation)

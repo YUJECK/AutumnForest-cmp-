@@ -21,8 +21,10 @@ namespace AutumnForest
         public void DetectionReleased() { }
         public void Interact()
         {
-            if (interactTrysDialogues.Count > 0 && !interactTrysDialogues[0].IsCurrentlyActive) StartNextDialogue();
-            else if(interactTrysDialogues.Count == 0) EnterToBasement();
+            if (interactTrysDialogues.Count > 0 && !interactTrysDialogues[0].IsCurrentlyActive)
+                StartNextDialogue();
+            else if(interactTrysDialogues.Count == 0) 
+                EnterToBasement();
         }
 
         public void Enable() => Enabled = true;

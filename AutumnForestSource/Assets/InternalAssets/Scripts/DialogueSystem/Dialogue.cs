@@ -1,5 +1,4 @@
-﻿using AutumnForest.Helpers;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace AutumnForest.DialogueSystem
@@ -21,14 +20,15 @@ namespace AutumnForest.DialogueSystem
 
         public void StartDialogue()
         {
-            if(!IsCurrentlyActive)
+            if (!IsCurrentlyActive)
             {
-                OnDialogueStarted.Invoke(this);
                 IsCurrentlyActive = true;
 
-                NextPhrase();
+                OnPhraseChanged.Invoke(DialogueName.Value, "...");
+                OnDialogueStarted.Invoke(this);
             }
         }
+
         public void NextPhrase()
         {
             if (nextPhrase >= DialoguePhrases.Length)
@@ -43,7 +43,7 @@ namespace AutumnForest.DialogueSystem
         }
         public void EndDialogue()
         {
-            if(IsCurrentlyActive)
+            if (IsCurrentlyActive)
             {
                 nextPhrase = 0;
                 IsCurrentlyActive = false;

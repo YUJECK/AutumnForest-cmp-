@@ -34,7 +34,7 @@ namespace AutumnForest
                 new FoxFirstFlowerPattern(points, 1f),
                 new FoxFirstFlowerPattern(points, 0.5f),
                 new FoxTurnedRoundSwordThrowingState(0.2f, 15, points),
-                new FoxTurnedRoundSwordThrowingState(0.1f, 20 , points)
+                new FoxSerialSwordThowing(points),
             };
 
             attackPatterns = patterns;

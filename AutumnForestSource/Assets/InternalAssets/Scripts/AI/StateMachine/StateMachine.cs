@@ -49,7 +49,7 @@ namespace AutumnForest.StateMachineSystem
         }
         public void DisableStateMachine()
         {
-            CurrentState.ExitState(StateMachineUser);
+            CurrentState?.ExitState(StateMachineUser);
             Enabled = false;
             OnMachineDisabled?.Invoke();
         }

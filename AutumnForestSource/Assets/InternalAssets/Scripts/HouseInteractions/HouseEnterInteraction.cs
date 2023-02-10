@@ -1,5 +1,4 @@
 using AutumnForest.DialogueSystem;
-using AutumnForest.Managers;
 using AutumnForest.Other;
 using UnityEngine;
 
@@ -10,16 +9,19 @@ namespace AutumnForest
         [SerializeField] private Transform housePosition;
         [SerializeField] private Dialogue familyDialogue;
 
+        private bool dialogueStarted = false;
+
         public void Detect() { }
         public void DetectionReleased() { }
-        public void Interact()
+        public async void Interact()
         {
-            FindObjectOfType<BlackoutTransition>().StartBlackout();
-
-            GlobalServiceLocator.GetService<PlayerMovable>().transform.position = housePosition.position;
-            GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToHouseCamera();
-
-            familyDialogue.StartDialogue();
+            await GlobalServiceLocator.GetService<HouseController>().EnterHouse();
+         
+            if (!dialogueStarted)
+            {
+                familyDialogue.StartDialogue();
+                dialogueStarted = true;
+            }
         }
     }
 }

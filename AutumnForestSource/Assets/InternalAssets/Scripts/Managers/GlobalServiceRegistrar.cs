@@ -42,6 +42,7 @@ namespace AutumnForest
             RegisterHelpers();
             RegisterPools();
             RegisterPlayerServices();
+            RegisterHouseServices();
             RegisterCameras();
             RegisterMusicThemes();
             RegisterDialogueServices();
@@ -55,7 +56,10 @@ namespace AutumnForest
             GlobalServiceLocator.RegisterService(new MusicSwitcher(
                 mainTheme, bossfightTheme, basementAmbientTheme, gramophoneTheme));
         }
-
+        private void RegisterHouseServices()
+        {
+            GlobalServiceLocator.RegisterService(FindObjectOfType<HouseController>(true));
+        }
         private void RegisterPools()
         {
             GlobalServiceLocator.RegisterService(new SomePoolsContainer(acorn, cone, acornHeal, defaultSword));
@@ -80,6 +84,7 @@ namespace AutumnForest
         private void RegisterHelpers()
         {
             GlobalServiceLocator.RegisterService(new ContainerHelper(projectileContainer, creatureContainer, otherContainer));
+            GlobalServiceLocator.RegisterService(FindObjectOfType<BlackoutTransition>(true));
         }
         private void RegisterBossFightServices()
         {

@@ -1,4 +1,3 @@
-using AutumnForest.Managers;
 using AutumnForest.Other;
 using UnityEngine;
 
@@ -13,8 +12,7 @@ namespace AutumnForest
 
         public void Interact()
         {
-            GlobalServiceLocator.GetService<PlayerMovable>().transform.position = exitPoint.position;
-            GlobalServiceLocator.GetService<CameraSwitcher>().SwichToMainCamera();
+            GlobalServiceLocator.GetService<HouseController>().ExitFromHouse();
         }
     }
 }

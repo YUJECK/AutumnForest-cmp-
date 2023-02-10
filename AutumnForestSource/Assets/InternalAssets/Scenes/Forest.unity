@@ -1020,7 +1020,8 @@ Transform:
   m_LocalPosition: {x: 7.048155, y: 10.174215, z: -0.012729814}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 749714976}
   m_Father: {fileID: 424279052}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8558,7 +8559,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  m_CustomBlends: {fileID: 0}
+  m_CustomBlends: {fileID: 11400000, guid: 7892343729d56b449a61db4b9c4ac6d4, type: 2}
   m_CameraCutEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -8701,7 +8702,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229860903}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.608398, y: -2.1570299, z: -13.043479}
+  m_LocalPosition: {x: 24.483244, y: -2.02423, z: -13.043479}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14222,13 +14223,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DialogueName>k__BackingField:
-    english: "\u0416\u0443\u043A\u0438"
-    russian: "\u0416\u0443\u043A\u0438"
+    english: Mother Hedgehog
+    russian: "\u041C\u0430\u043C\u0430 \u0415\u0436\u0438\u0445\u0430"
   <DialoguePhrases>k__BackingField:
-  - english: "\u0414\u043B\u043C\u0430\u0439"
-    russian: "\u041B\u043E\u043C\u0430\u0439"
-  - english: ...
-    russian: ...
+  - english: Son! Were you able to defeat the Mafinot?!
+    russian: "\u0421\u044B\u043D\u043E\u043A! \u0422\u044B \u0441\u043C\u043E\u0433
+      \u043F\u043E\u0431\u0435\u0434\u0438\u0442\u044C \u041C\u0430\u0444\u0438\u043D\u043E\u0442\u0430?!"
+  - english: I'm so proud of you! We were very worried about you...
+    russian: "\u042F \u0442\u0430\u043A \u0433\u043E\u0440\u0436\u0443\u0441\u044C
+      \u0442\u043E\u0431\u043E\u0439! \u041C\u044B \u043E\u0447\u0435\u043D\u044C
+      \u043F\u0435\u0440\u0435\u0436\u0438\u0432\u0430\u043B\u0438 \u0437\u0430 \u0442\u0435\u0431\u044F..."
 --- !u!114 &244211520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16684,7 +16688,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 310712537}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.43146515, y: -2.0071373, z: 0}
+  m_LocalPosition: {x: -0.30646515, y: -1.6946373, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20673,7 +20677,6 @@ Transform:
   - {fileID: 1198629255}
   - {fileID: 2077930658}
   - {fileID: 948744852}
-  - {fileID: 749714976}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -23072,7 +23075,7 @@ GameObject:
   - component: {fileID: 509052040}
   - component: {fileID: 509052039}
   m_Layer: 0
-  m_Name: FirstDialogue (2)
+  m_Name: 'ThirdDialogue '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23118,13 +23121,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DialogueName>k__BackingField:
-    english: Trapdoor21
-    russian: "\u041B\u044E\u043A21"
+    english: Father
+    russian: "\u041E\u0442\u0435\u0446"
   <DialoguePhrases>k__BackingField:
-  - english: Test21
-    russian: "\u0422\u0435\u0441\u044221"
-  - english: ...
-    russian: ...
+  - english: Well okay... If that's what you want, then go
+    russian: "\u041D\u0443 \u043B\u0430\u0434\u043D\u043E... \u0415\u0441\u043B\u0438
+      \u0442\u044B \u0442\u0430\u043A \u0445\u043E\u0447\u0435\u0448\u044C, \u0442\u043E
+      \u0438\u0434\u0438"
 --- !u!1001 &514342322
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23214,7 +23217,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 521083791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7065217, y: 1.7633567, z: -13.043479}
+  m_LocalPosition: {x: 14.456523, y: 5.730748, z: -13.043479}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -30633,12 +30636,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749714975}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.985655, y: 9.174215, z: -0.012729814}
+  m_LocalPosition: {x: -0.062498093, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 424279052}
-  m_RootOrder: 7
+  m_Father: {fileID: 15751378}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &750326808
 PrefabInstance:
@@ -44227,11 +44230,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 857177195470058290, guid: d7a56730bad26f74795553e2a0ae9251, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.8124999
+      value: 16.625
       objectReference: {fileID: 0}
     - target: {fileID: 857177195470058290, guid: d7a56730bad26f74795553e2a0ae9251, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.0278602
+      value: 6.59036
       objectReference: {fileID: 0}
     - target: {fileID: 857177195470058290, guid: d7a56730bad26f74795553e2a0ae9251, type: 3}
       propertyPath: m_LocalPosition.z
@@ -44271,7 +44274,7 @@ PrefabInstance:
       objectReference: {fileID: 1844823970}
     - target: {fileID: 857177195675609247, guid: d7a56730bad26f74795553e2a0ae9251, type: 3}
       propertyPath: m_Radius
-      value: 0.8899238
+      value: 0.81082106
       objectReference: {fileID: 0}
     - target: {fileID: 857177195675609247, guid: d7a56730bad26f74795553e2a0ae9251, type: 3}
       propertyPath: m_Offset.y
@@ -45122,6 +45125,7 @@ GameObject:
   - component: {fileID: 1198629259}
   - component: {fileID: 1198629258}
   - component: {fileID: 1198629260}
+  - component: {fileID: 1198629261}
   m_Layer: 0
   m_Name: House
   m_TagString: Untagged
@@ -45212,7 +45216,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.4278245, y: 0.18544412}
+  m_Offset: {x: -2.4278245, y: -0.009593487}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -45223,7 +45227,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.13451862, y: 4.836268}
+  m_Size: {x: 0.13451862, y: 4.7423353}
   m_EdgeRadius: 0
 --- !u!61 &1198629258
 BoxCollider2D:
@@ -45238,7 +45242,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.9119072}
+  m_Offset: {x: 0, y: 1.8170471}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -45249,7 +45253,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.688718, y: 0.08000946}
+  m_Size: {x: 4.688718, y: 0.2697296}
   m_EdgeRadius: 0
 --- !u!61 &1198629259
 BoxCollider2D:
@@ -45264,7 +45268,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 2.4205933, y: 0.16498852}
+  m_Offset: {x: 2.4205933, y: 0.036056995}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -45275,7 +45279,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.10697937, y: 4.979809}
+  m_Size: {x: 0.10697937, y: 4.721946}
   m_EdgeRadius: 0
 --- !u!61 &1198629260
 BoxCollider2D:
@@ -45290,7 +45294,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -2.1544204}
+  m_Offset: {x: 0, y: -2.3770804}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -45301,8 +45305,22 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.689617, y: 0.11385059}
+  m_Size: {x: 4.689617, y: 0.123970985}
   m_EdgeRadius: 0
+--- !u!114 &1198629261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198629254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff13c6650aeda9b458a1a8c2a835f298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enterPoint: {fileID: 310712538}
+  exitPoint: {fileID: 749714976}
 --- !u!1001 &1202159477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51006,13 +51024,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DialogueName>k__BackingField:
-    english: Trapdoor
-    russian: "\u041B\u044E\u043A"
+    english: Father
+    russian: "\u041E\u0442\u0435\u0446"
   <DialoguePhrases>k__BackingField:
-  - english: Test
-    russian: "\u0422\u0435\u0441\u0442"
-  - english: ...
-    russian: ...
+  - english: Do you want to get into the basement?
+    russian: "\u0422\u044B \u0445\u043E\u0447\u0435\u0448\u044C \u0437\u0430\u043B\u0435\u0437\u0442\u044C
+      \u0432 \u043F\u043E\u0434\u0432\u0430\u043B?"
 --- !u!1001 &1405631183
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64262,7 +64279,7 @@ GameObject:
   - component: {fileID: 1799241899}
   - component: {fileID: 1799241898}
   m_Layer: 0
-  m_Name: FirstDialogue (1)
+  m_Name: 'SecondDialogue '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64308,13 +64325,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <DialogueName>k__BackingField:
-    english: Trapdoor2
-    russian: "\u041B\u044E\u043A2"
+    english: Father
+    russian: "\u041E\u0442\u0435\u0446"
   <DialoguePhrases>k__BackingField:
-  - english: Test2
-    russian: "\u0422\u0435\u0441\u04422"
-  - english: ...
-    russian: ...
+  - english: What do you need there?
+    russian: "\u0410 \u0447\u0442\u043E \u0442\u0435\u0431\u0435 \u0442\u0430\u043C
+      \u043D\u0443\u0436\u043D\u043E?"
+  - english: It's dusty and dirty. I don't think you'll find anything valuable there.
+    russian: "\u0422\u0430\u043C \u043F\u044B\u043B\u044C\u043D\u043E \u0438 \u0433\u0440\u044F\u0437\u043D\u043E.
+      \u041D\u0435 \u0434\u0443\u043C\u0430\u044E, \u0447\u0442\u043E \u0442\u044B
+      \u0442\u0430\u043C \u0447\u0442\u043E-\u0442\u043E \u043D\u0430\u0439\u0434\u0435\u0448\u044C
+      \u0446\u0435\u043D\u043D\u043E\u0435"
 --- !u!1001 &1800222879
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73290,7 +73311,7 @@ MonoBehaviour:
     GateFit: 2
     m_SensorSize: {x: 1, y: 1}
   m_Transitions:
-    m_BlendHint: 0
+    m_BlendHint: 1
     m_InheritPosition: 0
     m_OnCameraLive:
       m_PersistentCalls:

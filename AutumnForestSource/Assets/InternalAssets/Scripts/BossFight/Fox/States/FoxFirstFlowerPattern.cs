@@ -14,13 +14,16 @@ namespace AutumnForest.BossFight.Fox.States
         private float shotDelay = 2f;
         private int repeatsCount = 4;
         private Transform[] swordPoints;
+        private AudioSource castSound;
 
         private CancellationTokenSource cancellationToken;
         
-        public FoxFirstFlowerPattern(Transform[] swordPoints, float shotDelay)
+        public FoxFirstFlowerPattern(Transform[] swordPoints, AudioSource castSound, float shotDelay)
         {
             this.shotDelay = shotDelay;
             this.swordPoints = swordPoints;
+
+            this.castSound = castSound;
         }
 
         public override void EnterState(IStateMachineUser stateMachine)
@@ -55,8 +58,11 @@ namespace AutumnForest.BossFight.Fox.States
 
                         await UniTask.Delay(TimeSpan.FromSeconds(shotDelay), cancellationToken: token);
 
+                        castSound.Play();
                         foreach (Projectile sword in spawnedSwords)
+                        {
                             sword.Rigidbody2D.AddForce(sword.transform.up * 10, ForceMode2D.Impulse);
+                        }
                     }
                 }
                 catch

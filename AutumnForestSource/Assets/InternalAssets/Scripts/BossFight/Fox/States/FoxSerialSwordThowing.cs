@@ -1,4 +1,5 @@
 ﻿using AutumnForest.Helpers;
+using AutumnForest.Other;
 using AutumnForest.Projectiles;
 using AutumnForest.StateMachineSystem;
 using Cysharp.Threading.Tasks;
@@ -10,34 +11,43 @@ namespace AutumnForest.BossFight.Fox.States
 {
     public sealed class FoxSerialSwordThowing : StateBehaviour
     {
-        private Transform[] swordPoints;
-        private Stack<Projectile> pickedSwords = new();
+        private readonly Transform[] swordPoints;
+        private readonly Stack<Projectile> pickedSwords = new();
 
-        public FoxSerialSwordThowing(Transform[] swordPoints)
+        private readonly AudioSource castSoundEffect;
+
+        private readonly float spawnRate = 0.1f;
+        private readonly float throwRate = 0.5f;
+
+        public FoxSerialSwordThowing(Transform[] swordPoints, AudioSource castSoundEffect, float spawnRate, float throwRate)
         {
             this.swordPoints = swordPoints;
+
+            this.castSoundEffect = castSoundEffect;
+
+            this.spawnRate = spawnRate;
+            this.throwRate = throwRate;
         }
 
         public override async void EnterState(IStateMachineUser stateMachine)
         {
-            for (int i = 0; i < swordPoints.Length; i++)
+            IsCompleted = false;
             {
-                Projectile sword = GlobalServiceLocator.GetService<SomePoolsContainer>().TargetedSwordPool.GetFree();
-                sword.transform.position = swordPoints[i].position;
-                pickedSwords.Push(sword);
+                for (int i = 0; i < swordPoints.Length; i++)
+                {
+                    pickedSwords.Push(SpawnNewSword(swordPoints[i].position));
+                    await UniTask.Delay(TimeSpan.FromSeconds(spawnRate));
+                }
+                while (pickedSwords.Count > 0)
+                {
+                    ThrowSword(stateMachine, pickedSwords.Peek());
 
-                await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
+                    pickedSwords.Pop();
+                    await UniTask.Delay(TimeSpan.FromSeconds(throwRate));
+                }
             }
-            while (pickedSwords.Count != 0)
-            {
-                if (pickedSwords.Peek() != null)
-                     stateMachine.ServiceLocator.GetService<Shooting>().ShootWithoutInstantiate(pickedSwords.Peek().Rigidbody2D, 10, 0, false);
-                
-                pickedSwords.Pop();
-                await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
-            }
+            IsCompleted = true;
         }
-
         public override void ExitState(IStateMachineUser stateMachine)
         {
             if(pickedSwords.Count > 0)
@@ -45,6 +55,25 @@ namespace AutumnForest.BossFight.Fox.States
                 while (pickedSwords.Peek() != null)
                     pickedSwords.Peek().gameObject.SetActive(false);
             }
+        }
+        
+        private Projectile SpawnNewSword(Vector3 swordPosition)
+        {
+            Projectile sword = GlobalServiceLocator.GetService<SomePoolsContainer>().TargetedSwordPool.GetFree();
+            sword.transform.position = swordPosition;
+
+            castSoundEffect.Play();
+
+            return sword;
+        }
+        private void ThrowSword(IStateMachineUser stateMachine, Projectile sword)
+        {
+            if (sword.TryGetComponent(out MonoRotator monoRotator))
+                monoRotator.TransfromRotation.Disable();
+
+            stateMachine.ServiceLocator.GetService<Shooting>().ShootWithoutInstantiate(sword.Rigidbody2D, 10, 0, false);
+
+            castSoundEffect.Play();
         }
     }
 }

@@ -12,6 +12,9 @@ namespace AutumnForest
     public class FoxStateMachineUser : MonoBehaviour, IStateMachineUser
     {
         [SerializeField] private ParticleSystem jumpParticle;
+        [Header("SFX")]
+        [SerializeField] private AudioSource castSoundEffect;
+        [SerializeField] private AudioSource throwSoundEffect;
         [Header("Services")]
         [SerializeField] private Shooting shooting;
         [SerializeField] private Animator animator;
@@ -31,10 +34,10 @@ namespace AutumnForest
             {
                 new TimingState(2.5f),
                 new TimingState(3.5f),
-                new FoxFirstFlowerPattern(points, 1f),
-                new FoxFirstFlowerPattern(points, 0.5f),
+                new FoxFirstFlowerPattern(points, castSoundEffect, 1f),
+                new FoxFirstFlowerPattern(points, castSoundEffect, 0.5f),
                 new FoxTurnedRoundSwordThrowingState(0.2f, 15, points),
-                new FoxSerialSwordThowing(points),
+                new FoxSerialSwordThowing(points, castSoundEffect, 0.1f, 0.5f),
             };
 
             attackPatterns = patterns;

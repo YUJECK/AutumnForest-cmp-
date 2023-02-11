@@ -14,7 +14,6 @@ namespace AutumnForest
         [SerializeField] private ParticleSystem jumpParticle;
         [Header("SFX")]
         [SerializeField] private AudioSource castSoundEffect;
-        [SerializeField] private AudioSource throwSoundEffect;
         [Header("Services")]
         [SerializeField] private Shooting shooting;
         [SerializeField] private Animator animator;

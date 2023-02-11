@@ -17,7 +17,7 @@ namespace AutumnForest.BossFight.Fox.States
         private AudioSource castSound;
 
         private CancellationTokenSource cancellationToken;
-        
+
         public FoxFirstFlowerPattern(Transform[] swordPoints, AudioSource castSound, float shotDelay)
         {
             this.shotDelay = shotDelay;
@@ -42,27 +42,16 @@ namespace AutumnForest.BossFight.Fox.States
             IsCompleted = false;
             {
                 List<Projectile> spawnedSwords = new();
-                
+
                 try
                 {
                     for (int i = 0; i < repeatsCount; i++)
                     {
                         for (int j = FirstSwordIndex(i); j < swordPoints.Length; j += 2)
-                        {
-                            Projectile newSword = GlobalServiceLocator.GetService<SomePoolsContainer>().DefaultSwordPool.GetFree();
-                            newSword.transform.position = swordPoints[j].transform.position;
-                            newSword.transform.rotation = swordPoints[j].transform.rotation;
-
-                            spawnedSwords.Add(newSword);
-                        }
+                            spawnedSwords.Add(SpawnSword(swordPoints[j]));
 
                         await UniTask.Delay(TimeSpan.FromSeconds(shotDelay), cancellationToken: token);
-
-                        castSound.Play();
-                        foreach (Projectile sword in spawnedSwords)
-                        {
-                            sword.Rigidbody2D.AddForce(sword.transform.up * 10, ForceMode2D.Impulse);
-                        }
+                        ThrowSwords(spawnedSwords);
                     }
                 }
                 catch
@@ -71,19 +60,34 @@ namespace AutumnForest.BossFight.Fox.States
 
                     foreach (Projectile item in spawnedSwords)
                         item.gameObject.SetActive(false);
-                    
+
                     return;
                 }
             }
             IsCompleted = true;
         }
-    
+
         private int FirstSwordIndex(int cycleIndex)
         {
             int isEven = cycleIndex % 2;
 
             if (isEven == 0) return 0;
             else return 1;
+        }
+        private void ThrowSwords(List<Projectile> spawnedSwords)
+        {
+            castSound.Play();
+
+            foreach (Projectile sword in spawnedSwords)
+                sword.Rigidbody2D.AddForce(sword.transform.up * 10, ForceMode2D.Impulse);
+        }
+        private Projectile SpawnSword(Transform spawnTransfrom)
+        {
+            Projectile newSword = GlobalServiceLocator.GetService<SomePoolsContainer>().DefaultSwordPool.GetFree();
+            newSword.transform.position = spawnTransfrom.position;
+            newSword.transform.rotation = spawnTransfrom.rotation;
+
+            return newSword;
         }
     }
 }

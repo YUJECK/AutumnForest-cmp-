@@ -82,6 +82,15 @@ namespace AutumnForest
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PauseMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""fd880cd6-1a73-4ea6-93ed-afb9ef714581"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -194,6 +203,17 @@ namespace AutumnForest
                     ""action"": ""Slingshot"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d96dfa63-eb23-497d-96c7-e0e111e69277"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PauseMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -225,6 +245,7 @@ namespace AutumnForest
             m_Inputs_Dash = m_Inputs.FindAction("Dash", throwIfNotFound: true);
             m_Inputs_Dialogue = m_Inputs.FindAction("Dialogue", throwIfNotFound: true);
             m_Inputs_Slingshot = m_Inputs.FindAction("Slingshot", throwIfNotFound: true);
+            m_Inputs_PauseMenu = m_Inputs.FindAction("PauseMenu", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -290,6 +311,7 @@ namespace AutumnForest
         private readonly InputAction m_Inputs_Dash;
         private readonly InputAction m_Inputs_Dialogue;
         private readonly InputAction m_Inputs_Slingshot;
+        private readonly InputAction m_Inputs_PauseMenu;
         public struct InputsActions
         {
             private @PlayerInput m_Wrapper;
@@ -300,6 +322,7 @@ namespace AutumnForest
             public InputAction @Dash => m_Wrapper.m_Inputs_Dash;
             public InputAction @Dialogue => m_Wrapper.m_Inputs_Dialogue;
             public InputAction @Slingshot => m_Wrapper.m_Inputs_Slingshot;
+            public InputAction @PauseMenu => m_Wrapper.m_Inputs_PauseMenu;
             public InputActionMap Get() { return m_Wrapper.m_Inputs; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -327,6 +350,9 @@ namespace AutumnForest
                     @Slingshot.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnSlingshot;
                     @Slingshot.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnSlingshot;
                     @Slingshot.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnSlingshot;
+                    @PauseMenu.started -= m_Wrapper.m_InputsActionsCallbackInterface.OnPauseMenu;
+                    @PauseMenu.performed -= m_Wrapper.m_InputsActionsCallbackInterface.OnPauseMenu;
+                    @PauseMenu.canceled -= m_Wrapper.m_InputsActionsCallbackInterface.OnPauseMenu;
                 }
                 m_Wrapper.m_InputsActionsCallbackInterface = instance;
                 if (instance != null)
@@ -349,6 +375,9 @@ namespace AutumnForest
                     @Slingshot.started += instance.OnSlingshot;
                     @Slingshot.performed += instance.OnSlingshot;
                     @Slingshot.canceled += instance.OnSlingshot;
+                    @PauseMenu.started += instance.OnPauseMenu;
+                    @PauseMenu.performed += instance.OnPauseMenu;
+                    @PauseMenu.canceled += instance.OnPauseMenu;
                 }
             }
         }
@@ -370,6 +399,7 @@ namespace AutumnForest
             void OnDash(InputAction.CallbackContext context);
             void OnDialogue(InputAction.CallbackContext context);
             void OnSlingshot(InputAction.CallbackContext context);
+            void OnPauseMenu(InputAction.CallbackContext context);
         }
     }
 }

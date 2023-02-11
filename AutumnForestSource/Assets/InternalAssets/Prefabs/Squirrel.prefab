@@ -155,7 +155,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shooting: {fileID: 3538509849648730527}
-  shotAudio: {fileID: 1916872861306852803}
+  shotAudio:
+    <AudioSource>k__BackingField: {fileID: 1916872861306852803}
+    minPitch: 0.8
+    maxPitch: 1.2
   shotAnimation: SquirrelThrow
   shootMinimumRate: 1.5
   shootMaximumRate: 2.5

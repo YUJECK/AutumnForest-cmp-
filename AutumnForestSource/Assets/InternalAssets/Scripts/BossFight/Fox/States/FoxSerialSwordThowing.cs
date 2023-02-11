@@ -14,7 +14,7 @@ namespace AutumnForest.BossFight.Fox.States
         private readonly Transform[] swordPoints;
         private readonly Stack<Projectile> pickedSwords = new();
 
-        private readonly AudioSource castSoundEffect;
+        private readonly PitchedAudio castSoundEffect;
 
         private readonly float spawnRate = 0.1f;
         private readonly float throwRate = 0.5f;
@@ -23,7 +23,7 @@ namespace AutumnForest.BossFight.Fox.States
         {
             this.swordPoints = swordPoints;
 
-            this.castSoundEffect = castSoundEffect;
+            this.castSoundEffect = new(castSoundEffect);
 
             this.spawnRate = spawnRate;
             this.throwRate = throwRate;

@@ -11,10 +11,10 @@ namespace AutumnForest.BossFight.Fox.States
 {
     public sealed class FoxFirstFlowerPattern : StateBehaviour
     {
-        private float shotDelay = 2f;
-        private int repeatsCount = 4;
-        private Transform[] swordPoints;
-        private AudioSource castSound;
+        private readonly float shotDelay = 2f;
+        private readonly int repeatsCount = 4;
+        private readonly Transform[] swordPoints;
+        private readonly PitchedAudio castSound;
 
         private CancellationTokenSource cancellationToken;
 
@@ -23,7 +23,7 @@ namespace AutumnForest.BossFight.Fox.States
             this.shotDelay = shotDelay;
             this.swordPoints = swordPoints;
 
-            this.castSound = castSound;
+            this.castSound = new(castSound);
         }
 
         public override void EnterState(IStateMachineUser stateMachine)

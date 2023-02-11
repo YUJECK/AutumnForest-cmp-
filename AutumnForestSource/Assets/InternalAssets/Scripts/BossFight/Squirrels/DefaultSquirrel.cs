@@ -15,7 +15,7 @@ namespace AutumnForest.BossFight.Squirrels
     public class DefaultSquirrel : Squirrel
     {
         [SerializeField] private Shooting shooting;
-        [SerializeField] private AudioSource shotAudio;
+        [SerializeField] private PitchedAudio shotAudio;
 
         [SerializeField] private string shotAnimation;
         [SerializeField] private float shootMinimumRate = 2f;
@@ -79,7 +79,6 @@ namespace AutumnForest.BossFight.Squirrels
         private void OnShoot(Rigidbody2D obj)
         {
             animator.Play(shotAnimation);
-            shotAudio.pitch = UnityEngine.Random.Range(0.35f, 0.75f);
             shotAudio.Play();
         }
     }

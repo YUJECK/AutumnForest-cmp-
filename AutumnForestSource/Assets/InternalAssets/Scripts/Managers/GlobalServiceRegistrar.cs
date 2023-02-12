@@ -1,4 +1,5 @@
 using AutumnForest.BossFight;
+using AutumnForest.BossFight.Fox;
 using AutumnForest.BossFight.Raccoon;
 using AutumnForest.DialogueSystem;
 using AutumnForest.Health;

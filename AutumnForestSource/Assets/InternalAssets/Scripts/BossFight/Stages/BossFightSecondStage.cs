@@ -1,6 +1,5 @@
-﻿using AutumnForest.BossFight.Raccoon;
+﻿using AutumnForest.BossFight.Fox;
 using AutumnForest.Health;
-using AutumnForest.Helpers;
 using AutumnForest.StateMachineSystem;
 
 namespace AutumnForest.BossFight.Stages
@@ -10,10 +9,10 @@ namespace AutumnForest.BossFight.Stages
         public override void EnterState(IStateMachineUser stateMachine)
         {
             GlobalServiceLocator.GetService<FoxStateMachineUser>().gameObject.SetActive(true);
-            
+
             GlobalServiceLocator.GetService<BossFightHealthBar>().SetConfig(GlobalServiceLocator.GetService<FoxStateMachineUser>()
                 .ServiceLocator.GetService<CreatureHealth>().HealthBarConfig);
-            
+
             GlobalServiceLocator.GetService<FoxStateMachineUser>().StateMachine.EnableStateMachine();
 
             IsCompleted = true;

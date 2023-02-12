@@ -1,10 +1,9 @@
-﻿using AutumnForest.BossFight.Raccoon;
+﻿using AutumnForest.BossFight.Fox;
+using AutumnForest.BossFight.Raccoon;
 using AutumnForest.BossFight.Stages;
 using AutumnForest.Health;
-using AutumnForest.Helpers;
 using AutumnForest.StateMachineSystem;
 using System;
-using UnityEngine;
 
 namespace AutumnForest.BossFight
 {
@@ -28,7 +27,7 @@ namespace AutumnForest.BossFight
                 OnStageChanged?.Invoke(currentStage);
             }
         }
-        
+
         public StateMachine StateMachine { get; private set; }
         public LocalServiceLocator ServiceLocator { get; private set; }
 
@@ -43,7 +42,7 @@ namespace AutumnForest.BossFight
         private StateBehaviour thirdStage = new BossFightFirstStage();
 
         private IHealth raccoonHealth;
-        private IHealth foxHealth; 
+        private IHealth foxHealth;
 
         public BossFightManager()
         {
@@ -64,7 +63,7 @@ namespace AutumnForest.BossFight
         {
             if (CurrentStage == BossFightStage.First && raccoonHealth.CurrentHealth <= raccoonHealth.MaximumHealth * 0.7)
                 CurrentStage = BossFightStage.Second;
-            
+
             else if (CurrentStage == BossFightStage.Second && foxHealth.CurrentHealth <= 0)
             {
                 OnStateChanged?.Invoke(thirdStage);
@@ -72,7 +71,7 @@ namespace AutumnForest.BossFight
             }
         }
 
-        public void StartBossFight() 
+        public void StartBossFight()
         {
             foxHealth = GlobalServiceLocator.GetService<FoxStateMachineUser>().ServiceLocator.GetService<CreatureHealth>();
             raccoonHealth = GlobalServiceLocator.GetService<RaccoonStateMachineUser>().ServiceLocator.GetService<CreatureHealth>();
@@ -81,7 +80,7 @@ namespace AutumnForest.BossFight
             CurrentStage = BossFightStage.First;
             OnStateChanged?.Invoke(firstStage);
 
-            OnBossFightStarted?.Invoke(); 
+            OnBossFightStarted?.Invoke();
         }
         public void EndBossFight() => OnBossFightEnded?.Invoke();
     }

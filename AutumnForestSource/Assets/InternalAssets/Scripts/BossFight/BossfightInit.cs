@@ -19,6 +19,9 @@ namespace AutumnForest.BossFight
         {
             bossFightManager.OnBossFightStarted += GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToBossFightCamera;
             bossFightManager.OnBossFightEnded += GlobalServiceLocator.GetService<CameraSwitcher>().SwichToMainCamera;
+            
+            bossFightManager.OnBossFightStarted += GlobalServiceLocator.GetService<MusicSwitcher>().SwitchToBossFightTheme;
+            bossFightManager.OnBossFightEnded += GlobalServiceLocator.GetService<MusicSwitcher>().SwitchToMainTheme;
 
             bossFightManager.OnBossFightStarted += EnableHealthBar;
             bossFightManager.OnBossFightEnded += DisableHealthBar;
@@ -37,7 +40,10 @@ namespace AutumnForest.BossFight
         {
             bossFightManager.OnBossFightStarted -= GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToBossFightCamera;
             bossFightManager.OnBossFightEnded -= GlobalServiceLocator.GetService<CameraSwitcher>().SwichToMainCamera;
-            
+
+            bossFightManager.OnBossFightStarted -= GlobalServiceLocator.GetService<MusicSwitcher>().SwitchToBossFightTheme;
+            bossFightManager.OnBossFightEnded -= GlobalServiceLocator.GetService<MusicSwitcher>().SwitchToMainTheme;
+
             bossFightManager.OnBossFightStarted -= GlobalServiceLocator.GetService<PlayerDash>().Enable;
             bossFightManager.OnBossFightEnded -= GlobalServiceLocator.GetService<PlayerDash>().Disable;
 

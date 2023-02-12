@@ -25,17 +25,14 @@ namespace AutumnForest.BossFight.Fox.States
 
             this.castSound = new(castSound);
         }
+        ~FoxFirstFlowerPattern() => cancellationToken.Dispose();
 
         public override void EnterState(IStateMachineUser stateMachine)
         {
             cancellationToken = new();
             StartPattern(cancellationToken.Token);
         }
-        public override void ExitState(IStateMachineUser stateMachine)
-        {
-            cancellationToken.Cancel();
-            cancellationToken.Dispose();
-        }
+        public override void ExitState(IStateMachineUser stateMachine) => cancellationToken.Cancel();
 
         private async void StartPattern(CancellationToken token)
         {

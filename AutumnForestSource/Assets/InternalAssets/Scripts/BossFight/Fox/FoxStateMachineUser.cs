@@ -1,4 +1,3 @@
-using AutumnForest.Assets.InternalAssets.Scripts.BossFight;
 using AutumnForest.BossFight.Fox.States;
 using AutumnForest.Health;
 using AutumnForest.Helpers;
@@ -7,7 +6,7 @@ using AutumnForest.StateMachineSystem;
 using System;
 using UnityEngine;
 
-namespace AutumnForest
+namespace AutumnForest.BossFight.Fox
 {
     public class FoxStateMachineUser : MonoBehaviour, IStateMachineUser
     {
@@ -16,7 +15,7 @@ namespace AutumnForest
         [SerializeField] private AudioSource castSoundEffect;
         [Header("Services")]
         [SerializeField] private Shooting shooting;
-        [SerializeField] private Animator animator;
+        [SerializeField] private CreatureAnimator animator;
         [SerializeField] private CreatureHealth creatureHealth;
         [SerializeField] private Transform[] points;
 
@@ -35,7 +34,7 @@ namespace AutumnForest
                 new TimingState(3.5f),
                 new FoxFirstFlowerPattern(points, castSoundEffect, 1f),
                 new FoxFirstFlowerPattern(points, castSoundEffect, 0.5f),
-                new FoxTurnedRoundSwordThrowingState(0.2f, 15, points),
+                new FoxSingleSwordCastState(15),
                 new FoxSerialSwordThowing(points, castSoundEffect, 0.1f, 0.5f),
             };
 
@@ -43,7 +42,7 @@ namespace AutumnForest
 
             creatureHealth.OnDied += OnDie;
 
-            ServiceLocator = new(shooting, creatureHealth);
+            ServiceLocator = new(shooting, creatureHealth, animator);
             StateMachine = new(this, false);
 
             StateMachine.OnMachineWorking += StateChoosing;
@@ -54,7 +53,7 @@ namespace AutumnForest
         private void OnDie()
         {
             StateMachine.DisableStateMachine();
-            animator.Play("FoxJump");
+            animator.PlayAnimation("FoxJump");
         }
         private void DisableObject() => gameObject.SetActive(false); //for animator
         private void PlayJumpParticle() => jumpParticle.Play(); //for animator

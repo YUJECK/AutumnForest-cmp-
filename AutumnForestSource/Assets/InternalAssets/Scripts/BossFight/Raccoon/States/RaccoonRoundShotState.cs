@@ -3,7 +3,6 @@ using AutumnForest.Projectiles;
 using AutumnForest.Raccoon;
 using AutumnForest.StateMachineSystem;
 using Cysharp.Threading.Tasks;
-using System;
 using System.Threading;
 using UnityEngine;
 
@@ -13,13 +12,37 @@ namespace AutumnForest
     {
         private readonly AudioSource throwSoundEffect;
         private CancellationTokenSource cancellationToken;
+        private RaccoonRoundShotStateConfig config;
 
-        public RaccoonRoundShotState(AudioSource throwSoundEffect)
+        public RaccoonRoundShotState(AudioSource throwSoundEffect, RaccoonRoundShotStateConfig config)
         {
-            if (throwSoundEffect == null)
-                throw new NullReferenceException(nameof(throwSoundEffect));
+            ThrowNullReferenceHeper.Check(throwSoundEffect, nameof(throwSoundEffect));
+            ThrowNullReferenceHeper.Check(config, nameof(config));
 
             this.throwSoundEffect = throwSoundEffect;
+            this.config = config;
+        }
+
+        public override async void EnterState(IStateMachineUser stateMachine)
+        {
+            IsCompleted = false;
+            {
+                cancellationToken = new();
+                stateMachine.ServiceLocator.GetService<CreatureAnimator>().PlayAnimation(RaccoonAnimationsHelper.Throwing);
+
+                InitTransformRotation(stateMachine.ServiceLocator.GetService<Shooting>().TransformRotation);
+
+                await SpawnCones(stateMachine, cancellationToken.Token);
+            }
+            IsCompleted = true;
+        }
+        public override void ExitState(IStateMachineUser stateMachine)
+        {
+            ResetTransfomRotation(stateMachine.ServiceLocator.GetService<Shooting>().TransformRotation);
+            throwSoundEffect.Stop();
+
+            cancellationToken.Cancel();
+            cancellationToken.Dispose();
         }
 
         private async UniTask SpawnCones(IStateMachineUser stateMachine, CancellationToken token)
@@ -27,17 +50,11 @@ namespace AutumnForest
             throwSoundEffect.Play();
             Shooting shooting = stateMachine.ServiceLocator.GetService<Shooting>();
 
-            int coneCountPerCycle = 3;
-            int cycles = 16;
-            int totalCones = coneCountPerCycle * cycles;
-
-            int shotRate = 100; //in milliseconds
-
             try
             {
-                for (int i = 0; i < totalCones; i++)
+                for (int i = 0; i < config.TotalConeCount; i++)
                 {
-                    await UniTask.Delay(shotRate, cancellationToken: token);
+                    await UniTask.Delay(config.ThrowRate, cancellationToken: token);
                     shooting.ShootWithoutInstantiate(GlobalServiceLocator.GetService<SomePoolsContainer>().ConePool.GetFree().GetComponent<Rigidbody2D>(), 10, 0, true, ForceMode2D.Impulse);
                 }
             }
@@ -46,29 +63,16 @@ namespace AutumnForest
                 return;
             }
         }
-        public override async void EnterState(IStateMachineUser stateMachine)
+        private void ResetTransfomRotation(TransformRotation transformRotation)
         {
-            IsCompleted = false;
-            {
-                cancellationToken = new();
-                stateMachine.ServiceLocator.GetService<CreatureAnimator>().PlayAnimation(RaccoonAnimationsHelper.Throwing);
-
-                stateMachine.ServiceLocator.GetService<Shooting>().TransformRotation.Enable();
-                stateMachine.ServiceLocator.GetService<Shooting>().TransformRotation.RotationType = TransformRotation.RotateType.Around;
-                stateMachine.ServiceLocator.GetService<Shooting>().TransformRotation.Coefficient = 15;
-
-                await SpawnCones(stateMachine, cancellationToken.Token);
-            }
-            IsCompleted = true;
+            transformRotation.Disable();
+            transformRotation.Coefficient = 1;
         }
-        public override void ExitState(IStateMachineUser stateMachine)
+        private void InitTransformRotation(TransformRotation transformRotation)
         {
-            stateMachine.ServiceLocator.GetService<Shooting>().TransformRotation.Disable();
-            stateMachine.ServiceLocator.GetService<Shooting>().TransformRotation.Coefficient = 1;
-            throwSoundEffect.Stop();
-
-            cancellationToken.Cancel();
-            cancellationToken.Dispose();
+            transformRotation.Enable();
+            transformRotation.RotationType = TransformRotation.RotateType.Around;
+            transformRotation.Coefficient = 15;
         }
     }
 }

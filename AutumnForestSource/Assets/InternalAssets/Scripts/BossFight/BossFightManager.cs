@@ -61,7 +61,7 @@ namespace AutumnForest.BossFight
 
         private void StateChoosing()
         {
-            if (CurrentStage == BossFightStage.First && raccoonHealth.CurrentHealth <= raccoonHealth.MaximumHealth * 0.7)
+            if (CurrentStage == BossFightStage.First && raccoonHealth.CurrentHealth <= raccoonHealth.MaximumHealth * 0.4)
                 CurrentStage = BossFightStage.Second;
 
             else if (CurrentStage == BossFightStage.Second && foxHealth.CurrentHealth <= 0)

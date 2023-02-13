@@ -39846,6 +39846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbcf4729fc9c352409b771f04970a875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  racconHealingStateConfig: {fileID: 11400000, guid: 47f03f131ecffb1478993d8569017ebc, type: 2}
   chestnut: {fileID: 160220853299425897, guid: 5f030ef350067734298dd4434b921de1, type: 3}
   shirtPrefab: {fileID: 0}
   defaultSquirrelPrefab: {fileID: 3538509849446323249, guid: bbc8f79cb335d4f4a83a32449059d8be, type: 3}

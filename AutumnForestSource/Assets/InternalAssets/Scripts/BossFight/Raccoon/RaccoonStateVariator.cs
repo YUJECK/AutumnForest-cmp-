@@ -11,6 +11,9 @@ namespace AutumnForest.Raccoon
 {
     public class RaccoonStateVariator : MonoBehaviour, IStateContainerVariator
     {
+        [Header("Configs")]
+        [SerializeField] private RacconHealingStateConfig racconHealingStateConfig;
+        [SerializeField] private RaccoonRoundShotStateConfig raccoonRoundShotStateConfig;
         [Header("Prefabs")]
         [SerializeField] private Rigidbody2D chestnut;
         [SerializeField] private Projectile shirtPrefab;
@@ -27,20 +30,20 @@ namespace AutumnForest.Raccoon
         {
             StateBehaviour[] firstStageStates =
             {
-                new RaccoonRoundShotState(throwLoopedSoundEffect),
+                new RaccoonRoundShotState(throwLoopedSoundEffect, raccoonRoundShotStateConfig),
                 new RaccoonSquirrelSpawnState(defaultSquirrelPrefab, 5, 7, 2.5f),
                 new TripleShotState(chestnut, shotSoundEffect, 10, 25, 0.5f)
             };
             StateBehaviour[] thirdStageStates =
             {
-                new RaccoonRoundShotState(throwLoopedSoundEffect),
+                new RaccoonRoundShotState(throwLoopedSoundEffect, raccoonRoundShotStateConfig),
                 new RaccoonSquirrelSpawnState(fireSquirrelPrefab, 3, 4, 1.5f)
             };
 
             return new RaccoonStatesContainer(
                 new RaccoonIdleState(),
                 new RaccoonDialogueState(dialogue),
-                new RaccoonHealingState(/*rate*/1, /*healPoints*/3, healPoint, defaultPosition),
+                new RaccoonHealingState(racconHealingStateConfig, healPoint, defaultPosition),
                 firstStageStates,
                 thirdStageStates);
         }

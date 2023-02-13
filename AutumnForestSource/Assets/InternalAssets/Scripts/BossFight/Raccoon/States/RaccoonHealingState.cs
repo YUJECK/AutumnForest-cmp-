@@ -14,15 +14,14 @@ namespace AutumnForest.BossFight.Raccoon.States
 
         private Transform healPosition;
         private Transform defaultPosition;
-        private float healRate;
-        private int healPoints;
+
+        private RacconHealingStateConfig config;
 
         public override bool Repeatable() => false;
 
-        public RaccoonHealingState(float healRate, int healPoints, Transform healPosition, Transform defaultPosition)
+        public RaccoonHealingState(RacconHealingStateConfig config, Transform healPosition, Transform defaultPosition)
         {
-            this.healRate = healRate;
-            this.healPoints = healPoints;
+            this.config = config;
             this.healPosition = healPosition;
             this.defaultPosition = defaultPosition;
         }   
@@ -54,8 +53,8 @@ namespace AutumnForest.BossFight.Raccoon.States
             {
                 try
                 {
-                    health.Heal(healPoints);
-                    await UniTask.Delay(TimeSpan.FromSeconds(healRate), cancellationToken: token);
+                    health.Heal(config.HealPoints);
+                    await UniTask.Delay(TimeSpan.FromSeconds(config.HealRate), cancellationToken: token);
                 }
                 catch
                 {

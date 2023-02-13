@@ -8,28 +8,32 @@ using System.Threading;
 using UnityEngine;
 
 namespace AutumnForest.BossFight.Fox.States
+    
 {
     public sealed class FoxFirstFlowerPattern : StateBehaviour
     {
         private readonly float shotDelay = 2f;
         private readonly int repeatsCount = 4;
+        private readonly string castAnimationName;
         private readonly Transform[] swordPoints;
         private readonly PitchedAudio castSound;
 
         private CancellationTokenSource cancellationToken;
 
-        public FoxFirstFlowerPattern(Transform[] swordPoints, AudioSource castSound, float shotDelay)
+        public FoxFirstFlowerPattern(Transform[] swordPoints, AudioSource castSound, float shotDelay, string castAnimationName)
         {
             this.shotDelay = shotDelay;
             this.swordPoints = swordPoints;
 
             this.castSound = new(castSound);
+            this.castAnimationName = castAnimationName;
         }
         ~FoxFirstFlowerPattern() => cancellationToken.Dispose();
 
         public override void EnterState(IStateMachineUser stateMachine)
         {
             cancellationToken = new();
+            stateMachine.ServiceLocator.GetService<CreatureAnimator>().PlayAnimation(castAnimationName);
             StartPattern(cancellationToken.Token);
         }
         public override void ExitState(IStateMachineUser stateMachine) => cancellationToken.Cancel();

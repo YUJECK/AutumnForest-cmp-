@@ -20,9 +20,11 @@ namespace AutumnForest.BossFight.Fox.States
         private readonly float spawnRate = 0.1f;
         private readonly float throwRate = 0.5f;
 
+        private readonly string castAnimationName;
+
         private CancellationTokenSource cancellationToken;
 
-        public FoxSerialSwordThowing(Transform[] swordPoints, AudioSource castSoundEffect, float spawnRate, float throwRate)
+        public FoxSerialSwordThowing(Transform[] swordPoints, AudioSource castSoundEffect, float spawnRate, float throwRate, string castAnimationName)
         {
             this.swordPoints = swordPoints;
 
@@ -30,13 +32,15 @@ namespace AutumnForest.BossFight.Fox.States
 
             this.spawnRate = spawnRate;
             this.throwRate = throwRate;
+            this.castAnimationName = castAnimationName;
         }
         ~FoxSerialSwordThowing() => cancellationToken.Dispose();
 
         public override void EnterState(IStateMachineUser stateMachine)
         {
-            IsCompleted = false;
             cancellationToken = new();
+            IsCompleted = false;
+            stateMachine.ServiceLocator.GetService<CreatureAnimator>().PlayAnimation(castAnimationName);
             CastPattern(stateMachine.ServiceLocator.GetService<Shooting>()/*, cancellationToken.Token*/);
         }
         public override void ExitState(IStateMachineUser stateMachine)

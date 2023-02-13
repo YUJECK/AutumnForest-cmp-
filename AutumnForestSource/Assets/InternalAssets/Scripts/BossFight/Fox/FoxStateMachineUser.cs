@@ -32,10 +32,10 @@ namespace AutumnForest.BossFight.Fox
             {
                 new TimingState(2.5f),
                 new TimingState(3.5f),
-                new FoxFirstFlowerPattern(points, castSoundEffect, 1f),
-                new FoxFirstFlowerPattern(points, castSoundEffect, 0.5f),
+                new FoxFirstFlowerPattern(points, castSoundEffect, 1f, "FoxCasting"),
+                new FoxFirstFlowerPattern(points, castSoundEffect, 0.5f, "FoxCasting"),
                 new FoxSingleSwordCastState(15),
-                new FoxSerialSwordThowing(points, castSoundEffect, 0.1f, 0.5f),
+                new FoxSerialSwordThowing(points, castSoundEffect, 0.1f, 0.5f, "FoxCasting"),
             };
 
             attackPatterns = patterns;

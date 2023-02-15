@@ -11,7 +11,7 @@ namespace AutumnForest.BossFight.Raccoon
     public class RaccoonStateMachineUser : MonoBehaviour, IStateMachineUser
     {
         [Header("Services")]
-        [SerializeField] private CreatureAnimator creatureAnimator;
+        [SerializeField] private Animator animator;
         [SerializeField] private Shooting shooting;
         [SerializeField] private CreatureHealth healthObject;
         [SerializeField] private SpawnPlace spawnPlace;
@@ -29,16 +29,13 @@ namespace AutumnForest.BossFight.Raccoon
 
         private void Awake()
         {
-            ServiceLocator = new(creatureAnimator, shooting, healthObject, spawnPlace, transform);
+            ServiceLocator = new(new RaccoonAnimator(animator), shooting, healthObject, spawnPlace, transform);
             raccoonStatesContainer = GetComponent<IStateContainerVariator>().InitStates() as RaccoonStatesContainer;
 
             StateMachine = new(this, false);
             StateMachine.OnMachineWorking += StateChoosing;
         }
-        private void Start()
-        {
-            bossFightManager = GlobalServiceLocator.GetService<BossFightManager>();
-        }
+        private void Start() => bossFightManager = GlobalServiceLocator.GetService<BossFightManager>();
         private void OnEnable()
         {
             StateMachine.OnMachineWorking += StateChoosing;
@@ -53,15 +50,11 @@ namespace AutumnForest.BossFight.Raccoon
         {
             StateBehaviour nextState = null;
 
-            if (bossFightManager.CurrentStage == BossFightStage.First)
-                nextState = FirstStageChoosing();
-            else if (bossFightManager.CurrentStage == BossFightStage.Second)
-                nextState = SecondStageChoosing();
-            else if (bossFightManager.CurrentStage == BossFightStage.Third)
-                nextState = ThirdStageChoosing();
+            if (bossFightManager.CurrentStage == BossFightStage.First) nextState = FirstStageChoosing();
+            else if (bossFightManager.CurrentStage == BossFightStage.Second) nextState = SecondStageChoosing();
+            else if (bossFightManager.CurrentStage == BossFightStage.Third) nextState = ThirdStageChoosing();
 
-            if (nextState != null)
-                OnStateChanged?.Invoke(nextState);
+            if (nextState != null) OnStateChanged?.Invoke(nextState);
         }
 
         private StateBehaviour FirstStageChoosing()
@@ -75,7 +68,8 @@ namespace AutumnForest.BossFight.Raccoon
             return ObjectRandomizer.GetRandom(raccoonStatesContainer.FirstStageStates);
         }
         private StateBehaviour SecondStageChoosing() => raccoonStatesContainer.HealingState;
-        public void HealingStateEntered() => OnEnteredHealingState?.Invoke(); 
         private StateBehaviour ThirdStageChoosing() => ObjectRandomizer.GetRandom(raccoonStatesContainer.ThirdStageStates);
+        
+        public void HealingStateEntered() => OnEnteredHealingState?.Invoke(); 
     }
 }

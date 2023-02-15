@@ -19,7 +19,6 @@ namespace AutumnForest.BossFight
         {
             IsCompleted = false;
             {
-                stateMachine.ServiceLocator.GetService<CreatureAnimator>().SetDefault();
                 await UniTask.Delay(TimeSpan.FromSeconds(timing));
             }
             IsCompleted = true;

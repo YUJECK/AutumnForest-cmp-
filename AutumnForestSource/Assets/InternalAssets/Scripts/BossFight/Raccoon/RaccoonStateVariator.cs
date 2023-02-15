@@ -14,6 +14,7 @@ namespace AutumnForest.Raccoon
         [Header("Configs")]
         [SerializeField] private RacconHealingStateConfig racconHealingStateConfig;
         [SerializeField] private RaccoonRoundShotStateConfig raccoonRoundShotStateConfig;
+        [SerializeField] private RaccoonShirtThrowingStateConfig raccoonShirtThrowingStateConfig;
         [Header("Prefabs")]
         [SerializeField] private Rigidbody2D chestnut;
         [SerializeField] private Projectile shirtPrefab;
@@ -31,6 +32,7 @@ namespace AutumnForest.Raccoon
             StateBehaviour[] firstStageStates =
             {
                 new RaccoonRoundShotState(throwLoopedSoundEffect, raccoonRoundShotStateConfig),
+                new RaccoonShirtThrowingState(raccoonShirtThrowingStateConfig),
                 new RaccoonSquirrelSpawnState(defaultSquirrelPrefab, 5, 7, 2.5f),
                 new TripleShotState(chestnut, shotSoundEffect, 10, 25, 0.5f)
             };

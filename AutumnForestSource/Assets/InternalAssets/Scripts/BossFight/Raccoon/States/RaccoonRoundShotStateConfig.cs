@@ -3,7 +3,9 @@ using UnityEngine;
 
 namespace AutumnForest
 {
-    [CreateAssetMenu(fileName = "New " + nameof(RaccoonRoundShotStateConfig), menuName = AsstetMenuHelper.BossFight_StatesConfigs + nameof(RaccoonRoundShotStateConfig))]
+    [CreateAssetMenu(
+        fileName = "New " + nameof(RaccoonRoundShotStateConfig), 
+        menuName = AssetMenuHelper.BossFight_StatesConfigs + nameof(RaccoonRoundShotStateConfig))]
     public sealed class RaccoonRoundShotStateConfig : ScriptableObject
     {
         [field: SerializeField] public int ConeCountPerCycle { get; private set; } = 16;

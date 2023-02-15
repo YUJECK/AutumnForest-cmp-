@@ -70,12 +70,12 @@ namespace AutumnForest.BossFight.Squirrels
                 await UniTask.Delay(TimeSpan.FromSeconds(UnityEngine.Random.Range(shootMinimumRate, shootMaximumRate)));
 
                 if (gameObject.activeInHierarchy)
-                    shooting.ShootWithoutInstantiate(GlobalServiceLocator.GetService<SomePoolsContainer>().AcornPool.GetFree().Rigidbody2D,
+                    shooting.ShootWithoutInstantiate(GlobalServiceLocator.GetService<PoolsContainer>().AcornPool.GetFree().Rigidbody2D,
                         shootSpeed, UnityEngine.Random.Range(0, spread), true, ForceMode2D.Impulse);
             }
         }
 
-        private void OnDie() => GlobalServiceLocator.GetService<SomePoolsContainer>().AcornHealPool.GetFree().transform.position = transform.position;
+        private void OnDie() => GlobalServiceLocator.GetService<PoolsContainer>().AcornHealPool.GetFree().transform.position = transform.position;
         private void OnShoot(Rigidbody2D obj)
         {
             animator.Play(shotAnimation);

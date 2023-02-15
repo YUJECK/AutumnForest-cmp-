@@ -7,7 +7,7 @@ namespace AutumnForest
         public override bool CanExit() => true;
         public override void EnterState(IStateMachineUser stateMachine)
         {
-            stateMachine.ServiceLocator.GetService<CreatureAnimator>().SetDefault();
+            stateMachine.ServiceLocator.GetService<RaccoonAnimator>().PlayIdle();
             IsCompleted = true;
         }
     }

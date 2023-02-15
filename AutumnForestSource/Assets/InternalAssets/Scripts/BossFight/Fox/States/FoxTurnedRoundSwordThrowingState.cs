@@ -18,7 +18,7 @@ namespace AutumnForest.BossFight.Fox.States
             IsCompleted = false;
             {
                 stateMachine.ServiceLocator.GetService<Shooting>().ShootWithoutInstantiate(
-                    GlobalServiceLocator.GetService<SomePoolsContainer>().DefaultSwordPool.GetFree().Rigidbody2D,
+                    GlobalServiceLocator.GetService<PoolsContainer>().DefaultSwordPool.GetFree().Rigidbody2D,
                     swordForce,
                     0f,
                     true);

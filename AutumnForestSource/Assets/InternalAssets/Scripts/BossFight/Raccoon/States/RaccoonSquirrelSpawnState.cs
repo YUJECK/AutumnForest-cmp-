@@ -10,7 +10,7 @@ namespace AutumnForest.Raccoon.States
 {
     public sealed class RaccoonSquirrelSpawnState : StateBehaviour
     {
-        private ObjectPool<Squirrel> squirrelPool;
+        private MonoObjectPool<Squirrel> squirrelPool;
 
         private int squirrelMinCount;
         private int squirrelMaxCount;
@@ -30,7 +30,7 @@ namespace AutumnForest.Raccoon.States
         public override bool Repeatable() => false;
         public override async void EnterState(IStateMachineUser stateMachine)
         {
-            stateMachine.ServiceLocator.GetService<CreatureAnimator>().SetDefault();
+            stateMachine.ServiceLocator.GetService<RaccoonAnimator>().PlayIdle();
             cancellationToken = new();
 
             IsCompleted = false;

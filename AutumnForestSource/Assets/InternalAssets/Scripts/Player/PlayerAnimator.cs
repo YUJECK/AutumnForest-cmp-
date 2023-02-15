@@ -1,32 +1,15 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AutumnForest.Player
 {
-    [RequireComponent(typeof(CreatureAnimator))]
-    public sealed class PlayerAnimator : MonoBehaviour
+    public sealed class PlayerAnimator : AnimatorWrapper
     {
         private const string walkAnimation = "PlayerWalk";
         private const string idleAnimation = "PlayerIdle";
 
-        private CreatureAnimator creatureAnimator;
+        public PlayerAnimator(Animator animator) : base(animator) { }
 
-        private void Awake()
-        {
-            creatureAnimator = GetComponent<CreatureAnimator>();
-        }
-
-        private void OnEnable()
-        {
-            GlobalServiceLocator.GetService<PlayerMovable>().OnMoved += PlayWalkAnimation;
-            GlobalServiceLocator.GetService<PlayerMovable>().OnMoveReleased += PlayIdleAnimation;
-        }
-        private void OnDisable()
-        {
-            GlobalServiceLocator.GetService<PlayerMovable>().OnMoved -= PlayWalkAnimation;
-            GlobalServiceLocator.GetService<PlayerMovable>().OnMoveReleased -= PlayIdleAnimation;
-        }
-
-        private void PlayWalkAnimation(Vector2 movement) => creatureAnimator.PlayAnimation(walkAnimation);
-        private void PlayIdleAnimation(Vector2 movement) => creatureAnimator.PlayAnimation(idleAnimation);
+        public void PlayIdleAnimation() => Play(idleAnimation);
+        public void PlayWalkAnimation() => Play(walkAnimation);
     }
 }

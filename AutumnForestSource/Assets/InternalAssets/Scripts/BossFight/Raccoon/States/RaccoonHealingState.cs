@@ -1,4 +1,5 @@
 ﻿using AutumnForest.Health;
+using AutumnForest.Helpers;
 using AutumnForest.Raccoon;
 using AutumnForest.StateMachineSystem;
 using Cysharp.Threading.Tasks;
@@ -17,30 +18,37 @@ namespace AutumnForest.BossFight.Raccoon.States
 
         private RacconHealingStateConfig config;
 
+        public override bool CanExit() => true;
         public override bool Repeatable() => false;
 
         public RaccoonHealingState(RacconHealingStateConfig config, Transform healPosition, Transform defaultPosition)
         {
-            this.config = config;
-            this.healPosition = healPosition;
-            this.defaultPosition = defaultPosition;
+            this.config = CheckForNullHelper.Check(config, nameof(config));
+            this.healPosition = CheckForNullHelper.Check(healPosition, nameof(healPosition));
+            this.defaultPosition = CheckForNullHelper.Check(defaultPosition, nameof(healPosition));
         }   
 
-        public override bool CanExit() => true;
-
-        public override void EnterState(IStateMachineUser stateMachine)
+        public override async void EnterState(IStateMachineUser stateMachine)
         {
             cancellationToken = new();
 
             GlobalServiceLocator.GetService<RaccoonStateMachineUser>().HealingStateEntered();
 
+            stateMachine.ServiceLocator.GetService<RaccoonAnimator>().PlayJump();
+
+            await UniTask.Delay(TimeSpan.FromSeconds(0.34f));
+
             stateMachine.ServiceLocator.GetService<Transform>().position = healPosition.position;
-            stateMachine.ServiceLocator.GetService<CreatureAnimator>().PlayAnimation(RaccoonAnimationsHelper.Idle);
+            stateMachine.ServiceLocator.GetService<RaccoonAnimator>().PlayIdle();
 
             Healing(stateMachine.ServiceLocator.GetService<CreatureHealth>(), cancellationToken.Token);
         }
-        public override void ExitState(IStateMachineUser stateMachine)
+        public override async void ExitState(IStateMachineUser stateMachine)
         {
+            stateMachine.ServiceLocator.GetService<RaccoonAnimator>().PlayJump();
+
+            await UniTask.Delay(TimeSpan.FromSeconds(0.34f));
+
             stateMachine.ServiceLocator.GetService<Transform>().position = defaultPosition.position;
 
             cancellationToken.Cancel();

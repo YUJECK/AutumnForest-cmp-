@@ -16,11 +16,8 @@ namespace AutumnForest
 
         public RaccoonRoundShotState(AudioSource throwSoundEffect, RaccoonRoundShotStateConfig config)
         {
-            ThrowNullReferenceHeper.Check(throwSoundEffect, nameof(throwSoundEffect));
-            ThrowNullReferenceHeper.Check(config, nameof(config));
-
-            this.throwSoundEffect = throwSoundEffect;
-            this.config = config;
+            this.throwSoundEffect = CheckForNullHelper.Check(throwSoundEffect, nameof(throwSoundEffect));
+            this.config = CheckForNullHelper.Check(config, nameof(config));
         }
 
         public override async void EnterState(IStateMachineUser stateMachine)
@@ -28,7 +25,7 @@ namespace AutumnForest
             IsCompleted = false;
             {
                 cancellationToken = new();
-                stateMachine.ServiceLocator.GetService<CreatureAnimator>().PlayAnimation(RaccoonAnimationsHelper.Throwing);
+                stateMachine.ServiceLocator.GetService<RaccoonAnimator>().PlayThrowing();
 
                 InitTransformRotation(stateMachine.ServiceLocator.GetService<Shooting>().TransformRotation);
 
@@ -55,7 +52,7 @@ namespace AutumnForest
                 for (int i = 0; i < config.TotalConeCount; i++)
                 {
                     await UniTask.Delay(config.ThrowRate, cancellationToken: token);
-                    shooting.ShootWithoutInstantiate(GlobalServiceLocator.GetService<SomePoolsContainer>().ConePool.GetFree().GetComponent<Rigidbody2D>(), 10, 0, true, ForceMode2D.Impulse);
+                    shooting.ShootWithoutInstantiate(GlobalServiceLocator.GetService<PoolsContainer>().ConePool.GetFree().GetComponent<Rigidbody2D>(), 10, 0, true, ForceMode2D.Impulse);
                 }
             }
             catch

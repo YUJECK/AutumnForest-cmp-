@@ -16,6 +16,8 @@ namespace AutumnForest.Player
         [field: SerializeField] public int CurrentHealth { get; private set; }
         [field: SerializeField] public int MaximumHealth { get; private set; }
 
+        [SerializeField] private PitchedAudio hitSound;
+
         public bool Fired { get; private set; }
 
         public event Action<int, int> OnHealthChanged;
@@ -35,6 +37,8 @@ namespace AutumnForest.Player
         }
         public void TakeHit(int damagePoints)
         {
+            hitSound?.Play();
+
             CurrentHealth -= damagePoints;
 
             OnTakeHit?.Invoke(CurrentHealth, MaximumHealth);

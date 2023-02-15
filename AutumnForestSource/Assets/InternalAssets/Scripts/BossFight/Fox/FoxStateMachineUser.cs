@@ -15,9 +15,11 @@ namespace AutumnForest.BossFight.Fox
         [SerializeField] private AudioSource castSoundEffect;
         [Header("Services")]
         [SerializeField] private Shooting shooting;
-        [SerializeField] private CreatureAnimator animator;
+        [SerializeField] private Animator animator;
         [SerializeField] private CreatureHealth creatureHealth;
         [SerializeField] private Transform[] points;
+
+        private FoxAnimator foxAnimator;
 
         public StateMachine StateMachine { get; private set; }
         public LocalServiceLocator ServiceLocator { get; private set; }
@@ -28,35 +30,40 @@ namespace AutumnForest.BossFight.Fox
 
         private void Awake()
         {
+            foxAnimator = new(animator);
+            ServiceLocator = new(shooting, creatureHealth, foxAnimator);
+
+            creatureHealth.OnDied += OnDie;
+
             StateBehaviour[] patterns =
             {
                 new TimingState(2.5f),
                 new TimingState(3.5f),
-                new FoxFirstFlowerPattern(points, castSoundEffect, 1f, "FoxCasting"),
-                new FoxFirstFlowerPattern(points, castSoundEffect, 0.5f, "FoxCasting"),
+                new FoxFirstFlowerPattern(points, castSoundEffect, 1f),
+                new FoxFirstFlowerPattern(points, castSoundEffect, 0.5f),
                 new FoxSingleSwordCastState(15),
-                new FoxSerialSwordThowing(points, castSoundEffect, 0.1f, 0.5f, "FoxCasting"),
+                new FoxSerialSwordThowing(points, castSoundEffect, 0.1f, 0.5f),
             };
-
             attackPatterns = patterns;
 
-            creatureHealth.OnDied += OnDie;
-
-            ServiceLocator = new(shooting, creatureHealth, animator);
             StateMachine = new(this, false);
-
             StateMachine.OnMachineWorking += StateChoosing;
 
             DisableObject();
+        }
+        private void OnEnable()
+        {
+            foxAnimator.PlayGrounded();
         }
 
         private void OnDie()
         {
             StateMachine.DisableStateMachine();
-            animator.PlayAnimation("FoxJump");
+            foxAnimator.PlayJump();
         }
         private void DisableObject() => gameObject.SetActive(false); //for animator
         private void PlayJumpParticle() => jumpParticle.Play(); //for animator
+        private void EnableStateMachine() => StateMachine.EnableStateMachine(); //for animator
         private void StateChoosing()
         {
             OnStateChanged?.Invoke(ObjectRandomizer.GetRandom(attackPatterns));

@@ -9,20 +9,16 @@ namespace AutumnForest.BossFight.Raccoon.States
     public sealed class TripleShotState : StateBehaviour
     {
         private Rigidbody2D projectile;
-        private AudioSource shotSoundEffect;
         private float shotSpeed;
         private float shotSpread;
         private float shotRate;
 
-        public TripleShotState(Rigidbody2D projectile, AudioSource shotSoundEffect, float shotSpeed, float shotSpread, float shotRate)
+        public TripleShotState(Rigidbody2D projectile, float shotSpeed, float shotSpread, float shotRate)
         {
             if (projectile == null)
                 throw new NullReferenceException(nameof(projectile));
-            if (shotSoundEffect == null)
-                throw new NullReferenceException(nameof(shotSoundEffect));
 
             this.projectile = projectile;
-            this.shotSoundEffect = shotSoundEffect;
             this.shotSpeed = shotSpeed;
             this.shotSpread = shotSpread;
             this.shotRate = shotRate;
@@ -50,8 +46,8 @@ namespace AutumnForest.BossFight.Raccoon.States
             {
                 stateMachine.ServiceLocator.GetService<Shooting>()
                     .ShootWithInstantiate(projectile, shotSpeed, UnityEngine.Random.Range(-shotSpread, shotSpread));
-                shotSoundEffect.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
-                shotSoundEffect.Play();
+
+                stateMachine.ServiceLocator.GetService<RaccoonSoudsHelper>().ThrowSound.Play();
 
                 await UniTask.Delay(TimeSpan.FromSeconds(shotRate));
             }

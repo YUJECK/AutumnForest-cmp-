@@ -24,11 +24,13 @@ namespace AutumnForest.BossFight.Slingshot
         }
         private void OnEnable()
         {
-            GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.performed += SlingshotInput;
+            if (GlobalServiceLocator.TryGetService(out PlayerInput playerInput))
+                playerInput.Inputs.Slingshot.performed += SlingshotInput;
         }
         private void OnDisable()
         {
-            GlobalServiceLocator.GetService<PlayerInput>().Inputs.Slingshot.performed -= SlingshotInput;
+            if(GlobalServiceLocator.TryGetService(out PlayerInput playerInput))
+                playerInput.Inputs.Slingshot.performed -= SlingshotInput;
         }
 
         public void EnableSlingshot()

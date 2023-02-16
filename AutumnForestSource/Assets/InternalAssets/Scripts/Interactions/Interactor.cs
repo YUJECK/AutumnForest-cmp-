@@ -1,4 +1,4 @@
-﻿using AutumnForest.Other;   
+﻿using AutumnForest.Other;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +11,11 @@ namespace AutumnForest
         private List<IInteractive> awailableInteractions = new();
 
         private void OnEnable() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.Interact.performed += Interact;
-        private void OnDisable() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.Interact.performed -= Interact;
+        private void OnDisable()
+        {
+            if (GlobalServiceLocator.TryGetService(out PlayerInput playerInput))
+                playerInput.Inputs.Interact.performed -= Interact;
+        }
 
         private void Interact(UnityEngine.InputSystem.InputAction.CallbackContext obj)
         {

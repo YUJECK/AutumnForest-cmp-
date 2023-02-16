@@ -46,12 +46,14 @@ namespace AutumnForest.Player
         }
         private void OnEnable()
         {
-            GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dash.performed += InvokeDash;
+            if(GlobalServiceLocator.TryGetService(out PlayerInput playerInput))
+                playerInput.Inputs.Dash.performed += InvokeDash;
 
         }
         private void OnDisable()
         {
-            GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dash.performed -= InvokeDash;
+            if (GlobalServiceLocator.TryGetService(out PlayerInput playerInput))
+                playerInput.Inputs.Dash.performed -= InvokeDash;
         }
 
         private async void InvokeDash(InputAction.CallbackContext context)

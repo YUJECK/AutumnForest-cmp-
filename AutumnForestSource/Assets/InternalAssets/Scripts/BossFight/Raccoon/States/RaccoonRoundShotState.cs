@@ -1,3 +1,4 @@
+using AutumnForest.BossFight.Raccoon;
 using AutumnForest.Helpers;
 using AutumnForest.Projectiles;
 using AutumnForest.Raccoon;
@@ -10,15 +11,10 @@ namespace AutumnForest
 {
     public class RaccoonRoundShotState : StateBehaviour
     {
-        private readonly AudioSource throwSoundEffect;
         private CancellationTokenSource cancellationToken;
         private RaccoonRoundShotStateConfig config;
 
-        public RaccoonRoundShotState(AudioSource throwSoundEffect, RaccoonRoundShotStateConfig config)
-        {
-            this.throwSoundEffect = CheckForNullHelper.Check(throwSoundEffect, nameof(throwSoundEffect));
-            this.config = CheckForNullHelper.Check(config, nameof(config));
-        }
+        public RaccoonRoundShotState(RaccoonRoundShotStateConfig config) => this.config = CheckForNullHelper.Check(config, nameof(config));
 
         public override async void EnterState(IStateMachineUser stateMachine)
         {
@@ -36,7 +32,7 @@ namespace AutumnForest
         public override void ExitState(IStateMachineUser stateMachine)
         {
             ResetTransfomRotation(stateMachine.ServiceLocator.GetService<Shooting>().TransformRotation);
-            throwSoundEffect.Stop();
+            stateMachine.ServiceLocator.GetService<RaccoonSoudsHelper>().LoopedThrowSound.Stop();
 
             cancellationToken.Cancel();
             cancellationToken.Dispose();
@@ -44,7 +40,7 @@ namespace AutumnForest
 
         private async UniTask SpawnCones(IStateMachineUser stateMachine, CancellationToken token)
         {
-            throwSoundEffect.Play();
+            stateMachine.ServiceLocator.GetService<RaccoonSoudsHelper>().LoopedThrowSound.Play();
             Shooting shooting = stateMachine.ServiceLocator.GetService<Shooting>();
 
             try

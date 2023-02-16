@@ -9,13 +9,8 @@ namespace AutumnForest.BossFight.Raccoon.States
     public sealed class RaccoonShirtThrowingState : StateBehaviour
     {
         private RaccoonShirtThrowingStateConfig config;
-        private PitchedAudio throwAudio;
 
-        public RaccoonShirtThrowingState(RaccoonShirtThrowingStateConfig config, AudioSource throwAudio)
-        {
-            this.config = config;
-            this.throwAudio = new(throwAudio);
-        }
+        public RaccoonShirtThrowingState(RaccoonShirtThrowingStateConfig config) => this.config = config;
 
         public override void EnterState(IStateMachineUser stateMachine) => ThrowShirts(stateMachine);
 
@@ -28,7 +23,7 @@ namespace AutumnForest.BossFight.Raccoon.States
                 for (int i = 0; i < config.ShirtsCount; i++)
                 {
                     ThrowShirt(stateMachineUser);
-                    throwAudio.Play();
+                    stateMachineUser.ServiceLocator.GetService<RaccoonSoudsHelper>().ThrowSound.Play();
                     await UniTask.Delay(TimeSpan.FromSeconds(config.ThrowRate));
                 }
             }

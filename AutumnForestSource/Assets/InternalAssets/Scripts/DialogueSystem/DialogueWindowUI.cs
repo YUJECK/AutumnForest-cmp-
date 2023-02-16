@@ -41,9 +41,12 @@ namespace AutumnForest.DialogueSystem
         }
         private void OnDisable()
         {
-            GlobalServiceLocator.GetService<DialogueManager>().OnDialogueStarted -= OnDialogueStarted;
-            GlobalServiceLocator.GetService<DialogueManager>().OnDialogueEnded -= OnDialogueEnded;
-            GlobalServiceLocator.GetService<DialogueManager>().OnPhraseSwitched -= OnPhraseSwitched;
+            if (GlobalServiceLocator.TryGetService(out DialogueManager dialogueManager))
+            {
+                dialogueManager.OnDialogueStarted -= OnDialogueStarted;
+                dialogueManager.OnDialogueEnded -= OnDialogueEnded;
+                dialogueManager.OnPhraseSwitched -= OnPhraseSwitched;
+            }
 
             cancellationToken.Dispose();
         }

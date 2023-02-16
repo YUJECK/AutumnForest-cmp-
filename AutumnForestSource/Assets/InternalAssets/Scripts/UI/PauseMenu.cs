@@ -10,7 +10,11 @@ namespace AutumnForest
         private void Awake() => Continue();
 
         private void OnEnable() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.PauseMenu.performed += PauseMenuInput;
-        private void OnDisable() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.PauseMenu.performed -= PauseMenuInput;
+        private void OnDisable()
+        {
+            if (GlobalServiceLocator.TryGetService(out PlayerInput playerInput))
+                playerInput.Inputs.PauseMenu.performed -= PauseMenuInput;
+        }
 
         private void PauseMenuInput(UnityEngine.InputSystem.InputAction.CallbackContext obj)
         {

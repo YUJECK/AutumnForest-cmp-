@@ -20,8 +20,11 @@ namespace AutumnForest.Player
         }
         private void OnDisable()
         {
-            GlobalServiceLocator.GetService<PlayerMovable>().OnMoved -= OnMoved;
-            GlobalServiceLocator.GetService<PlayerMovable>().OnMoveReleased -= OnMoveReleased;
+            if (GlobalServiceLocator.TryGetService(out PlayerMovable playerMovable))
+            {
+                playerMovable.OnMoved += OnMoved;
+                playerMovable.OnMoveReleased += OnMoveReleased;
+            }
         }
 
         private void OnMoved(Vector2 obj) => playerAnimator.PlayWalkAnimation();

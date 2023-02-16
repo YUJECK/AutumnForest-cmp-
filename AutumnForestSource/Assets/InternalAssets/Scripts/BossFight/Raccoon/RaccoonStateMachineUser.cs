@@ -8,12 +8,14 @@ using UnityEngine;
 namespace AutumnForest.BossFight.Raccoon
 {
     [RequireComponent(typeof(IStateContainerVariator))]
+    [RequireComponent(typeof(RaccoonSoudsHelper))]
     public class RaccoonStateMachineUser : MonoBehaviour, IStateMachineUser
     {
         [Header("Services")]
         [SerializeField] private Animator animator;
         [SerializeField] private Shooting shooting;
         [SerializeField] private CreatureHealth healthObject;
+        [SerializeField] private RaccoonSoudsHelper raccoonSouds;
         [SerializeField] private SpawnPlace spawnPlace;
 
         private BossFightManager bossFightManager;
@@ -29,7 +31,7 @@ namespace AutumnForest.BossFight.Raccoon
 
         private void Awake()
         {
-            ServiceLocator = new(new RaccoonAnimator(animator), shooting, healthObject, spawnPlace, transform);
+            ServiceLocator = new(new RaccoonAnimator(animator), shooting, healthObject, spawnPlace, raccoonSouds, transform);
             raccoonStatesContainer = GetComponent<IStateContainerVariator>().InitStates() as RaccoonStatesContainer;
 
             StateMachine = new(this, false);

@@ -36,25 +36,22 @@ namespace AutumnForest.BossFight
                 .GetService<CreatureHealth>()
                 .OnDied += bossFightManager.EndBossFight;
         }
-        private void OnDisable()
-        {
-            bossFightManager.OnBossFightStarted -= GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToBossFightCamera;
-            bossFightManager.OnBossFightEnded -= GlobalServiceLocator.GetService<CameraSwitcher>().SwichToMainCamera;
+        //private void OnDisable()
+        //{
+        //    bossFightManager.OnBossFightStarted -= GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToBossFightCamera;
+        //    bossFightManager.OnBossFightEnded -= GlobalServiceLocator.GetService<CameraSwitcher>().SwichToMainCamera;
 
-            bossFightManager.OnBossFightStarted -= GlobalServiceLocator.GetService<MusicSwitcher>().SwitchToBossFightTheme;
-            bossFightManager.OnBossFightEnded -= GlobalServiceLocator.GetService<MusicSwitcher>().SwitchToMainTheme;
+        //    bossFightManager.OnBossFightStarted -= GlobalServiceLocator.GetService<PlayerDash>().Enable;
+        //    bossFightManager.OnBossFightEnded -= GlobalServiceLocator.GetService<PlayerDash>().Disable;
 
-            bossFightManager.OnBossFightStarted -= GlobalServiceLocator.GetService<PlayerDash>().Enable;
-            bossFightManager.OnBossFightEnded -= GlobalServiceLocator.GetService<PlayerDash>().Disable;
+        //    bossFightManager.OnBossFightStarted -= EnableHealthBar;
+        //    bossFightManager.OnBossFightEnded -= DisableHealthBar;
 
-            bossFightManager.OnBossFightStarted -= EnableHealthBar;
-            bossFightManager.OnBossFightEnded -= DisableHealthBar;
-
-            bossFightManager.OnBossFightStarted -= EnableLog;
-            bossFightManager.OnBossFightStarted -= DisableLog;
+        //    bossFightManager.OnBossFightStarted -= EnableLog;
+        //    bossFightManager.OnBossFightStarted -= DisableLog;
             
-            GlobalServiceLocator.GetService<RaccoonStateMachineUser>().ServiceLocator.GetService<CreatureHealth>().OnDied -= bossFightManager.EndBossFight;
-        }
+        //    GlobalServiceLocator.GetService<RaccoonStateMachineUser>().ServiceLocator.GetService<CreatureHealth>().OnDied -= bossFightManager.EndBossFight;
+        //}
 
         private void EnableHealthBar() => healthBar.gameObject.SetActive(true);
         private void EnableLog() => log.SetActive(true);

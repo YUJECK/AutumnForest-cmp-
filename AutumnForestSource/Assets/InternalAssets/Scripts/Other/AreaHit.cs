@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AutumnForest
 {
-    public class AreaHit : MonoBehaviour
+    public sealed class AreaHit : MonoBehaviour
     {
         public event Action OnHitted;
         [SerializeField] private float attackRange = 0.3f;

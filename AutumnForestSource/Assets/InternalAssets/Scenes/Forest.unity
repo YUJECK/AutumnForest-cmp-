@@ -9582,7 +9582,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229860903}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.37873, y: -2.16322, z: -13.043479}
+  m_LocalPosition: {x: 24.5625, y: -1.875, z: -13.043479}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32220,7 +32220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &733049152
 RectTransform:
   m_ObjectHideFlags: 0
@@ -42706,6 +42706,7 @@ GameObject:
   - component: {fileID: 1025024693}
   - component: {fileID: 1025024695}
   - component: {fileID: 1025024696}
+  - component: {fileID: 1025024699}
   - component: {fileID: 1025024698}
   - component: {fileID: 1025024697}
   m_Layer: 10
@@ -42749,6 +42750,7 @@ MonoBehaviour:
   animator: {fileID: 1155370346}
   shooting: {fileID: 1809685870}
   healthObject: {fileID: 1025024698}
+  raccoonSouds: {fileID: 1025024699}
   spawnPlace:
     leftDownCorner: {x: 17, y: -7}
     rightUpCorner: {x: 28, y: 3.5}
@@ -42768,11 +42770,8 @@ MonoBehaviour:
   raccoonRoundShotStateConfig: {fileID: 11400000, guid: f57eedd32a9e8134abc8eb548b255e05, type: 2}
   raccoonShirtThrowingStateConfig: {fileID: 11400000, guid: 0ce18d5742a94a546a551e65c6236b93, type: 2}
   chestnut: {fileID: 160220853299425897, guid: 5f030ef350067734298dd4434b921de1, type: 3}
-  shirtPrefab: {fileID: 0}
   defaultSquirrelPrefab: {fileID: 3538509849446323249, guid: bbc8f79cb335d4f4a83a32449059d8be, type: 3}
   fireSquirrelPrefab: {fileID: 4786743963374172463, guid: 8be165a019008924ebf764f79c336822, type: 3}
-  throwLoopedSoundEffect: {fileID: 1513363127}
-  shotSoundEffect: {fileID: 399046276}
   dialogue: {fileID: 968301942}
   healPoint: {fileID: 754517608}
   defaultPosition: {fileID: 1753236064}
@@ -42818,6 +42817,23 @@ MonoBehaviour:
   <HealthBarConfig>k__BackingField: {fileID: 11400000, guid: f42455fc5862c734f974153d8402f075, type: 2}
   <CurrentHealth>k__BackingField: 180
   <MaximumHealth>k__BackingField: 180
+--- !u!114 &1025024699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025024692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60a3d34deb2eec44098e707e0b690e32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <LoopedThrowSound>k__BackingField: {fileID: 1513363127}
+  <ThrowSound>k__BackingField:
+    <AudioSource>k__BackingField: {fileID: 399046276}
+    minPitch: 0.8
+    maxPitch: 1.2
 --- !u!1 &1029327000
 GameObject:
   m_ObjectHideFlags: 0
@@ -44537,8 +44553,8 @@ Transform:
   - {fileID: 1172446387}
   - {fileID: 1420591305}
   - {fileID: 878030963}
-  - {fileID: 1473234112}
   - {fileID: 1850862270}
+  - {fileID: 1473234112}
   - {fileID: 704267743}
   m_Father: {fileID: 432826428}
   m_RootOrder: 1
@@ -64177,8 +64193,8 @@ Transform:
   - {fileID: 279371391}
   - {fileID: 1173638655}
   - {fileID: 1033946634}
-  - {fileID: 1978542412}
   - {fileID: 288637033}
+  - {fileID: 1978542412}
   - {fileID: 1654344441}
   - {fileID: 1808420501}
   - {fileID: 1998287980}

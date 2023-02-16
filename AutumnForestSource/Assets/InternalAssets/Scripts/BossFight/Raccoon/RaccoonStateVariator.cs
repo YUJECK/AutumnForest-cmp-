@@ -17,12 +17,9 @@ namespace AutumnForest.Raccoon
         [SerializeField] private RaccoonShirtThrowingStateConfig raccoonShirtThrowingStateConfig;
         [Header("Prefabs")]
         [SerializeField] private Rigidbody2D chestnut;
-        [SerializeField] private Projectile shirtPrefab;
         [SerializeField] private Squirrel defaultSquirrelPrefab;
         [SerializeField] private Squirrel fireSquirrelPrefab;
         [Space]
-        [SerializeField] private AudioSource throwLoopedSoundEffect;
-        [SerializeField] private AudioSource shotSoundEffect;
         [SerializeField] private Dialogue dialogue;
         [SerializeField] private Transform healPoint;
         [SerializeField] private Transform defaultPosition;
@@ -31,15 +28,15 @@ namespace AutumnForest.Raccoon
         {
             StateBehaviour[] firstStageStates =
             {
-                new RaccoonRoundShotState(throwLoopedSoundEffect, raccoonRoundShotStateConfig),
-                new RaccoonShirtThrowingState(raccoonShirtThrowingStateConfig, shotSoundEffect),
-                new RaccoonShirtThrowingState(raccoonShirtThrowingStateConfig, shotSoundEffect),
+                new RaccoonRoundShotState(raccoonRoundShotStateConfig),
+                new RaccoonShirtThrowingState(raccoonShirtThrowingStateConfig),
+                new RaccoonShirtThrowingState(raccoonShirtThrowingStateConfig),
                 new RaccoonSquirrelSpawnState(defaultSquirrelPrefab, 5, 7, 2.5f),
-                new TripleShotState(chestnut, shotSoundEffect, 10, 25, 0.5f)
+                new TripleShotState(chestnut, 10, 25, 0.5f)
             };
             StateBehaviour[] thirdStageStates =
             {
-                new RaccoonRoundShotState(throwLoopedSoundEffect, raccoonRoundShotStateConfig),
+                new RaccoonRoundShotState(raccoonRoundShotStateConfig),
                 new RaccoonSquirrelSpawnState(fireSquirrelPrefab, 3, 4, 1.5f)
             };
 

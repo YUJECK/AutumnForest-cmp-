@@ -15,12 +15,24 @@ namespace AutumnForest
 
             throw new NullReferenceException("Service is not registered");
         }
+        public static void UnregisterAll() => services.Clear();
         public static T GetService<T>() where T : class
         {
             if (services.TryGetValue(typeof(T), out var service))
                 return service as T;
 
-            throw new NullReferenceException("Service is not registered");
+            return null;
+        }
+        public static bool TryGetService<T>(out T service) where T : class
+        {
+            if (services.TryGetValue(typeof(T), out var item))
+            {
+                service = item as T;
+                return true;
+            }
+
+            service = null;
+            return false;
         }
     }
 }

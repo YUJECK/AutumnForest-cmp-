@@ -25,6 +25,8 @@ namespace AutumnForest.Player
         public event Action<int, int> OnTakeHit;
         public event Action OnDied;
 
+        private bool died;
+
         public void Heal(int healPoints)
         {
             CurrentHealth += healPoints;
@@ -44,10 +46,12 @@ namespace AutumnForest.Player
             OnTakeHit?.Invoke(CurrentHealth, MaximumHealth);
             OnHealthChanged?.Invoke(CurrentHealth, MaximumHealth);
 
-            if (CurrentHealth <= 0)
+            if (CurrentHealth <= 0 && !died)
             {
+                died = true;
+
                 OnDied?.Invoke();
-                //GameManager.Restart();
+                SceneReload.RestartScene();
             }
         }
 

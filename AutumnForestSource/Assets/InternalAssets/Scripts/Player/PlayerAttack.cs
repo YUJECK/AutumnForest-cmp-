@@ -20,7 +20,11 @@ namespace AutumnForest.Player
             if (attackEffect == null) throw new NullReferenceException(nameof(attackEffect));
         }
         private void OnEnable() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.Attack.performed += Attack;
-        private void OnDisable() => GlobalServiceLocator.GetService<PlayerInput>().Inputs.Attack.performed -= Attack;
+        private void OnDisable()
+        {
+            if (GlobalServiceLocator.TryGetService(out PlayerInput playerInput))
+                playerInput.Inputs.Attack.performed -= Attack;
+        }
 
         private async void Attack(InputAction.CallbackContext context)
         {

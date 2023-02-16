@@ -1,20 +1,20 @@
 using AutumnForest.Health;
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace AutumnForest
 {
     public class AreaHit : MonoBehaviour
     {
-        public UnityEvent OnHitting = new();
+        public event Action OnHitted;
         [SerializeField] private float attackRange = 0.3f;
 
         private void OnDrawGizmos() => Gizmos.DrawWireSphere(transform.position, attackRange);
 
-        public void Hit(int damage = 10)
+        public void Hit(int damage)
         {
             Collider2D[] hitObj = Physics2D.OverlapCircleAll(transform.position, attackRange);
-            OnHitting.Invoke();
+            OnHitted?.Invoke();
 
             foreach (Collider2D obj in hitObj)
             {

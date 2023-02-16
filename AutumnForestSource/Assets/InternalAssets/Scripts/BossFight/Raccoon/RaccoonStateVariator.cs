@@ -32,7 +32,8 @@ namespace AutumnForest.Raccoon
             StateBehaviour[] firstStageStates =
             {
                 new RaccoonRoundShotState(throwLoopedSoundEffect, raccoonRoundShotStateConfig),
-                new RaccoonShirtThrowingState(raccoonShirtThrowingStateConfig),
+                new RaccoonShirtThrowingState(raccoonShirtThrowingStateConfig, shotSoundEffect),
+                new RaccoonShirtThrowingState(raccoonShirtThrowingStateConfig, shotSoundEffect),
                 new RaccoonSquirrelSpawnState(defaultSquirrelPrefab, 5, 7, 2.5f),
                 new TripleShotState(chestnut, shotSoundEffect, 10, 25, 0.5f)
             };

@@ -62,11 +62,10 @@ namespace AutumnForest
         }
         private void RegisterPlayerServices()
         {
+            GlobalServiceLocator.RegisterService(new PlayerInput());
             GlobalServiceLocator.RegisterService(FindObjectOfType<PlayerMovable>(true));
             GlobalServiceLocator.RegisterService(FindObjectOfType<PlayerAttack>(true));
             GlobalServiceLocator.RegisterService(FindObjectOfType<PlayerDash>(true));
-            GlobalServiceLocator.RegisterService(FindObjectOfType<PlayerFlipper>(true));
-            GlobalServiceLocator.RegisterService(new PlayerInput());
         }
         private void RegisterCameras()
         {

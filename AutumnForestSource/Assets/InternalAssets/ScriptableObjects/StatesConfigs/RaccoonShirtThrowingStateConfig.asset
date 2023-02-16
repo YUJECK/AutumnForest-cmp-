@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: RaccoonShirtThrowingStateConfig
   m_EditorClassIdentifier: 
   <ShirtsCount>k__BackingField: 8
-  <ThrowRate>k__BackingField: 0.5
+  <ThrowRate>k__BackingField: 0.75

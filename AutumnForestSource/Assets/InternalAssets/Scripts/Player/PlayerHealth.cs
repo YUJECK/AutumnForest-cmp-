@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace AutumnForest.Player
 {
-    public class PlayerHealth : MonoBehaviour, IHealth, IFireable
+    public class PlayerHealth : MonoBehaviour, IHealth
     {
         //здесь можно было добавить всякие проверки в сеттер этого свойства, но мне было лень
         //и поэтому я чисто их прикостылил в методы ниже
@@ -53,21 +53,6 @@ namespace AutumnForest.Player
                 OnDied?.Invoke();
                 SceneReload.RestartScene();
             }
-        }
-
-        public async void Fire()
-        {
-            if (Fired) return;
-
-            Fired = true;
-            {
-                for (int i = 0; i < 5; i++)
-                {
-                    TakeHit(2);
-                    await UniTask.Delay(TimeSpan.FromSeconds(1f));
-                }
-            }
-            Fired = false;
         }
     }
 }

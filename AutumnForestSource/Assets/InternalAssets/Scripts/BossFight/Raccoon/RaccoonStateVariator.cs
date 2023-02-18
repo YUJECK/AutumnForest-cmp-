@@ -21,6 +21,7 @@ namespace AutumnForest.Raccoon
         [SerializeField] private Squirrel fireSquirrelPrefab;
         [Space]
         [SerializeField] private Dialogue dialogue;
+        [SerializeField] private GameObject waterJet;
         [SerializeField] private Transform healPoint;
         [SerializeField] private Transform defaultPosition;
 
@@ -37,11 +38,13 @@ namespace AutumnForest.Raccoon
             StateBehaviour[] thirdStageStates =
             {
                 new RaccoonRoundShotState(raccoonRoundShotStateConfig),
-                new RaccoonSquirrelSpawnState(fireSquirrelPrefab, 3, 4, 1.5f)
+                new RaccoonSquirrelSpawnState(fireSquirrelPrefab, 3, 4, 1.5f),
+                new RaccoonWaterJetState(waterJet, 10)
             };
 
             return new RaccoonStatesContainer(
                 new RaccoonIdleState(),
+                
                 new RaccoonDialogueState(dialogue),
                 new RaccoonHealingState(racconHealingStateConfig, healPoint, defaultPosition),
                 firstStageStates,

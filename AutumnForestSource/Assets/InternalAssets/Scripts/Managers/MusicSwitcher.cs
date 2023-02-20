@@ -28,6 +28,7 @@ namespace AutumnForest
         }
 
         public void SwitchToMainTheme() => Switch(mainTheme);
+        public void SwitchToNone() => Switch(null);
         public void SwitchToBossFightTheme() => Switch(bossfightTheme);
         public void SwitchToBasementAmbient() => Switch(basementAmbientTheme);
         public void SwitchToGramophone() => Switch(gramophoneTheme);
@@ -39,7 +40,7 @@ namespace AutumnForest
             previousTheme?.Stop();
 
             currentTheme = theme;
-            currentTheme.Play();
+            currentTheme?.Play();
         }
     }
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 73d93cbff33768947b565dd8ea0551a6
+guid: 89b959a7e1cd9b247b5008ee18635fb2
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Pixeled
+  - Fifaks 1.0 dev1
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

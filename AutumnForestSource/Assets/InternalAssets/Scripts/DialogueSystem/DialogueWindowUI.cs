@@ -12,6 +12,8 @@ namespace AutumnForest.DialogueSystem
         [SerializeField] private AnimationClip windowDisableAnimation;
         [SerializeField] private AnimationClip windowEnableAnimation;
 
+        [SerializeField] private AudioSource dialogueClickAudio;
+
         private Animator animator;
 
         [SerializeField] private GameObject dialogueWindowUI;
@@ -63,18 +65,25 @@ namespace AutumnForest.DialogueSystem
             ShowPhrase(name, phrase, cancellationToken.Token);
         }
 
-
         private void OnDialogueStarted(Dialogue dialogue)
         {
             enableTask = SelfEnable();
             dialogueNameUI.text = dialogue.DialogueName.Value;
         }
-        private void OnDialogueEnded(Dialogue dialogue) => disableTask = SelfDisable();
+        private void OnDialogueEnded(Dialogue dialogue)
+        {
+            if(dialogueClickAudio.isPlaying)
+                dialogueClickAudio.Stop();
+            
+            disableTask = SelfDisable();
+        }
 
         private async void ShowPhrase(string name, string text, CancellationToken token)
         {
             dialogueNameUI.text = name;
             dialogueTextUI.text = "";
+
+            dialogueClickAudio.Play();
 
             try
             {
@@ -83,6 +92,7 @@ namespace AutumnForest.DialogueSystem
                     dialogueTextUI.text += text[i];
                     await UniTask.Delay(TimeSpan.FromSeconds(textSpeed), cancellationToken: token);
                 }
+                dialogueClickAudio.Stop();
             }
             catch
             {

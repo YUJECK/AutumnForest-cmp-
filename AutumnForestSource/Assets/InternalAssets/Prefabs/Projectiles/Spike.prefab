@@ -86,7 +86,7 @@ MonoBehaviour:
   damage: 2
   collideEffect: {fileID: 0}
   hitSoundEffect: {fileID: 0}
-  <Rigidbody2D>k__BackingField: {fileID: 0}
+  projectileLayer: 8
 --- !u!61 &-1869262398112889642
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -20,6 +20,9 @@ namespace AutumnForest.Assets.InternalAssets.Scripts
             LanguageManager.OnLanguageChanged += OnLanguageChanged;
         }
 
+        private void OnValidate()
+        {
+        }
         private void OnLanguageChanged(Language language)
         {
             if (language == Language.English) text.text = englishText;

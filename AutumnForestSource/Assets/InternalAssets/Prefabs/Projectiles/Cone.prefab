@@ -305,6 +305,7 @@ MonoBehaviour:
   damage: 2
   collideEffect: {fileID: 8288446103499334202, guid: 65ea51d7dbb99f2428fdf664e0677273, type: 3}
   hitSoundEffect: {fileID: 0}
+  projectileLayer: 8
   fireEffect: {fileID: 609348359228036970}
 --- !u!58 &8068767326314776787
 CircleCollider2D:

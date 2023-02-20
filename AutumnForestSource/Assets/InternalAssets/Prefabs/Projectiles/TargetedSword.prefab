@@ -150,6 +150,7 @@ MonoBehaviour:
   damage: 7
   collideEffect: {fileID: 8288446103499334202, guid: 65ea51d7dbb99f2428fdf664e0677273, type: 3}
   hitSoundEffect: {fileID: 0}
+  projectileLayer: 8
 --- !u!50 &5064042236662064233
 Rigidbody2D:
   serializedVersion: 4

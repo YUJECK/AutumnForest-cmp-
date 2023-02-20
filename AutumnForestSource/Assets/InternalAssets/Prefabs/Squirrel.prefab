@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3538509848148200146}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 3538509849446323248}
   - component: {fileID: 3538509849446323278}
   - component: {fileID: 3538509849446323279}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Squirrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   - component: {fileID: 3538509849648730496}
   - component: {fileID: 3538509849648730526}
   - component: {fileID: 3538509849648730527}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shooting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -293,7 +293,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7045931915638134691}
   - component: {fileID: 1916872861306852803}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}

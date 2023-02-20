@@ -252,7 +252,7 @@ MonoBehaviour:
     russian: "\u0421\u0442\u0430\u0440\u0443\u0448\u043A\u0430 \u0421\u043E\u0432\u0430"
   <DialoguePhrases>k__BackingField:
   - english: Ho-ho-ho! Hello, my prickly little friend
-    russian: " \u0425\u043E-\u0445\u043E-\u0445\u043E! \u041F\u0440\u0438\u0432\u0435\u0442,
+    russian: "\u0425\u043E-\u0445\u043E-\u0445\u043E! \u041F\u0440\u0438\u0432\u0435\u0442,
       \u043C\u043E\u0439 \u043C\u0430\u043B\u0435\u043D\u044C\u043A\u0438\u0439 \u043A\u043E\u043B\u044E\u0447\u0438\u0439
       \u0434\u0440\u0443\u0433"
   - english: How are you? I heard you have a problem with the Mafinot, right?

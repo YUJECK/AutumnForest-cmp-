@@ -29,6 +29,8 @@ namespace AutumnForest.BossFight.Raccoon.States
         public override void EnterState(IStateMachineUser stateMachine)
         {
             IsCompleted = false;
+
+            GlobalServiceLocator.GetService<MusicSwitcher>().SwitchToNone();
             dialogue.StartDialogue();
 
             GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToDialogueCamera(stateMachine.ServiceLocator.GetService<Transform>());

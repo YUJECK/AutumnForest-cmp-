@@ -7,6 +7,7 @@ namespace AutumnForest
         public static async void RestartScene()
         {
             await GlobalServiceLocator.GetService<BlackoutTransition>().StartBlackout();
+            
             GlobalServiceLocator.UnregisterAll();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }

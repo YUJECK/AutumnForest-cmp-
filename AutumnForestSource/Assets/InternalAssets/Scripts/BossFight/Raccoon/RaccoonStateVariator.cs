@@ -38,7 +38,7 @@ namespace AutumnForest.Raccoon
             StateBehaviour[] thirdStageStates =
             {
                 new RaccoonRoundShotState(raccoonRoundShotStateConfig),
-                new RaccoonSquirrelSpawnState(fireSquirrelPrefab, 3, 4, 1.5f),
+                new RaccoonSquirrelSpawnState(defaultSquirrelPrefab, 3, 4, 1.5f),
                 new RaccoonWaterJetState(waterJet, 10)
             };
 

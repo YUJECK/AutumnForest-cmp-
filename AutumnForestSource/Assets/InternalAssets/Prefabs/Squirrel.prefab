@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fb21741dd506464382c1d49639b2502, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 3538509848148200146}
+  <FirePoint>k__BackingField: {fileID: 3538509848148200146}
 --- !u!1 &6803103406985748088
 GameObject:
   m_ObjectHideFlags: 0

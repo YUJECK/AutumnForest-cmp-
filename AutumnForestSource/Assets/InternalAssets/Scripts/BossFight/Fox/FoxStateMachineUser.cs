@@ -11,10 +11,9 @@ namespace AutumnForest.BossFight.Fox
     public class FoxStateMachineUser : MonoBehaviour, IStateMachineUser
     {
         [SerializeField] private ParticleSystem jumpParticle;
-        [Header("SFX")]
-        [SerializeField] private AudioSource castSoundEffect;
         [Header("Services")]
         [SerializeField] private Shooting shooting;
+        [SerializeField] private FoxSoundsHelper foxSounds;
         [SerializeField] private Animator animator;
         [SerializeField] private CreatureHealth creatureHealth;
         [SerializeField] private Transform[] points;
@@ -31,7 +30,7 @@ namespace AutumnForest.BossFight.Fox
         private void Awake()
         {
             foxAnimator = new(animator);
-            ServiceLocator = new(shooting, creatureHealth, foxAnimator);
+            ServiceLocator = new(shooting, creatureHealth, foxAnimator, foxSounds);
 
             creatureHealth.OnDied += OnDie;
 
@@ -39,10 +38,10 @@ namespace AutumnForest.BossFight.Fox
             {
                 new TimingState(2.5f),
                 new TimingState(3.5f),
-                new FoxFirstFlowerPattern(points, castSoundEffect, 1f),
-                new FoxFirstFlowerPattern(points, castSoundEffect, 0.5f),
-                new FoxSingleSwordCastState(15),
-                new FoxSerialSwordThowing(points, castSoundEffect, 0.1f, 0.5f),
+                new FoxFirstFlowerPattern(points, 1f),
+                new FoxFirstFlowerPattern(points, 0.5f),
+                new FoxSwordWandererSpawnState(),
+                new FoxSerialSwordThowing(points, 0.1f, 0.5f),
             };
             attackPatterns = patterns;
 

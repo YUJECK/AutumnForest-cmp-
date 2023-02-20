@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using UnityEditorInternal;
 using UnityEngine;
 
 namespace AutumnForest.BossFight.Fox.States
@@ -16,18 +17,14 @@ namespace AutumnForest.BossFight.Fox.States
         private readonly Transform[] swordPoints;
         private readonly Stack<Projectile> pickedSwords = new();
 
-        private readonly PitchedAudio castSoundEffect;
-
         private readonly float spawnRate = 0.1f;
         private readonly float throwRate = 0.5f;
 
         private CancellationTokenSource cancellationToken;
 
-        public FoxSerialSwordThowing(Transform[] swordPoints, AudioSource castSoundEffect, float spawnRate, float throwRate)
+        public FoxSerialSwordThowing(Transform[] swordPoints, float spawnRate, float throwRate)
         {
             this.swordPoints = swordPoints;
-
-            this.castSoundEffect = new(castSoundEffect);
 
             this.spawnRate = spawnRate;
             this.throwRate = throwRate;
@@ -36,10 +33,11 @@ namespace AutumnForest.BossFight.Fox.States
 
         public override void EnterState(IStateMachineUser stateMachine)
         {
-            cancellationToken = new();
             IsCompleted = false;
+            cancellationToken = new();
+            
             stateMachine.ServiceLocator.GetService<FoxAnimator>().PlayCasting();
-            CastPattern(stateMachine.ServiceLocator.GetService<Shooting>(), cancellationToken.Token);
+            CastPattern(stateMachine.ServiceLocator.GetService<Shooting>(), stateMachine.ServiceLocator.GetService<FoxSoundsHelper>().CastSound, cancellationToken.Token);
         }
         public override void ExitState(IStateMachineUser stateMachine)
         {
@@ -49,12 +47,12 @@ namespace AutumnForest.BossFight.Fox.States
                 pickedSwords.Pop().gameObject.SetActive(false);
         }
 
-        private async void CastPattern(Shooting shooting, CancellationToken token)
+        private async void CastPattern(Shooting shooting, PitchedAudio castSound, CancellationToken token)
         {
             try
             {
-                await SpawningSwords(token);
-                await LaunchingSwords(shooting, token);
+                await SpawningSwords(castSound, token);
+                await LaunchingSwords(shooting, castSound, token);
             }
             catch
             {
@@ -64,43 +62,43 @@ namespace AutumnForest.BossFight.Fox.States
             IsCompleted = true;
         }
 
-        private async UniTask SpawningSwords(CancellationToken token)
+        private async UniTask SpawningSwords(PitchedAudio castSound, CancellationToken token)
         {
             for (int i = 0; i < swordPoints.Length; i++)
             {
-                pickedSwords.Push(SpawnNewSword(swordPoints[i].position));
+                pickedSwords.Push(SpawnNewSword(swordPoints[i].position, castSound));
                 await UniTask.Delay(TimeSpan.FromSeconds(spawnRate), cancellationToken: token);
             }
         }
 
-        private async UniTask LaunchingSwords(Shooting shooting, CancellationToken token)
+        private async UniTask LaunchingSwords(Shooting shooting, PitchedAudio castSound, CancellationToken token)
         {
             while (pickedSwords.Count > 0)
             {
-                ThrowSword(shooting, pickedSwords.Peek());
+                ThrowSword(shooting, pickedSwords.Peek(), castSound);
 
                 pickedSwords.Pop();
                 await UniTask.Delay(TimeSpan.FromSeconds(throwRate), cancellationToken: token);
             }
         }
 
-        private Projectile SpawnNewSword(Vector3 swordPosition)
+        private Projectile SpawnNewSword(Vector3 swordPosition, PitchedAudio castSound)
         {
             Projectile sword = GlobalServiceLocator.GetService<PoolsContainer>().TargetedSwordPool.GetFree();
             sword.transform.position = swordPosition;
 
-            castSoundEffect.Play();
+            castSound.Play();
 
             return sword;
         }
-        private void ThrowSword(Shooting shooting, Projectile sword)
+        private void ThrowSword(Shooting shooting, Projectile sword, PitchedAudio castSound)
         {
             if (sword.TryGetComponent(out MonoRotator monoRotator))
                 monoRotator.TransfromRotation.Disable();
 
             shooting.ShootWithoutInstantiate(sword.Rigidbody2D, 10, 0, false);
 
-            castSoundEffect.Play();
+            castSound.Play();
         }
     }
 }

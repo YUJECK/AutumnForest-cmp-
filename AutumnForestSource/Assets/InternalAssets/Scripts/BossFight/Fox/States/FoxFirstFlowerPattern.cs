@@ -15,16 +15,13 @@ namespace AutumnForest.BossFight.Fox.States
         private readonly float shotDelay = 2f;
         private readonly int repeatsCount = 4;
         private readonly Transform[] swordPoints;
-        private readonly PitchedAudio castSound;
 
         private CancellationTokenSource cancellationToken;
 
-        public FoxFirstFlowerPattern(Transform[] swordPoints, AudioSource castSound, float shotDelay)
+        public FoxFirstFlowerPattern(Transform[] swordPoints, float shotDelay)
         {
             this.shotDelay = shotDelay;
             this.swordPoints = swordPoints;
-
-            this.castSound = new(castSound);
         }
         ~FoxFirstFlowerPattern() => cancellationToken.Dispose();
 
@@ -32,11 +29,11 @@ namespace AutumnForest.BossFight.Fox.States
         {
             cancellationToken = new();
             stateMachine.ServiceLocator.GetService<FoxAnimator>().PlayCasting();
-            StartPattern(cancellationToken.Token);
+            StartPattern(cancellationToken.Token, stateMachine.ServiceLocator.GetService<FoxSoundsHelper>().CastSound);
         }
         public override void ExitState(IStateMachineUser stateMachine) => cancellationToken.Cancel();
 
-        private async void StartPattern(CancellationToken token)
+        private async void StartPattern(CancellationToken token, PitchedAudio castAudio)
         {
             IsCompleted = false;
             {
@@ -50,7 +47,7 @@ namespace AutumnForest.BossFight.Fox.States
                             spawnedSwords.Add(SpawnSword(swordPoints[j]));
 
                         await UniTask.Delay(TimeSpan.FromSeconds(shotDelay), cancellationToken: token);
-                        ThrowSwords(spawnedSwords);
+                        ThrowSwords(spawnedSwords, castAudio);
                     }
                 }
                 catch
@@ -73,10 +70,10 @@ namespace AutumnForest.BossFight.Fox.States
             if (isEven == 0) return 0;
             else return 1;
         }
-        private void ThrowSwords(List<Projectile> spawnedSwords)
+        private void ThrowSwords(List<Projectile> spawnedSwords, PitchedAudio castAudio)
         {
-            castSound.Play();
-
+            castAudio.Play();
+            
             foreach (Projectile sword in spawnedSwords)
                 sword.Rigidbody2D.AddForce(sword.transform.up * 10, ForceMode2D.Impulse);
         }

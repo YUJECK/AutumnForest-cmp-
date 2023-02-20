@@ -13,6 +13,7 @@ namespace AutumnForest.Helpers
         [SerializeField] private Projectile defaultSword;
         [SerializeField] private Projectile targetedSword;
         [SerializeField] private Shirt shirt;
+        [SerializeField] private SwordWanderer swordWanderer;
 
         public MonoObjectPool<Projectile> AcornPool { get; private set; }
         public MonoObjectPool<Projectile> ConePool { get; private set; }
@@ -20,6 +21,7 @@ namespace AutumnForest.Helpers
         public MonoObjectPool<Projectile> TargetedSwordPool { get; private set; }
         public MonoObjectPool<Projectile> DefaultSwordPool { get; private set; }
         public MonoObjectPool<Shirt> ShirtPool { get; private set; }
+        public MonoObjectPool<SwordWanderer> SwordWandererPool { get; private set; }
 
         private void Start()
         {
@@ -29,6 +31,7 @@ namespace AutumnForest.Helpers
             DefaultSwordPool = new(defaultSword, GlobalServiceLocator.GetService<ContainerHelper>().ProjectileContainer, 10, true);
             TargetedSwordPool = new(targetedSword, GlobalServiceLocator.GetService<ContainerHelper>().ProjectileContainer, 12, true);
             ShirtPool = new(shirt, GlobalServiceLocator.GetService<ContainerHelper>().ProjectileContainer, 12, true);
+            SwordWandererPool = new(swordWanderer, GlobalServiceLocator.GetService<ContainerHelper>().ProjectileContainer, 6, true);
         }
     }
 }

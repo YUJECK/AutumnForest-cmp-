@@ -8,12 +8,12 @@ namespace AutumnForest.Projectiles
     public class Projectile : MonoBehaviour
     {
         [SerializeField, Min(0)] protected int damage;
-        [SerializeField] private GameObject collideEffect;
-        [SerializeField] private AudioSource hitSoundEffect;
+        [SerializeField] protected GameObject collideEffect;
+        [SerializeField] protected AudioSource hitSoundEffect;
 
-        [SerializeField, Layer] private int projectileLayer;
+        [SerializeField, Layer] protected int projectileLayer;
 
-        public Rigidbody2D Rigidbody2D { get; private set; }
+        public Rigidbody2D Rigidbody2D { get; protected set; }
 
         private void Awake()
         {

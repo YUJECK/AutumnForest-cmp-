@@ -42952,6 +42952,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbcf4729fc9c352409b771f04970a875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  randomShotStateConfig: {fileID: 11400000, guid: aac41fc4d530afb4fbad9c86b06dca5a, type: 2}
   racconHealingStateConfig: {fileID: 11400000, guid: 47f03f131ecffb1478993d8569017ebc, type: 2}
   raccoonRoundShotStateConfig: {fileID: 11400000, guid: f57eedd32a9e8134abc8eb548b255e05, type: 2}
   raccoonShirtThrowingStateConfig: {fileID: 11400000, guid: 0ce18d5742a94a546a551e65c6236b93, type: 2}

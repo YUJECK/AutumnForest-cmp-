@@ -15,13 +15,13 @@ namespace AutumnForest.Helpers
         [SerializeField] private Shirt shirt;
         [SerializeField] private SwordWanderer swordWanderer;
 
-        public MonoObjectPool<Projectile> AcornPool { get; private set; }
-        public MonoObjectPool<Projectile> ConePool { get; private set; }
-        public MonoObjectPool<AcornHeal> AcornHealPool { get; private set; }
-        public MonoObjectPool<Projectile> TargetedSwordPool { get; private set; }
-        public MonoObjectPool<Projectile> DefaultSwordPool { get; private set; }
-        public MonoObjectPool<Shirt> ShirtPool { get; private set; }
-        public MonoObjectPool<SwordWanderer> SwordWandererPool { get; private set; }
+        public ObjectPool<Projectile> AcornPool { get; private set; }
+        public ObjectPool<Projectile> ConePool { get; private set; }
+        public ObjectPool<AcornHeal> AcornHealPool { get; private set; }
+        public ObjectPool<Projectile> TargetedSwordPool { get; private set; }
+        public ObjectPool<Projectile> DefaultSwordPool { get; private set; }
+        public ObjectPool<Shirt> ShirtPool { get; private set; }
+        public ObjectPool<SwordWanderer> SwordWandererPool { get; private set; }
 
         private void Start()
         {

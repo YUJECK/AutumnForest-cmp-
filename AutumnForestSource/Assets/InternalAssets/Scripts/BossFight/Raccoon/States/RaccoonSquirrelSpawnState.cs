@@ -10,7 +10,7 @@ namespace AutumnForest.Raccoon.States
 {
     public sealed class RaccoonSquirrelSpawnState : StateBehaviour
     {
-        private MonoObjectPool<Squirrel> squirrelPool;
+        private ObjectPool<Squirrel> squirrelPool;
 
         private int squirrelMinCount;
         private int squirrelMaxCount;

@@ -9,6 +9,11 @@ namespace AutumnForest.BossFight.Raccoon
 
         public bool Fired { get; private set; }
 
+        private void Reset()
+        {
+            if (Rigidbody2D == null)
+                Rigidbody2D = GetComponent<Rigidbody2D>();
+        }
         public void Fire()
         {
             if (!Fired)

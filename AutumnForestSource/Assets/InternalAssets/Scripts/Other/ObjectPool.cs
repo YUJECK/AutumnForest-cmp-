@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AutumnForest
 {
-    public sealed class MonoObjectPool<T> where T : MonoBehaviour
+    public sealed class ObjectPool<T> where T : MonoBehaviour
     {
         [SerializeField] private T prefab;
         [SerializeField] private Transform poolContainer;
@@ -12,7 +12,7 @@ namespace AutumnForest
 
         private List<T> pool = new();
 
-        public MonoObjectPool(T prefab, Transform container, int poolSize, bool autoExpand)
+        public ObjectPool(T prefab, Transform container, int poolSize, bool autoExpand)
         {
             if (prefab == null) 
                 throw new NullReferenceException(nameof(prefab));

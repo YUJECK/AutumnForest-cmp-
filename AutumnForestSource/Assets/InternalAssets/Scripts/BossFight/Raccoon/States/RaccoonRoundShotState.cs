@@ -1,7 +1,6 @@
 using AutumnForest.BossFight.Raccoon;
 using AutumnForest.Helpers;
 using AutumnForest.Projectiles;
-using AutumnForest.Raccoon;
 using AutumnForest.StateMachineSystem;
 using Cysharp.Threading.Tasks;
 using System.Threading;

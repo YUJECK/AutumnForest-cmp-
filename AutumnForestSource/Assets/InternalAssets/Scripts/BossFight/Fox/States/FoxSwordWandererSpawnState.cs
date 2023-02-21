@@ -3,6 +3,7 @@ using AutumnForest.Projectiles;
 using AutumnForest.StateMachineSystem;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Threading;
 
 namespace AutumnForest.BossFight.Fox.States
 {
@@ -12,9 +13,13 @@ namespace AutumnForest.BossFight.Fox.States
         private const float _spawnRate = 0.8f;
         private const int _swordsCount = 4;
 
+        private CancellationTokenSource cancellationToken;
+
         public override bool Repeatable() => false;
         public override async void EnterState(IStateMachineUser stateMachine)
         {
+            cancellationToken = new();
+
             IsCompleted = false;
             {
                 stateMachine.ServiceLocator.GetService<FoxAnimator>().PlayCasting();
@@ -28,6 +33,11 @@ namespace AutumnForest.BossFight.Fox.States
                 }
             }
             IsCompleted = true;
+        }
+        public override void ExitState(IStateMachineUser stateMachine)
+        {
+            cancellationToken.Cancel();
+            cancellationToken.Dispose();
         }
 
         private async UniTask SpawnSword(IStateMachineUser stateMachine)

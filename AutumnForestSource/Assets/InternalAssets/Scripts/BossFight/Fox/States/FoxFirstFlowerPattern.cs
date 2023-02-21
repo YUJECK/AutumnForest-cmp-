@@ -23,7 +23,6 @@ namespace AutumnForest.BossFight.Fox.States
             this.shotDelay = shotDelay;
             this.swordPoints = swordPoints;
         }
-        ~FoxFirstFlowerPattern() => cancellationToken.Dispose();
 
         public override void EnterState(IStateMachineUser stateMachine)
         {
@@ -31,7 +30,11 @@ namespace AutumnForest.BossFight.Fox.States
             stateMachine.ServiceLocator.GetService<FoxAnimator>().PlayCasting();
             StartPattern(cancellationToken.Token, stateMachine.ServiceLocator.GetService<FoxSoundsHelper>().CastSound);
         }
-        public override void ExitState(IStateMachineUser stateMachine) => cancellationToken.Cancel();
+        public override void ExitState(IStateMachineUser stateMachine)
+        {
+            cancellationToken.Cancel();
+            cancellationToken.Dispose();
+        }
 
         private async void StartPattern(CancellationToken token, PitchedAudio castAudio)
         {

@@ -6,8 +6,6 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
-using UnityEditorInternal;
 using UnityEngine;
 
 namespace AutumnForest.BossFight.Fox.States
@@ -29,19 +27,19 @@ namespace AutumnForest.BossFight.Fox.States
             this.spawnRate = spawnRate;
             this.throwRate = throwRate;
         }
-        ~FoxSerialSwordThowing() => cancellationToken.Dispose();
 
         public override void EnterState(IStateMachineUser stateMachine)
         {
             IsCompleted = false;
             cancellationToken = new();
-            
+
             stateMachine.ServiceLocator.GetService<FoxAnimator>().PlayCasting();
             CastPattern(stateMachine.ServiceLocator.GetService<Shooting>(), stateMachine.ServiceLocator.GetService<FoxSoundsHelper>().CastSound, cancellationToken.Token);
         }
         public override void ExitState(IStateMachineUser stateMachine)
         {
             cancellationToken.Cancel();
+            cancellationToken.Dispose();
 
             while (pickedSwords.Count > 0)
                 pickedSwords.Pop().gameObject.SetActive(false);

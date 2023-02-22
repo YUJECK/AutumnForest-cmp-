@@ -12,7 +12,7 @@ namespace AutumnForest.Catscenes
         [SerializeField] private AudioSource titlesTheme;
         [SerializeField] private AudioSource mafiaHouseTheme;
 
-        [SerializeField] private PassiveDialogue dialogue;
+        [SerializeField] private DialgueBus dialgueBus;
 
         protected override async void OnCatsceneStart()
         {
@@ -20,13 +20,19 @@ namespace AutumnForest.Catscenes
             await titlesTheme.StopSmoothly();
 
             await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
-            
+
             mafiaHouseTheme.Play();
-            dialogue.Dialogue.StartDialogue();
+            
+            await UniTask.Delay(TimeSpan.FromSeconds(4f));
+
+            dialgueBus.StartBus();
         }
         protected override void OnCatsceneEnd()
         {
             camera.gameObject.SetActive(false);
+
+
+            //перемещаем типо в "спасибо за игру"
         }
     }
 }

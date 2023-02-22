@@ -7,7 +7,10 @@ namespace AutumnForest.Catscenes
     {
         private void Awake()
         {
+            GlobalServiceLocator.UnregisterAll();
+
             GlobalServiceLocator.RegisterService(new DialogueManager());
+
             GlobalServiceLocator.RegisterService(new PlayerInput());
 
             GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dialogue.Enable();

@@ -15,7 +15,7 @@ namespace AutumnForest.Projectiles
 
         public Rigidbody2D Rigidbody2D { get; protected set; }
 
-        private void Awake()
+        private void OnValidate()
         {
             if(Rigidbody2D == null)
                 Rigidbody2D = GetComponent<Rigidbody2D>();

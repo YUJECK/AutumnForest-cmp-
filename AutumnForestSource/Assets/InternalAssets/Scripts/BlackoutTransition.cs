@@ -6,6 +6,7 @@ namespace AutumnForest
 {
     public class BlackoutTransition : MonoBehaviour
     {
+        [SerializeField] private float blackoutDuration = 0.45f;
         [SerializeField] private Animator blackout;
         [SerializeField] private string blackoutAnimationName = "BlackoutBegin";
 
@@ -13,7 +14,7 @@ namespace AutumnForest
         {
             blackout.Play(blackoutAnimationName);
 
-            await UniTask.Delay(TimeSpan.FromSeconds(0.45));
+            await UniTask.Delay(TimeSpan.FromSeconds(blackoutDuration));
         }
     }
 }

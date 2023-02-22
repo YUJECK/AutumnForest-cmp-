@@ -1,22 +1,23 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
-namespace AutumnForest.Cutscenes
+namespace AutumnForest.Catscenes
 {
     public abstract class Catscene : MonoBehaviour
     {
-        public event Action OnCatsceneStarted;
-        public event Action OnCatsceneEnded;
+        public UnityEvent OnCatsceneStarted = new();
+        public UnityEvent OnCatsceneEnded = new();
 
         public void StartCatscene() 
         {
             OnCatsceneStart();
-            OnCatsceneStarted?.Invoke();
+            OnCatsceneStarted.Invoke();
         }
         public void EndCutScene()
         {
             OnCatsceneEnd();
-            OnCatsceneEnded?.Invoke();
+            OnCatsceneEnded.Invoke();
         }
 
         protected abstract void OnCatsceneStart();

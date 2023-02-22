@@ -3,12 +3,16 @@ using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 
-namespace AutumnForest.Cutscenes
+namespace AutumnForest.Catscenes
 {
     public class StaticCatscene : Catscene
     {
         [SerializeField] private float catsceneDuraiton;
-        [SerializeField] private CinemachineVirtualCamera camera;
+        [SerializeField] private new CinemachineVirtualCamera camera;
+
+        private BlackoutTransition blackoutTransition;
+
+        private void Awake() => blackoutTransition = FindObjectOfType<BlackoutTransition>(true);
 
         protected override void OnCatsceneStart()
         {
@@ -24,6 +28,9 @@ namespace AutumnForest.Cutscenes
         private async void Wait()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(catsceneDuraiton));
+            
+            await blackoutTransition.StartBlackout();
+            
             EndCutScene();
         }
     }

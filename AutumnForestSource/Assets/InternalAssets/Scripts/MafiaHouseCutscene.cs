@@ -11,12 +11,21 @@ namespace AutumnForest.Catscenes
         [SerializeField] private new CinemachineVirtualCamera camera;
         [SerializeField] private AudioSource titlesTheme;
         [SerializeField] private AudioSource mafiaHouseTheme;
-
+            
         [SerializeField] private DialgueBus dialgueBus;
+
+        private void Awake()
+        {
+            objectsInCatscene.Add(camera.gameObject);
+        }
 
         protected override async void OnCatsceneStart()
         {
+            SetCatsceneObjectsActive(true);
+
             camera.gameObject.SetActive(true);
+            dialgueBus.OnBusCompleted += EndCutScene;
+            
             await titlesTheme.StopSmoothly();
 
             await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
@@ -29,8 +38,7 @@ namespace AutumnForest.Catscenes
         }
         protected override void OnCatsceneEnd()
         {
-            camera.gameObject.SetActive(false);
-
+            SetCatsceneObjectsActive(false);
 
             //перемещаем типо в "спасибо за игру"
         }

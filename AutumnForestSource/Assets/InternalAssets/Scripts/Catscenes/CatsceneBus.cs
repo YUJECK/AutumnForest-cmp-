@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AutumnForest.Titles
 {
-    public class TitlesController : MonoBehaviour
+    public sealed class CatsceneBus : MonoBehaviour
     {
         [SerializeField] private Catscene[] catscenes;
         private int currentCutscene;
@@ -15,6 +15,7 @@ namespace AutumnForest.Titles
             catscenes[currentCutscene].OnCatsceneEnded.AddListener(Switch);
             catscenes[currentCutscene].StartCatscene();
         }
+
         private void Switch()
         {
             catscenes[currentCutscene].OnCatsceneEnded.RemoveListener(Switch);

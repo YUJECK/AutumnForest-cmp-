@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,7 +9,9 @@ namespace AutumnForest.Catscenes
         public UnityEvent OnCatsceneStarted = new();
         public UnityEvent OnCatsceneEnded = new();
 
-        public void StartCatscene() 
+        [SerializeField] protected List<GameObject> objectsInCatscene = new();
+
+        public void StartCatscene()
         {
             OnCatsceneStart();
             OnCatsceneStarted.Invoke();
@@ -22,5 +24,11 @@ namespace AutumnForest.Catscenes
 
         protected abstract void OnCatsceneStart();
         protected abstract void OnCatsceneEnd();
+
+        protected void SetCatsceneObjectsActive(bool active)
+        {
+            foreach (var item in objectsInCatscene)
+                item?.SetActive(active);
+        }
     }
 }

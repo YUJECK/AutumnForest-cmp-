@@ -1,6 +1,7 @@
 using Cinemachine;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AutumnForest.Catscenes
@@ -8,27 +9,29 @@ namespace AutumnForest.Catscenes
     public class StaticCatscene : Catscene
     {
         [SerializeField] private float catsceneDuraiton;
-        [SerializeField] private new CinemachineVirtualCamera camera;
+        
+        [SerializeField] private CinemachineVirtualCamera catsceneCamera;
 
         private BlackoutTransition blackoutTransition;
 
-        private void Awake() => blackoutTransition = FindObjectOfType<BlackoutTransition>(true);
+        private void Awake()
+        {
+            blackoutTransition = FindObjectOfType<BlackoutTransition>(true);
+            objectsInCatscene.Add(catsceneCamera.gameObject);
 
+            SetCatsceneObjectsActive(false);                
+        }
         protected override void OnCatsceneStart()
         {
-            camera.gameObject.SetActive(true);
+            SetCatsceneObjectsActive(true);
             Wait();
         }
-        protected override void OnCatsceneEnd()
-        {
-            camera.gameObject.SetActive(false);
-        }
+        protected override void OnCatsceneEnd() => SetCatsceneObjectsActive(false);
 
 
         private async void Wait()
         {
             await UniTask.Delay(TimeSpan.FromSeconds(catsceneDuraiton));
-            
             await blackoutTransition.StartBlackout();
             
             EndCutScene();

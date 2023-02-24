@@ -30,7 +30,7 @@ namespace AutumnForest.Health
                 throw new NullReferenceException(nameof(healthBarConfig));
 
             healthBarIcon.sprite = healthBarConfig.HealthBarIcon;
-            healthBarText.text = healthBarConfig.HealthBarName;
+            healthBarText.text = healthBarConfig.HealthBarName.Value;
 
             if(healthBarConfig.HealthTarget != null)
                 healthBar.SwitchTarget(healthBarConfig.HealthTarget);

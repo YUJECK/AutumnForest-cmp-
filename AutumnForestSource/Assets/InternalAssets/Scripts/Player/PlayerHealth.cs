@@ -39,9 +39,6 @@ namespace AutumnForest.Player
         }
         public void TakeHit(int damagePoints)
         {
-            Debug.Log(damagePoints);
-
-
             hitSound?.Play();
 
             CurrentHealth -= damagePoints;

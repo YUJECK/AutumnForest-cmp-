@@ -33,6 +33,7 @@ namespace AutumnForest.BossFight.Raccoon.States
         {
             stateMachineUser.ServiceLocator.GetService<Shooting>().TransformRotation.RotationType = TransformRotation.RotateType.Around;
             stateMachineUser.ServiceLocator.GetService<Shooting>().TransformRotation.Coefficient = 10;
+            stateMachineUser.ServiceLocator.GetService<Shooting>().TransformRotation.Enable();
             
             stateMachineUser.ServiceLocator.GetService<RaccoonAnimator>().PlayThrowing();
 
@@ -52,8 +53,10 @@ namespace AutumnForest.BossFight.Raccoon.States
             }
             catch
             {
+                stateMachineUser.ServiceLocator.GetService<Shooting>().TransformRotation.Disable();
                 return;
             }
+            stateMachineUser.ServiceLocator.GetService<Shooting>().TransformRotation.Disable();
         }
     }
 }

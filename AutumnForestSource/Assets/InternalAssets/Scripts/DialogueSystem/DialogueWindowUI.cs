@@ -35,6 +35,8 @@ namespace AutumnForest.DialogueSystem
         }
         private void OnEnable()
         {
+            Debug.Log("OnEnable");
+
             GlobalServiceLocator.GetService<DialogueManager>().OnDialogueStarted += OnDialogueStarted;
             GlobalServiceLocator.GetService<DialogueManager>().OnDialogueEnded += OnDialogueEnded;
             GlobalServiceLocator.GetService<DialogueManager>().OnPhraseSwitched += OnPhraseSwitched;

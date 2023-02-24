@@ -2,29 +2,49 @@
 using AutumnForest.StateMachineSystem;
 using Cysharp.Threading.Tasks;
 using System;
-using UnityEngine;
+using System.Threading;
 
 namespace AutumnForest.BossFight.Raccoon.States
 {
     public sealed class RaccoonShirtThrowingState : StateBehaviour
     {
         private RaccoonShirtThrowingStateConfig config;
+        private CancellationTokenSource cancellationToken;
 
         public RaccoonShirtThrowingState(RaccoonShirtThrowingStateConfig config) => this.config = config;
 
-        public override void EnterState(IStateMachineUser stateMachine) => ThrowShirts(stateMachine);
+        public override void EnterState(IStateMachineUser stateMachine)
+        {
+            cancellationToken = new();
 
-        private async void ThrowShirts(IStateMachineUser stateMachineUser)
+            ThrowShirts(stateMachine, cancellationToken.Token);
+        }
+        public override void ExitState(IStateMachineUser stateMachine)
+        {
+            cancellationToken.Cancel();
+            cancellationToken.Dispose();
+        }
+
+        private async void ThrowShirts(IStateMachineUser stateMachineUser, CancellationToken token)
         {
             IsCompleted = false;
             {
                 stateMachineUser.ServiceLocator.GetService<RaccoonAnimator>().PlayThrowing();
 
-                for (int i = 0; i < config.ShirtsCount; i++)
+                try
                 {
-                    ThrowShirt(stateMachineUser);
-                    stateMachineUser.ServiceLocator.GetService<RaccoonSoudsHelper>().ThrowSound.Play();
-                    await UniTask.Delay(TimeSpan.FromSeconds(config.ThrowRate));
+                    for (int i = 0; i < config.ShirtsCount; i++)
+                    {
+                        ThrowShirt(stateMachineUser);
+                        stateMachineUser.ServiceLocator.GetService<RaccoonSoudsHelper>().ThrowSound.Play();
+
+                        await UniTask.Delay(TimeSpan.FromSeconds(config.ThrowRate), cancellationToken: token);
+                    }
+                }
+                catch
+                {
+                    IsCompleted = true;
+                    return;
                 }
             }
             IsCompleted = true;

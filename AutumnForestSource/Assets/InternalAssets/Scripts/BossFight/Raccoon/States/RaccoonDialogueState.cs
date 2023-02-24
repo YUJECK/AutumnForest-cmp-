@@ -34,11 +34,14 @@ namespace AutumnForest.BossFight.Raccoon.States
             dialogue.StartDialogue();
 
             GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToDialogueCamera(stateMachine.ServiceLocator.GetService<Transform>());
+            GlobalServiceLocator.GetService<PlayerMovable>().Disable();
         }
         public override void ExitState(IStateMachineUser stateMachine)
         {
             GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToPrevious();
             GlobalServiceLocator.GetService<MusicSwitcher>().SwitchToBossFightTheme();
+            
+            GlobalServiceLocator.GetService<PlayerMovable>().Enable();
         }
     }
 }

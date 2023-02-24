@@ -24,8 +24,6 @@ namespace AutumnForest.Projectiles
 
                 OnShoot?.Invoke(newProjectile);
             }
-            else if (FirePoint == null) throw new NullReferenceException(nameof(FirePoint));
-            else if (projectile == null) throw new NullReferenceException(nameof(projectile));
         }
         public void ShootWithoutInstantiate(Rigidbody2D projectile, float speed, float shootOffset, bool replace, ForceMode2D forceMode2D = ForceMode2D.Impulse)
         {
@@ -41,8 +39,6 @@ namespace AutumnForest.Projectiles
 
                 OnShoot?.Invoke(projectile);
             }
-            else if (FirePoint == null) throw new NullReferenceException(nameof(FirePoint));
-            else if (projectile == null) throw new NullReferenceException(nameof(projectile));
         }
     }
 }

@@ -30,10 +30,6 @@ namespace AutumnForest.BossFight
 
             bossFightManager.OnBossFightStarted += EnableLog;
             bossFightManager.OnBossFightStarted += DisableLog;
-
-            GlobalServiceLocator.GetService<RaccoonStateMachineUser>().ServiceLocator
-                .GetService<CreatureHealth>()
-                .OnDied += bossFightManager.EndBossFight;
         }
         //private void OnDisable()
         //{

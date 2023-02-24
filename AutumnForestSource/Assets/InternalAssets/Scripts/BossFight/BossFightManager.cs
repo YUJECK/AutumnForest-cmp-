@@ -12,7 +12,8 @@ namespace AutumnForest.BossFight
         NotStarted,
         First,
         Second,
-        Third
+        Third,
+        Ended
     }
 
     public class BossFightManager : IStateMachineUser
@@ -64,11 +65,14 @@ namespace AutumnForest.BossFight
             if (CurrentStage == BossFightStage.First && raccoonHealth.CurrentHealth <= raccoonHealth.MaximumHealth * 0.4)
                 CurrentStage = BossFightStage.Second;
 
-            else if (CurrentStage == BossFightStage.Second && foxHealth.CurrentHealth <= 0)
+            else if (CurrentStage == BossFightStage.Second && foxHealth.CurrentHealth <= 0 && raccoonHealth.CurrentHealth > 0)
             {
                 OnStateChanged?.Invoke(thirdStage);
                 CurrentStage = BossFightStage.Third;
             }
+            
+            if (currentStage != BossFightStage.Ended && raccoonHealth.CurrentHealth <= 0 && foxHealth.CurrentHealth <= 0)
+                EndBossFight();
         }
 
         public void StartBossFight()
@@ -82,6 +86,10 @@ namespace AutumnForest.BossFight
 
             OnBossFightStarted?.Invoke();
         }
-        public void EndBossFight() => OnBossFightEnded?.Invoke();
+        public void EndBossFight()
+        {
+            OnBossFightEnded?.Invoke();
+            currentStage = BossFightStage.Ended;
+        }
     }
 }

@@ -13,15 +13,14 @@ namespace AutumnForest.Assets.InternalAssets.Scripts
 
         private void Awake()
         {
-            text = GetComponent<Text>();
-
-            text.text = englishText;
-
+            if (text == null) text = GetComponent<Text>();
             LanguageManager.OnLanguageChanged += OnLanguageChanged;
         }
 
         private void OnValidate()
         {
+            if(text == null) text = GetComponent<Text>();
+            text.text = englishText;
         }
         private void OnLanguageChanged(Language language)
         {

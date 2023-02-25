@@ -22,8 +22,8 @@ namespace AutumnForest.DialogueSystem
 
         [SerializeField] private float textSpeed = 0.02f;
 
-        private UniTask disableTask;
-        private UniTask enableTask;
+        private bool isClosing = false;
+        private bool isOpening = false;
 
         private CancellationTokenSource cancellationToken;
 
@@ -63,19 +63,18 @@ namespace AutumnForest.DialogueSystem
 
         private void OnDialogueStarted(Dialogue dialogue)
         {
-            enableTask = SelfEnable();
-            dialogueNameUI.text = dialogue.DialogueName.Value;
+            EnableWidow();
         }
         private void OnDialogueEnded(Dialogue dialogue)
         {
-            if(dialogueClickAudio.isPlaying)
-                dialogueClickAudio.Stop();
-            
-            disableTask = SelfDisable();
+            if(dialogueClickAudio.isPlaying) dialogueClickAudio.Stop();
+            DisableWIndow();
         }
 
         private async void ShowPhrase(string name, string text, CancellationToken token)
         {
+            while (isClosing || isOpening) await UniTask.Yield();
+
             dialogueNameUI.text = name;
             dialogueTextUI.text = "";
 
@@ -96,28 +95,42 @@ namespace AutumnForest.DialogueSystem
             }
         }
 
-        private async UniTask SelfEnable()
+        private async void EnableWidow()
         {
-            if (disableTask.Status == UniTaskStatus.Pending)
-                await disableTask;
+            while(isClosing)
+                await UniTask.Yield();
 
-            dialogueWindowUI.SetActive(true);
-            animator.Play(windowEnableAnimation.name);
+            isOpening = true;
+            {
+                dialogueWindowUI.SetActive(true);
+                animator.Play(windowEnableAnimation.name);
 
-            await UniTask.Delay(TimeSpan.FromSeconds(windowEnableAnimation.length));
+                await UniTask.Delay(TimeSpan.FromSeconds(windowEnableAnimation.length));
+            }
+            isOpening = false;
         }
-        private async UniTask SelfDisable()
+        private async void DisableWIndow()
         {
-            if (enableTask.Status == UniTaskStatus.Pending)
-                await enableTask;
+            while (isOpening)
+                await UniTask.Yield();
 
+            isClosing = true;
+            {
+                ClearWindow();
+
+                animator.Play(windowDisableAnimation.name);
+                
+                await UniTask.Delay(TimeSpan.FromSeconds(windowDisableAnimation.length));
+
+                dialogueWindowUI.SetActive(false);
+            }
+            isClosing = false;
+        }
+
+        private void ClearWindow()
+        {
             dialogueTextUI.text = "";
             dialogueNameUI.text = "";
-
-            animator.Play(windowDisableAnimation.name);
-            await UniTask.Delay(TimeSpan.FromSeconds(windowDisableAnimation.length));
-
-            dialogueWindowUI.SetActive(false);
         }
     }
 }

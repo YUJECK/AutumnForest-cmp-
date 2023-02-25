@@ -13,7 +13,7 @@ namespace AutumnForest.Catscenes
         [SerializeField] private AudioSource titlesTheme;
         [SerializeField] private AudioSource mafiaHouseTheme;
             
-        [SerializeField] private DialgueBus dialgueBus;
+        [SerializeField] private DialogueBus dialgueBus;
         [SerializeField] private Transform secondTarget; 
 
         protected override async void OnCatsceneStart()

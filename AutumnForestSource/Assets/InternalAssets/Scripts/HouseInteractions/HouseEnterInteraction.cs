@@ -7,7 +7,7 @@ namespace AutumnForest
     public class HouseEnterInteraction : MonoBehaviour, IInteractive
     {
         [SerializeField] private Transform housePosition;
-        [SerializeField] private Dialogue familyDialogue;
+        [SerializeField] private DialogueBus familyDialogue;
 
         private bool dialogueStarted = false;
 
@@ -19,7 +19,7 @@ namespace AutumnForest
          
             if (!dialogueStarted)
             {
-                familyDialogue.StartDialogue();
+                familyDialogue.StartBus();
                 dialogueStarted = true;
             }
         }

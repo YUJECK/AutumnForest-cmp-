@@ -24,7 +24,7 @@ namespace AutumnForest.DialogueSystem
             {
                 IsCurrentlyActive = true;
 
-                GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dialogue.performed += InputCallback; ;
+                GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dialogue.performed += InputCallback;
 
                 NextPhrase();
                 OnDialogueStarted.Invoke(this);
@@ -49,6 +49,8 @@ namespace AutumnForest.DialogueSystem
             {
                 nextPhrase = 0;
                 IsCurrentlyActive = false;
+
+                GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dialogue.performed -= InputCallback;
 
                 OnDialogueEnded.Invoke(this);
             }

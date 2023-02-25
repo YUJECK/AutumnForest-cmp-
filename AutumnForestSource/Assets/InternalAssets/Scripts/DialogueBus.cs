@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AutumnForest.DialogueSystem
 {
-    public class DialgueBus : MonoBehaviour
+    public class DialogueBus : MonoBehaviour
     {
         [SerializeField] private Dialogue[] dialogues;
         private int currentDialogue;

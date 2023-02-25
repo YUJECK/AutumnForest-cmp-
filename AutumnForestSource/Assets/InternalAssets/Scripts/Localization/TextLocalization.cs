@@ -6,26 +6,26 @@ namespace AutumnForest.Assets.InternalAssets.Scripts
     [RequireComponent(typeof(Text))]
     public sealed class TextLocalization : MonoBehaviour
     {
-        private Text text;
+        [SerializeField] private Text uiText;
 
-        [SerializeField, TextArea(1, 5)] private string englishText;
-        [SerializeField, TextArea(1, 5)] private string russianText;
-
-        private void Awake()
-        {
-            if (text == null) text = GetComponent<Text>();
-            LanguageManager.OnLanguageChanged += OnLanguageChanged;
-        }
-
+        [SerializeField] private LocalizatedString text = new();
         private void OnValidate()
         {
-            if(text == null) text = GetComponent<Text>();
-            text.text = englishText;
+            if (uiText == null) uiText = GetComponent<Text>();
+            UpdateText();
         }
-        private void OnLanguageChanged(Language language)
+
+        private void UpdateText()
         {
-            if (language == Language.English) text.text = englishText;
-            else if (language == Language.Russian) text.text = russianText;
+            uiText.text = text.Value;
+        }
+
+
+        //я изначально работал с ивентом для смены языка, но словил очень странный баг,
+        //который мне было лень фикисть, поэтому просто впихнул обновления текста в апдейт
+        private void Update()
+        {
+            UpdateText();
         }
     }
 }

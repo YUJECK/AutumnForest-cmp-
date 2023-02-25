@@ -132,6 +132,7 @@ SpriteAtlas:
   - {fileID: 6472434916163104904, guid: 0ae5106b118e74947a37a26d3f1f06d1, type: 3}
   - {fileID: -2156081303824848856, guid: 0ae5106b118e74947a37a26d3f1f06d1, type: 3}
   - {fileID: -1507431518, guid: 0ae5106b118e74947a37a26d3f1f06d1, type: 3}
+  - {fileID: -1958302009, guid: a2176f8b4bbc914488b22e1f053f677c, type: 3}
   - {fileID: -1311080593, guid: a2176f8b4bbc914488b22e1f053f677c, type: 3}
   - {fileID: 75136911, guid: a2176f8b4bbc914488b22e1f053f677c, type: 3}
   - {fileID: 21300000, guid: e3f8b62c043568342814d867b0bad964, type: 3}
@@ -222,6 +223,7 @@ SpriteAtlas:
   - Squirel_1
   - Squirel_0
   - Squirel_4
+  - Family_2
   - Family_0
   - Family_1
   - Log

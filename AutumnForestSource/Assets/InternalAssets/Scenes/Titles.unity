@@ -48069,7 +48069,7 @@ MonoBehaviour:
     width: 0.2
   m_Looped: 0
   m_Waypoints:
-  - position: {x: 27.60263, y: -10.69068, z: 0}
+  - position: {x: 25.10263, y: -10.37818, z: 0}
     roll: 0
   - position: {x: 15.977631, y: -9.25318, z: 0}
     roll: 0

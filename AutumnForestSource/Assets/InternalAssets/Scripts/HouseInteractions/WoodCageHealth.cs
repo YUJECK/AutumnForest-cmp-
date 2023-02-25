@@ -7,6 +7,7 @@ namespace AutumnForest.HouseInteractions
     public sealed class WoodCageHealth : MonoBehaviour, IHealth
     {
         [SerializeField] private GameObject family;
+        [SerializeField] private AudioSource destroySound; 
 
         public int CurrentHealth { get; private set; }
         public int MaximumHealth { get; private set; }
@@ -28,11 +29,15 @@ namespace AutumnForest.HouseInteractions
                 Die();
         }
 
-        private void Die()
+        private async void Die()
         {
             OnDied?.Invoke();
-            family.SetActive(true);
+            destroySound.Play();
+
+            await GlobalServiceLocator.GetService<BlackoutTransition>().StartBlackout();
+
             Destroy(gameObject);
+            family.SetActive(true);
         }
     }
 }

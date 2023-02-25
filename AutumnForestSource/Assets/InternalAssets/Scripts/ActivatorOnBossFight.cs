@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace AutumnForest.BossFight
@@ -8,7 +9,7 @@ namespace AutumnForest.BossFight
         enum ActivateType
         {
             EnableOnStartDisableOnEnd,
-            EnableOnEndDisableOnStart,
+            DisableOnStartEnableOnEnd,
             EnableOnEnd,
             EnableOnStart,
             DisableOnStart,
@@ -20,34 +21,35 @@ namespace AutumnForest.BossFight
 
         private void Awake()
         {
-            if (type == ActivateType.EnableOnStartDisableOnEnd)
+            switch (type)
             {
-                GlobalServiceLocator.GetService<BossFightManager>().OnBossFightStarted += Enable;
-                GlobalServiceLocator.GetService<BossFightManager>().OnBossFightEnded += Disable;
-            }
-            else if (type == ActivateType.EnableOnEndDisableOnStart)
-            {
-                GlobalServiceLocator.GetService<BossFightManager>().OnBossFightStarted += Disable;
-                GlobalServiceLocator.GetService<BossFightManager>().OnBossFightEnded += Enable;
-            }
-            else if (type == ActivateType.EnableOnEnd)
-            {
-                GlobalServiceLocator.GetService<BossFightManager>().OnBossFightEnded += Enable;
-            }
-            else if (type == ActivateType.DisableOnEnd)
-            {
-                GlobalServiceLocator.GetService<BossFightManager>().OnBossFightEnded += Disable;
-            }
-            else if (type == ActivateType.EnableOnStart)
-            {
-                GlobalServiceLocator.GetService<BossFightManager>().OnBossFightStarted += Enable;
-            }
-            else if (type == ActivateType.DisableOnStart)
-            {
-                GlobalServiceLocator.GetService<BossFightManager>().OnBossFightStarted += Disable;
+                case ActivateType.EnableOnStartDisableOnEnd:
+                    SetEvents(Enable, Disable);
+                    break;
+                case ActivateType.DisableOnStartEnableOnEnd:
+                    SetEvents(Disable, Enable);
+                    break;
+                case ActivateType.EnableOnStart:
+                    SetEvents(Enable, null);
+                    break;
+                case ActivateType.DisableOnStart:
+                    SetEvents(Disable, null);
+                    break;
+                case ActivateType.EnableOnEnd:
+                    SetEvents(null, Enable);
+                    break;
+                case ActivateType.DisableOnEnd:
+                    SetEvents(null, Disable);
+                    break;
             }
 
             if (disableOnAwake) Disable();
+        }
+
+        private void SetEvents(Action onStarted, Action onEnded)
+        {
+            if (onStarted != null) GlobalServiceLocator.GetService<BossFightManager>().OnBossFightStarted += onStarted;
+            if (onEnded != null) GlobalServiceLocator.GetService<BossFightManager>().OnBossFightEnded += onEnded;
         }
 
         private void Disable() => gameObject.SetActive(false);

@@ -8,6 +8,7 @@ namespace AutumnForest.Player
     {
         [SerializeField] private GameObject dashIndicator;
         [SerializeField] private ParticleSystem dashParticle;
+        [SerializeField] private Animator playerAnimator;
         
         private PlayerDash playerDash;
 

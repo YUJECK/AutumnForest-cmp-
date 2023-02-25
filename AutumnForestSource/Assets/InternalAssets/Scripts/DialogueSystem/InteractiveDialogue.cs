@@ -33,8 +33,8 @@ namespace AutumnForest.DialogueSystem
         }
         public void Interact()
         {
-            if (!Dialogue.IsCurrentlyActive) Dialogue.StartDialogue();
-            else Dialogue.NextPhrase();
+            if (!Dialogue.IsCurrentlyActive) 
+                Dialogue.StartDialogue();
         }
         public void DetectionReleased()
         {

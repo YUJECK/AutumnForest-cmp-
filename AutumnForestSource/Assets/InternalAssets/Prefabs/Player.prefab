@@ -86,8 +86,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3072e8224c3b35c48ad44f6902f8cdf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentHealth>k__BackingField: 40
-  <MaximumHealth>k__BackingField: 40
+  <CurrentHealth>k__BackingField: 50
+  <MaximumHealth>k__BackingField: 50
   hitSound:
     <AudioSource>k__BackingField: {fileID: 8589662901624118116}
     minPitch: 0.8
@@ -5633,6 +5633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashIndicator: {fileID: 3449584156584790655}
   dashParticle: {fileID: 1311345892726071266}
+  playerAnimator: {fileID: 3952701129441610502}
 --- !u!114 &8879104589993439246
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -24,7 +24,9 @@ namespace AutumnForest.DialogueSystem
             {
                 IsCurrentlyActive = true;
 
-                OnPhraseChanged.Invoke(DialogueName.Value, "...");
+                GlobalServiceLocator.GetService<PlayerInput>().Inputs.Dialogue.performed += InputCallback; ;
+
+                NextPhrase();
                 OnDialogueStarted.Invoke(this);
             }
         }
@@ -56,10 +58,10 @@ namespace AutumnForest.DialogueSystem
         {
             DialogueManager dialogueManager = GlobalServiceLocator.GetService<DialogueManager>();
 
-            if (dialogueManager != null)
+            if (dialogueManager != null) 
                 dialogueManager.AddDialogue(this);
-            else
-                throw new NullReferenceException(nameof(dialogueManager));
         }
+
+        private void InputCallback(UnityEngine.InputSystem.InputAction.CallbackContext obj) => NextPhrase();
     }
 }

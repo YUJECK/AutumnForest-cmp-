@@ -22,7 +22,6 @@ namespace AutumnForest.DialogueSystem
 
         [SerializeField] private float textSpeed = 0.02f;
 
-        //костыль момент
         private UniTask disableTask;
         private UniTask enableTask;
 
@@ -35,8 +34,6 @@ namespace AutumnForest.DialogueSystem
         }
         private void OnEnable()
         {
-            Debug.Log("OnEnable");
-
             GlobalServiceLocator.GetService<DialogueManager>().OnDialogueStarted += OnDialogueStarted;
             GlobalServiceLocator.GetService<DialogueManager>().OnDialogueEnded += OnDialogueEnded;
             GlobalServiceLocator.GetService<DialogueManager>().OnPhraseSwitched += OnPhraseSwitched;
@@ -54,10 +51,7 @@ namespace AutumnForest.DialogueSystem
 
             cancellationToken.Dispose();
         }
-        private void OnDestroy()
-        {
-            cancellationToken.Dispose();
-        }
+        private void OnDestroy() => cancellationToken.Dispose();
 
         private void OnPhraseSwitched(string name, string phrase)
         {
@@ -102,7 +96,7 @@ namespace AutumnForest.DialogueSystem
             }
         }
 
-        protected async UniTask SelfEnable()
+        private async UniTask SelfEnable()
         {
             if (disableTask.Status == UniTaskStatus.Pending)
                 await disableTask;
@@ -112,7 +106,7 @@ namespace AutumnForest.DialogueSystem
 
             await UniTask.Delay(TimeSpan.FromSeconds(windowEnableAnimation.length));
         }
-        protected async UniTask SelfDisable()
+        private async UniTask SelfDisable()
         {
             if (enableTask.Status == UniTaskStatus.Pending)
                 await enableTask;

@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ad4add6f09c4d4a93e90499a1f04d3, type: 3}
   m_Name: RaccoonHealthBar
   m_EditorClassIdentifier: 
-  <HealthBarName>k__BackingField: "\u041C\u0430\u0444\u0438\u043D\u043E\u0442"
+  <HealthBarName>k__BackingField:
+    english: Mafinot
+    russian: "\u041C\u0430\u0444\u0438\u043D\u043E\u0442"
   <HealthBarIcon>k__BackingField: {fileID: 358522314, guid: 8c8ffc1b7f9db6c46898cbe7865cf271, type: 3}

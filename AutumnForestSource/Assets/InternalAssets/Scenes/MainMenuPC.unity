@@ -1625,7 +1625,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 126.19475}
-  m_SizeDelta: {x: 630.8355, y: 251.79462}
+  m_SizeDelta: {x: 1937.5, y: 251.7946}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &60478988
 MonoBehaviour:
@@ -1639,9 +1639,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiText: {fileID: 60478989}
   text:
-    english: About us
-    russian: "\u041E \u043D\u0430\u0441"
+    english: Social Media
+    russian: "\u0421\u043E\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0442\u0438"
 --- !u!114 &60478989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1675,7 +1676,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: "\u041E \u043D\u0430\u0441"
+  m_Text: Social Media
 --- !u!222 &60478990
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2231,6 +2232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiText: {fileID: 112797964}
   text:
     english: Settings
     russian: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
@@ -2267,7 +2269,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+  m_Text: Settings
 --- !u!222 &112797965
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4168,7 +4170,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1460139621}
         m_TargetAssemblyTypeName: AutumnForest.ButtonMethods, Assembly-CSharp
         m_MethodName: OpenLink
         m_Mode: 5
@@ -14399,6 +14401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiText: {fileID: 633751884}
   text:
     english: Volume
     russian: "\u0413\u0440\u043E\u043C\u043A\u043E\u0441\u0442\u044C"
@@ -14435,7 +14438,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: "\u0413\u0440\u043E\u043C\u043A\u043E\u0441\u0442\u044C"
+  m_Text: Volume
 --- !u!222 &633751885
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16830,6 +16833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiText: {fileID: 757002517}
   text:
     english: Social Media
     russian: "\u0421\u043E\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0442\u0438"
@@ -16866,7 +16870,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: "\u0421\u043E\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0442\u0438"
+  m_Text: Social Media
 --- !u!222 &757002518
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17955,7 +17959,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1460139621}
         m_TargetAssemblyTypeName: AutumnForest.ButtonMethods, Assembly-CSharp
         m_MethodName: Exit
         m_Mode: 1
@@ -20901,12 +20905,12 @@ GameObject:
   - component: {fileID: 957318203}
   - component: {fileID: 957318202}
   m_Layer: 5
-  m_Name: AboutWindow
+  m_Name: SocialMediaWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &957318201
 RectTransform:
   m_ObjectHideFlags: 0
@@ -23521,6 +23525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiText: {fileID: 1107187745}
   text:
     english: Exit
     russian: "\u0412\u044B\u0445\u043E\u0434"
@@ -23557,7 +23562,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: "\u0412\u044B\u0445\u043E\u0434"
+  m_Text: Exit
 --- !u!222 &1107187746
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28731,6 +28736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiText: {fileID: 1413161140}
   text:
     english: Start
     russian: "\u041D\u0430\u0447\u0430\u0442\u044C"
@@ -28767,7 +28773,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: "\u041D\u0430\u0447\u0430\u0442\u044C"
+  m_Text: Start
 --- !u!222 &1413161141
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -33726,7 +33732,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1460139621}
         m_TargetAssemblyTypeName: AutumnForest.ButtonMethods, Assembly-CSharp
         m_MethodName: OpenLink
         m_Mode: 5
@@ -36697,6 +36703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiText: {fileID: 1868533591}
   text:
     english: Settings
     russian: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
@@ -36733,7 +36740,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
+  m_Text: Settings
 --- !u!222 &1868533592
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -40035,6 +40042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiText: {fileID: 2045900132}
   text:
     english: Language
     russian: "\u042F\u0437\u044B\u043A"
@@ -40071,7 +40079,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: "\u042F\u0437\u044B\u043A"
+  m_Text: Language
 --- !u!222 &2045900133
 CanvasRenderer:
   m_ObjectHideFlags: 0

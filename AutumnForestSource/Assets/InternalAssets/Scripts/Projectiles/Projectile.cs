@@ -13,7 +13,7 @@ namespace AutumnForest.Projectiles
 
         [SerializeField, Layer] protected int projectileLayer;
 
-        public Rigidbody2D Rigidbody2D { get; protected set; }
+        [field: SerializeField] public Rigidbody2D Rigidbody2D { get; protected set; }
 
         private void Awake()
         {

@@ -1,19 +1,16 @@
-using Cysharp.Threading.Tasks;
-using System;
 using System.Collections;
 using UnityEngine;
 
 namespace AutumnForest.Projectiles
 {
     [RequireComponent(typeof(AreaHit))]
-    public class ChestnutBomb : MonoBehaviour
+    public class ChestnutBomb : Projectile
     {
-        [SerializeField] private int damage;
         [SerializeField] private float timeToExpoit = 1f;
         [SerializeField] private GameObject spikePrefab;
         [SerializeField] private GameObject exploitPrefab;
         [SerializeField] private Transform[] spikesSpawnPoints;
-        
+
         private AreaHit areaHit;
 
         private void Awake() => areaHit = GetComponent<AreaHit>();
@@ -25,7 +22,7 @@ namespace AutumnForest.Projectiles
             //await UniTask.Delay(TimeSpan.FromSeconds(timeToExpoit));
 
             yield return new WaitForSeconds(1f);
-            
+
             Exploit();
         }
         private void Exploit()

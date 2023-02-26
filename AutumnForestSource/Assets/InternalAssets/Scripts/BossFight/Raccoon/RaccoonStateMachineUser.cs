@@ -2,6 +2,7 @@ using AutumnForest.Health;
 using AutumnForest.Helpers;
 using AutumnForest.Projectiles;
 using AutumnForest.StateMachineSystem;
+using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 
@@ -41,9 +42,12 @@ namespace AutumnForest.BossFight.Raccoon
         private void OnEnable()
         {
             StateMachine.OnMachineWorking += StateChoosing;
+            healthObject.OnDied += OnDied;
         }
         private void OnDisable()
         {
+            healthObject.OnDied -= OnDied;
+
             StateMachine.OnMachineWorking -= StateChoosing;
             StateMachine.DisableStateMachine();
         }
@@ -72,6 +76,14 @@ namespace AutumnForest.BossFight.Raccoon
         private StateBehaviour SecondStageChoosing() => raccoonStatesContainer.HealingState;
         private StateBehaviour ThirdStageChoosing() => ObjectRandomizer.GetRandom(raccoonStatesContainer.ThirdStageStates);
         
-        public void HealingStateEntered() => OnEnteredHealingState?.Invoke(); 
+        public void HealingStateEntered() => OnEnteredHealingState?.Invoke();
+        public async void OnDied()
+        {
+            ServiceLocator.GetService<RaccoonAnimator>().PlayJump();
+
+            await UniTask.Delay(TimeSpan.FromSeconds(0.3f));
+
+            gameObject.SetActive(false);
+        }
     }
 }

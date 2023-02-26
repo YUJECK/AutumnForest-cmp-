@@ -8,6 +8,7 @@ namespace AutumnForest
         public const string Throwing = "RaccoonThrowing";
         public const string Jump = "RaccoonJump";
         public const string Grounded = "RaccoonGrounded";
+        public const string Died = "RaccoonDied";
 
         public RaccoonAnimator(Animator animator) : base(animator) { }
 
@@ -15,5 +16,6 @@ namespace AutumnForest
         public void PlayThrowing() => Play(Throwing);
         public void PlayJump() => Play(Jump);
         public void PlayGrounded() => Play(Grounded);
+        public void PlayDied() => Play(Died);
     }
 }

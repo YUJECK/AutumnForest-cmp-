@@ -12,7 +12,8 @@ namespace AutumnForest.Raccoon
     public class RaccoonStateVariator : MonoBehaviour, IStateContainerVariator
     {
         [Header("Configs")]
-        [SerializeField] private RandomShotStateConfig randomShotStateConfig;
+        [SerializeField] private RandomShotStateConfig firstRandomShotStateConfig;
+        [SerializeField] private RandomShotStateConfig secondRandomShotStateConfig;
         [SerializeField] private RacconHealingStateConfig racconHealingStateConfig;
         [SerializeField] private RaccoonRoundShotStateConfig raccoonRoundShotStateConfig;
         [SerializeField] private RaccoonShirtThrowingStateConfig raccoonShirtThrowingStateConfig;
@@ -30,16 +31,19 @@ namespace AutumnForest.Raccoon
         {
             StateBehaviour[] firstStageStates =
             {
-                new RaccoonRandomShotState(randomShotStateConfig),
+                new RaccoonRandomShotState(firstRandomShotStateConfig),
                 new RaccoonRoundShotState(raccoonRoundShotStateConfig),
                 new RaccoonShirtThrowingState(raccoonShirtThrowingStateConfig),
-                new RaccoonSquirrelSpawnState(defaultSquirrelPrefab, 5, 7, 2.5f),
+                new RaccoonSquirrelSpawnState(defaultSquirrelPrefab, 3, 4, 2.5f),
                 new TripleShotState(chestnut, 10, 25, 0.5f)
             };
             StateBehaviour[] thirdStageStates =
             {
                 new RaccoonRoundShotState(raccoonRoundShotStateConfig),
+                new RaccoonShirtThrowingState(raccoonShirtThrowingStateConfig),
                 new RaccoonSquirrelSpawnState(defaultSquirrelPrefab, 3, 4, 1.5f),
+                new RaccoonRandomShotState(secondRandomShotStateConfig),
+                new TripleShotState(chestnut, 10, 25, 0.5f)
             };
 
             return new RaccoonStatesContainer(

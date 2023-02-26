@@ -86,8 +86,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3072e8224c3b35c48ad44f6902f8cdf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentHealth>k__BackingField: 50
-  <MaximumHealth>k__BackingField: 50
+  <CurrentHealth>k__BackingField: 45
+  <MaximumHealth>k__BackingField: 45
   hitSound:
     <AudioSource>k__BackingField: {fileID: 8589662901624118116}
     minPitch: 0.8

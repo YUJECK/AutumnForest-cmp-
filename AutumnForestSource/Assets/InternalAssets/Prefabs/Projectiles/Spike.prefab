@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d7d3b6da14d4144af03da749a98d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 2
   collideEffect: {fileID: 0}
   hitSoundEffect: {fileID: 0}
   projectileLayer: 8

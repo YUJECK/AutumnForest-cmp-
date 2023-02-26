@@ -670,6 +670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiText: {fileID: 22317994}
   text:
     english: Settings
     russian: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
@@ -3812,7 +3813,6 @@ GameObject:
   - component: {fileID: 189209117}
   - component: {fileID: 189209120}
   - component: {fileID: 189209119}
-  - component: {fileID: 189209118}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -3838,23 +3838,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -1.9375, y: 4.8750114}
-  m_SizeDelta: {x: 381.8152, y: 105.2952}
+  m_SizeDelta: {x: 548.9783, y: 172.1604}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &189209118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 189209116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text:
-    english: 
-    russian: 
 --- !u!114 &189209119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3888,7 +3873,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: 
+  m_Text: YouTube
 --- !u!222 &189209120
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10475,6 +10460,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiText: {fileID: 461531319}
   text:
     english: "\u0421\u043E\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0442\u0438"
     russian: Social Media
@@ -13663,6 +13649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiText: {fileID: 603750650}
   text:
     english: Start
     russian: "\u041D\u0430\u0447\u0430\u0442\u044C"
@@ -14699,7 +14686,7 @@ RectTransform:
   m_Children:
   - {fileID: 189209117}
   m_Father: {fileID: 1408635665}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -14750,7 +14737,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 223179849}
         m_TargetAssemblyTypeName: AutumnForest.ButtonMethods, Assembly-CSharp
         m_MethodName: OpenLink
         m_Mode: 5
@@ -28236,7 +28223,7 @@ GameObject:
   - component: {fileID: 1408635667}
   - component: {fileID: 1408635666}
   m_Layer: 5
-  m_Name: AboutWindow
+  m_Name: SocialMediaWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28254,9 +28241,9 @@ RectTransform:
   m_LocalScale: {x: 0.74999994, y: 0.74999994, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2060278277}
   - {fileID: 1624400621}
   - {fileID: 639471582}
-  - {fileID: 2060278277}
   m_Father: {fileID: 178078973}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -30429,6 +30416,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiText: {fileID: 1538556286}
   text:
     english: Settings
     russian: "\u041D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438"
@@ -31703,6 +31691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiText: {fileID: 1623156461}
   text:
     english: Language
     russian: "\u042F\u0437\u044B\u043A"
@@ -31781,7 +31770,7 @@ RectTransform:
   m_Children:
   - {fileID: 1885277082}
   m_Father: {fileID: 1408635665}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -31832,7 +31821,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 223179849}
         m_TargetAssemblyTypeName: AutumnForest.ButtonMethods, Assembly-CSharp
         m_MethodName: OpenLink
         m_Mode: 5
@@ -35764,6 +35753,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiText: {fileID: 1844255315}
   text:
     english: Volume
     russian: "\u0413\u0440\u043E\u043C\u043A\u043E\u0441\u0442\u044C"
@@ -36674,7 +36664,6 @@ GameObject:
   - component: {fileID: 1885277082}
   - component: {fileID: 1885277085}
   - component: {fileID: 1885277084}
-  - component: {fileID: 1885277083}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -36702,21 +36691,6 @@ RectTransform:
   m_AnchoredPosition: {x: -1.9375, y: 4.8750114}
   m_SizeDelta: {x: 381.8152, y: 105.2952}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1885277083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1885277081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text:
-    english: 
-    russian: 
 --- !u!114 &1885277084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36750,7 +36724,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: 
+  m_Text: Discord
 --- !u!222 &1885277085
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -39833,12 +39807,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1408635665}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 126.19475}
-  m_SizeDelta: {x: 630.8355, y: 251.79462}
+  m_SizeDelta: {x: 1054.0103, y: 314.0261}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2060278278
 MonoBehaviour:
@@ -39852,9 +39826,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6b6c45d1695f8a4a9c03efe2eff17b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiText: {fileID: 2060278279}
   text:
-    english: 
-    russian: 
+    english: Social Media
+    russian: "\u0421\u043E\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0442\u0438"
 --- !u!114 &2060278279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39888,7 +39863,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: 
+  m_Text: Social Media
 --- !u!222 &2060278280
 CanvasRenderer:
   m_ObjectHideFlags: 0

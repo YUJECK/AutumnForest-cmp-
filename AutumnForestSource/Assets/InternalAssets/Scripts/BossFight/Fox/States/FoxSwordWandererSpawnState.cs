@@ -26,10 +26,18 @@ namespace AutumnForest.BossFight.Fox.States
                 stateMachine.ServiceLocator.GetService<Shooting>().TransformRotation.Enable();
                 stateMachine.ServiceLocator.GetService<Shooting>().TransformRotation.RotationType = TransformRotation.RotateType.ByTarget;
 
-                for (int i = 0; i < _swordsCount; i++)
+                try
                 {
-                    await SpawnSword(stateMachine);
-                    await UniTask.Delay(TimeSpan.FromSeconds(_spawnRate));
+                    for (int i = 0; i < _swordsCount; i++)
+                    {
+                        await SpawnSword(stateMachine);
+                        await UniTask.Delay(TimeSpan.FromSeconds(_spawnRate), cancellationToken: cancellationToken.Token);
+                    }
+                }
+                catch
+                {
+                    IsCompleted = true;
+                    return;
                 }
             }
             IsCompleted = true;

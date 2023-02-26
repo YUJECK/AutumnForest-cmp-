@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4988002288ba4748b37e4444bcf68c6, type: 3}
-  m_Name: RaccoonRandomShotStateConfig
+  m_Name: RaccoonConeRandomShotStateConfig
   m_EditorClassIdentifier: 
   <ProjectilePrefab>k__BackingField: {fileID: 4270532997081402518, guid: e8c0b2bb56593f3429477322396d7488, type: 3}
   <ProjectilesCount>k__BackingField: 7

@@ -35,7 +35,7 @@ namespace AutumnForest.Raccoon
                 new RaccoonRoundShotState(raccoonRoundShotStateConfig),
                 new RaccoonShirtThrowingState(raccoonShirtThrowingStateConfig),
                 new RaccoonSquirrelSpawnState(defaultSquirrelPrefab, 3, 4, 2.5f),
-                new TripleShotState(chestnut, 10, 25, 0.5f)
+                new RaccoonTripleShotState(chestnut, 10, 25, 0.5f)
             };
             StateBehaviour[] thirdStageStates =
             {
@@ -43,7 +43,7 @@ namespace AutumnForest.Raccoon
                 new RaccoonShirtThrowingState(raccoonShirtThrowingStateConfig),
                 new RaccoonSquirrelSpawnState(defaultSquirrelPrefab, 3, 4, 1.5f),
                 new RaccoonRandomShotState(secondRandomShotStateConfig),
-                new TripleShotState(chestnut, 10, 25, 0.5f)
+                new RaccoonTripleShotState(chestnut, 10, 25, 0.5f)
             };
 
             return new RaccoonStatesContainer(

@@ -36,7 +36,7 @@ namespace AutumnForest.BossFight.Fox
 
             StateBehaviour[] patterns =
             {
-                new TimingState(3.5f),
+                new FoxTimingState(3.5f),
                 new FoxFirstFlowerPattern(points, 1f),
                 new FoxFirstFlowerPattern(points, 0.5f),
                 new FoxSwordWandererSpawnState(),

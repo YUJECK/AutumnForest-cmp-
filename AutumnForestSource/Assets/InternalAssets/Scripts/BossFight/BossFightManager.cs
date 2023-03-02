@@ -79,7 +79,7 @@ namespace AutumnForest.BossFight
         {
             foxHealth = GlobalServiceLocator.GetService<FoxStateMachineUser>().ServiceLocator.GetService<CreatureHealth>();
             raccoonHealth = GlobalServiceLocator.GetService<RaccoonStateMachineUser>().ServiceLocator.GetService<CreatureHealth>();
-            GlobalServiceLocator.GetService<BossFightHealthBar>().gameObject.SetActive(true);
+            
 
             CurrentStage = BossFightStage.First;
             OnStateChanged?.Invoke(firstStage);
@@ -89,6 +89,7 @@ namespace AutumnForest.BossFight
         public void EndBossFight()
         {
             OnBossFightEnded?.Invoke();
+            GlobalServiceLocator.GetService<BossFightUIMarker>().gameObject.SetActive(false);
             currentStage = BossFightStage.Ended;
         }
     }

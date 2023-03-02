@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace AutumnForest.Health
 {
     [DisallowMultipleComponent]
-    public class BossFightHealthBar : MonoBehaviour
+    public sealed class BossFightHealthBar : MonoBehaviour
     {
         [SerializeField, Expandable] BossFightHealthBarConfig healthBarConfig;
 
@@ -26,8 +26,8 @@ namespace AutumnForest.Health
 
         public void SetConfig(BossFightHealthBarConfig healthBarConfig)
         {
-            if (healthBarConfig == null)
-                throw new NullReferenceException(nameof(healthBarConfig));
+            if(healthBar == null) healthBar = new(healthBarFill);
+            if (healthBarConfig == null) Debug.LogError("Health bar config null");
 
             healthBarIcon.sprite = healthBarConfig.HealthBarIcon;
             healthBarText.text = healthBarConfig.HealthBarName.Value;

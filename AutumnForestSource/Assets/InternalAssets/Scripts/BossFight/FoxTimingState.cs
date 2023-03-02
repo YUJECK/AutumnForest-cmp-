@@ -4,11 +4,11 @@ using System;
 
 namespace AutumnForest.BossFight
 {
-    public sealed class TimingState : StateBehaviour
+    public sealed class FoxTimingState : StateBehaviour
     {
         private float timing;
 
-        public TimingState(float timing)
+        public FoxTimingState(float timing)
         {
             this.timing = timing;
         }
@@ -19,6 +19,7 @@ namespace AutumnForest.BossFight
         {
             IsCompleted = false;
             {
+                stateMachine.ServiceLocator.GetService<FoxAnimator>().PlayIdle();
                 await UniTask.Delay(TimeSpan.FromSeconds(timing));
             }
             IsCompleted = true;

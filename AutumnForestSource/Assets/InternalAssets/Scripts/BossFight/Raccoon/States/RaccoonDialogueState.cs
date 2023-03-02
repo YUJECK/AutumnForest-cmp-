@@ -40,8 +40,10 @@ namespace AutumnForest.BossFight.Raccoon.States
         {
             GlobalServiceLocator.GetService<CameraSwitcher>().SwitchToPrevious();
             GlobalServiceLocator.GetService<MusicSwitcher>().SwitchToBossFightTheme();
-            
+
             GlobalServiceLocator.GetService<PlayerMovable>().Enable();
+            
+            GlobalServiceLocator.GetService<BossFightUIMarker>().gameObject.SetActive(true);
         }
     }
 }

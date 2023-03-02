@@ -2,11 +2,9 @@ using AutumnForest.BossFight;
 using AutumnForest.BossFight.Fox;
 using AutumnForest.BossFight.Raccoon;
 using AutumnForest.DialogueSystem;
-using AutumnForest.Health;
 using AutumnForest.Helpers;
 using AutumnForest.Managers;
 using AutumnForest.Player;
-using AutumnForest.Projectiles;
 using Cinemachine;
 using UnityEngine;
 
@@ -26,8 +24,6 @@ namespace AutumnForest
         [SerializeField] private AudioSource bossfightTheme;
         [SerializeField] private AudioSource basementAmbientTheme;
         [SerializeField] private AudioSource gramophoneTheme;
-        [Header("Health bars")]
-        [SerializeField] private BossFightHealthBar bossHealthBar;
         [Header("Containers")]
         [SerializeField] private Transform projectileContainer;
         [SerializeField] private Transform creatureContainer;
@@ -83,7 +79,7 @@ namespace AutumnForest
         }
         private void RegisterBossFightServices()
         {
-            GlobalServiceLocator.RegisterService(FindObjectOfType<BossFightHealthBar>(true));
+            GlobalServiceLocator.RegisterService(FindObjectOfType<BossFightUIMarker>(true));
             GlobalServiceLocator.RegisterService(FindObjectOfType<RaccoonStateMachineUser>(true));
             GlobalServiceLocator.RegisterService(FindObjectOfType<FoxStateMachineUser>(true));
             GlobalServiceLocator.RegisterService(new BossFightManager());

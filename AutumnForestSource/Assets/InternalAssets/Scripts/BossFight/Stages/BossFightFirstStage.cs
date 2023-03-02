@@ -10,7 +10,7 @@ namespace AutumnForest.BossFight.Stages
         {
             GlobalServiceLocator.GetService<RaccoonStateMachineUser>().StateMachine.EnableStateMachine();
 
-            GlobalServiceLocator.GetService<BossFightHealthBar>().SetConfig(GlobalServiceLocator.GetService<RaccoonStateMachineUser>()
+            GlobalServiceLocator.GetService<BossFightUIMarker>().BossFightHealthBar.SetConfig(GlobalServiceLocator.GetService<RaccoonStateMachineUser>()
                 .ServiceLocator.GetService<CreatureHealth>().HealthBarConfig);
 
             IsCompleted = true;

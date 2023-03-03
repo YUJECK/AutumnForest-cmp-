@@ -39,8 +39,14 @@ namespace AutumnForest
             RegisterMusicThemes();
             RegisterDialogueServices();
             RegisterBossFightServices();
+            RegisterHints();
 
             GlobalServiceLocator.GetService<PlayerInput>().Enable();
+        }
+
+        private void RegisterHints()
+        {
+            GlobalServiceLocator.RegisterService(FindObjectOfType<DashHint>(true));
         }
 
         private void RegisterMusicThemes()

@@ -25,14 +25,14 @@ namespace AutumnForest.Player
 
         private void OnEnabled()
         {
-            playerDash.OnDashed += OnDashed;
+            playerDash.OnDashStarted += OnDashed;
             playerDash.OnReloaded += OnReloaded;
 
             dashIndicator.SetActive(true);
         }
         private void OnDisabled()
         {
-            playerDash.OnDashed -= OnDashed;
+            playerDash.OnDashStarted -= OnDashed;
             playerDash.OnReloaded -= OnReloaded;
 
             dashIndicator.SetActive(false);

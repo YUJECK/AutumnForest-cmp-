@@ -1,5 +1,4 @@
 using NaughtyAttributes;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,11 +25,12 @@ namespace AutumnForest.Health
 
         public void SetConfig(BossFightHealthBarConfig healthBarConfig)
         {
-            if(healthBar == null) healthBar = new(healthBarFill);
+            if (healthBar == null) healthBar = new(healthBarFill);
             if (healthBarConfig == null) Debug.LogError("Health bar config null");
 
             healthBarIcon.sprite = healthBarConfig.HealthBarIcon;
             healthBarText.text = healthBarConfig.HealthBarName.Value;
+            this.healthBarConfig = healthBarConfig;
 
             if(healthBarConfig.HealthTarget != null)
                 healthBar.SwitchTarget(healthBarConfig.HealthTarget);

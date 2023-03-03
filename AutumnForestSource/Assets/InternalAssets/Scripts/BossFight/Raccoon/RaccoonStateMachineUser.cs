@@ -51,6 +51,25 @@ namespace AutumnForest.BossFight.Raccoon
             StateMachine.OnMachineWorking -= StateChoosing;
             StateMachine.DisableStateMachine();
         }
+        private void OnDrawGizmos()
+        {
+            //рисуем верхнюю линию
+            Gizmos.DrawLine(
+                new Vector3(spawnPlace.LeftDownCorner.x, spawnPlace.RightUpCorner.y, 0), 
+                new Vector3(spawnPlace.RightUpCorner.x, spawnPlace.RightUpCorner.y, 0));
+            //рисуем нижнюю линию
+            Gizmos.DrawLine(
+                new Vector3(spawnPlace.LeftDownCorner.x, spawnPlace.LeftDownCorner.y, 0),
+                new Vector3(spawnPlace.RightUpCorner.x, spawnPlace.LeftDownCorner.y, 0));
+            //рисуем левую линию
+            Gizmos.DrawLine(
+                new Vector3(spawnPlace.LeftDownCorner.x, spawnPlace.LeftDownCorner.y, 0),
+                new Vector3(spawnPlace.LeftDownCorner.x, spawnPlace.RightUpCorner.y, 0));
+            //рисуем правую линию
+            Gizmos.DrawLine(
+                new Vector3(spawnPlace.RightUpCorner.x, spawnPlace.LeftDownCorner.y, 0),
+                new Vector3(spawnPlace.RightUpCorner.x, spawnPlace.RightUpCorner.y, 0));
+        }
 
         private void StateChoosing()
         {

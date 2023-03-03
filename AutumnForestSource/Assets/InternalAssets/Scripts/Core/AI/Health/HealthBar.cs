@@ -22,7 +22,7 @@ namespace AutumnForest
 
         public void SwitchTarget(IHealth healthTarget)
         {
-            if(this.healthTarget != null) this.healthTarget.OnHealthChanged -= OnHealthChanged;
+            if (this.healthTarget != null) this.healthTarget.OnHealthChanged -= OnHealthChanged;
 
             this.healthTarget = healthTarget;
             this.healthTarget.OnHealthChanged += OnHealthChanged;

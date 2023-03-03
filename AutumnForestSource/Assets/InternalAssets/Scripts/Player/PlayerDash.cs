@@ -23,7 +23,7 @@ namespace AutumnForest.Player
 
         [SerializeField, NaughtyAttributes.ReadOnly] private DashState dashState;
 
-        public event Action OnDashed;
+        public event Action OnDashStarted;
         public event Action OnDashReleased;
         public event Action OnCulldown;
         public event Action OnReloaded;
@@ -75,7 +75,7 @@ namespace AutumnForest.Player
         {
             dashState = DashState.NowDashing;
 
-            OnDashed?.Invoke();
+            OnDashStarted?.Invoke();
             {
                 playerRigidbody.AddForce(dashMovement, ForceMode2D.Impulse);
                 int previousLayer = gameObject.layer;

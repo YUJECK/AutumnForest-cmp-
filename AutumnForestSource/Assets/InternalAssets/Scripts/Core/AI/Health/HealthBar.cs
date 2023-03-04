@@ -16,8 +16,7 @@ namespace AutumnForest
             if (healthBar == null) throw new NullReferenceException(nameof(healthBar));
             this.healthBar = healthBar;
 
-            if (healthTarget != null)
-                SwitchTarget(healthTarget);
+            if (healthTarget != null) SwitchTarget(healthTarget);
         }
 
         public void SwitchTarget(IHealth healthTarget)

@@ -73,10 +73,13 @@ namespace AutumnForest.BossFight.Fox.States
         {
             while (pickedSwords.Count > 0)
             {
-                ThrowSword(shooting, pickedSwords.Peek(), castSound);
+                if(pickedSwords.Peek().gameObject.activeSelf)
+                {
+                    ThrowSword(shooting, pickedSwords.Peek(), castSound);
 
+                    await UniTask.Delay(TimeSpan.FromSeconds(throwRate), cancellationToken: token);
+                }
                 pickedSwords.Pop();
-                await UniTask.Delay(TimeSpan.FromSeconds(throwRate), cancellationToken: token);
             }
         }
 

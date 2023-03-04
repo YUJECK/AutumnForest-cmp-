@@ -17,6 +17,6 @@ namespace AutumnForest
             transform.position = new Vector3(newPos.x, newPos.y, -100f);
         }
 
-        public void SetCursor(Texture2D cursorTexture) => Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+        public void SetCursor(Texture2D cursorTexture) { } // => Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
     }
 }

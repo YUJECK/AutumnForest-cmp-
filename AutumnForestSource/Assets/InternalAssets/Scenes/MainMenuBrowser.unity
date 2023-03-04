@@ -10462,8 +10462,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiText: {fileID: 461531319}
   text:
-    english: "\u0421\u043E\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0442\u0438"
-    russian: Social Media
+    english: Social Media
+    russian: "\u0421\u043E\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0442\u0438"
 --- !u!114 &461531319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10497,7 +10497,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0
-  m_Text: "\u0421\u043E\u0446\u0438\u0430\u043B\u044C\u043D\u044B\u0435 \u0441\u0435\u0442\u0438"
+  m_Text: Social Media
 --- !u!222 &461531320
 CanvasRenderer:
   m_ObjectHideFlags: 0

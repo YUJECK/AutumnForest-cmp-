@@ -47,7 +47,7 @@ namespace AutumnForest
                 for (int i = 0; i < config.TotalConeCount; i++)
                 {
                     await UniTask.Delay(config.ThrowRate, cancellationToken: token);
-                    shooting.ShootWithoutInstantiate(GlobalServiceLocator.GetService<PoolsContainer>().ConePool.GetFree().GetComponent<Rigidbody2D>(), 10, 0, true, ForceMode2D.Impulse);
+                    shooting.ShootWithoutInstantiate(GlobalServiceLocator.GetService<PoolsContainer>().ConePool.GetFree().GetComponent<Rigidbody2D>(), 8, 0, true, ForceMode2D.Impulse);
                 }
             }
             catch

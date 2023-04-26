@@ -100,10 +100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d7d3b6da14d4144af03da749a98d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 20
   collideEffect: {fileID: 8288446103499334202, guid: 65ea51d7dbb99f2428fdf664e0677273, type: 3}
   hitSoundEffect: {fileID: 0}
   projectileLayer: 7
+  <Rigidbody2D>k__BackingField: {fileID: 5767805362926127977}
 --- !u!50 &5767805362926127977
 Rigidbody2D:
   serializedVersion: 4
@@ -164,4 +165,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceMode: 1
-  force: 10
+  force: 15

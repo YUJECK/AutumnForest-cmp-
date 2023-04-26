@@ -10405,7 +10405,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 229860903}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.505842, y: -1.9872199, z: -13.043479}
+  m_LocalPosition: {x: 24.508429, y: -2.1753, z: -13.043479}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29918,6 +29918,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &610236120
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -34737,6 +34738,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &733049156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39162,7 +39164,7 @@ RectTransform:
   m_Children:
   - {fileID: 1422370344}
   m_Father: {fileID: 1659784387}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -39202,6 +39204,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &841721077
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51703,6 +51706,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!212 &1155370347
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -53052,6 +53056,14 @@ PrefabInstance:
     - target: {fileID: 3567886832848310522, guid: d7a56730bad26f74795553e2a0ae9251, type: 3}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5099769274306359923, guid: d7a56730bad26f74795553e2a0ae9251, type: 3}
+      propertyPath: <CurrentHealth>k__BackingField
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5099769274306359923, guid: d7a56730bad26f74795553e2a0ae9251, type: 3}
+      propertyPath: <MaximumHealth>k__BackingField
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7819391261967987463, guid: d7a56730bad26f74795553e2a0ae9251, type: 3}
       propertyPath: m_Name
@@ -59358,6 +59370,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1371496179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67166,7 +67179,7 @@ RectTransform:
   m_Children:
   - {fileID: 717118805}
   m_Father: {fileID: 1659784387}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -70762,8 +70775,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1371496177}
-  - {fileID: 840573244}
   - {fileID: 1605620466}
+  - {fileID: 840573244}
   - {fileID: 733049152}
   - {fileID: 905989521}
   - {fileID: 88653697}

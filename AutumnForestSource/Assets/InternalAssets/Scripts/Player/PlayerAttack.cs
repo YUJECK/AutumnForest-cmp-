@@ -1,12 +1,13 @@
 using AutumnForest.Projectiles;
 using Cysharp.Threading.Tasks;
 using System;
+using AutumnForest.BossFight;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace AutumnForest.Player
 {
-    public sealed class PlayerAttack : MonoBehaviour
+    public sealed class PlayerAttack : MonoBehaviour, IDisablable
     {
         [SerializeField] private int damage;
         [SerializeField] private float attackRate = 0.75f;
@@ -17,14 +18,17 @@ namespace AutumnForest.Player
 
         private int playerProjectilesLayer = 7;
 
+        public event Action OnEnabled;
+        public event Action OnDisabled;
+        public bool Enabled { get; private set; }
+
         private void Awake()
-        {
-            if (areaHit == null) throw new NullReferenceException(nameof(areaHit));
-            if (attackEffect == null) throw new NullReferenceException(nameof(attackEffect));
-        }
+            => Disable();
+
         private void OnEnable()
         {
             GlobalServiceLocator.GetService<PlayerInput>().Inputs.Attack.performed += Attack;
+            GlobalServiceLocator.GetService<BossFightManager>().OnBossFightStarted += Enable;
 
             areaHit.OnHitted += OnHitted;
         }
@@ -39,7 +43,7 @@ namespace AutumnForest.Player
 
         private async void Attack(InputAction.CallbackContext context)
         {
-            if (canAttack)
+            if (canAttack && Enabled)
             {
                 areaHit.Hit(damage);
                 Instantiate(attackEffect, areaHit.transform.position, areaHit.transform.rotation);
@@ -49,6 +53,7 @@ namespace AutumnForest.Player
                 canAttack = true;
             }
         }
+
         private void OnHitted(Collider2D[] obj)
         {
             foreach (Collider2D item in obj)
@@ -62,5 +67,14 @@ namespace AutumnForest.Player
             }
         }
 
+        public void Enable()
+        {
+            Enabled = true;
+        }
+
+        public void Disable()
+        {
+            Enabled = false;
+        }
     }
 }

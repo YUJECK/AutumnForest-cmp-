@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceMode: 1
-  force: 5
+  force: 3.5
 --- !u!114 &5995689997604042995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,10 +83,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65d7d3b6da14d4144af03da749a98d14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
+  damage: 1
   collideEffect: {fileID: 0}
   hitSoundEffect: {fileID: 0}
   projectileLayer: 8
+  <Rigidbody2D>k__BackingField: {fileID: 2978243615303353882}
 --- !u!61 &-1869262398112889642
 BoxCollider2D:
   m_ObjectHideFlags: 0

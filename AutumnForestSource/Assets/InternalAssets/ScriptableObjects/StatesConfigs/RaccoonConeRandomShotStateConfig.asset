@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ProjectilePrefab>k__BackingField: {fileID: 4270532997081402518, guid: e8c0b2bb56593f3429477322396d7488, type: 3}
   <ProjectilesCount>k__BackingField: 7
-  <ProjectileForce>k__BackingField: 15
+  <ProjectileForce>k__BackingField: 10
   <ShotMinimumRate>k__BackingField: 0.1
   <ShotMaximumRate>k__BackingField: 0.5
